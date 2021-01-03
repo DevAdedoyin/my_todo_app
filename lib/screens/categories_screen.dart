@@ -20,14 +20,16 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ],
       ),
       drawer: AppDrawer(),
-      body: Center(
-        child: Column(
-          children: [
-            Icon(Icons.hourglass_empty_rounded),
-            Text("You have no ToDo List Category yet"),
-          ],
+      body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+        Center(
+          child: Column(
+            children: [
+              Icon(Icons.hourglass_empty_rounded),
+              Text("You have no ToDo List Category yet"),
+            ],
+          ),
         ),
-      ),
+      ]),
     );
   }
 }
