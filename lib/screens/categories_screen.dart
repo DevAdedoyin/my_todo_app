@@ -24,7 +24,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         child: Column(
           children: [
             Icon(Icons.hourglass_empty_rounded),
-            Text("You have no ToDo List Category yet")
+            Text("You have no ToDo List Category yet"),
           ],
         ),
       ),

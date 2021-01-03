@@ -14,9 +14,8 @@ class AppDrawer extends StatelessWidget {
             title: Text('Hi Adedoyin'),
             automaticallyImplyLeading: false,
           ),
-          Divider(),
           Container(
-            height: 150,
+            height: 500,
             child: ListView.builder(
               itemBuilder: (_, i) => Column(
                 children: [
