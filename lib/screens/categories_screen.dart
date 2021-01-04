@@ -15,6 +15,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
     final userCats = Provider.of<Categories>(context);
     return Scaffold(
       appBar: AppBar(
+        title: Text('My To-do Categories'),
         actions: <Widget>[
           IconButton(
               icon: const Icon(Icons.search),
@@ -24,6 +25,37 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ],
       ),
       drawer: AppDrawer(),
+      bottomNavigationBar: BottomAppBar(
+        color: Theme.of(context).primaryColor,
+        child: Row(children: <Widget>[
+          Expanded(
+            child: FlatButton(
+              splashColor: Colors.white,
+              onPressed: () {},
+              child: Row(
+                children: [
+                  Icon(
+                    Icons.add,
+                    color: Colors.white70,
+                  ),
+                  Text(
+                    'Add Category',
+                    style: TextStyle(color: Colors.white70),
+                  )
+                ],
+              ),
+            ),
+          ),
+          // Container(
+          //   child: IconButton(
+          //     color: Colors.white54,
+          //     splashColor: Colors.black87,
+          //     icon: Icon(Icons.add),
+          //     onPressed: () {},
+          //   ),
+          // ),
+        ]),
+      ),
       body: ListView.builder(
           itemBuilder: (_, i) => UserCategories(
                 icon: userCats.cat[i].icon,

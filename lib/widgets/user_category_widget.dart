@@ -27,7 +27,7 @@ class _UserCategoriesState extends State<UserCategories> {
           borderRadius: BorderRadius.circular(10),
         ),
         elevation: 5,
-        shadowColor: Colors.black54,
+        shadowColor: Colors.black87,
         child: Container(
           child: ListTile(
             leading: Icon(widget.icon),
