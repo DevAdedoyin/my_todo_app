@@ -3,9 +3,9 @@ import 'package:my_todo_app/providers/categories.dart';
 import 'package:provider/provider.dart';
 
 class UserCategories extends StatefulWidget {
-  final Icon icon;
-  final Text title;
-  final Text numOfList;
+  final IconData icon;
+  final String title;
+  final String numOfList;
 
   UserCategories({this.icon, this.title, this.numOfList});
 
@@ -22,6 +22,7 @@ class _UserCategoriesState extends State<UserCategories> {
       splashColor: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(10),
       child: Card(
+        margin: EdgeInsets.only(left: 10, right: 10, top: 7, bottom: 7),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
@@ -29,9 +30,9 @@ class _UserCategoriesState extends State<UserCategories> {
         shadowColor: Colors.black54,
         child: Container(
           child: ListTile(
-            leading: widget.icon,
-            title: widget.title,
-            trailing: widget.numOfList,
+            leading: Icon(widget.icon),
+            title: Text(widget.title),
+            trailing: Text(widget.numOfList),
           ),
         ),
       ),
