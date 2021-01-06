@@ -15,21 +15,43 @@ class _TodoListState extends State<TodoList> {
     return Container(
       child: ListView.builder(
         itemBuilder: (_, i) => Card(
+          margin: EdgeInsets.all(7),
           elevation: 5,
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
           shadowColor: Colors.black,
           child: ListTile(
-            leading: Icon(Icons.account_circle_outlined),
-            title: Text(todo.todo[i].title),
+            leading: Container(
+              width: 40,
+              height: 40,
+              child: CircleAvatar(
+                backgroundColor: Colors.white,
+              ),
+              decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(100),
+                  border: Border.all(color: Colors.black, width: 2)),
+            ),
+            title: Text(todo.todo.values.toList()[i].title),
             subtitle: Row(
               children: <Widget>[
-                Icon(Icons.calendar_today_outlined),
+                Icon(
+                  Icons.calendar_today_outlined,
+                  size: 15,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
                 Text(DateFormat.MONTH_DAY),
-                Icon(Icons.repeat),
+                Icon(
+                  Icons.repeat,
+                  size: 15,
+                ),
               ],
             ),
-            trailing: Icon(Icons.star_border_outlined),
+            trailing: Icon(
+              Icons.star_border_outlined,
+              size: 20,
+            ),
           ),
         ),
         itemCount: todo.todo.length,
