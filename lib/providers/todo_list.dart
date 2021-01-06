@@ -16,7 +16,7 @@ class Todo {
       @required this.note});
 }
 
-class ToDoProviders with ChangeNotifier {
+class ToDoProvider with ChangeNotifier {
   Map<String, Todo> _todo = {};
 
   Map<String, Todo> get todo {
