@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/widgets/todo_list_widget.dart';
 
 class TodoListScreen extends StatefulWidget {
   @override
@@ -40,7 +41,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                   ])
         ],
       ),
-      body: ,
+      body: TodoList(),
+      floatingActionButton: FloatingActionButton(
+        onPressed: () {},
+        backgroundColor: Theme.of(context).primaryColor,
+        splashColor: Colors.white54,
+        elevation: 5,
+        child: Icon(
+          Icons.add,
+          color: Colors.white,
+        ),
+      ),
     );
   }
 }
