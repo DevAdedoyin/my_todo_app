@@ -15,6 +15,10 @@ class _TodoListState extends State<TodoList> {
     return Container(
       child: ListView.builder(
         itemBuilder: (_, i) => Card(
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shadowColor: Colors.black,
           child: ListTile(
             leading: Icon(Icons.account_circle_outlined),
             title: Text(todo.todo[i].title),
