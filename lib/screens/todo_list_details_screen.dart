@@ -14,9 +14,23 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
     return Scaffold(
-        appBar: AppBar(
-          title: Text('Details'),
+      appBar: AppBar(
+        title: Text('Details'),
+      ),
+      body: SingleChildScrollView(child: ToDoDetailsWidget()),
+      bottomNavigationBar: BottomAppBar(
+        child: Container(
+          height: 40,
+          padding: EdgeInsets.only(left: 15, right: 7),
+          child: Row(
+            children: [
+              Text('Created on Wed, Jan 7'),
+              Spacer(),
+              Icon(Icons.delete)
+            ],
+          ),
         ),
-        body: SingleChildScrollView(child: ToDoDetailsWidget()));
+      ),
+    );
   }
 }
