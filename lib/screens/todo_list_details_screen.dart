@@ -13,6 +13,10 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
-    return Scaffold(body: SingleChildScrollView(child: ToDoDetailsWidget()));
+    return Scaffold(
+        appBar: AppBar(
+          title: Text('Details'),
+        ),
+        body: SingleChildScrollView(child: ToDoDetailsWidget()));
   }
 }

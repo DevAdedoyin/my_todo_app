@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/providers/categories.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/screens/categories_screen.dart';
+import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 import 'package:my_todo_app/screens/todo_list_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -18,7 +19,7 @@ class MainApp extends StatelessWidget {
           primarySwatch: Colors.lightBlue,
           accentColor: Colors.yellow,
         ),
-        home: TodoListScreen(),
+        home: ToDoListDetailsScreen(),
       ),
     );
   }
