@@ -7,11 +7,17 @@ List<Color> bgColors = [
   Colors.grey,
   Colors.redAccent,
   Colors.deepOrangeAccent,
-  Colors.deepPurpleAccent
+  Colors.deepPurpleAccent,
 ];
 
 enum ColorList {
-  bgColors,
+  greenAccent,
+  yellowAccent,
+  blueGrey,
+  grey,
+  redAccent,
+  deepOrangeAccent,
+  deepPurpleAccent,
 }
 
 class Category {

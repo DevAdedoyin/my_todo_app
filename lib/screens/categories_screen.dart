@@ -15,7 +15,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     final userCats = Provider.of<Categories>(context);
+    //final customCats = Provider.of<UserCategories>(context);
     TextEditingController _textFieldController = TextEditingController();
+    ColorList _selColor = ColorList.greenAccent;
     return Scaffold(
       appBar: AppBar(
         title: Text('My To-do Categories'),
@@ -43,8 +45,9 @@ class _CategoryScreenState extends State<CategoryScreen> {
                           'Category',
                         ),
                         content: Container(
-                          height: 200,
+                          height: 160,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Container(
                                 child: Row(
@@ -72,32 +75,66 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   ],
                                 ),
                               ),
-                              ListView.builder(
-                                itemBuilder: (_, i) => Row(
-                                  children: [
-                                    Expanded(
-                                      child: Container(
-                                        height: 20,
-                                        width: 20,
-                                        decoration: BoxDecoration(
-                                            shape: BoxShape.circle,
-                                            color: bgColors[i]),
-                                        child: Radio(
-                                          onChanged: (List<Color> color) {
-                                            setState(() {});
-                                          },
-                                          groupValue: bgColors,
-                                          value: bgColors,
-                                        ),
-                                      ),
-                                    )
-                                  ],
+                              Container(
+                                margin: EdgeInsets.only(top: 10),
+                                child: Chip(
+                                  backgroundColor: bgColors[0],
+                                  label: Text('Color'),
                                 ),
-                                itemCount: bgColors.length,
+                              ),
+                              Container(
+                                height: 50,
+                                // margin: EdgeInsets.only(top: 1),
+                                child: ListView.builder(
+                                  scrollDirection: Axis.horizontal,
+                                  itemBuilder: (_, i) => Expanded(
+                                    child: Container(
+                                      height: 30,
+                                      width: 30,
+                                      margin: EdgeInsets.all(5),
+                                      decoration: BoxDecoration(
+                                        shape: BoxShape.circle,
+                                        color: bgColors[i],
+                                      ),
+                                      //TODO: Convert List of Colors and name to a map
+                                      child: Radio(
+                                        activeColor: bgColors[i],
+                                        focusColor: Colors.black,
+                                        value: ColorList.greenAccent,
+                                        groupValue: _selColor,
+                                        onChanged: (ColorList selectedColor) {
+                                          setState(() {
+                                            _selColor = selectedColor;
+                                          });
+                                        },
+                                      ),
+                                    ),
+                                  ),
+                                  itemCount: bgColors.length,
+                                ),
                               )
                             ],
                           ),
                         ),
+                        elevation: 7,
+                        actions: [
+                          IconButton(
+                            icon: Icon(Icons.cancel_rounded),
+                            onPressed: () {},
+                            color: Colors.red,
+                            iconSize: 30,
+                            splashColor: Colors.redAccent,
+                            splashRadius: 25,
+                          ),
+                          IconButton(
+                            icon: Icon(Icons.check_circle),
+                            onPressed: () {},
+                            color: Colors.green,
+                            iconSize: 30,
+                            splashColor: Colors.greenAccent,
+                            splashRadius: 25,
+                          ),
+                        ],
                       );
                     });
               },
