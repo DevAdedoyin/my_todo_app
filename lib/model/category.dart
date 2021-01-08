@@ -10,6 +10,16 @@ List<Color> bgColors = [
   Colors.deepPurpleAccent,
 ];
 
+Map<String, Color> bgColor = {
+  'greenAccent': Colors.greenAccent,
+  'yellowAccent': Colors.yellowAccent,
+  'blueGrey': Colors.blueGrey,
+  'grey': Colors.grey,
+  'redAccent': Colors.redAccent,
+  'deepOrangeAccent': Colors.deepOrangeAccent,
+  'deepPurpleAccent': Colors.deepPurpleAccent,
+};
+
 enum ColorList {
   greenAccent,
   yellowAccent,
