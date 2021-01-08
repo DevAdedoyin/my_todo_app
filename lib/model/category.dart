@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 
 List<Color> color = [
+  Colors.greenAccent,
   Colors.yellowAccent,
   Colors.blueGrey,
-  Colors.greenAccent,
   Colors.grey,
   Colors.redAccent,
   Colors.deepOrangeAccent,
@@ -15,10 +15,12 @@ class Category {
   final IconData icon;
   final String title;
   final int numberOfList;
+  final List<Color> color;
 
   Category(
       {@required this.id,
       @required this.icon,
       @required this.title,
-      @required this.numberOfList});
+      @required this.numberOfList,
+      this.color});
 }
