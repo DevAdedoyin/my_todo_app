@@ -1,18 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
-class Category {
-  final String id;
-  final IconData icon;
-  final String title;
-  final int numberOfList;
-
-  Category(
-      {@required this.id,
-      @required this.icon,
-      @required this.title,
-      @required this.numberOfList});
-}
+import '../model/category.dart';
 
 class Categories with ChangeNotifier {
   List<Category> _cat = [
