@@ -12,12 +12,29 @@ class CategoryScreen extends StatefulWidget {
 }
 
 class _CategoryScreenState extends State<CategoryScreen> {
+  int selectedColor;
+  int index;
+
+  @override
+  void initState() {
+    super.initState();
+    selectedColor = 0;
+    index = 0;
+  }
+
+  void _selectedColor(int val) {
+    setState(() {
+      selectedColor = val;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     final userCats = Provider.of<Categories>(context);
     //final customCats = Provider.of<UserCategories>(context);
     TextEditingController _textFieldController = TextEditingController();
-    ColorList _selColor = ColorList.greenAccent;
+    // Color selectedColor = bgColor[0];
+
     return Scaffold(
       appBar: AppBar(
         title: Text('My To-do Categories'),
@@ -78,17 +95,18 @@ class _CategoryScreenState extends State<CategoryScreen> {
                               Container(
                                 margin: EdgeInsets.only(top: 10),
                                 child: Chip(
-                                  backgroundColor: bgColors[0],
+                                  backgroundColor: bgColors[selectedColor],
                                   label: Text('Color'),
                                 ),
                               ),
-                              Container(
-                                height: 50,
-                                // margin: EdgeInsets.only(top: 1),
-                                child: ListView.builder(
-                                  scrollDirection: Axis.horizontal,
-                                  itemBuilder: (_, i) => Expanded(
-                                    child: Container(
+                              StatefulBuilder(builder: (BuildContext context,
+                                  StateSetter stateSetter) {
+                                return Container(
+                                  height: 50,
+                                  // margin: EdgeInsets.only(top: 1),
+                                  child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemBuilder: (_, i) => Container(
                                       height: 30,
                                       width: 30,
                                       margin: EdgeInsets.all(5),
@@ -98,21 +116,24 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       ),
                                       //TODO: Convert List of Colors and name to a map
                                       child: Radio(
-                                        activeColor: bgColors[i],
-                                        focusColor: Colors.black,
-                                        value: ColorList.greenAccent,
-                                        groupValue: _selColor,
-                                        onChanged: (ColorList selectedColor) {
-                                          setState(() {
-                                            _selColor = selectedColor;
+                                        hoverColor: bgColor[i],
+                                        activeColor: Colors.black,
+                                        focusColor: bgColor[i],
+                                        // focusColor: Colors.black,
+                                        value: i,
+                                        groupValue: selectedColor,
+                                        onChanged: (val) {
+                                          stateSetter(() {
+                                            _selectedColor(val);
+                                            index = val;
                                           });
                                         },
                                       ),
                                     ),
+                                    itemCount: bgColor.length,
                                   ),
-                                  itemCount: bgColors.length,
-                                ),
-                              )
+                                );
+                              })
                             ],
                           ),
                         ),
