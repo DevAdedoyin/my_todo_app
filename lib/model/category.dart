@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-List<Color> color = [
+List<Color> bgColors = [
   Colors.greenAccent,
   Colors.yellowAccent,
   Colors.blueGrey,
@@ -10,12 +10,16 @@ List<Color> color = [
   Colors.deepPurpleAccent
 ];
 
+enum ColorList {
+  bgColors,
+}
+
 class Category {
   final String id;
   final IconData icon;
   final String title;
   final int numberOfList;
-  final List<Color> color;
+  final Color color;
 
   Category(
       {@required this.id,
