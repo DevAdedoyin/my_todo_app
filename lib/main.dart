@@ -12,14 +12,14 @@ class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (ctx) => ToDoProvider(),
+      create: (ctx) => Categories(),
       child: MaterialApp(
         title: 'My ToDo',
         theme: ThemeData(
           primarySwatch: Colors.lightBlue,
           accentColor: Colors.yellow,
         ),
-        home: ToDoListDetailsScreen(),
+        home: CategoryScreen(),
       ),
     );
   }
