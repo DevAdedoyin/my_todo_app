@@ -61,47 +61,47 @@ class _CategoryScreenState extends State<CategoryScreen> {
                         title: Text(
                           'Category',
                         ),
-                        content: Container(
-                          height: 160,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Container(
-                                child: Row(
-                                  mainAxisSize: MainAxisSize.min,
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      flex: 1,
-                                      child: Icon(
-                                        Icons.category,
-                                        size: 20,
+                        content: StatefulBuilder(builder:
+                            (BuildContext context, StateSetter stateSetter) {
+                          return Container(
+                            height: 160,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Container(
+                                  child: Row(
+                                    mainAxisSize: MainAxisSize.min,
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        flex: 1,
+                                        child: Icon(
+                                          Icons.category,
+                                          size: 20,
+                                        ),
                                       ),
-                                    ),
-                                    Expanded(
-                                      flex: 7,
-                                      child: Container(
-                                          margin: EdgeInsets.only(left: 10),
-                                          child: TextField(
-                                            controller: _textFieldController,
-                                            decoration: InputDecoration(
-                                                hintText:
-                                                    'Enter your category'),
-                                          )),
-                                    )
-                                  ],
+                                      Expanded(
+                                        flex: 7,
+                                        child: Container(
+                                            margin: EdgeInsets.only(left: 10),
+                                            child: TextField(
+                                              controller: _textFieldController,
+                                              decoration: InputDecoration(
+                                                  hintText:
+                                                      'Enter your category'),
+                                            )),
+                                      )
+                                    ],
+                                  ),
                                 ),
-                              ),
-                              Container(
-                                margin: EdgeInsets.only(top: 10),
-                                child: Chip(
-                                  backgroundColor: bgColors[selectedColor],
-                                  label: Text('Color'),
+                                Container(
+                                  margin: EdgeInsets.only(top: 10),
+                                  child: Chip(
+                                    backgroundColor: bgColors[selectedColor],
+                                    label: Text('Color'),
+                                  ),
                                 ),
-                              ),
-                              StatefulBuilder(builder: (BuildContext context,
-                                  StateSetter stateSetter) {
-                                return Container(
+                                Container(
                                   height: 50,
                                   // margin: EdgeInsets.only(top: 1),
                                   child: ListView.builder(
@@ -132,11 +132,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                     ),
                                     itemCount: bgColor.length,
                                   ),
-                                );
-                              })
-                            ],
-                          ),
-                        ),
+                                ),
+                              ],
+                            ),
+                          );
+                        }),
                         elevation: 7,
                         actions: [
                           IconButton(
