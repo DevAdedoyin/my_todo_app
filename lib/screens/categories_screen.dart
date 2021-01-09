@@ -78,6 +78,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                         child: Icon(
                                           Icons.category,
                                           size: 20,
+                                          color: bgColors[selectedColor],
                                         ),
                                       ),
                                       Expanded(
@@ -98,7 +99,11 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                   margin: EdgeInsets.only(top: 10),
                                   child: Chip(
                                     backgroundColor: bgColors[selectedColor],
-                                    label: Text('Color'),
+                                    label: Text(
+                                      'Color',
+                                      style: TextStyle(
+                                          fontWeight: FontWeight.bold),
+                                    ),
                                   ),
                                 ),
                                 Container(
