@@ -88,8 +88,13 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                             child: TextField(
                                               controller: _textFieldController,
                                               decoration: InputDecoration(
-                                                  hintText:
-                                                      'Enter your category'),
+                                                hintText: 'Enter your category',
+                                                // border: InputBorder.none,
+                                                // focusedBorder: InputBorder.none,
+                                                // enabledBorder: InputBorder.none,
+                                                // errorBorder: InputBorder.none,
+                                                // disabledBorder: InputBorder.none,
+                                              ),
                                             )),
                                       )
                                     ],
@@ -121,10 +126,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                                       ),
                                       //TODO: Convert List of Colors and name to a map
                                       child: Radio(
-                                        hoverColor: bgColor[i],
-                                        activeColor: Colors.black,
-                                        focusColor: bgColor[i],
-                                        // focusColor: Colors.black,
+                                        activeColor: bgColors[i],
                                         value: i,
                                         groupValue: selectedColor,
                                         onChanged: (val) {
