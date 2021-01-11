@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/category.dart';
+import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:provider/provider.dart';
 
 class AlertDialogWidget extends StatefulWidget {
@@ -35,7 +36,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    // TextEditingController _textFieldController = TextEditingController();
+    final userCatProv = Provider.of<UserCategories>(context);
     return AlertDialog(
       title: Text(
         'Category',
@@ -137,7 +138,10 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
         ),
         IconButton(
           icon: Icon(Icons.check_circle),
-          onPressed: () {},
+          onPressed: () {
+            return userCatProv.catDetail(
+                selectedColor, _textFieldController.text);
+          },
           color: Colors.green,
           iconSize: 30,
           splashColor: Colors.greenAccent,
