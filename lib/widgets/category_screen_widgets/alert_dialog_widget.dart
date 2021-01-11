@@ -11,6 +11,15 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   int selectedColor;
   int index;
 
+  final _textFieldController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    _textFieldController.dispose();
+    super.dispose();
+  }
+
   @override
   void initState() {
     super.initState();
@@ -26,7 +35,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    TextEditingController _textFieldController = TextEditingController();
+    // TextEditingController _textFieldController = TextEditingController();
     return AlertDialog(
       title: Text(
         'Category',
@@ -59,6 +68,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                             controller: _textFieldController,
                             decoration: InputDecoration(
                               hintText: 'Enter your category',
+
                               // border: InputBorder.none,
                               // focusedBorder: InputBorder.none,
                               // enabledBorder: InputBorder.none,
@@ -117,7 +127,9 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
       actions: [
         IconButton(
           icon: Icon(Icons.cancel_rounded),
-          onPressed: () {},
+          onPressed: () {
+            return Navigator.of(context).pop();
+          },
           color: Colors.red,
           iconSize: 30,
           splashColor: Colors.redAccent,

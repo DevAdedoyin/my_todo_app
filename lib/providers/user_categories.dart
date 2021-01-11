@@ -7,4 +7,6 @@ class UserCategories with ChangeNotifier {
   List<Category> get userCat {
     return [..._userCat];
   }
+
+  void catDetail(int catId, String catName) {}
 }
