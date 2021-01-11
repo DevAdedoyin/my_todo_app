@@ -2,18 +2,18 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/providers/categories.dart';
 import 'package:provider/provider.dart';
 
-class UserCategories extends StatefulWidget {
+class UserCategoriesWidget extends StatefulWidget {
   final IconData icon;
   final String title;
   final String numOfList;
 
-  UserCategories({this.icon, this.title, this.numOfList});
+  UserCategoriesWidget({this.icon, this.title, this.numOfList});
 
   @override
-  _UserCategoriesState createState() => _UserCategoriesState();
+  _UserCategoriesWidgetState createState() => _UserCategoriesWidgetState();
 }
 
-class _UserCategoriesState extends State<UserCategories> {
+class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     final userCats = Provider.of<Categories>(context);

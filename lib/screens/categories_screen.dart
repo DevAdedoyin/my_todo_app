@@ -67,7 +67,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
         ]),
       ),
       body: ListView.builder(
-          itemBuilder: (_, i) => UserCategories(
+          itemBuilder: (_, i) => UserCategoriesWidget(
                 icon: userCats.cat[i].icon,
                 title: userCats.cat[i].title,
                 numOfList: userCats.cat[i].numberOfList.toString(),
