@@ -8,5 +8,12 @@ class UserCategories with ChangeNotifier {
     return [..._userCat];
   }
 
-  void catDetail(int catId, String catName) {}
+  void catDetail(int bgColorNum, String catName) {
+    _userCat.add(Category(
+        title: catName,
+        icon: Icons.category_rounded,
+        numberOfList: bgColorNum,
+        id: 'DummyId',
+        color: bgColors[bgColorNum]));
+  }
 }
