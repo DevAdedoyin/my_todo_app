@@ -15,5 +15,6 @@ class UserCategories with ChangeNotifier {
         numberOfList: bgColorNum,
         id: 'DummyId',
         color: bgColors[bgColorNum]));
+    notifyListeners();
   }
 }
