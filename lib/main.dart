@@ -18,16 +18,19 @@ class MainApp extends StatelessWidget {
         ChangeNotifierProvider.value(value: Categories()),
         ChangeNotifierProvider.value(
           value: UserCategories(),
+        ),
+        ChangeNotifierProvider.value(
+          value: ToDoProvider(),
         )
       ],
       child: MaterialApp(
-        title: 'My ToDo',
-        theme: ThemeData(
-          primarySwatch: Colors.lightBlue,
-          accentColor: Colors.yellow,
-        ),
-        home: CategoryScreen(),
-      ),
+          title: 'My ToDo',
+          theme: ThemeData(
+            primarySwatch: Colors.lightBlue,
+            accentColor: Colors.yellow,
+          ),
+          home: CategoryScreen(),
+          routes: {TodoListScreen.routeName: (ctx) => TodoListScreen()}),
     );
   }
 }

@@ -9,6 +9,7 @@ import 'package:provider/provider.dart';
 import '../model/category.dart';
 
 class CategoryScreen extends StatefulWidget {
+  static const routeName = '/category-screen';
   @override
   _CategoryScreenState createState() => _CategoryScreenState();
 }

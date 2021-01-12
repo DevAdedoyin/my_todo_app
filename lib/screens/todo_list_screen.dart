@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/widgets/todo_list_widget.dart';
 
 class TodoListScreen extends StatefulWidget {
+  static const routeName = '/todo-list';
   @override
   _TodoListScreenState createState() => _TodoListScreenState();
 }

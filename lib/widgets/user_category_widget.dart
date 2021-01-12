@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/category.dart';
 import 'package:my_todo_app/providers/categories.dart';
+import 'package:my_todo_app/screens/todo_list_screen.dart';
 import 'package:provider/provider.dart';
 
 class UserCategoriesWidget extends StatefulWidget {
@@ -20,7 +21,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   Widget build(BuildContext context) {
     // final userCats = Provider.of<Categories>(context);
     return InkWell(
-      onTap: () => {},
+      onTap: () => {Navigator.of(context).pushNamed(TodoListScreen.routeName)},
       splashColor: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(10),
       child: Card(
