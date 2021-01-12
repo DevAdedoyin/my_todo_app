@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:my_todo_app/providers/categories.dart';
+import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/widgets/app_drawer.dart';
 import 'package:my_todo_app/widgets/category_screen_widgets/alert_dialog_widget.dart';
 import 'package:my_todo_app/widgets/user_category_widget.dart';
@@ -15,8 +16,8 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    final userCats = Provider.of<Categories>(context);
-    //final customCats = Provider.of<UserCategories>(context);
+    // final userCats = Provider.of<Categories>(context);
+    final customCats = Provider.of<UserCategories>(context);
 
     // Color selectedColor = bgColor[0];
 
@@ -68,11 +69,12 @@ class _CategoryScreenState extends State<CategoryScreen> {
       ),
       body: ListView.builder(
           itemBuilder: (_, i) => UserCategoriesWidget(
-                icon: userCats.cat[i].icon,
-                title: userCats.cat[i].title,
-                numOfList: userCats.cat[i].numberOfList.toString(),
+                icon: customCats.userCat[i].icon,
+                title: customCats.userCat[i].title,
+                numOfList: customCats.userCat[i].numberOfList.toString(),
+                color: customCats.userCat[i].color,
               ),
-          itemCount: userCats.cat.length),
+          itemCount: customCats.userCat.length),
       // Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       //   Center(
       //     child: Column(

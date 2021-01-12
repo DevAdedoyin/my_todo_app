@@ -139,8 +139,12 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
         IconButton(
           icon: Icon(Icons.check_circle),
           onPressed: () {
-            return userCatProv.catDetail(
-                selectedColor, _textFieldController.text);
+            return {
+              print(_textFieldController.text),
+              print(selectedColor),
+              userCatProv.catDetail(selectedColor, _textFieldController.text),
+              Navigator.of(context).pop()
+            };
           },
           color: Colors.green,
           iconSize: 30,
