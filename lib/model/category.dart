@@ -9,6 +9,7 @@ List<Color> bgColors = [
   Colors.redAccent,
   Colors.deepOrangeAccent,
   Colors.deepPurpleAccent,
+  Colors.pinkAccent,
 ];
 
 // Map<String, Color> bgColor = {

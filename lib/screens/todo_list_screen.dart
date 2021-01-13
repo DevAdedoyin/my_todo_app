@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/model/category.dart';
+import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_widget.dart';
+import 'package:provider/provider.dart';
 
 class TodoListScreen extends StatefulWidget {
   static const routeName = '/todo-list';
@@ -10,40 +13,64 @@ class TodoListScreen extends StatefulWidget {
 class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
+    final _todo = Provider.of<ToDoProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Test Screen'),
-        actions: [
-          PopupMenuButton(
-              itemBuilder: (_) => [
-                    PopupMenuItem(
-                      child: Row(children: <Widget>[
-                        Icon(Icons.color_lens),
-                        Text('Rename list')
-                      ]),
-                    ),
-                    PopupMenuItem(
-                      child: Row(children: <Widget>[
-                        Icon(Icons.sort),
-                        Text('Sort by')
-                      ]),
-                    ),
-                    PopupMenuItem(
-                      child: Row(children: <Widget>[
-                        Icon(Icons.color_lens_outlined),
-                        Text('Change Theme')
-                      ]),
-                    ),
-                    PopupMenuItem(
-                      child: Row(children: <Widget>[
-                        Icon(Icons.delete),
-                        Text('Delete list')
-                      ]),
-                    ),
-                  ])
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            backgroundColor: Colors.blue,
+            floating: true,
+            pinned: true,
+            expandedHeight: 120,
+            flexibleSpace: Row(
+              children: [
+                Container(
+                  width: 200,
+                  child: FlexibleSpaceBar(
+                    title: Text("Test Screen"),
+                    centerTitle: true,
+                    // collapseMode: CollapseMode.pin,
+                  ),
+                ),
+                Spacer(),
+                PopupMenuButton(
+                    itemBuilder: (_) => [
+                          PopupMenuItem(
+                            child: Row(children: <Widget>[
+                              Icon(Icons.color_lens),
+                              Text('Rename list')
+                            ]),
+                          ),
+                          PopupMenuItem(
+                            child: Row(children: <Widget>[
+                              Icon(Icons.sort),
+                              Text('Sort by')
+                            ]),
+                          ),
+                          PopupMenuItem(
+                            child: Row(children: <Widget>[
+                              Icon(Icons.color_lens_outlined),
+                              Text('Change Theme')
+                            ]),
+                          ),
+                          PopupMenuItem(
+                            child: Row(children: <Widget>[
+                              Icon(Icons.delete),
+                              Text('Delete list')
+                            ]),
+                          ),
+                        ])
+              ],
+            ),
+          ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate((_, i) {
+              return TodoList(i);
+            }, childCount: _todo.todo.length),
+          )
         ],
       ),
-      body: TodoList(),
+      //  TodoList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {},
         backgroundColor: Theme.of(context).primaryColor,
