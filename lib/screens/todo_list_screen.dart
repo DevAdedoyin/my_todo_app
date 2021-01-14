@@ -78,83 +78,87 @@ class _TodoListScreenState extends State<TodoListScreen> {
           return showModalBottomSheet(
               context: context,
               isScrollControlled: true,
-              builder: (context) => Container(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisSize: MainAxisSize.min,
-                      children: [
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 4,
-                              child: Container(
-                                margin: EdgeInsets.only(left: 15, right: 10),
-                                child: TextField(
-                                  autofocus: true,
-                                  decoration: InputDecoration(
-                                    border: InputBorder.none,
-                                    hintText: 'Add a task',
+              builder: (context) => Padding(
+                    padding: MediaQuery.of(context).viewInsets,
+                    child: Container(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 4,
+                                child: Container(
+                                  margin: EdgeInsets.only(left: 15, right: 10),
+                                  child: TextField(
+                                    autofocus: true,
+                                    decoration: InputDecoration(
+                                      border: InputBorder.none,
+                                      hintText: 'Add a task',
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: Icon(Icons.save_alt_rounded),
-                            )
-                          ],
-                        ),
-                        Row(
-                          children: [
-                            Expanded(
-                              flex: 1,
-                              child: FlatButton(
-                                padding: EdgeInsets.only(left: 5, right: 5),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Icon(Icons.alarm),
-                                    ),
-                                    Text('Remind me')
-                                  ],
+                              Expanded(
+                                flex: 1,
+                                child: Icon(Icons.save_alt_rounded),
+                              )
+                            ],
+                          ),
+                          Row(
+                            children: [
+                              Expanded(
+                                flex: 1,
+                                child: FlatButton(
+                                  padding: EdgeInsets.only(left: 5, right: 5),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child: Icon(Icons.alarm),
+                                      ),
+                                      Text('Remind me')
+                                    ],
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () {},
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: FlatButton(
-                                padding: EdgeInsets.only(left: 5, right: 5),
-                                child: Row(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  children: [
-                                    Expanded(
-                                      child: Icon(Icons.repeat),
-                                    ),
-                                    Text('Repeat')
-                                  ],
+                              Expanded(
+                                flex: 1,
+                                child: FlatButton(
+                                  padding: EdgeInsets.only(left: 5, right: 5),
+                                  child: Row(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    children: [
+                                      Expanded(
+                                        child: Icon(Icons.repeat),
+                                      ),
+                                      Text('Repeat')
+                                    ],
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () {},
                               ),
-                            ),
-                            Expanded(
-                              flex: 1,
-                              child: FlatButton(
-                                padding: EdgeInsets.only(left: 5, right: 5),
-                                child: Row(
-                                  children: [
-                                    Expanded(
-                                      child: Icon(Icons.calendar_today_rounded),
-                                    ),
-                                    Text('Set due date')
-                                  ],
+                              Expanded(
+                                flex: 1,
+                                child: FlatButton(
+                                  padding: EdgeInsets.only(left: 5, right: 5),
+                                  child: Row(
+                                    children: [
+                                      Expanded(
+                                        child:
+                                            Icon(Icons.calendar_today_rounded),
+                                      ),
+                                      Text('Set due date')
+                                    ],
+                                  ),
+                                  onPressed: () {},
                                 ),
-                                onPressed: () {},
-                              ),
-                            )
-                          ],
-                        )
-                      ],
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   ));
         },
