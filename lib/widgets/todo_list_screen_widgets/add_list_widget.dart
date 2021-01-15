@@ -6,6 +6,7 @@ class AddListWidget extends StatefulWidget {
 }
 
 class _AddListWidgetState extends State<AddListWidget> {
+  final _listTitleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -24,6 +25,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                   child: Container(
                     margin: EdgeInsets.only(left: 10),
                     child: TextField(
+                      controller: _listTitleController,
                       autofocus: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
@@ -32,9 +34,11 @@ class _AddListWidgetState extends State<AddListWidget> {
                     ),
                   ),
                 ),
-                Expanded(
-                  // flex: 1,
-                  child: Icon(Icons.save_alt_rounded),
+                Container(
+                  margin: EdgeInsets.only(right: 10),
+                  child: Icon(
+                    Icons.save_alt_rounded,
+                  ),
                 )
               ],
             ),
