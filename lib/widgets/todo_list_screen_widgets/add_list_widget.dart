@@ -7,6 +7,7 @@ class AddListWidget extends StatefulWidget {
 
 class _AddListWidgetState extends State<AddListWidget> {
   final _listTitleController = TextEditingController();
+  DateTime _selectedDate;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -76,7 +77,12 @@ class _AddListWidgetState extends State<AddListWidget> {
                       firstDate: DateTime.now(),
                       initialDate: DateTime.now(),
                       lastDate: DateTime(2030),
-                    );
+                    ).then((pickedDate) {
+                      if (pickedDate == null) return;
+                      setState(() {
+                        _selectedDate = pickedDate;
+                      });
+                    });
                   },
                 ),
               ],
