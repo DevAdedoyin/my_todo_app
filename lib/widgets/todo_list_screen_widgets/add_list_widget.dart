@@ -50,32 +50,6 @@ class _AddListWidgetState extends State<AddListWidget> {
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
                   FlatButton(
-                    splashColor: Colors.red,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(right: 7),
-                            child: Icon(Icons.alarm)),
-                        Text('Remind me')
-                      ],
-                    ),
-                    onPressed: () {},
-                  ),
-                  FlatButton(
-                    splashColor: Colors.green,
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [
-                        Container(
-                            margin: EdgeInsets.only(right: 7),
-                            child: Icon(Icons.repeat)),
-                        Text('Repeat')
-                      ],
-                    ),
-                    onPressed: () {},
-                  ),
-                  FlatButton(
                     splashColor: Colors.blue,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -102,6 +76,35 @@ class _AddListWidgetState extends State<AddListWidget> {
                         });
                       });
                     },
+                  ),
+                  FlatButton(
+                    splashColor: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.alarm)),
+                        Text('Remind me')
+                      ],
+                    ),
+                    onPressed: () {
+                      return showTimePicker(
+                          context: context, initialTime: TimeOfDay.now());
+                    },
+                  ),
+                  FlatButton(
+                    splashColor: Colors.green,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.repeat)),
+                        Text('Repeat')
+                      ],
+                    ),
+                    onPressed: () {},
                   ),
                 ],
               ),
