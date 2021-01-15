@@ -46,7 +46,6 @@ class _AddListWidgetState extends State<AddListWidget> {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
                 FlatButton(
-                  // padding: EdgeInsets.only(left: 5, right: 5),
                   splashColor: Colors.red,
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -56,7 +55,6 @@ class _AddListWidgetState extends State<AddListWidget> {
                 ),
                 FlatButton(
                   splashColor: Colors.green,
-                  // padding: EdgeInsets.only(left: 5, right: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [Icon(Icons.repeat), Text('Repeat')],
@@ -65,7 +63,6 @@ class _AddListWidgetState extends State<AddListWidget> {
                 ),
                 FlatButton(
                   splashColor: Colors.blue,
-                  // padding: EdgeInsets.only(left: 5, right: 5),
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
@@ -73,8 +70,15 @@ class _AddListWidgetState extends State<AddListWidget> {
                       Text('Set due date')
                     ],
                   ),
-                  onPressed: () {},
-                )
+                  onPressed: () {
+                    return showDatePicker(
+                      context: context,
+                      firstDate: DateTime.now(),
+                      initialDate: DateTime.now(),
+                      lastDate: DateTime(2030),
+                    );
+                  },
+                ),
               ],
             )
           ],
