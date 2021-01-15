@@ -53,7 +53,12 @@ class _AddListWidgetState extends State<AddListWidget> {
                     splashColor: Colors.red,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [Icon(Icons.alarm), Text('Remind me')],
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.alarm)),
+                        Text('Remind me')
+                      ],
                     ),
                     onPressed: () {},
                   ),
@@ -61,7 +66,12 @@ class _AddListWidgetState extends State<AddListWidget> {
                     splashColor: Colors.green,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                      children: [Icon(Icons.repeat), Text('Repeat')],
+                      children: [
+                        Container(
+                            margin: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.repeat)),
+                        Text('Repeat')
+                      ],
                     ),
                     onPressed: () {},
                   ),
@@ -70,7 +80,9 @@ class _AddListWidgetState extends State<AddListWidget> {
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                       children: [
-                        Icon(Icons.calendar_today_rounded),
+                        Container(
+                            margin: EdgeInsets.only(right: 7),
+                            child: Icon(Icons.calendar_today_rounded)),
                         _selectedDate == null
                             ? Text('Set due date')
                             : Text(
