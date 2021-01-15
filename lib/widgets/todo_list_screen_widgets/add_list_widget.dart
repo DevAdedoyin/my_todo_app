@@ -14,7 +14,7 @@ class _AddListWidgetState extends State<AddListWidget> {
         // width: 350,
         // padding: EdgeInsets.only(left: 10, right: 10),
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
           children: [
             Row(
@@ -22,7 +22,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                 Expanded(
                   flex: 5,
                   child: Container(
-                    // margin: EdgeInsets.only(left: 15, right: 10),
+                    margin: EdgeInsets.only(left: 10),
                     child: TextField(
                       autofocus: true,
                       decoration: InputDecoration(
@@ -38,51 +38,40 @@ class _AddListWidgetState extends State<AddListWidget> {
                 )
               ],
             ),
-            Container(
-              // width: 350,
-              child: Row(
-                children: [
-                  Expanded(
-                    // flex: 1,
-                    child: FlatButton(
-                      // padding: EdgeInsets.only(left: 5, right: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [Icon(Icons.alarm), Text('Remind me')],
-                      ),
-                      onPressed: () {},
-                    ),
+            Row(
+              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+              children: [
+                FlatButton(
+                  // padding: EdgeInsets.only(left: 5, right: 5),
+                  splashColor: Colors.red,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [Icon(Icons.alarm), Text('Remind me')],
                   ),
-                  Expanded(
-                    // flex: 1,
-                    child: FlatButton(
-                      // padding: EdgeInsets.only(left: 5, right: 5),
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.start,
-                        children: [Icon(Icons.repeat), Text('Repeat')],
-                      ),
-                      onPressed: () {},
-                    ),
+                  onPressed: () {},
+                ),
+                FlatButton(
+                  splashColor: Colors.green,
+                  // padding: EdgeInsets.only(left: 5, right: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [Icon(Icons.repeat), Text('Repeat')],
                   ),
-                  Expanded(
-                    child: Container(
-                      // height: 30,
-                      // width: 20,
-                      decoration: BoxDecoration(shape: BoxShape.circle),
-                      child: FlatButton(
-                        // padding: EdgeInsets.only(left: 5, right: 5),
-                        child: Row(
-                          children: [
-                            Icon(Icons.calendar_today_rounded),
-                            Text('Set due date')
-                          ],
-                        ),
-                        onPressed: () {},
-                      ),
-                    ),
-                  )
-                ],
-              ),
+                  onPressed: () {},
+                ),
+                FlatButton(
+                  splashColor: Colors.blue,
+                  // padding: EdgeInsets.only(left: 5, right: 5),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      Icon(Icons.calendar_today_rounded),
+                      Text('Set due date')
+                    ],
+                  ),
+                  onPressed: () {},
+                )
+              ],
             )
           ],
         ),
