@@ -82,7 +82,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
               context: context,
               elevation: 10,
               isScrollControlled: true,
-              builder: (context) => AddListWidget());
+              builder: (context) => GestureDetector(
+                    child: AddListWidget(),
+                    onTap: () {
+                      Navigator.of(context).pop();
+                    },
+                    behavior: HitTestBehavior.opaque,
+                  ));
         },
         backgroundColor: Theme.of(context).primaryColor,
         splashColor: Colors.white54,
