@@ -9,6 +9,8 @@ class AddListWidget extends StatefulWidget {
 class _AddListWidgetState extends State<AddListWidget> {
   final _listTitleController = TextEditingController();
   DateTime _selectedDate;
+  TimeOfDay _selectedTime;
+  MaterialLocalizations localizations;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -85,12 +87,24 @@ class _AddListWidgetState extends State<AddListWidget> {
                         Container(
                             margin: EdgeInsets.only(right: 7),
                             child: Icon(Icons.alarm)),
-                        Text('Remind me')
+                        _selectedTime == null
+                            ? Text('Remind me')
+                            : Text(
+                                'Due Time: ${_selectedTime.hour}:${_selectedTime.minute}')
                       ],
                     ),
                     onPressed: () {
                       return showTimePicker(
-                          context: context, initialTime: TimeOfDay.now());
+                              context: context, initialTime: TimeOfDay.now())
+                          .then((pickedTime) {
+                        if (pickedTime == null) return;
+                        setState(() {
+                          _selectedTime = TimeOfDay(
+                            hour: pickedTime.hour,
+                            minute: pickedTime.minute,
+                          );
+                        });
+                      });
                     },
                   ),
                   FlatButton(
