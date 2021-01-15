@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class AddListWidget extends StatefulWidget {
   @override
@@ -43,49 +44,55 @@ class _AddListWidgetState extends State<AddListWidget> {
                 )
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                FlatButton(
-                  splashColor: Colors.red,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [Icon(Icons.alarm), Text('Remind me')],
+            SingleChildScrollView(
+              scrollDirection: Axis.horizontal,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  FlatButton(
+                    splashColor: Colors.red,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [Icon(Icons.alarm), Text('Remind me')],
+                    ),
+                    onPressed: () {},
                   ),
-                  onPressed: () {},
-                ),
-                FlatButton(
-                  splashColor: Colors.green,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [Icon(Icons.repeat), Text('Repeat')],
+                  FlatButton(
+                    splashColor: Colors.green,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [Icon(Icons.repeat), Text('Repeat')],
+                    ),
+                    onPressed: () {},
                   ),
-                  onPressed: () {},
-                ),
-                FlatButton(
-                  splashColor: Colors.blue,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                    children: [
-                      Icon(Icons.calendar_today_rounded),
-                      Text('Set due date')
-                    ],
-                  ),
-                  onPressed: () {
-                    return showDatePicker(
-                      context: context,
-                      firstDate: DateTime.now(),
-                      initialDate: DateTime.now(),
-                      lastDate: DateTime(2030),
-                    ).then((pickedDate) {
-                      if (pickedDate == null) return;
-                      setState(() {
-                        _selectedDate = pickedDate;
+                  FlatButton(
+                    splashColor: Colors.blue,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                      children: [
+                        Icon(Icons.calendar_today_rounded),
+                        _selectedDate == null
+                            ? Text('Set due date')
+                            : Text(
+                                'Due Date: ${DateFormat.yMd().format(_selectedDate)}')
+                      ],
+                    ),
+                    onPressed: () {
+                      return showDatePicker(
+                        context: context,
+                        firstDate: DateTime.now(),
+                        initialDate: DateTime.now(),
+                        lastDate: DateTime(2030),
+                      ).then((pickedDate) {
+                        if (pickedDate == null) return;
+                        setState(() {
+                          _selectedDate = pickedDate;
+                        });
                       });
-                    });
-                  },
-                ),
-              ],
+                    },
+                  ),
+                ],
+              ),
             )
           ],
         ),
