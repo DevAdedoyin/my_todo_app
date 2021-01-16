@@ -11,6 +11,17 @@ class _AddListWidgetState extends State<AddListWidget> {
   DateTime _selectedDate;
   TimeOfDay _selectedTime;
   MaterialLocalizations localizations;
+
+  List<String> daysOfTheWeek = [
+    'Daily',
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
+  ];
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -118,7 +129,32 @@ class _AddListWidgetState extends State<AddListWidget> {
                         Text('Repeat')
                       ],
                     ),
-                    onPressed: () {},
+                    onPressed: () {
+                      return showDialog(
+                          context: context,
+                          builder: (_) => AlertDialog(
+                                title: Text('Remind me'),
+                                content: Container(
+                                  height: 160,
+                                  child: ListView.builder(
+                                    itemBuilder: (_, i) {
+                                      return Card(
+                                        child: Container(
+                                          height: 30,
+                                          child: Row(
+                                            children: [
+                                              Text(daysOfTheWeek[i]),
+                                            ],
+                                          ),
+                                        ),
+                                        elevation: 10,
+                                      );
+                                    },
+                                    itemCount: daysOfTheWeek.length,
+                                  ),
+                                ),
+                              ));
+                    },
                   ),
                 ],
               ),
