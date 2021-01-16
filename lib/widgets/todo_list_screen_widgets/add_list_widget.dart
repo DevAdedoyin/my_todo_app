@@ -163,6 +163,22 @@ class _AddListWidgetState extends State<AddListWidget> {
                                     itemCount: daysOfTheWeek.length,
                                   ),
                                 ),
+                                actions: [
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.cancel,
+                                      color: Colors.red,
+                                    ),
+                                    onPressed: () {},
+                                  ),
+                                  IconButton(
+                                    icon: Icon(
+                                      Icons.check,
+                                      color: Colors.green,
+                                    ),
+                                    onPressed: () {},
+                                  )
+                                ],
                               ));
                     },
                   ),
