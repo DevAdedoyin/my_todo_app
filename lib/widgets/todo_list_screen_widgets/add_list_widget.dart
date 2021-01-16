@@ -14,13 +14,13 @@ class _AddListWidgetState extends State<AddListWidget> {
 
   List<String> daysOfTheWeek = [
     'Daily',
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday'
+    'Sunday(s)',
+    'Monday(s)',
+    'Tuesday(s)',
+    'Wednesday(s)',
+    'Thursday(s)',
+    'Friday(s)',
+    'Saturday(s)'
   ];
   @override
   Widget build(BuildContext context) {
@@ -135,15 +135,25 @@ class _AddListWidgetState extends State<AddListWidget> {
                           builder: (_) => AlertDialog(
                                 title: Text('Remind me'),
                                 content: Container(
-                                  height: 160,
+                                  padding: EdgeInsets.all(10),
+                                  height: 180,
                                   child: ListView.builder(
                                     itemBuilder: (_, i) {
                                       return Card(
                                         child: Container(
+                                          padding: EdgeInsets.only(
+                                              left: 10, right: 10),
                                           height: 30,
                                           child: Row(
                                             children: [
                                               Text(daysOfTheWeek[i]),
+                                              Spacer(),
+                                              Checkbox(
+                                                onChanged: (_) {},
+                                                value: false,
+                                                activeColor: Colors.blue,
+                                                checkColor: Colors.green,
+                                              )
                                             ],
                                           ),
                                         ),
