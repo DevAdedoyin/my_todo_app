@@ -133,7 +133,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                       return showDialog(
                           context: context,
                           builder: (_) => AlertDialog(
-                                title: Text('Remind me'),
+                                title: Text('Repeat'),
                                 content: Container(
                                   padding: EdgeInsets.all(10),
                                   height: 180,
