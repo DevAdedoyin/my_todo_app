@@ -170,13 +170,17 @@ class _AddListWidgetState extends State<AddListWidget> {
                                       color: Colors.red,
                                     ),
                                     onPressed: () {},
+                                    splashColor: Colors.redAccent,
+                                    splashRadius: 20,
                                   ),
                                   IconButton(
                                     icon: Icon(
-                                      Icons.check,
+                                      Icons.check_circle,
                                       color: Colors.green,
                                     ),
                                     onPressed: () {},
+                                    splashColor: Colors.greenAccent,
+                                    splashRadius: 20,
                                   )
                                 ],
                               ));
