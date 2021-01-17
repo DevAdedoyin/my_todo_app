@@ -13,18 +13,18 @@ class _AddListWidgetState extends State<AddListWidget> {
   MaterialLocalizations localizations;
   bool isCheck;
 
-  List<String> daysOfTheWeek = [
+  List<String> _daysOfTheWeek = [
     'Daily',
-    'Sunday(s)',
-    'Monday(s)',
-    'Tuesday(s)',
-    'Wednesday(s)',
-    'Thursday(s)',
-    'Friday(s)',
-    'Saturday(s)'
+    'Sunday',
+    'Monday',
+    'Tuesday',
+    'Wednesday',
+    'Thursday',
+    'Friday',
+    'Saturday'
   ];
 
-  Map<int, bool> days = {
+  Map<int, bool> _days = {
     0: false,
     1: false,
     2: false,
@@ -34,6 +34,8 @@ class _AddListWidgetState extends State<AddListWidget> {
     6: false,
     7: false
   };
+
+  List<String> _selectedDay = [];
 
   @override
   void initState() {
@@ -169,15 +171,24 @@ class _AddListWidgetState extends State<AddListWidget> {
                                               height: 30,
                                               child: Row(
                                                 children: [
-                                                  Text(daysOfTheWeek[i]),
+                                                  Text(_daysOfTheWeek[i]),
                                                   Spacer(),
                                                   Checkbox(
                                                     onChanged: (isSelected) {
                                                       stateSetter(() {
-                                                        days[i] = isSelected;
+                                                        _days[i] = isSelected;
+                                                        if (_days[i])
+                                                          _selectedDay.add(
+                                                              _daysOfTheWeek[
+                                                                  i]);
+                                                        else
+                                                          _selectedDay.remove(
+                                                              _daysOfTheWeek[
+                                                                  i]);
+                                                        print(_selectedDay);
                                                       });
                                                     },
-                                                    value: days[i],
+                                                    value: _days[i],
                                                     activeColor: Colors.black,
                                                     checkColor: Colors.white,
                                                   )
@@ -187,7 +198,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                             elevation: 10,
                                           );
                                         },
-                                        itemCount: days.length,
+                                        itemCount: _days.length,
                                       ),
                                     ),
                                     actions: [
