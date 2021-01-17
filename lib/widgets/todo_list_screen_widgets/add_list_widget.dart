@@ -187,6 +187,9 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                           _days.forEach((x, _) {
                                                             _days[x] = true;
                                                           });
+                                                        } else if (!_days[i] &
+                                                            _days[0]) {
+                                                          _days[0] = false;
                                                         } else {
                                                           _selectedDay.remove(
                                                               _daysOfTheWeek[
