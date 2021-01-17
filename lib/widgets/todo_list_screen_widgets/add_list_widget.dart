@@ -177,14 +177,29 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                     onChanged: (isSelected) {
                                                       stateSetter(() {
                                                         _days[i] = isSelected;
-                                                        if (_days[i])
+                                                        if (_days[i] &
+                                                            !_days[0])
                                                           _selectedDay.add(
                                                               _daysOfTheWeek[
                                                                   i]);
-                                                        else
+                                                        else if (_days[i] &
+                                                            _days[0]) {
+                                                          _days.forEach((x, _) {
+                                                            _days[x] = true;
+                                                          });
+                                                        } else {
                                                           _selectedDay.remove(
                                                               _daysOfTheWeek[
                                                                   i]);
+                                                        }
+                                                        // if (_days[0])
+                                                        //   _days.forEach((x, _) {
+                                                        //     _days[x] = true;
+                                                        //   });
+                                                        // else
+                                                        //   _days.forEach((x, _) {
+                                                        //     _days[x] = false;
+                                                        //   });
                                                         print(_selectedDay);
                                                       });
                                                     },
