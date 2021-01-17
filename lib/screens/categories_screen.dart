@@ -68,24 +68,25 @@ class _CategoryScreenState extends State<CategoryScreen> {
           // ),
         ]),
       ),
-      body: ListView.builder(
-          itemBuilder: (_, i) => UserCategoriesWidget(
-                icon: customCats.userCat[i].icon,
-                title: customCats.userCat[i].title,
-                numOfList: customCats.userCat[i].numberOfList.toString(),
-                color: customCats.userCat[i].color,
+      body: customCats.userCat.isEmpty
+          ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+              Center(
+                child: Column(
+                  children: [
+                    Icon(Icons.timeline_rounded),
+                    Text("You have no ToDo List Category yet"),
+                  ],
+                ),
               ),
-          itemCount: customCats.userCat.length),
-      // Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-      //   Center(
-      //     child: Column(
-      //       children: [
-      //         Icon(Icons.hourglass_empty_rounded),
-      //         Text("You have no ToDo List Category yet"),
-      //       ],
-      //     ),
-      //   ),
-      // ]),
+            ])
+          : ListView.builder(
+              itemBuilder: (_, i) => UserCategoriesWidget(
+                    icon: customCats.userCat[i].icon,
+                    title: customCats.userCat[i].title,
+                    numOfList: customCats.userCat[i].numberOfList.toString(),
+                    color: customCats.userCat[i].color,
+                  ),
+              itemCount: customCats.userCat.length),
     );
   }
 }
