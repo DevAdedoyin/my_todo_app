@@ -240,7 +240,11 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           color: Colors.green,
                                         ),
                                         onPressed: () {
-                                          todoDetails.todo.addAll();
+                                          todoDetails.todo.add(Todo(
+                                              date: _selectedDate.toString(),
+                                              time: _selectedTime.toString(),
+                                              title:
+                                                  _listTitleController.text));
                                         },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
