@@ -18,9 +18,9 @@ class Todo {
 }
 
 class ToDoProvider with ChangeNotifier {
-  Map<String, Todo> _todo = {};
+  List<Todo> _todo = [];
 
-  Map<String, Todo> get todo {
-    return {..._todo};
+  List<Todo> get todo {
+    return [..._todo];
   }
 }
