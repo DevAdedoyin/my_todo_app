@@ -75,11 +75,18 @@ class _AddListWidgetState extends State<AddListWidget> {
                   ),
                 ),
                 Container(
-                  margin: EdgeInsets.only(right: 10),
-                  child: Icon(
-                    Icons.save_alt_rounded,
-                  ),
-                )
+                    margin: EdgeInsets.only(right: 10),
+                    child: IconButton(
+                      icon: Icon(Icons.save_rounded),
+                      onPressed: () {
+                        todoDetails.todo.add(Todo(
+                            date: _selectedDate.toString(),
+                            time: _selectedTime.toString(),
+                            title: _listTitleController.text));
+                        Navigator.of(context).pop();
+                        print(_selectedDate.toString());
+                      },
+                    ))
               ],
             ),
             SingleChildScrollView(
@@ -239,13 +246,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           Icons.check_circle,
                                           color: Colors.green,
                                         ),
-                                        onPressed: () {
-                                          todoDetails.todo.add(Todo(
-                                              date: _selectedDate.toString(),
-                                              time: _selectedTime.toString(),
-                                              title:
-                                                  _listTitleController.text));
-                                        },
+                                        onPressed: () {},
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
                                       )
