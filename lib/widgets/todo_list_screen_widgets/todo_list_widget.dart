@@ -32,7 +32,7 @@ class _TodoListState extends State<TodoList> {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.black, width: 2)),
           ),
-          title: Text(todo.todo.values.toList()[widget.index].title),
+          title: Text(todo.todo[widget.index].title),
           subtitle: Row(
             children: <Widget>[
               Icon(
