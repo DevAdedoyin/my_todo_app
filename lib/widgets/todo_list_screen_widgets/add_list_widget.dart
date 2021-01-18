@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:my_todo_app/providers/todo_list.dart';
+import 'package:provider/provider.dart';
 
 class AddListWidget extends StatefulWidget {
   @override
@@ -46,6 +48,7 @@ class _AddListWidgetState extends State<AddListWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final todoDetails = Provider.of<ToDoProvider>(context);
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
@@ -236,7 +239,9 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           Icons.check_circle,
                                           color: Colors.green,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          todoDetails.todo.addAll();
+                                        },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
                                       )

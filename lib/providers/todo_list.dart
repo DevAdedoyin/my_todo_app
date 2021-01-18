@@ -13,8 +13,8 @@ class Todo {
       {@required this.title,
       @required this.time,
       @required this.date,
-      @required this.frequency,
-      @required this.note});
+      this.frequency,
+      this.note});
 }
 
 class ToDoProvider with ChangeNotifier {
