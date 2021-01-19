@@ -79,10 +79,8 @@ class _AddListWidgetState extends State<AddListWidget> {
                     child: IconButton(
                       icon: Icon(Icons.save_rounded),
                       onPressed: () {
-                        todoDetails.todo.add(Todo(
-                            date: _selectedDate.toString(),
-                            time: _selectedTime.toString(),
-                            title: _listTitleController.text));
+                        todoDetails.insertTodo(_listTitleController.text,
+                            _selectedTime.toString(), _selectedDate.toString());
 
                         print(todoDetails.todo);
                         Navigator.of(context).pop();
