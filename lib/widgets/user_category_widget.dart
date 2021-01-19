@@ -22,8 +22,8 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
     // final userCats = Provider.of<Categories>(context);
     return InkWell(
       onTap: () => {
-        Navigator.of(context)
-            .pushNamed(TodoListScreen.routeName, arguments: widget.title)
+        Navigator.of(context).pushNamed(TodoListScreen.routeName,
+            arguments: {widget.title, widget.color})
       },
       splashColor: Theme.of(context).accentColor,
       borderRadius: BorderRadius.circular(10),

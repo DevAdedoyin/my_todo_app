@@ -18,6 +18,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
     final _todo = Provider.of<ToDoProvider>(context);
     final _title = ModalRoute.of(context).settings.arguments as String;
     return Scaffold(
+      // backgroundColor: ,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
