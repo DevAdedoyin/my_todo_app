@@ -23,4 +23,9 @@ class ToDoProvider with ChangeNotifier {
   List<Todo> get todo {
     return [..._todo];
   }
+
+  void insertTodo(String title, String time, String date) {
+    _todo.add(Todo(date: date, time: time, title: title));
+    notifyListeners();
+  }
 }

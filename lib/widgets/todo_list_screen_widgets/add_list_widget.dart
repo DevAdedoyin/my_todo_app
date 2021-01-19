@@ -83,8 +83,13 @@ class _AddListWidgetState extends State<AddListWidget> {
                             date: _selectedDate.toString(),
                             time: _selectedTime.toString(),
                             title: _listTitleController.text));
+
+                        print(todoDetails.todo);
                         Navigator.of(context).pop();
-                        print(_selectedDate.toString());
+
+                        print(_selectedDate.toString() +
+                            " " +
+                            _listTitleController.text);
                       },
                     ))
               ],

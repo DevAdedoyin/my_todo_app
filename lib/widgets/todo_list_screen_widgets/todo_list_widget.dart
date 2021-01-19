@@ -32,7 +32,7 @@ class _TodoListState extends State<TodoList> {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.black, width: 2)),
           ),
-          title: Text(todo.todo[widget.index].title),
+          title: Text(todo.todo[0].title),
           subtitle: Row(
             children: <Widget>[
               Icon(
@@ -42,7 +42,7 @@ class _TodoListState extends State<TodoList> {
               SizedBox(
                 width: 5,
               ),
-              Text(DateFormat.MONTH_DAY),
+              Text(todo.todo[0].title),
               Icon(
                 Icons.repeat,
                 size: 15,
