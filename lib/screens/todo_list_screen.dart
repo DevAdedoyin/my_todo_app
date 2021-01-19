@@ -16,9 +16,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
     final _todo = Provider.of<ToDoProvider>(context);
-    final _title = ModalRoute.of(context).settings.arguments as String;
+    final _args = ModalRoute.of(context).settings.arguments as List;
+
+    // final _color = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      // backgroundColor: ,
+      backgroundColor: _args[1],
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -32,7 +34,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 Container(
                   width: 200,
                   child: FlexibleSpaceBar(
-                    title: Text(_title.toString()),
+                    title: Text(_args[0]),
                     centerTitle: true,
                     // collapseMode: CollapseMode.pin,
                   ),

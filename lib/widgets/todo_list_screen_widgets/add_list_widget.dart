@@ -81,7 +81,6 @@ class _AddListWidgetState extends State<AddListWidget> {
                       onPressed: () {
                         todoDetails.insertTodo(_listTitleController.text,
                             _selectedTime.toString(), _selectedDate.toString());
-
                         print(todoDetails.todo);
                         Navigator.of(context).pop();
 
