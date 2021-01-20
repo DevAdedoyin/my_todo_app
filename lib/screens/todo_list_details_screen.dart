@@ -5,6 +5,7 @@ import 'package:provider/provider.dart';
 import '';
 
 class ToDoListDetailsScreen extends StatefulWidget {
+  static const routeName = '/todo-list-details';
   @override
   _ToDoListDetailsScreenState createState() => _ToDoListDetailsScreenState();
 }
