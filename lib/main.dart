@@ -5,6 +5,7 @@ import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/screens/categories_screen.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 import 'package:my_todo_app/screens/todo_list_screen.dart';
+import 'package:my_todo_app/widgets/todo_list_details.dart';
 import 'package:my_todo_app/widgets/user_category_widget.dart';
 import 'package:provider/provider.dart';
 
@@ -30,7 +31,10 @@ class MainApp extends StatelessWidget {
             accentColor: Colors.yellow,
           ),
           home: CategoryScreen(),
-          routes: {TodoListScreen.routeName: (ctx) => TodoListScreen()}),
+          routes: {
+            TodoListScreen.routeName: (ctx) => TodoListScreen(),
+            ToDoListDetailsScreen.routeName: (ctx) => ToDoDetailsWidget()
+          }),
     );
   }
 }
