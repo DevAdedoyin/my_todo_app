@@ -31,6 +31,7 @@ class MainApp extends StatelessWidget {
             accentColor: Colors.yellow,
           ),
           home: CategoryScreen(),
+          // CategoryScreen(),
           routes: {
             TodoListScreen.routeName: (ctx) => TodoListScreen(),
             ToDoListDetailsScreen.routeName: (ctx) => ToDoDetailsWidget()
