@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_details.dart';
 import 'package:provider/provider.dart';
-import '';
 
 class ToDoListDetailsScreen extends StatefulWidget {
   static const routeName = '/todo-list-details';
@@ -18,7 +17,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
       appBar: AppBar(
         title: Text('Details'),
       ),
-      body: SingleChildScrollView(child: ToDoDetailsWidget()),
+      body: ToDoDetailsWidget(),
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 40,
