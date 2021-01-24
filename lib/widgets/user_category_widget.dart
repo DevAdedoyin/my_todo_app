@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/model/category.dart';
-import 'package:my_todo_app/providers/categories.dart';
+// import 'package:my_todo_app/model/category.dart';
+// import 'package:my_todo_app/providers/categories.dart';
 import 'package:my_todo_app/screens/todo_list_screen.dart';
-import 'package:provider/provider.dart';
+// import 'package:provider/provider.dart';
+// import 'package:path/path.dart';
 
 class UserCategoriesWidget extends StatefulWidget {
   final IconData icon;
