@@ -32,16 +32,31 @@ List<Color> bgColors = [
 //   deepPurpleAccent,
 // }
 
-class Category {
-  final int id;gory_
+class DefaultCategory {
+  final int defaultCategoryId;
+  final IconData categoryIcon;
+  final String defaultCategoryTitle;
+  final int numberOfCategory;
+
+  DefaultCategory({
+    @required this.defaultCategoryId,
+    @required this.categoryIcon,
+    @required this.defaultCategoryTitle,
+    @required this.numberOfCategory,
+  });
+}
+
+class UserCategory {
+  final int categoryId;
   final String categoryTitle;
   final int numberOfList;
+  final bool isFavorite;
   final Color color;
 
-  Category(
-      {@required this.id,
-
+  UserCategory(
+      {@required this.categoryId,
       @required this.categoryTitle,
       @required this.numberOfList,
+      @required this.isFavorite,
       this.color});
 }
