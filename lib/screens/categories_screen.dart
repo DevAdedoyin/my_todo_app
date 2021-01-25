@@ -24,10 +24,17 @@ class _CategoryScreenState extends State<CategoryScreen> {
 
     return Scaffold(
       appBar: AppBar(
-        title: Text('My To-do Categories'),
+        backgroundColor: Theme.of(context).primaryColor,
+        title: Text(
+          'All Categories',
+          // style: TextStyle(color: Colors.white70),
+        ),
         actions: <Widget>[
           IconButton(
-              icon: const Icon(Icons.search),
+              icon: const Icon(
+                Icons.search,
+                // color: Colors.white70,
+              ),
               onPressed: () {
                 // TODO: OnPressed Feature Not Done
               }),
@@ -48,24 +55,20 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 children: [
                   Icon(
                     Icons.add,
-                    color: Colors.white70,
+                    color: Colors.white,
+                    size: 27,
                   ),
-                  Text(
-                    'Add Category',
-                    style: TextStyle(color: Colors.white70),
+                  Container(
+                    margin: EdgeInsets.only(left: 7),
+                    child: Text(
+                      'Add Category',
+                      style: TextStyle(color: Colors.white, fontSize: 15),
+                    ),
                   )
                 ],
               ),
             ),
           ),
-          // Container(
-          //   child: IconButton(
-          //     color: Colors.white54,
-          //     splashColor: Colors.black87,
-          //     icon: Icon(Icons.add),
-          //     onPressed: () {},
-          //   ),
-          // ),
         ]),
       ),
       body: customCats.userCat.isEmpty
@@ -73,8 +76,14 @@ class _CategoryScreenState extends State<CategoryScreen> {
               Center(
                 child: Column(
                   children: [
-                    Icon(Icons.timeline_rounded),
-                    Text("You have no ToDo List Category yet"),
+                    Icon(
+                      Icons.hourglass_empty_rounded,
+                      size: 20,
+                    ),
+                    Text(
+                      "You have no category yet.",
+                      style: TextStyle(fontSize: 20),
+                    ),
                   ],
                 ),
               ),

@@ -28,7 +28,8 @@ class MainApp extends StatelessWidget {
           title: 'My ToDo',
           theme: ThemeData(
             primarySwatch: Colors.lightBlue,
-            accentColor: Colors.yellow,
+            primaryColor: Colors.lightBlue[800],
+            accentColor: Colors.cyan,
           ),
           home: CategoryScreen(),
           // CategoryScreen(),
