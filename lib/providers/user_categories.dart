@@ -2,19 +2,21 @@ import 'package:flutter/material.dart';
 import '../model/category.dart';
 
 class UserCategories with ChangeNotifier {
-  List<Category> _userCat = [];
+  List<UserCategory> _userCat = [];
 
-  List<Category> get userCat {
+  List<UserCategory> get userCat {
     return [..._userCat];
   }
 
   void catDetail(int bgColorNum, String catName) {
-    _userCat.add(Category(
-        title: catName,
-        icon: Icons.category_rounded,
-        numberOfList: bgColorNum,
-        id: 'DummyId',
-        color: bgColors[bgColorNum]));
+    _userCat.add(
+      UserCategory(
+          categoryTitle: catName,
+          numberOfList: bgColorNum,
+          categoryId: 0,
+          isFavorite: false,
+          color: bgColors[bgColorNum]),
+    );
     // print(bgColors[bgColorNum].toString);
     notifyListeners();
   }
