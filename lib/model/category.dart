@@ -1,36 +1,23 @@
 import 'package:flutter/material.dart';
 
 List<Color> bgColors = [
-  Colors.white10,
-  Colors.greenAccent,
-  Colors.yellowAccent,
-  Colors.blueGrey,
-  Colors.grey,
-  Colors.redAccent,
-  Colors.deepOrangeAccent,
-  Colors.deepPurpleAccent,
-  Colors.pinkAccent,
+  Colors.white,
+  Colors.teal,
+  Colors.red,
+  Colors.yellow,
+  Colors.purple,
+  Colors.pink,
+  Colors.orange,
+  Colors.lime,
+  Colors.indigo,
+  Colors.black,
+  Colors.amber,
+  Colors.blue,
+  Colors.brown,
+  Colors.cyan,
+  Colors.green,
+  Colors.grey
 ];
-
-// Map<String, Color> bgColor = {
-//   'greenAccent': Colors.greenAccent,
-//   'yellowAccent': Colors.yellowAccent,
-//   'blueGrey': Colors.blueGrey,
-//   'grey': Colors.grey,
-//   'redAccent': Colors.redAccent,
-//   'deepOrangeAccent': Colors.deepOrangeAccent,
-//   'deepPurpleAccent': Colors.deepPurpleAccent,
-// };
-
-// enum ColorList {
-//   greenAccent,
-//   yellowAccent,
-//   blueGrey,
-//   grey,
-//   redAccent,
-//   deepOrangeAccent,
-//   deepPurpleAccent,
-// }
 
 class DefaultCategory {
   final int defaultCategoryId;

@@ -44,7 +44,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
             ),
             title: Text(
               widget.title,
-              style: TextStyle(fontSize: 23),
+              style: TextStyle(fontSize: 22),
             ),
             trailing: Text(
               widget.numOfList,
