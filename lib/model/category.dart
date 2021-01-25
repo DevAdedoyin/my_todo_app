@@ -33,16 +33,15 @@ List<Color> bgColors = [
 // }
 
 class Category {
-  final String id;
-  final IconData icon;
-  final String title;
+  final int id;gory_
+  final String categoryTitle;
   final int numberOfList;
   final Color color;
 
   Category(
       {@required this.id,
-      @required this.icon,
-      @required this.title,
+
+      @required this.categoryTitle,
       @required this.numberOfList,
       this.color});
 }
