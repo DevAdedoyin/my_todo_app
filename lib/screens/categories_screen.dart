@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:my_todo_app/providers/categories.dart';
+import 'package:my_todo_app/providers/default_categories.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/widgets/app_drawer.dart';
 import 'package:my_todo_app/widgets/category_screen_widgets/alert_dialog_widget.dart';
@@ -81,8 +81,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ])
           : ListView.builder(
               itemBuilder: (_, i) => UserCategoriesWidget(
-                    icon: customCats.userCat[i].icon,
-                    title: customCats.userCat[i].title,
+                    title: customCats.userCat[i].categoryTitle,
                     numOfList: customCats.userCat[i].numberOfList.toString(),
                     color: customCats.userCat[i].color,
                   ),
