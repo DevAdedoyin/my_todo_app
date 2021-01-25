@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/providers/categories.dart';
+import 'package:my_todo_app/providers/default_categories.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/screens/categories_screen.dart';
