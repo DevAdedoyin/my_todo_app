@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/screens/todo_list_screen.dart';
 
 class UserCategoriesWidget extends StatefulWidget {
-  final IconData icon;
   final String title;
   final String numOfList;
   final Color color;

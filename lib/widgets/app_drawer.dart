@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/model/category.dart';
 import 'package:provider/provider.dart';
-import '../providers/categories.dart';
+import '../providers/default_categories.dart';
 
 class AppDrawer extends StatelessWidget {
   @override
@@ -20,9 +21,10 @@ class AppDrawer extends StatelessWidget {
               itemBuilder: (_, i) => Column(
                 children: [
                   ListTile(
-                    leading: Icon(categories.cat[i].icon),
-                    title: Text(categories.cat[i].title),
-                    trailing: Text(categories.cat[i].numberOfList.toString()),
+                    leading: Icon(categories.cat[i].categoryIcon),
+                    title: Text(categories.cat[i].defaultCategoryTitle),
+                    trailing:
+                        Text(categories.cat[i].numberOfCategory.toString()),
                   ),
                   Divider(),
                 ],
