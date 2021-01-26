@@ -38,6 +38,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   Widget build(BuildContext context) {
     final userCatProv = Provider.of<UserCategories>(context);
     return AlertDialog(
+      backgroundColor: Colors.white70.withOpacity(0.97),
       title: Text(
         'Category',
       ),
@@ -69,12 +70,6 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                             controller: _textFieldController,
                             decoration: InputDecoration(
                               hintText: 'Enter your category',
-
-                              // border: InputBorder.none,
-                              // focusedBorder: InputBorder.none,
-                              // enabledBorder: InputBorder.none,
-                              // errorBorder: InputBorder.none,
-                              // disabledBorder: InputBorder.none,
                             ),
                           )),
                     )
