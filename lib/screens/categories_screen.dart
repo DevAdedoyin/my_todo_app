@@ -92,7 +92,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
               itemBuilder: (_, i) => UserCategoriesWidget(
                     title: customCats.userCat[i].categoryTitle,
                     numOfList: customCats.userCat[i].numberOfList.toString(),
-                    color: customCats.userCat[i].color,
+                    color: bgColors[customCats.userCat[i].color],
                   ),
               itemCount: customCats.userCat.length),
     );

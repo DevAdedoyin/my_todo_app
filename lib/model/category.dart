@@ -37,8 +37,8 @@ class UserCategory {
   final int categoryId;
   final String categoryTitle;
   final int numberOfList;
-  final bool isFavorite;
-  final Color color;
+  final int isFavorite;
+  final int color;
 
   UserCategory(
       {@required this.categoryId,

@@ -12,10 +12,10 @@ class UserCategories with ChangeNotifier {
     _userCat.add(
       UserCategory(
           categoryTitle: catName,
-          numberOfList: bgColorNum,
+          numberOfList: 0,
           categoryId: 0,
-          isFavorite: false,
-          color: bgColors[bgColorNum]),
+          isFavorite: 0,
+          color: bgColorNum),
     );
     // print(bgColors[bgColorNum].toString);
     notifyListeners();
