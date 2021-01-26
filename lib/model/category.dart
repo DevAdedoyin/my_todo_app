@@ -45,5 +45,5 @@ class UserCategory {
       @required this.categoryTitle,
       @required this.numberOfList,
       @required this.isFavorite,
-      this.color});
+      @required this.color});
 }
