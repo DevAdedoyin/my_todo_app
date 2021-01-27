@@ -38,7 +38,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
   Widget build(BuildContext context) {
     final userCatProv = Provider.of<UserCategories>(context);
     return AlertDialog(
-      backgroundColor: Colors.white70.withOpacity(0.97),
+      backgroundColor: Colors.white70.withOpacity(0.9),
       title: Text(
         'Category',
       ),

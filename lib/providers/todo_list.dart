@@ -3,18 +3,27 @@ import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
 class Todo {
+  final int listId;
   final String title;
   final String time;
   final String date;
   final String frequency;
   final String note;
+  final bool isCompleted;
+  final String steps;
+  final bool isImportant;
 
-  Todo(
-      {@required this.title,
-      @required this.time,
-      @required this.date,
-      this.frequency,
-      this.note});
+  Todo({
+    this.listId,
+    @required this.title,
+    @required this.time,
+    @required this.date,
+    this.frequency,
+    this.note,
+    this.isCompleted,
+    this.steps,
+    this.isImportant,
+  });
 }
 
 class ToDoProvider with ChangeNotifier {
