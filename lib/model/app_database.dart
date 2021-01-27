@@ -15,8 +15,8 @@ class Category extends Table {
   BoolColumn get isFavorite => boolean()();
   IntColumn get color => integer().nullable()();
 
-  @override
-  Set<Column> get primaryKey => {categoryId};
+  // @override
+  // Set<Column> get primaryKey => {categoryId};
 }
 
 class ToDoList extends Table {
@@ -31,8 +31,8 @@ class ToDoList extends Table {
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
 
-  @override
-  Set<Column> get primaryKey => {listId};
+  // @override
+  // Set<Column> get primaryKey => {listId};
 }
 
 @UseMoor(tables: [Category, ToDoList])
