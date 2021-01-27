@@ -6,7 +6,7 @@ import 'package:moor/ffi.dart';
 
 part 'app_database.g.dart';
 
-@DataClassName('Category')
+// @DataClassName('Category')
 class Category extends Table {
   IntColumn get categoryId => integer().autoIncrement()();
   TextColumn get categoryTitle =>
@@ -36,7 +36,12 @@ class ToDoList extends Table {
 }
 
 @UseMoor(tables: [Category, ToDoList])
-class AppDatabase {}
+class AppDatabase extends _$AppDatabase {
+  AppDatabase() : super(_openConnection());
+
+  @override
+  int get schemaVersion => 1;
+}
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
