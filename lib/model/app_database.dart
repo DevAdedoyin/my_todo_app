@@ -3,7 +3,7 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:moor/ffi.dart';
-// import '../model/category.dart';
+import '../model/category.dart';
 
 part 'app_database.g.dart';
 
@@ -42,6 +42,10 @@ class AppDatabase extends _$AppDatabase {
 
   @override
   int get schemaVersion => 1;
+
+  Future<List<Categorie>> get getAllCategory {
+    return select(categories).get();
+  }
 }
 
 LazyDatabase _openConnection() {
