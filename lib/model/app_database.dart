@@ -44,6 +44,9 @@ class AppDatabase extends _$AppDatabase {
   @override
   int get schemaVersion => 1;
 
+  Future<int> insertCategory(CategoriesCompanion cats) =>
+      into(categories).insert(cats);
+
   Future<List<Categorie>> get getAllCategory {
     return select(categories).get();
   }
