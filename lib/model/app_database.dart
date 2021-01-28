@@ -3,23 +3,24 @@ import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
 import 'package:moor/ffi.dart';
+// import '../model/category.dart';
 
 part 'app_database.g.dart';
 
 // @DataClassName('Category')
-class Category extends Table {
+class Categories extends Table {
   IntColumn get categoryId => integer().autoIncrement()();
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().nullable()();
-  BoolColumn get isFavorite => boolean()();
+  IntColumn get isFavorite => integer()();
   IntColumn get color => integer().nullable()();
 
   // @override
   // Set<Column> get primaryKey => {categoryId};
 }
 
-class ToDoList extends Table {
+class ToDoLists extends Table {
   IntColumn get listId => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
@@ -35,7 +36,7 @@ class ToDoList extends Table {
   // Set<Column> get primaryKey => {listId};
 }
 
-@UseMoor(tables: [Category, ToDoList])
+@UseMoor(tables: [Categories, ToDoLists])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 

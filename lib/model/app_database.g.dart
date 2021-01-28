@@ -7,32 +7,31 @@ part of 'app_database.dart';
 // **************************************************************************
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
-class CategoryData extends DataClass implements Insertable<CategoryData> {
+class Categorie extends DataClass implements Insertable<Categorie> {
   final int categoryId;
   final String categoryTitle;
   final int numberOfList;
-  final bool isFavorite;
+  final int isFavorite;
   final int color;
-  CategoryData(
+  Categorie(
       {@required this.categoryId,
       @required this.categoryTitle,
       this.numberOfList,
       @required this.isFavorite,
       this.color});
-  factory CategoryData.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+  factory Categorie.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
-    final boolType = db.typeSystem.forDartType<bool>();
-    return CategoryData(
+    return Categorie(
       categoryId: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}category_id']),
       categoryTitle: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}category_title']),
       numberOfList: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}number_of_list']),
-      isFavorite: boolType
+      isFavorite: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_favorite']),
       color: intType.mapFromDatabaseResponse(data['${effectivePrefix}color']),
     );
@@ -50,7 +49,7 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
       map['number_of_list'] = Variable<int>(numberOfList);
     }
     if (!nullToAbsent || isFavorite != null) {
-      map['is_favorite'] = Variable<bool>(isFavorite);
+      map['is_favorite'] = Variable<int>(isFavorite);
     }
     if (!nullToAbsent || color != null) {
       map['color'] = Variable<int>(color);
@@ -58,8 +57,8 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
     return map;
   }
 
-  CategoryCompanion toCompanion(bool nullToAbsent) {
-    return CategoryCompanion(
+  CategoriesCompanion toCompanion(bool nullToAbsent) {
+    return CategoriesCompanion(
       categoryId: categoryId == null && nullToAbsent
           ? const Value.absent()
           : Value(categoryId),
@@ -77,14 +76,14 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
     );
   }
 
-  factory CategoryData.fromJson(Map<String, dynamic> json,
+  factory Categorie.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return CategoryData(
+    return Categorie(
       categoryId: serializer.fromJson<int>(json['categoryId']),
       categoryTitle: serializer.fromJson<String>(json['categoryTitle']),
       numberOfList: serializer.fromJson<int>(json['numberOfList']),
-      isFavorite: serializer.fromJson<bool>(json['isFavorite']),
+      isFavorite: serializer.fromJson<int>(json['isFavorite']),
       color: serializer.fromJson<int>(json['color']),
     );
   }
@@ -95,18 +94,18 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
       'categoryId': serializer.toJson<int>(categoryId),
       'categoryTitle': serializer.toJson<String>(categoryTitle),
       'numberOfList': serializer.toJson<int>(numberOfList),
-      'isFavorite': serializer.toJson<bool>(isFavorite),
+      'isFavorite': serializer.toJson<int>(isFavorite),
       'color': serializer.toJson<int>(color),
     };
   }
 
-  CategoryData copyWith(
+  Categorie copyWith(
           {int categoryId,
           String categoryTitle,
           int numberOfList,
-          bool isFavorite,
+          int isFavorite,
           int color}) =>
-      CategoryData(
+      Categorie(
         categoryId: categoryId ?? this.categoryId,
         categoryTitle: categoryTitle ?? this.categoryTitle,
         numberOfList: numberOfList ?? this.numberOfList,
@@ -115,7 +114,7 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
       );
   @override
   String toString() {
-    return (StringBuffer('CategoryData(')
+    return (StringBuffer('Categorie(')
           ..write('categoryId: $categoryId, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
@@ -135,7 +134,7 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
-      (other is CategoryData &&
+      (other is Categorie &&
           other.categoryId == this.categoryId &&
           other.categoryTitle == this.categoryTitle &&
           other.numberOfList == this.numberOfList &&
@@ -143,32 +142,32 @@ class CategoryData extends DataClass implements Insertable<CategoryData> {
           other.color == this.color);
 }
 
-class CategoryCompanion extends UpdateCompanion<CategoryData> {
+class CategoriesCompanion extends UpdateCompanion<Categorie> {
   final Value<int> categoryId;
   final Value<String> categoryTitle;
   final Value<int> numberOfList;
-  final Value<bool> isFavorite;
+  final Value<int> isFavorite;
   final Value<int> color;
-  const CategoryCompanion({
+  const CategoriesCompanion({
     this.categoryId = const Value.absent(),
     this.categoryTitle = const Value.absent(),
     this.numberOfList = const Value.absent(),
     this.isFavorite = const Value.absent(),
     this.color = const Value.absent(),
   });
-  CategoryCompanion.insert({
+  CategoriesCompanion.insert({
     this.categoryId = const Value.absent(),
     @required String categoryTitle,
     this.numberOfList = const Value.absent(),
-    @required bool isFavorite,
+    @required int isFavorite,
     this.color = const Value.absent(),
   })  : categoryTitle = Value(categoryTitle),
         isFavorite = Value(isFavorite);
-  static Insertable<CategoryData> custom({
+  static Insertable<Categorie> custom({
     Expression<int> categoryId,
     Expression<String> categoryTitle,
     Expression<int> numberOfList,
-    Expression<bool> isFavorite,
+    Expression<int> isFavorite,
     Expression<int> color,
   }) {
     return RawValuesInsertable({
@@ -180,13 +179,13 @@ class CategoryCompanion extends UpdateCompanion<CategoryData> {
     });
   }
 
-  CategoryCompanion copyWith(
+  CategoriesCompanion copyWith(
       {Value<int> categoryId,
       Value<String> categoryTitle,
       Value<int> numberOfList,
-      Value<bool> isFavorite,
+      Value<int> isFavorite,
       Value<int> color}) {
-    return CategoryCompanion(
+    return CategoriesCompanion(
       categoryId: categoryId ?? this.categoryId,
       categoryTitle: categoryTitle ?? this.categoryTitle,
       numberOfList: numberOfList ?? this.numberOfList,
@@ -208,7 +207,7 @@ class CategoryCompanion extends UpdateCompanion<CategoryData> {
       map['number_of_list'] = Variable<int>(numberOfList.value);
     }
     if (isFavorite.present) {
-      map['is_favorite'] = Variable<bool>(isFavorite.value);
+      map['is_favorite'] = Variable<int>(isFavorite.value);
     }
     if (color.present) {
       map['color'] = Variable<int>(color.value);
@@ -218,7 +217,7 @@ class CategoryCompanion extends UpdateCompanion<CategoryData> {
 
   @override
   String toString() {
-    return (StringBuffer('CategoryCompanion(')
+    return (StringBuffer('CategoriesCompanion(')
           ..write('categoryId: $categoryId, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
@@ -229,11 +228,11 @@ class CategoryCompanion extends UpdateCompanion<CategoryData> {
   }
 }
 
-class $CategoryTable extends Category
-    with TableInfo<$CategoryTable, CategoryData> {
+class $CategoriesTable extends Categories
+    with TableInfo<$CategoriesTable, Categorie> {
   final GeneratedDatabase _db;
   final String _alias;
-  $CategoryTable(this._db, [this._alias]);
+  $CategoriesTable(this._db, [this._alias]);
   final VerificationMeta _categoryIdMeta = const VerificationMeta('categoryId');
   GeneratedIntColumn _categoryId;
   @override
@@ -296,13 +295,13 @@ class $CategoryTable extends Category
   List<GeneratedColumn> get $columns =>
       [categoryId, categoryTitle, numberOfList, isFavorite, color];
   @override
-  $CategoryTable get asDslTable => this;
+  $CategoriesTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'category';
+  String get $tableName => _alias ?? 'categories';
   @override
-  final String actualTableName = 'category';
+  final String actualTableName = 'categories';
   @override
-  VerificationContext validateIntegrity(Insertable<CategoryData> instance,
+  VerificationContext validateIntegrity(Insertable<Categorie> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -344,18 +343,18 @@ class $CategoryTable extends Category
   @override
   Set<GeneratedColumn> get $primaryKey => {categoryId};
   @override
-  CategoryData map(Map<String, dynamic> data, {String tablePrefix}) {
+  Categorie map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return CategoryData.fromData(data, _db, prefix: effectivePrefix);
+    return Categorie.fromData(data, _db, prefix: effectivePrefix);
   }
 
   @override
-  $CategoryTable createAlias(String alias) {
-    return $CategoryTable(_db, alias);
+  $CategoriesTable createAlias(String alias) {
+    return $CategoriesTable(_db, alias);
   }
 }
 
-class ToDoListData extends DataClass implements Insertable<ToDoListData> {
+class ToDoList extends DataClass implements Insertable<ToDoList> {
   final int listId;
   final String title;
   final String time;
@@ -365,7 +364,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
   final bool isCompleted;
   final String steps;
   final bool isImportant;
-  ToDoListData(
+  ToDoList(
       {@required this.listId,
       @required this.title,
       @required this.time,
@@ -375,13 +374,13 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
       @required this.isCompleted,
       @required this.steps,
       @required this.isImportant});
-  factory ToDoListData.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+  factory ToDoList.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final boolType = db.typeSystem.forDartType<bool>();
-    return ToDoListData(
+    return ToDoList(
       listId:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}list_id']),
       title:
@@ -432,8 +431,8 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
     return map;
   }
 
-  ToDoListCompanion toCompanion(bool nullToAbsent) {
-    return ToDoListCompanion(
+  ToDoListsCompanion toCompanion(bool nullToAbsent) {
+    return ToDoListsCompanion(
       listId:
           listId == null && nullToAbsent ? const Value.absent() : Value(listId),
       title:
@@ -455,10 +454,10 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
     );
   }
 
-  factory ToDoListData.fromJson(Map<String, dynamic> json,
+  factory ToDoList.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return ToDoListData(
+    return ToDoList(
       listId: serializer.fromJson<int>(json['listId']),
       title: serializer.fromJson<String>(json['title']),
       time: serializer.fromJson<String>(json['time']),
@@ -486,7 +485,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
     };
   }
 
-  ToDoListData copyWith(
+  ToDoList copyWith(
           {int listId,
           String title,
           String time,
@@ -496,7 +495,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
           bool isCompleted,
           String steps,
           bool isImportant}) =>
-      ToDoListData(
+      ToDoList(
         listId: listId ?? this.listId,
         title: title ?? this.title,
         time: time ?? this.time,
@@ -509,7 +508,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
       );
   @override
   String toString() {
-    return (StringBuffer('ToDoListData(')
+    return (StringBuffer('ToDoList(')
           ..write('listId: $listId, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
@@ -543,7 +542,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
-      (other is ToDoListData &&
+      (other is ToDoList &&
           other.listId == this.listId &&
           other.title == this.title &&
           other.time == this.time &&
@@ -555,7 +554,7 @@ class ToDoListData extends DataClass implements Insertable<ToDoListData> {
           other.isImportant == this.isImportant);
 }
 
-class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
+class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
   final Value<int> listId;
   final Value<String> title;
   final Value<String> time;
@@ -565,7 +564,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
   final Value<bool> isCompleted;
   final Value<String> steps;
   final Value<bool> isImportant;
-  const ToDoListCompanion({
+  const ToDoListsCompanion({
     this.listId = const Value.absent(),
     this.title = const Value.absent(),
     this.time = const Value.absent(),
@@ -576,7 +575,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
   });
-  ToDoListCompanion.insert({
+  ToDoListsCompanion.insert({
     this.listId = const Value.absent(),
     @required String title,
     @required String time,
@@ -594,7 +593,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
         isCompleted = Value(isCompleted),
         steps = Value(steps),
         isImportant = Value(isImportant);
-  static Insertable<ToDoListData> custom({
+  static Insertable<ToDoList> custom({
     Expression<int> listId,
     Expression<String> title,
     Expression<String> time,
@@ -618,7 +617,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
     });
   }
 
-  ToDoListCompanion copyWith(
+  ToDoListsCompanion copyWith(
       {Value<int> listId,
       Value<String> title,
       Value<String> time,
@@ -628,7 +627,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
       Value<bool> isCompleted,
       Value<String> steps,
       Value<bool> isImportant}) {
-    return ToDoListCompanion(
+    return ToDoListsCompanion(
       listId: listId ?? this.listId,
       title: title ?? this.title,
       time: time ?? this.time,
@@ -676,7 +675,7 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
 
   @override
   String toString() {
-    return (StringBuffer('ToDoListCompanion(')
+    return (StringBuffer('ToDoListsCompanion(')
           ..write('listId: $listId, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
@@ -691,11 +690,11 @@ class ToDoListCompanion extends UpdateCompanion<ToDoListData> {
   }
 }
 
-class $ToDoListTable extends ToDoList
-    with TableInfo<$ToDoListTable, ToDoListData> {
+class $ToDoListsTable extends ToDoLists
+    with TableInfo<$ToDoListsTable, ToDoList> {
   final GeneratedDatabase _db;
   final String _alias;
-  $ToDoListTable(this._db, [this._alias]);
+  $ToDoListsTable(this._db, [this._alias]);
   final VerificationMeta _listIdMeta = const VerificationMeta('listId');
   GeneratedIntColumn _listId;
   @override
@@ -800,13 +799,13 @@ class $ToDoListTable extends ToDoList
         isImportant
       ];
   @override
-  $ToDoListTable get asDslTable => this;
+  $ToDoListsTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'to_do_list';
+  String get $tableName => _alias ?? 'to_do_lists';
   @override
-  final String actualTableName = 'to_do_list';
+  final String actualTableName = 'to_do_lists';
   @override
-  VerificationContext validateIntegrity(Insertable<ToDoListData> instance,
+  VerificationContext validateIntegrity(Insertable<ToDoList> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -872,25 +871,25 @@ class $ToDoListTable extends ToDoList
   @override
   Set<GeneratedColumn> get $primaryKey => {listId};
   @override
-  ToDoListData map(Map<String, dynamic> data, {String tablePrefix}) {
+  ToDoList map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ToDoListData.fromData(data, _db, prefix: effectivePrefix);
+    return ToDoList.fromData(data, _db, prefix: effectivePrefix);
   }
 
   @override
-  $ToDoListTable createAlias(String alias) {
-    return $ToDoListTable(_db, alias);
+  $ToDoListsTable createAlias(String alias) {
+    return $ToDoListsTable(_db, alias);
   }
 }
 
 abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
-  $CategoryTable _category;
-  $CategoryTable get category => _category ??= $CategoryTable(this);
-  $ToDoListTable _toDoList;
-  $ToDoListTable get toDoList => _toDoList ??= $ToDoListTable(this);
+  $CategoriesTable _categories;
+  $CategoriesTable get categories => _categories ??= $CategoriesTable(this);
+  $ToDoListsTable _toDoLists;
+  $ToDoListsTable get toDoLists => _toDoLists ??= $ToDoListsTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [category, toDoList];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [categories, toDoLists];
 }
