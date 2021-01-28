@@ -269,11 +269,11 @@ class $CategoryTable extends Category
   }
 
   final VerificationMeta _isFavoriteMeta = const VerificationMeta('isFavorite');
-  GeneratedBoolColumn _isFavorite;
+  GeneratedIntColumn _isFavorite;
   @override
-  GeneratedBoolColumn get isFavorite => _isFavorite ??= _constructIsFavorite();
-  GeneratedBoolColumn _constructIsFavorite() {
-    return GeneratedBoolColumn(
+  GeneratedIntColumn get isFavorite => _isFavorite ??= _constructIsFavorite();
+  GeneratedIntColumn _constructIsFavorite() {
+    return GeneratedIntColumn(
       'is_favorite',
       $tableName,
       false,
