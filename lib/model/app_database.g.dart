@@ -364,6 +364,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
   final bool isCompleted;
   final String steps;
   final bool isImportant;
+  final int category;
   ToDoList(
       {@required this.listId,
       @required this.title,
@@ -373,7 +374,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       @required this.note,
       @required this.isCompleted,
       @required this.steps,
-      @required this.isImportant});
+      @required this.isImportant,
+      this.category});
   factory ToDoList.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -396,6 +398,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}steps']),
       isImportant: boolType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
+      category:
+          intType.mapFromDatabaseResponse(data['${effectivePrefix}category']),
     );
   }
   @override
@@ -428,6 +432,9 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
     if (!nullToAbsent || isImportant != null) {
       map['is_important'] = Variable<bool>(isImportant);
     }
+    if (!nullToAbsent || category != null) {
+      map['category'] = Variable<int>(category);
+    }
     return map;
   }
 
@@ -451,6 +458,9 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       isImportant: isImportant == null && nullToAbsent
           ? const Value.absent()
           : Value(isImportant),
+      category: category == null && nullToAbsent
+          ? const Value.absent()
+          : Value(category),
     );
   }
 
@@ -467,6 +477,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       isCompleted: serializer.fromJson<bool>(json['isCompleted']),
       steps: serializer.fromJson<String>(json['steps']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
+      category: serializer.fromJson<int>(json['category']),
     );
   }
   @override
@@ -482,6 +493,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       'isCompleted': serializer.toJson<bool>(isCompleted),
       'steps': serializer.toJson<String>(steps),
       'isImportant': serializer.toJson<bool>(isImportant),
+      'category': serializer.toJson<int>(category),
     };
   }
 
@@ -494,7 +506,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           String note,
           bool isCompleted,
           String steps,
-          bool isImportant}) =>
+          bool isImportant,
+          int category}) =>
       ToDoList(
         listId: listId ?? this.listId,
         title: title ?? this.title,
@@ -505,6 +518,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
         isCompleted: isCompleted ?? this.isCompleted,
         steps: steps ?? this.steps,
         isImportant: isImportant ?? this.isImportant,
+        category: category ?? this.category,
       );
   @override
   String toString() {
@@ -517,7 +531,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           ..write('note: $note, ')
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
-          ..write('isImportant: $isImportant')
+          ..write('isImportant: $isImportant, ')
+          ..write('category: $category')
           ..write(')'))
         .toString();
   }
@@ -538,7 +553,9 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
                           $mrjc(
                               isCompleted.hashCode,
                               $mrjc(
-                                  steps.hashCode, isImportant.hashCode)))))))));
+                                  steps.hashCode,
+                                  $mrjc(isImportant.hashCode,
+                                      category.hashCode))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -551,7 +568,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           other.note == this.note &&
           other.isCompleted == this.isCompleted &&
           other.steps == this.steps &&
-          other.isImportant == this.isImportant);
+          other.isImportant == this.isImportant &&
+          other.category == this.category);
 }
 
 class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
@@ -564,6 +582,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
   final Value<bool> isCompleted;
   final Value<String> steps;
   final Value<bool> isImportant;
+  final Value<int> category;
   const ToDoListsCompanion({
     this.listId = const Value.absent(),
     this.title = const Value.absent(),
@@ -574,6 +593,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     this.isCompleted = const Value.absent(),
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
+    this.category = const Value.absent(),
   });
   ToDoListsCompanion.insert({
     this.listId = const Value.absent(),
@@ -585,6 +605,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     @required bool isCompleted,
     @required String steps,
     @required bool isImportant,
+    this.category = const Value.absent(),
   })  : title = Value(title),
         time = Value(time),
         date = Value(date),
@@ -603,6 +624,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     Expression<bool> isCompleted,
     Expression<String> steps,
     Expression<bool> isImportant,
+    Expression<int> category,
   }) {
     return RawValuesInsertable({
       if (listId != null) 'list_id': listId,
@@ -614,6 +636,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       if (isCompleted != null) 'is_completed': isCompleted,
       if (steps != null) 'steps': steps,
       if (isImportant != null) 'is_important': isImportant,
+      if (category != null) 'category': category,
     });
   }
 
@@ -626,7 +649,8 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       Value<String> note,
       Value<bool> isCompleted,
       Value<String> steps,
-      Value<bool> isImportant}) {
+      Value<bool> isImportant,
+      Value<int> category}) {
     return ToDoListsCompanion(
       listId: listId ?? this.listId,
       title: title ?? this.title,
@@ -637,6 +661,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       isCompleted: isCompleted ?? this.isCompleted,
       steps: steps ?? this.steps,
       isImportant: isImportant ?? this.isImportant,
+      category: category ?? this.category,
     );
   }
 
@@ -670,6 +695,9 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     if (isImportant.present) {
       map['is_important'] = Variable<bool>(isImportant.value);
     }
+    if (category.present) {
+      map['category'] = Variable<int>(category.value);
+    }
     return map;
   }
 
@@ -684,7 +712,8 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
           ..write('note: $note, ')
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
-          ..write('isImportant: $isImportant')
+          ..write('isImportant: $isImportant, ')
+          ..write('category: $category')
           ..write(')'))
         .toString();
   }
@@ -786,6 +815,18 @@ class $ToDoListsTable extends ToDoLists
     );
   }
 
+  final VerificationMeta _categoryMeta = const VerificationMeta('category');
+  GeneratedIntColumn _category;
+  @override
+  GeneratedIntColumn get category => _category ??= _constructCategory();
+  GeneratedIntColumn _constructCategory() {
+    return GeneratedIntColumn(
+      'category',
+      $tableName,
+      true,
+    );
+  }
+
   @override
   List<GeneratedColumn> get $columns => [
         listId,
@@ -796,7 +837,8 @@ class $ToDoListsTable extends ToDoLists
         note,
         isCompleted,
         steps,
-        isImportant
+        isImportant,
+        category
       ];
   @override
   $ToDoListsTable get asDslTable => this;
@@ -864,6 +906,10 @@ class $ToDoListsTable extends ToDoLists
               data['is_important'], _isImportantMeta));
     } else if (isInserting) {
       context.missing(_isImportantMeta);
+    }
+    if (data.containsKey('category')) {
+      context.handle(_categoryMeta,
+          category.isAcceptableOrUnknown(data['category'], _categoryMeta));
     }
     return context;
   }

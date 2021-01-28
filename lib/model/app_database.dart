@@ -31,6 +31,7 @@ class ToDoLists extends Table {
   BoolColumn get isCompleted => boolean()();
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
+  IntColumn get category => integer().nullable()();
 
   // @override
   // Set<Column> get primaryKey => {listId};
@@ -47,11 +48,11 @@ class AppDatabase extends _$AppDatabase {
     return select(categories).get();
   }
 
-  Stream<List<ToDoList>> watchToDoEntriesInCategory(Categorie cat) {
-    return (select(toDoLists)
-          ..where((td) => td.categories.equals(cat.categoryId)))
-        .watch();
-  }
+  // Stream<List<ToDoList>> watchToDoEntriesInCategory(Categorie cat) {
+  //   return (select(toDoLists)
+  //         ..where((td) => td.categories.equals(cat.categoryId)))
+  //       .watch();
+  // }
 }
 
 LazyDatabase _openConnection() {
