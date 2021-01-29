@@ -14,7 +14,7 @@ class Categories extends Table {
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().nullable()();
   IntColumn get isFavorite => integer().withDefault(const Constant(0))();
-  IntColumn get color => integer().nullable()();
+  IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
   // @override
   // Set<Column> get primaryKey => {categoryId};
