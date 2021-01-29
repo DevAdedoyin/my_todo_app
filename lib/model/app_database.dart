@@ -13,7 +13,7 @@ class Categories extends Table {
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().nullable()();
-  IntColumn get isFavorite => integer()();
+  IntColumn get isFavorite => integer().withDefault(const Constant(0))();
   IntColumn get color => integer().nullable()();
 
   // @override

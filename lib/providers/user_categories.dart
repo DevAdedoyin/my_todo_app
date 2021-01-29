@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/model/app_database.dart';
 import '../model/category.dart';
 
 class UserCategories with ChangeNotifier {
@@ -17,6 +18,7 @@ class UserCategories with ChangeNotifier {
           isFavorite: 0,
           color: bgColorNum),
     );
+    // AppDatabase().insertCategory(CategoriesCompanion(categoryTitle: catName, color: bgColorNum, isFavorite: 0, numberOfList: 0);
     // print(bgColors[bgColorNum].toString);
     notifyListeners();
   }
