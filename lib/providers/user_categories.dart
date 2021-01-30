@@ -22,4 +22,6 @@ class UserCategories with ChangeNotifier {
     // print(bgColors[bgColorNum].toString);
     notifyListeners();
   }
+
+  void insertCategories() {}
 }
