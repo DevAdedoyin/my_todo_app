@@ -11,7 +11,7 @@ class UserCategories with ChangeNotifier {
   }
 
   void catDetail(int bgColorNum, String catName) {
-    // _userCat.add(
+    // //_userCat.add(
     // //   UserCategory(
     // //       categoryTitle: catName,
     // //       numberOfList: 0,
@@ -20,13 +20,14 @@ class UserCategories with ChangeNotifier {
     // //       color: bgColorNum),
     // // );
     AppDatabase().insertCategory(CategoriesCompanion(
-        categoryTitle: Value(catName),
-        color: Value(bgColorNum),
-        isFavorite: Value(0)));
-    // print(bgColors[bgColorNum].toString);
+        categoryTitle: Value(catName), color: Value(bgColorNum)));
+    //// print(bgColors[bgColorNum].toString);
 
     notifyListeners();
   }
 
-  void insertCategories() {}
+  void getCategories() {
+    //  List<Categorie> cats = AppDatabase().getAllCategory;
+    _userCat.add(AppDatabase().getAllCategory);
+  }
 }

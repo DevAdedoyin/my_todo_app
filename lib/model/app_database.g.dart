@@ -16,7 +16,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   Categorie(
       {@required this.categoryId,
       @required this.categoryTitle,
-      this.numberOfList,
+      @required this.numberOfList,
       @required this.isFavorite,
       this.color});
   factory Categorie.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -159,10 +159,9 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
     this.categoryId = const Value.absent(),
     @required String categoryTitle,
     this.numberOfList = const Value.absent(),
-    @required int isFavorite,
+    this.isFavorite = const Value.absent(),
     this.color = const Value.absent(),
-  })  : categoryTitle = Value(categoryTitle),
-        isFavorite = Value(isFavorite);
+  }) : categoryTitle = Value(categoryTitle);
   static Insertable<Categorie> custom({
     Expression<int> categoryId,
     Expression<String> categoryTitle,
@@ -260,11 +259,8 @@ class $CategoriesTable extends Categories
   GeneratedIntColumn get numberOfList =>
       _numberOfList ??= _constructNumberOfList();
   GeneratedIntColumn _constructNumberOfList() {
-    return GeneratedIntColumn(
-      'number_of_list',
-      $tableName,
-      true,
-    );
+    return GeneratedIntColumn('number_of_list', $tableName, false,
+        defaultValue: const Constant(0));
   }
 
   final VerificationMeta _isFavoriteMeta = const VerificationMeta('isFavorite');
@@ -272,11 +268,8 @@ class $CategoriesTable extends Categories
   @override
   GeneratedIntColumn get isFavorite => _isFavorite ??= _constructIsFavorite();
   GeneratedIntColumn _constructIsFavorite() {
-    return GeneratedIntColumn(
-      'is_favorite',
-      $tableName,
-      false,
-    );
+    return GeneratedIntColumn('is_favorite', $tableName, false,
+        defaultValue: const Constant(0));
   }
 
   final VerificationMeta _colorMeta = const VerificationMeta('color');
@@ -284,11 +277,8 @@ class $CategoriesTable extends Categories
   @override
   GeneratedIntColumn get color => _color ??= _constructColor();
   GeneratedIntColumn _constructColor() {
-    return GeneratedIntColumn(
-      'color',
-      $tableName,
-      true,
-    );
+    return GeneratedIntColumn('color', $tableName, true,
+        defaultValue: const Constant(0));
   }
 
   @override
@@ -330,8 +320,6 @@ class $CategoriesTable extends Categories
           _isFavoriteMeta,
           isFavorite.isAcceptableOrUnknown(
               data['is_favorite'], _isFavoriteMeta));
-    } else if (isInserting) {
-      context.missing(_isFavoriteMeta);
     }
     if (data.containsKey('color')) {
       context.handle(
