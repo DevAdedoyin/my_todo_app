@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:moor_flutter/moor_flutter.dart' hide Column;
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/model/category.dart';
-import 'package:my_todo_app/providers/user_categories.dart';
+// import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:provider/provider.dart';
 
 class AlertDialogWidget extends StatefulWidget {
@@ -37,7 +38,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final userCatProv = Provider.of<UserCategories>(context);
+    final insertCategory = Provider.of<CategorieDao>(context);
     return AlertDialog(
       backgroundColor: Colors.white70.withOpacity(0.9),
       title: Text(
@@ -138,7 +139,10 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
             return {
               print(_textFieldController.text),
               print(selectedColor),
-              userCatProv.catDetail(selectedColor, _textFieldController.text),
+              // userCatProv.catDetail(selectedColor, _textFieldController.text),
+              insertCategory.insertCategorie(CategoriesCompanion(
+                  categoryTitle: Value(_textFieldController.text),
+                  color: Value(selectedColor))),
               Navigator.of(context).pop()
             };
           },
