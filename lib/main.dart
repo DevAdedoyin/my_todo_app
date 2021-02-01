@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/default_categories.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
@@ -14,9 +15,14 @@ void main() => runApp(MainApp());
 class MainApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    final db = AppDatabase();
     return MultiProvider(
       providers: [
-        ChangeNotifierProvider.value(value: Categories()),
+        // ChangeNotifierProvider.value(value: Categories()),
+        Provider.value(value: db.taskDao),
+        Provider.value(
+          value: db.categorieDao,
+        ),
         ChangeNotifierProvider.value(
           value: UserCategories(),
         ),
