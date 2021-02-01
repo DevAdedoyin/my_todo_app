@@ -35,9 +35,13 @@ class ToDoLists extends Table {
   BoolColumn get isImportant => boolean()();
   TextColumn get category =>
       text().nullable().customConstraint('NULL REFERENCES categories(id)')();
+}
 
-  // @override
-  // Set<Column> get primaryKey => {listId};
+class TaskWithCategory {
+  final ToDoList toDoList;
+  final Categorie categorie;
+
+  TaskWithCategory({@required this.categorie, @required this.toDoList});
 }
 
 @UseMoor(tables: [Categories, ToDoLists])
@@ -53,12 +57,6 @@ class AppDatabase extends _$AppDatabase {
   Future<List<Categorie>> get getAllCategory {
     return select(categories).get();
   }
-
-  // Stream<List<ToDoList>> watchToDoEntriesInCategory(Categorie cat) {
-  //   return (select(toDoLists)
-  //         ..where((td) => td.categories.equals(cat.categoryId)))
-  //       .watch();
-  // }
 }
 
 LazyDatabase _openConnection() {
