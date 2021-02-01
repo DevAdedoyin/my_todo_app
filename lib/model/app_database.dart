@@ -16,8 +16,8 @@ class Categories extends Table {
   IntColumn get isFavorite => integer().withDefault(const Constant(0))();
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
-  // @override
-  // Set<Column> get primaryKey => {categoryId};
+  @override
+  Set<Column> get primaryKey => {categoryTitle};
 }
 
 class ToDoLists extends Table {
@@ -31,7 +31,8 @@ class ToDoLists extends Table {
   BoolColumn get isCompleted => boolean()();
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
-  IntColumn get category => integer().nullable()();
+  IntColumn get category =>
+      integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 
   // @override
   // Set<Column> get primaryKey => {listId};

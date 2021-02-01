@@ -10,7 +10,7 @@ class UserCategories with ChangeNotifier {
     return [..._userCat];
   }
 
-  void catDetail(int bgColorNum, String catName) {
+  void catDetail(int bgColorNum, String catName) async {
     // //_userCat.add(
     // //   UserCategory(
     // //       categoryTitle: catName,
@@ -22,12 +22,14 @@ class UserCategories with ChangeNotifier {
     AppDatabase().insertCategory(CategoriesCompanion(
         categoryTitle: Value(catName), color: Value(bgColorNum)));
     //// print(bgColors[bgColorNum].toString);
+    Future<List<Categorie>> getCats = AppDatabase().getAllCategory;
+
+    List list = await getCats;
+
+    _userCat.add(list);
 
     notifyListeners();
   }
+  //  List<Categorie> cats = AppDatabase().getAllCategory;
 
-  void getCategories() {
-    //  List<Categorie> cats = AppDatabase().getAllCategory;
-    _userCat.add(AppDatabase().getAllCategory);
-  }
 }
