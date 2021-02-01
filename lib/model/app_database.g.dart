@@ -924,6 +924,11 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   $CategoriesTable get categories => _categories ??= $CategoriesTable(this);
   $TasksTable _tasks;
   $TasksTable get tasks => _tasks ??= $TasksTable(this);
+  TaskDao _taskDao;
+  TaskDao get taskDao => _taskDao ??= TaskDao(this as AppDatabase);
+  CategorieDao _categorieDao;
+  CategorieDao get categorieDao =>
+      _categorieDao ??= CategorieDao(this as AppDatabase);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override

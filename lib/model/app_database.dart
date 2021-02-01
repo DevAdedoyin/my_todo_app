@@ -1,4 +1,5 @@
 import 'package:moor/moor.dart';
+import 'package:moor_flutter/moor_flutter.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
 import 'package:path_provider/path_provider.dart';
@@ -42,25 +43,33 @@ class TaskWithCategory {
   TaskWithCategory({@required this.categorie, @required this.task});
 }
 
-@UseMoor(tables: [Categories, Tasks], daos: [])
+@UseMoor(tables: [Categories, Tasks], daos: [TaskDao, CategorieDao])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
   @override
   int get schemaVersion => 1;
 
-  Future<int> insertCategory(CategoriesCompanion cats) =>
-      into(categories).insert(cats);
-
-  Future<List<Categorie>> get getAllCategory {
-    return select(categories).get();
-  }
+  @override
+  // TODO: implement migration
+  MigrationStrategy get migration =>
+      MigrationStrategy(onUpgrade: (migrator, from, to) async {
+        if (from == 1) {
+          await migrator.addColumn(tasks, tasks.category);
+          await migrator.createTable(categories);
+        }
+      }, beforeOpen: (details) async {
+        await customStatement('PRAGMA foreign_keys = ON');
+      });
 }
 
 LazyDatabase _openConnection() {
   return LazyDatabase(() async {
     final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(dbFolder.path, 'db.sqlite'));
+    final file = File(p.join(
+      dbFolder.path,
+      'db.sqlite',
+    ));
     return VmDatabase(file);
   });
 }

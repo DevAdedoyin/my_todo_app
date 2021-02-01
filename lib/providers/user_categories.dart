@@ -19,14 +19,14 @@ class UserCategories with ChangeNotifier {
     // //       isFavorite: 0,
     // //       color: bgColorNum),
     // // );
-    AppDatabase().insertCategory(CategoriesCompanion(
-        categoryTitle: Value(catName), color: Value(bgColorNum)));
-    //// print(bgColors[bgColorNum].toString);
-    Future<List<Categorie>> getCats = AppDatabase().getAllCategory;
+    // AppDatabase().insertCategory(CategoriesCompanion(
+    //     categoryTitle: Value(catName), color: Value(bgColorNum)));
+    // //// print(bgColors[bgColorNum].toString);
+    // Future<List<Categorie>> getCats = AppDatabase().getAllCategory;
 
-    List list = await getCats;
+    // List<Categorie> list = await getCats;
 
-    _userCat.add(list);
+    // _userCat.add(list);
 
     notifyListeners();
   }
