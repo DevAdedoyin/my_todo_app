@@ -156,12 +156,13 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
     this.color = const Value.absent(),
   });
   CategoriesCompanion.insert({
-    this.categoryId = const Value.absent(),
+    @required int categoryId,
     @required String categoryTitle,
     this.numberOfList = const Value.absent(),
     this.isFavorite = const Value.absent(),
     this.color = const Value.absent(),
-  }) : categoryTitle = Value(categoryTitle);
+  })  : categoryId = Value(categoryId),
+        categoryTitle = Value(categoryTitle);
   static Insertable<Categorie> custom({
     Expression<int> categoryId,
     Expression<String> categoryTitle,
@@ -300,6 +301,8 @@ class $CategoriesTable extends Categories
           _categoryIdMeta,
           categoryId.isAcceptableOrUnknown(
               data['category_id'], _categoryIdMeta));
+    } else if (isInserting) {
+      context.missing(_categoryIdMeta);
     }
     if (data.containsKey('category_title')) {
       context.handle(
@@ -329,7 +332,7 @@ class $CategoriesTable extends Categories
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {categoryId};
+  Set<GeneratedColumn> get $primaryKey => {categoryTitle};
   @override
   Categorie map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -352,7 +355,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
   final bool isCompleted;
   final String steps;
   final bool isImportant;
-  final int category;
+  final String category;
   ToDoList(
       {@required this.listId,
       @required this.title,
@@ -386,8 +389,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}steps']),
       isImportant: boolType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
-      category:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}category']),
+      category: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}category']),
     );
   }
   @override
@@ -421,7 +424,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       map['is_important'] = Variable<bool>(isImportant);
     }
     if (!nullToAbsent || category != null) {
-      map['category'] = Variable<int>(category);
+      map['category'] = Variable<String>(category);
     }
     return map;
   }
@@ -465,7 +468,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       isCompleted: serializer.fromJson<bool>(json['isCompleted']),
       steps: serializer.fromJson<String>(json['steps']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
-      category: serializer.fromJson<int>(json['category']),
+      category: serializer.fromJson<String>(json['category']),
     );
   }
   @override
@@ -481,7 +484,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       'isCompleted': serializer.toJson<bool>(isCompleted),
       'steps': serializer.toJson<String>(steps),
       'isImportant': serializer.toJson<bool>(isImportant),
-      'category': serializer.toJson<int>(category),
+      'category': serializer.toJson<String>(category),
     };
   }
 
@@ -495,7 +498,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           bool isCompleted,
           String steps,
           bool isImportant,
-          int category}) =>
+          String category}) =>
       ToDoList(
         listId: listId ?? this.listId,
         title: title ?? this.title,
@@ -570,7 +573,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
   final Value<bool> isCompleted;
   final Value<String> steps;
   final Value<bool> isImportant;
-  final Value<int> category;
+  final Value<String> category;
   const ToDoListsCompanion({
     this.listId = const Value.absent(),
     this.title = const Value.absent(),
@@ -612,7 +615,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     Expression<bool> isCompleted,
     Expression<String> steps,
     Expression<bool> isImportant,
-    Expression<int> category,
+    Expression<String> category,
   }) {
     return RawValuesInsertable({
       if (listId != null) 'list_id': listId,
@@ -638,7 +641,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       Value<bool> isCompleted,
       Value<String> steps,
       Value<bool> isImportant,
-      Value<int> category}) {
+      Value<String> category}) {
     return ToDoListsCompanion(
       listId: listId ?? this.listId,
       title: title ?? this.title,
@@ -684,7 +687,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       map['is_important'] = Variable<bool>(isImportant.value);
     }
     if (category.present) {
-      map['category'] = Variable<int>(category.value);
+      map['category'] = Variable<String>(category.value);
     }
     return map;
   }
@@ -804,15 +807,12 @@ class $ToDoListsTable extends ToDoLists
   }
 
   final VerificationMeta _categoryMeta = const VerificationMeta('category');
-  GeneratedIntColumn _category;
+  GeneratedTextColumn _category;
   @override
-  GeneratedIntColumn get category => _category ??= _constructCategory();
-  GeneratedIntColumn _constructCategory() {
-    return GeneratedIntColumn(
-      'category',
-      $tableName,
-      true,
-    );
+  GeneratedTextColumn get category => _category ??= _constructCategory();
+  GeneratedTextColumn _constructCategory() {
+    return GeneratedTextColumn('category', $tableName, true,
+        $customConstraints: 'NULL REFERENCES categories(id)');
   }
 
   @override

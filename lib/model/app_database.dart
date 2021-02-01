@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:moor/moor.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
@@ -31,8 +33,8 @@ class ToDoLists extends Table {
   BoolColumn get isCompleted => boolean()();
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
-  IntColumn get category =>
-      integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
+  TextColumn get category =>
+      text().nullable().customConstraint('NULL REFERENCES categories(id)')();
 
   // @override
   // Set<Column> get primaryKey => {listId};
