@@ -238,8 +238,11 @@ class $CategoriesTable extends Categories
   @override
   GeneratedIntColumn get categoryId => _categoryId ??= _constructCategoryId();
   GeneratedIntColumn _constructCategoryId() {
-    return GeneratedIntColumn('category_id', $tableName, false,
-        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+    return GeneratedIntColumn(
+      'category_id',
+      $tableName,
+      false,
+    );
   }
 
   final VerificationMeta _categoryTitleMeta =
@@ -332,7 +335,7 @@ class $CategoriesTable extends Categories
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {categoryTitle};
+  Set<GeneratedColumn> get $primaryKey => {categoryId, categoryTitle};
   @override
   Categorie map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -345,7 +348,7 @@ class $CategoriesTable extends Categories
   }
 }
 
-class ToDoList extends DataClass implements Insertable<ToDoList> {
+class Task extends DataClass implements Insertable<Task> {
   final int listId;
   final String title;
   final String time;
@@ -356,7 +359,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
   final String steps;
   final bool isImportant;
   final String category;
-  ToDoList(
+  Task(
       {@required this.listId,
       @required this.title,
       @required this.time,
@@ -367,13 +370,13 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       @required this.steps,
       @required this.isImportant,
       this.category});
-  factory ToDoList.fromData(Map<String, dynamic> data, GeneratedDatabase db,
+  factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final boolType = db.typeSystem.forDartType<bool>();
-    return ToDoList(
+    return Task(
       listId:
           intType.mapFromDatabaseResponse(data['${effectivePrefix}list_id']),
       title:
@@ -429,8 +432,8 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
     return map;
   }
 
-  ToDoListsCompanion toCompanion(bool nullToAbsent) {
-    return ToDoListsCompanion(
+  TasksCompanion toCompanion(bool nullToAbsent) {
+    return TasksCompanion(
       listId:
           listId == null && nullToAbsent ? const Value.absent() : Value(listId),
       title:
@@ -455,10 +458,10 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
     );
   }
 
-  factory ToDoList.fromJson(Map<String, dynamic> json,
+  factory Task.fromJson(Map<String, dynamic> json,
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
-    return ToDoList(
+    return Task(
       listId: serializer.fromJson<int>(json['listId']),
       title: serializer.fromJson<String>(json['title']),
       time: serializer.fromJson<String>(json['time']),
@@ -488,7 +491,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
     };
   }
 
-  ToDoList copyWith(
+  Task copyWith(
           {int listId,
           String title,
           String time,
@@ -499,7 +502,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           String steps,
           bool isImportant,
           String category}) =>
-      ToDoList(
+      Task(
         listId: listId ?? this.listId,
         title: title ?? this.title,
         time: time ?? this.time,
@@ -513,7 +516,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
       );
   @override
   String toString() {
-    return (StringBuffer('ToDoList(')
+    return (StringBuffer('Task(')
           ..write('listId: $listId, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
@@ -550,7 +553,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
-      (other is ToDoList &&
+      (other is Task &&
           other.listId == this.listId &&
           other.title == this.title &&
           other.time == this.time &&
@@ -563,7 +566,7 @@ class ToDoList extends DataClass implements Insertable<ToDoList> {
           other.category == this.category);
 }
 
-class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
+class TasksCompanion extends UpdateCompanion<Task> {
   final Value<int> listId;
   final Value<String> title;
   final Value<String> time;
@@ -574,7 +577,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
   final Value<String> steps;
   final Value<bool> isImportant;
   final Value<String> category;
-  const ToDoListsCompanion({
+  const TasksCompanion({
     this.listId = const Value.absent(),
     this.title = const Value.absent(),
     this.time = const Value.absent(),
@@ -586,7 +589,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     this.isImportant = const Value.absent(),
     this.category = const Value.absent(),
   });
-  ToDoListsCompanion.insert({
+  TasksCompanion.insert({
     this.listId = const Value.absent(),
     @required String title,
     @required String time,
@@ -605,7 +608,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
         isCompleted = Value(isCompleted),
         steps = Value(steps),
         isImportant = Value(isImportant);
-  static Insertable<ToDoList> custom({
+  static Insertable<Task> custom({
     Expression<int> listId,
     Expression<String> title,
     Expression<String> time,
@@ -631,7 +634,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
     });
   }
 
-  ToDoListsCompanion copyWith(
+  TasksCompanion copyWith(
       {Value<int> listId,
       Value<String> title,
       Value<String> time,
@@ -642,7 +645,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
       Value<String> steps,
       Value<bool> isImportant,
       Value<String> category}) {
-    return ToDoListsCompanion(
+    return TasksCompanion(
       listId: listId ?? this.listId,
       title: title ?? this.title,
       time: time ?? this.time,
@@ -694,7 +697,7 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
 
   @override
   String toString() {
-    return (StringBuffer('ToDoListsCompanion(')
+    return (StringBuffer('TasksCompanion(')
           ..write('listId: $listId, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
@@ -710,11 +713,10 @@ class ToDoListsCompanion extends UpdateCompanion<ToDoList> {
   }
 }
 
-class $ToDoListsTable extends ToDoLists
-    with TableInfo<$ToDoListsTable, ToDoList> {
+class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   final GeneratedDatabase _db;
   final String _alias;
-  $ToDoListsTable(this._db, [this._alias]);
+  $TasksTable(this._db, [this._alias]);
   final VerificationMeta _listIdMeta = const VerificationMeta('listId');
   GeneratedIntColumn _listId;
   @override
@@ -829,13 +831,13 @@ class $ToDoListsTable extends ToDoLists
         category
       ];
   @override
-  $ToDoListsTable get asDslTable => this;
+  $TasksTable get asDslTable => this;
   @override
-  String get $tableName => _alias ?? 'to_do_lists';
+  String get $tableName => _alias ?? 'tasks';
   @override
-  final String actualTableName = 'to_do_lists';
+  final String actualTableName = 'tasks';
   @override
-  VerificationContext validateIntegrity(Insertable<ToDoList> instance,
+  VerificationContext validateIntegrity(Insertable<Task> instance,
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
@@ -905,14 +907,14 @@ class $ToDoListsTable extends ToDoLists
   @override
   Set<GeneratedColumn> get $primaryKey => {listId};
   @override
-  ToDoList map(Map<String, dynamic> data, {String tablePrefix}) {
+  Task map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
-    return ToDoList.fromData(data, _db, prefix: effectivePrefix);
+    return Task.fromData(data, _db, prefix: effectivePrefix);
   }
 
   @override
-  $ToDoListsTable createAlias(String alias) {
-    return $ToDoListsTable(_db, alias);
+  $TasksTable createAlias(String alias) {
+    return $TasksTable(_db, alias);
   }
 }
 
@@ -920,10 +922,22 @@ abstract class _$AppDatabase extends GeneratedDatabase {
   _$AppDatabase(QueryExecutor e) : super(SqlTypeSystem.defaultInstance, e);
   $CategoriesTable _categories;
   $CategoriesTable get categories => _categories ??= $CategoriesTable(this);
-  $ToDoListsTable _toDoLists;
-  $ToDoListsTable get toDoLists => _toDoLists ??= $ToDoListsTable(this);
+  $TasksTable _tasks;
+  $TasksTable get tasks => _tasks ??= $TasksTable(this);
   @override
   Iterable<TableInfo> get allTables => allSchemaEntities.whereType<TableInfo>();
   @override
-  List<DatabaseSchemaEntity> get allSchemaEntities => [categories, toDoLists];
+  List<DatabaseSchemaEntity> get allSchemaEntities => [categories, tasks];
+}
+
+// **************************************************************************
+// DaoGenerator
+// **************************************************************************
+
+mixin _$TaskDaoMixin on DatabaseAccessor<AppDatabase> {
+  $TasksTable get tasks => attachedDatabase.tasks;
+  $CategoriesTable get categories => attachedDatabase.categories;
+}
+mixin _$CategorieDaoMixin on DatabaseAccessor<AppDatabase> {
+  $CategoriesTable get categories => attachedDatabase.categories;
 }

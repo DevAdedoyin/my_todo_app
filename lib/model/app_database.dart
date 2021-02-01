@@ -1,5 +1,3 @@
-import 'dart:html';
-
 import 'package:moor/moor.dart';
 import 'dart:io';
 import 'package:path/path.dart' as p;
@@ -11,7 +9,7 @@ part 'app_database.g.dart';
 
 // @DataClassName('Category')
 class Categories extends Table {
-  IntColumn get categoryId => integer().autoIncrement()();
+  IntColumn get categoryId => integer()();
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().withDefault(const Constant(0))();
@@ -19,10 +17,10 @@ class Categories extends Table {
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
   @override
-  Set<Column> get primaryKey => {categoryTitle};
+  Set<Column> get primaryKey => {categoryId, categoryTitle};
 }
 
-class ToDoLists extends Table {
+class Tasks extends Table {
   IntColumn get listId => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
@@ -38,13 +36,13 @@ class ToDoLists extends Table {
 }
 
 class TaskWithCategory {
-  final ToDoList toDoList;
+  final Task task;
   final Categorie categorie;
 
-  TaskWithCategory({@required this.categorie, @required this.toDoList});
+  TaskWithCategory({@required this.categorie, @required this.task});
 }
 
-@UseMoor(tables: [Categories, ToDoLists])
+@UseMoor(tables: [Categories, Tasks], daos: [])
 class AppDatabase extends _$AppDatabase {
   AppDatabase() : super(_openConnection());
 
@@ -65,4 +63,51 @@ LazyDatabase _openConnection() {
     final file = File(p.join(dbFolder.path, 'db.sqlite'));
     return VmDatabase(file);
   });
+}
+
+@UseDao(
+  tables: [Tasks, Categories],
+)
+class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
+  final AppDatabase db;
+
+  TaskDao(this.db) : super(db);
+
+  Stream<List<TaskWithCategory>> watchAllTasks() {
+    return (select(tasks)
+          ..orderBy(
+            [
+              (t) => OrderingTerm(expression: t.date, mode: OrderingMode.desc),
+              (t) => OrderingTerm(expression: t.title),
+            ],
+          ))
+        .join(
+          [
+            leftOuterJoin(
+                categories, categories.categoryTitle.equalsExp(tasks.category)),
+          ],
+        )
+        .watch()
+        .map((rows) => rows.map((row) {
+              return TaskWithCategory(
+                  categorie: row.readTable(categories),
+                  task: row.readTable(tasks));
+            }).toList());
+  }
+
+  Future insertTask(Insertable<Task> task) => into(tasks).insert(task);
+  Future updateTask(Insertable<Task> task) => update(tasks).replace(task);
+  Future deleteTask(Insertable<Task> task) => delete(tasks).delete(task);
+}
+
+@UseDao(tables: [Categories])
+class CategorieDao extends DatabaseAccessor<AppDatabase>
+    with _$CategorieDaoMixin {
+  final AppDatabase db;
+
+  CategorieDao(this.db) : super(db);
+
+  Stream<List<Categorie>> watchCategories() => select(categories).watch();
+  Future insertCategorie(Insertable<Categorie> categorie) =>
+      into(categories).insert(categorie);
 }
