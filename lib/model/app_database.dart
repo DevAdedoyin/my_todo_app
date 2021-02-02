@@ -10,15 +10,15 @@ part 'app_database.g.dart';
 
 // @DataClassName('Category')
 class Categories extends Table {
-  // IntColumn get categoryId => integer().autoIncrement()();
+  IntColumn get categoryId => integer().autoIncrement()();
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().withDefault(const Constant(0))();
   IntColumn get isFavorite => integer().withDefault(const Constant(0))();
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
-  @override
-  Set<Column> get primaryKey => {categoryTitle};
+  // @override
+  // Set<Column> get primaryKey => {categoryTitle};
 }
 
 class Tasks extends Table {
@@ -32,9 +32,9 @@ class Tasks extends Table {
   BoolColumn get isCompleted => boolean()();
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
-  TextColumn get categoryTitle => text()
+  IntColumn get categoryId => integer()
       .nullable()
-      .customConstraint('NULL REFERENCES categories(categoryTitle)')();
+      .customConstraint('NULL REFERENCES categories(categoryId)')();
 }
 
 class TaskWithCategory {
@@ -58,7 +58,7 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration =>
       MigrationStrategy(onUpgrade: (migrator, from, to) async {
         if (from == 1) {
-          await migrator.addColumn(tasks, tasks.categoryTitle);
+          await migrator.addColumn(tasks, tasks.categoryId);
           await migrator.createTable(categories);
         }
       }, beforeOpen: (details) async {
@@ -84,8 +84,8 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
           ))
         .join(
           [
-            leftOuterJoin(categories,
-                categories.categoryTitle.equalsExp(tasks.categoryTitle)),
+            leftOuterJoin(
+                categories, categories.categoryId.equalsExp(tasks.categoryId)),
           ],
         )
         .watch()
@@ -108,6 +108,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   CategorieDao(this.db) : super(db);
 
+//TODO: Convert the order be int based
   Stream<List<Categorie>> watchAllCategories() {
     return (select(categories)
           ..orderBy(([
