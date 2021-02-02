@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/default_categories.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/widgets/app_drawer.dart';
@@ -18,60 +19,69 @@ class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
     // final userCats = Provider.of<Categories>(context);
-    final customCats = Provider.of<UserCategories>(context);
+    final getCategories = Provider.of<CategorieDao>(context);
 
     // Color selectedColor = bgColor[0];
 
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Theme.of(context).primaryColor,
-        title: Text(
-          'All Categories',
-          // style: TextStyle(color: Colors.white70),
+        appBar: AppBar(
+          backgroundColor: Theme.of(context).primaryColor,
+          title: Text(
+            'All Categories',
+            // style: TextStyle(color: Colors.white70),
+          ),
+          actions: <Widget>[
+            IconButton(
+                icon: const Icon(
+                  Icons.search,
+                  // color: Colors.white70,
+                ),
+                onPressed: () {
+                  // TODO: OnPressed Feature Not Done
+                }),
+          ],
         ),
-        actions: <Widget>[
-          IconButton(
-              icon: const Icon(
-                Icons.search,
-                // color: Colors.white70,
-              ),
-              onPressed: () {
-                // TODO: OnPressed Feature Not Done
-              }),
-        ],
-      ),
-      drawer: AppDrawer(),
-      bottomNavigationBar: BottomAppBar(
-        color: Theme.of(context).primaryColor,
-        child: Row(children: <Widget>[
-          Expanded(
-            child: FlatButton(
-              splashColor: Colors.white,
-              onPressed: () {
-                showDialog(
-                    context: context, builder: (_) => AlertDialogWidget());
-              },
-              child: Row(
-                children: [
-                  Icon(
-                    Icons.add,
-                    color: Colors.white,
-                    size: 27,
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 7),
-                    child: Text(
-                      'Add Category',
-                      style: TextStyle(color: Colors.white, fontSize: 15),
+        drawer: AppDrawer(),
+        bottomNavigationBar: BottomAppBar(
+          color: Theme.of(context).primaryColor,
+          child: Row(children: <Widget>[
+            Expanded(
+              child: FlatButton(
+                splashColor: Colors.white,
+                onPressed: () {
+                  showDialog(
+                      context: context, builder: (_) => AlertDialogWidget());
+                },
+                child: Row(
+                  children: [
+                    Icon(
+                      Icons.add,
+                      color: Colors.white,
+                      size: 27,
                     ),
-                  )
-                ],
+                    Container(
+                      margin: EdgeInsets.only(left: 7),
+                      child: Text(
+                        'Add Category',
+                        style: TextStyle(color: Colors.white, fontSize: 15),
+                      ),
+                    )
+                  ],
+                ),
               ),
             ),
-          ),
-        ]),
-      ),
-      body: customCats.userCat.isEmpty
+          ]),
+        ),
+        body: _buildCategoryList(context));
+  }
+}
+
+StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
+  return StreamBuilder<List<Categorie>>(
+    stream: Provider.of<CategorieDao>(context).watchAllCategories(),
+    builder: (context, snapshot) {
+      final categories = snapshot.data ?? List();
+      return categories.isEmpty
           ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Center(
                 child: Column(
@@ -90,11 +100,10 @@ class _CategoryScreenState extends State<CategoryScreen> {
             ])
           : ListView.builder(
               itemBuilder: (_, i) => UserCategoriesWidget(
-                    title: customCats.userCat[i].categoryTitle,
-                    numOfList: customCats.userCat[i].numberOfList.toString(),
-                    color: bgColors[customCats.userCat[i].color],
+                    title: categories[i].categoryTitle,
+                    color: bgColors[categories[i].color],
                   ),
-              itemCount: customCats.userCat.length),
-    );
-  }
+              itemCount: categories.length);
+    },
+  );
 }
