@@ -112,8 +112,8 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
   Stream<List<Categorie>> watchAllCategories() {
     return (select(categories)
           ..orderBy(([
-            (c) => OrderingTerm(
-                expression: c.categoryTitle, mode: OrderingMode.asc)
+            (c) =>
+                OrderingTerm(expression: c.categoryId, mode: OrderingMode.desc)
           ])))
         .watch();
   }
