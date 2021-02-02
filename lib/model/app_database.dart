@@ -10,7 +10,7 @@ part 'app_database.g.dart';
 
 // @DataClassName('Category')
 class Categories extends Table {
-  IntColumn get categoryId => integer()();
+  // IntColumn get categoryId => integer().autoIncrement()();
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().withDefault(const Constant(0))();
@@ -18,7 +18,7 @@ class Categories extends Table {
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
   @override
-  Set<Column> get primaryKey => {categoryId, categoryTitle};
+  Set<Column> get primaryKey => {categoryTitle};
 }
 
 class Tasks extends Table {
@@ -32,8 +32,9 @@ class Tasks extends Table {
   BoolColumn get isCompleted => boolean()();
   TextColumn get steps => text().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean()();
-  TextColumn get category =>
-      text().nullable().customConstraint('NULL REFERENCES categories(id)')();
+  TextColumn get categoryTitle => text()
+      .nullable()
+      .customConstraint('NULL REFERENCES categories(categoryTitle)')();
 }
 
 class TaskWithCategory {
@@ -45,7 +46,9 @@ class TaskWithCategory {
 
 @UseMoor(tables: [Categories, Tasks], daos: [TaskDao, CategorieDao])
 class AppDatabase extends _$AppDatabase {
-  AppDatabase() : super(_openConnection());
+  AppDatabase()
+      : super(FlutterQueryExecutor.inDatabaseFolder(
+            path: 'db.sqlite', logStatements: true));
 
   @override
   int get schemaVersion => 1;
@@ -55,23 +58,12 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration =>
       MigrationStrategy(onUpgrade: (migrator, from, to) async {
         if (from == 1) {
-          await migrator.addColumn(tasks, tasks.category);
+          await migrator.addColumn(tasks, tasks.categoryTitle);
           await migrator.createTable(categories);
         }
       }, beforeOpen: (details) async {
         await customStatement('PRAGMA foreign_keys = ON');
       });
-}
-
-LazyDatabase _openConnection() {
-  return LazyDatabase(() async {
-    final dbFolder = await getApplicationDocumentsDirectory();
-    final file = File(p.join(
-      dbFolder.path,
-      'db.sqlite',
-    ));
-    return VmDatabase(file);
-  });
 }
 
 @UseDao(
@@ -92,8 +84,8 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
           ))
         .join(
           [
-            leftOuterJoin(
-                categories, categories.categoryTitle.equalsExp(tasks.category)),
+            leftOuterJoin(categories,
+                categories.categoryTitle.equalsExp(tasks.categoryTitle)),
           ],
         )
         .watch()
