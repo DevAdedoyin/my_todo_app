@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_todo_app/model/app_database.dart';
+import 'package:my_todo_app/model/app_database.dart' hide Categories;
+import 'package:my_todo_app/model/category.dart';
 import 'package:my_todo_app/providers/default_categories.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
@@ -18,11 +19,11 @@ class MainApp extends StatelessWidget {
     final db = AppDatabase();
     return MultiProvider(
       providers: [
-        // ChangeNotifierProvider.value(value: Categories()),
         Provider.value(value: db.taskDao),
         Provider.value(
           value: db.categorieDao,
         ),
+        ChangeNotifierProvider.value(value: Categories()),
         ChangeNotifierProvider.value(
           value: UserCategories(),
         ),
