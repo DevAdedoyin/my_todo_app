@@ -116,7 +116,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   CategorieDao(this.db) : super(db);
 
-  Stream<List<Categorie>> watchCategories() => select(categories).watch();
+  Stream<List<Categorie>> watchAllCategories() => select(categories).watch();
   Future insertCategorie(Insertable<Categorie> categorie) =>
       into(categories).insert(categorie);
 }

@@ -18,7 +18,7 @@ class UserCategoriesWidget extends StatefulWidget {
 class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
-    final userCats = Provider.of<UserCategories>(context);
+    // final userCats = Provider.of<UserCategories>(context);
     return InkWell(
       onTap: () => {
         Navigator.of(context).pushNamed(TodoListScreen.routeName,
