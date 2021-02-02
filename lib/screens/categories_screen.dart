@@ -100,8 +100,9 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
             ])
           : ListView.builder(
               itemBuilder: (_, i) => UserCategoriesWidget(
-                    title: categories[i].categoryTitle,
+                    title: categories[i].categoryTitle ?? "",
                     color: bgColors[categories[i].color],
+                    numOfList: categories[i].numberOfList.toString(),
                   ),
               itemCount: categories.length);
     },
