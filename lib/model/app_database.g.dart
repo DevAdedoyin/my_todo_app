@@ -11,13 +11,13 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   final int categoryId;
   final String categoryTitle;
   final int numberOfList;
-  final int isFavorite;
+  final int isImportant;
   final int color;
   Categorie(
       {@required this.categoryId,
       @required this.categoryTitle,
       @required this.numberOfList,
-      @required this.isFavorite,
+      @required this.isImportant,
       this.color});
   factory Categorie.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -31,8 +31,8 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           .mapFromDatabaseResponse(data['${effectivePrefix}category_title']),
       numberOfList: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}number_of_list']),
-      isFavorite: intType
-          .mapFromDatabaseResponse(data['${effectivePrefix}is_favorite']),
+      isImportant: intType
+          .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
       color: intType.mapFromDatabaseResponse(data['${effectivePrefix}color']),
     );
   }
@@ -48,8 +48,8 @@ class Categorie extends DataClass implements Insertable<Categorie> {
     if (!nullToAbsent || numberOfList != null) {
       map['number_of_list'] = Variable<int>(numberOfList);
     }
-    if (!nullToAbsent || isFavorite != null) {
-      map['is_favorite'] = Variable<int>(isFavorite);
+    if (!nullToAbsent || isImportant != null) {
+      map['is_important'] = Variable<int>(isImportant);
     }
     if (!nullToAbsent || color != null) {
       map['color'] = Variable<int>(color);
@@ -68,9 +68,9 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       numberOfList: numberOfList == null && nullToAbsent
           ? const Value.absent()
           : Value(numberOfList),
-      isFavorite: isFavorite == null && nullToAbsent
+      isImportant: isImportant == null && nullToAbsent
           ? const Value.absent()
-          : Value(isFavorite),
+          : Value(isImportant),
       color:
           color == null && nullToAbsent ? const Value.absent() : Value(color),
     );
@@ -83,7 +83,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       categoryId: serializer.fromJson<int>(json['categoryId']),
       categoryTitle: serializer.fromJson<String>(json['categoryTitle']),
       numberOfList: serializer.fromJson<int>(json['numberOfList']),
-      isFavorite: serializer.fromJson<int>(json['isFavorite']),
+      isImportant: serializer.fromJson<int>(json['isImportant']),
       color: serializer.fromJson<int>(json['color']),
     );
   }
@@ -94,7 +94,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       'categoryId': serializer.toJson<int>(categoryId),
       'categoryTitle': serializer.toJson<String>(categoryTitle),
       'numberOfList': serializer.toJson<int>(numberOfList),
-      'isFavorite': serializer.toJson<int>(isFavorite),
+      'isImportant': serializer.toJson<int>(isImportant),
       'color': serializer.toJson<int>(color),
     };
   }
@@ -103,13 +103,13 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           {int categoryId,
           String categoryTitle,
           int numberOfList,
-          int isFavorite,
+          int isImportant,
           int color}) =>
       Categorie(
         categoryId: categoryId ?? this.categoryId,
         categoryTitle: categoryTitle ?? this.categoryTitle,
         numberOfList: numberOfList ?? this.numberOfList,
-        isFavorite: isFavorite ?? this.isFavorite,
+        isImportant: isImportant ?? this.isImportant,
         color: color ?? this.color,
       );
   @override
@@ -118,7 +118,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           ..write('categoryId: $categoryId, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
-          ..write('isFavorite: $isFavorite, ')
+          ..write('isImportant: $isImportant, ')
           ..write('color: $color')
           ..write(')'))
         .toString();
@@ -130,7 +130,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       $mrjc(
           categoryTitle.hashCode,
           $mrjc(numberOfList.hashCode,
-              $mrjc(isFavorite.hashCode, color.hashCode)))));
+              $mrjc(isImportant.hashCode, color.hashCode)))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -138,7 +138,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           other.categoryId == this.categoryId &&
           other.categoryTitle == this.categoryTitle &&
           other.numberOfList == this.numberOfList &&
-          other.isFavorite == this.isFavorite &&
+          other.isImportant == this.isImportant &&
           other.color == this.color);
 }
 
@@ -146,34 +146,34 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   final Value<int> categoryId;
   final Value<String> categoryTitle;
   final Value<int> numberOfList;
-  final Value<int> isFavorite;
+  final Value<int> isImportant;
   final Value<int> color;
   const CategoriesCompanion({
     this.categoryId = const Value.absent(),
     this.categoryTitle = const Value.absent(),
     this.numberOfList = const Value.absent(),
-    this.isFavorite = const Value.absent(),
+    this.isImportant = const Value.absent(),
     this.color = const Value.absent(),
   });
   CategoriesCompanion.insert({
     this.categoryId = const Value.absent(),
     @required String categoryTitle,
     this.numberOfList = const Value.absent(),
-    this.isFavorite = const Value.absent(),
+    this.isImportant = const Value.absent(),
     this.color = const Value.absent(),
   }) : categoryTitle = Value(categoryTitle);
   static Insertable<Categorie> custom({
     Expression<int> categoryId,
     Expression<String> categoryTitle,
     Expression<int> numberOfList,
-    Expression<int> isFavorite,
+    Expression<int> isImportant,
     Expression<int> color,
   }) {
     return RawValuesInsertable({
       if (categoryId != null) 'category_id': categoryId,
       if (categoryTitle != null) 'category_title': categoryTitle,
       if (numberOfList != null) 'number_of_list': numberOfList,
-      if (isFavorite != null) 'is_favorite': isFavorite,
+      if (isImportant != null) 'is_important': isImportant,
       if (color != null) 'color': color,
     });
   }
@@ -182,13 +182,13 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
       {Value<int> categoryId,
       Value<String> categoryTitle,
       Value<int> numberOfList,
-      Value<int> isFavorite,
+      Value<int> isImportant,
       Value<int> color}) {
     return CategoriesCompanion(
       categoryId: categoryId ?? this.categoryId,
       categoryTitle: categoryTitle ?? this.categoryTitle,
       numberOfList: numberOfList ?? this.numberOfList,
-      isFavorite: isFavorite ?? this.isFavorite,
+      isImportant: isImportant ?? this.isImportant,
       color: color ?? this.color,
     );
   }
@@ -205,8 +205,8 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
     if (numberOfList.present) {
       map['number_of_list'] = Variable<int>(numberOfList.value);
     }
-    if (isFavorite.present) {
-      map['is_favorite'] = Variable<int>(isFavorite.value);
+    if (isImportant.present) {
+      map['is_important'] = Variable<int>(isImportant.value);
     }
     if (color.present) {
       map['color'] = Variable<int>(color.value);
@@ -220,7 +220,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
           ..write('categoryId: $categoryId, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
-          ..write('isFavorite: $isFavorite, ')
+          ..write('isImportant: $isImportant, ')
           ..write('color: $color')
           ..write(')'))
         .toString();
@@ -263,12 +263,14 @@ class $CategoriesTable extends Categories
         defaultValue: const Constant(0));
   }
 
-  final VerificationMeta _isFavoriteMeta = const VerificationMeta('isFavorite');
-  GeneratedIntColumn _isFavorite;
+  final VerificationMeta _isImportantMeta =
+      const VerificationMeta('isImportant');
+  GeneratedIntColumn _isImportant;
   @override
-  GeneratedIntColumn get isFavorite => _isFavorite ??= _constructIsFavorite();
-  GeneratedIntColumn _constructIsFavorite() {
-    return GeneratedIntColumn('is_favorite', $tableName, false,
+  GeneratedIntColumn get isImportant =>
+      _isImportant ??= _constructIsImportant();
+  GeneratedIntColumn _constructIsImportant() {
+    return GeneratedIntColumn('is_important', $tableName, false,
         defaultValue: const Constant(0));
   }
 
@@ -283,7 +285,7 @@ class $CategoriesTable extends Categories
 
   @override
   List<GeneratedColumn> get $columns =>
-      [categoryId, categoryTitle, numberOfList, isFavorite, color];
+      [categoryId, categoryTitle, numberOfList, isImportant, color];
   @override
   $CategoriesTable get asDslTable => this;
   @override
@@ -315,11 +317,11 @@ class $CategoriesTable extends Categories
           numberOfList.isAcceptableOrUnknown(
               data['number_of_list'], _numberOfListMeta));
     }
-    if (data.containsKey('is_favorite')) {
+    if (data.containsKey('is_important')) {
       context.handle(
-          _isFavoriteMeta,
-          isFavorite.isAcceptableOrUnknown(
-              data['is_favorite'], _isFavoriteMeta));
+          _isImportantMeta,
+          isImportant.isAcceptableOrUnknown(
+              data['is_important'], _isImportantMeta));
     }
     if (data.containsKey('color')) {
       context.handle(
