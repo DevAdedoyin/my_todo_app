@@ -14,7 +14,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   final bool isImportant;
   final int color;
   Categorie(
-      {@required this.categoryId,
+      {this.categoryId,
       this.categoryTitle,
       this.numberOfList,
       @required this.isImportant,
@@ -238,7 +238,7 @@ class $CategoriesTable extends Categories
   @override
   GeneratedIntColumn get categoryId => _categoryId ??= _constructCategoryId();
   GeneratedIntColumn _constructCategoryId() {
-    return GeneratedIntColumn('category_id', $tableName, false,
+    return GeneratedIntColumn('category_id', $tableName, true,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
