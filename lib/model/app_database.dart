@@ -120,4 +120,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   Future insertCategorie(Insertable<Categorie> categorie) =>
       into(categories).insert(categorie);
+
+  Future updateCategorie(Insertable<Categorie> categorie) =>
+      update(categories).replace(categorie);
 }
