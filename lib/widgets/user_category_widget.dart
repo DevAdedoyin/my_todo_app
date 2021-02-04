@@ -54,11 +54,13 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                     ),
               onPressed: () {
                 if (widget.isImportant) {
-                  catDao.updateCategorie(
-                      CategoriesCompanion(isImportant: Value(false)));
+                  catDao.updateCategorie(Categorie(
+                    isImportant: false,
+                  ));
                 } else {
-                  catDao.updateCategorie(
-                      CategoriesCompanion(isImportant: Value(true)));
+                  catDao.updateCategorie(Categorie(
+                    isImportant: true,
+                  ));
                 }
               },
               splashColor: widget.color,

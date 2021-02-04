@@ -127,6 +127,8 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
   Future updateCategorie(Insertable<Categorie> categorie) =>
       update(categories).replace(categorie);
 
+  Future<List<Categorie>> get allCategories => select(categories).get();
+
   // Future<Categorie> updateCategoriee(Insertable<Categorie> categorie) async {
   // return await update(categories)..where((uc) => uc.categoryId.equals().);}
 }
