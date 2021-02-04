@@ -104,6 +104,7 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
                     title: categories[i].categoryTitle ?? "",
                     color: bgColors[categories[i].color],
                     numOfList: categories[i].numberOfList.toString(),
+                    isImportant: categories[i].isImportant,
                   ),
               itemCount: categories.length);
     },
