@@ -41,10 +41,16 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           alignment: Alignment.center,
           child: ListTile(
             leading: IconButton(
-              icon: Icon(
-                Icons.star_border_outlined,
-                size: 25,
-              ),
+              icon: widget.isImportant
+                  ? Icon(
+                      Icons.star_border_outlined,
+                      size: 20,
+                      color: widget.color,
+                    )
+                  : Icon(
+                      Icons.star_border_outlined,
+                      size: 25,
+                    ),
               onPressed: () {},
               splashColor: widget.color,
             ),
