@@ -11,7 +11,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   final int categoryId;
   final String categoryTitle;
   final int numberOfList;
-  final int isImportant;
+  final bool isImportant;
   final int color;
   Categorie(
       {@required this.categoryId,
@@ -24,6 +24,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
     final effectivePrefix = prefix ?? '';
     final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
+    final boolType = db.typeSystem.forDartType<bool>();
     return Categorie(
       categoryId: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}category_id']),
@@ -31,7 +32,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           .mapFromDatabaseResponse(data['${effectivePrefix}category_title']),
       numberOfList: intType
           .mapFromDatabaseResponse(data['${effectivePrefix}number_of_list']),
-      isImportant: intType
+      isImportant: boolType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
       color: intType.mapFromDatabaseResponse(data['${effectivePrefix}color']),
     );
@@ -49,7 +50,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       map['number_of_list'] = Variable<int>(numberOfList);
     }
     if (!nullToAbsent || isImportant != null) {
-      map['is_important'] = Variable<int>(isImportant);
+      map['is_important'] = Variable<bool>(isImportant);
     }
     if (!nullToAbsent || color != null) {
       map['color'] = Variable<int>(color);
@@ -83,7 +84,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       categoryId: serializer.fromJson<int>(json['categoryId']),
       categoryTitle: serializer.fromJson<String>(json['categoryTitle']),
       numberOfList: serializer.fromJson<int>(json['numberOfList']),
-      isImportant: serializer.fromJson<int>(json['isImportant']),
+      isImportant: serializer.fromJson<bool>(json['isImportant']),
       color: serializer.fromJson<int>(json['color']),
     );
   }
@@ -94,7 +95,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       'categoryId': serializer.toJson<int>(categoryId),
       'categoryTitle': serializer.toJson<String>(categoryTitle),
       'numberOfList': serializer.toJson<int>(numberOfList),
-      'isImportant': serializer.toJson<int>(isImportant),
+      'isImportant': serializer.toJson<bool>(isImportant),
       'color': serializer.toJson<int>(color),
     };
   }
@@ -103,7 +104,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
           {int categoryId,
           String categoryTitle,
           int numberOfList,
-          int isImportant,
+          bool isImportant,
           int color}) =>
       Categorie(
         categoryId: categoryId ?? this.categoryId,
@@ -146,7 +147,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   final Value<int> categoryId;
   final Value<String> categoryTitle;
   final Value<int> numberOfList;
-  final Value<int> isImportant;
+  final Value<bool> isImportant;
   final Value<int> color;
   const CategoriesCompanion({
     this.categoryId = const Value.absent(),
@@ -166,7 +167,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
     Expression<int> categoryId,
     Expression<String> categoryTitle,
     Expression<int> numberOfList,
-    Expression<int> isImportant,
+    Expression<bool> isImportant,
     Expression<int> color,
   }) {
     return RawValuesInsertable({
@@ -182,7 +183,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
       {Value<int> categoryId,
       Value<String> categoryTitle,
       Value<int> numberOfList,
-      Value<int> isImportant,
+      Value<bool> isImportant,
       Value<int> color}) {
     return CategoriesCompanion(
       categoryId: categoryId ?? this.categoryId,
@@ -206,7 +207,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
       map['number_of_list'] = Variable<int>(numberOfList.value);
     }
     if (isImportant.present) {
-      map['is_important'] = Variable<int>(isImportant.value);
+      map['is_important'] = Variable<bool>(isImportant.value);
     }
     if (color.present) {
       map['color'] = Variable<int>(color.value);
@@ -265,13 +266,13 @@ class $CategoriesTable extends Categories
 
   final VerificationMeta _isImportantMeta =
       const VerificationMeta('isImportant');
-  GeneratedIntColumn _isImportant;
+  GeneratedBoolColumn _isImportant;
   @override
-  GeneratedIntColumn get isImportant =>
+  GeneratedBoolColumn get isImportant =>
       _isImportant ??= _constructIsImportant();
-  GeneratedIntColumn _constructIsImportant() {
-    return GeneratedIntColumn('is_important', $tableName, false,
-        defaultValue: const Constant(0));
+  GeneratedBoolColumn _constructIsImportant() {
+    return GeneratedBoolColumn('is_important', $tableName, false,
+        defaultValue: const Constant(false));
   }
 
   final VerificationMeta _colorMeta = const VerificationMeta('color');
