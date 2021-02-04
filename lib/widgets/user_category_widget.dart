@@ -44,24 +44,23 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
             leading: IconButton(
               icon: widget.isImportant == true
                   ? Icon(
-                      Icons.star_border_outlined,
+                      Icons.star_border,
                       size: 20,
                       color: widget.color,
                     )
                   : Icon(
-                      Icons.star_border_outlined,
+                      Icons.star_border,
                       size: 25,
+                      color: Colors.black,
                     ),
               onPressed: () {
                 //  catDao.allCategories;
-                if (widget.isImportant) {
-                  catDao.updateCategorie(Categorie(
-                    isImportant: false,
-                  ));
+                if (widget.isImportant == true) {
+                  catDao.updateCategoryImportance(Categorie(isImportant: false)
+                      .copyWith(categoryId: widget.catId));
                 } else {
-                  catDao.updateCategorie(Categorie(
-                    isImportant: true,
-                  ));
+                  catDao.updateCategoryImportance(Categorie(isImportant: true)
+                      .copyWith(categoryId: widget.catId));
                 }
               },
               splashColor: widget.color,
