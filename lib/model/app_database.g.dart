@@ -16,7 +16,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   Categorie(
       {@required this.categoryId,
       this.categoryTitle,
-      @required this.numberOfList,
+      this.numberOfList,
       @required this.isImportant,
       this.color});
   factory Categorie.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -260,7 +260,7 @@ class $CategoriesTable extends Categories
   GeneratedIntColumn get numberOfList =>
       _numberOfList ??= _constructNumberOfList();
   GeneratedIntColumn _constructNumberOfList() {
-    return GeneratedIntColumn('number_of_list', $tableName, false,
+    return GeneratedIntColumn('number_of_list', $tableName, true,
         defaultValue: const Constant(0));
   }
 

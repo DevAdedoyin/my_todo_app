@@ -15,7 +15,8 @@ class Categories extends Table {
       .withLength(min: 3, max: 15)
       .nullable()
       .customConstraint('UNIQUE')();
-  IntColumn get numberOfList => integer().withDefault(const Constant(0))();
+  IntColumn get numberOfList =>
+      integer().withDefault(const Constant(0)).nullable()();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
@@ -125,4 +126,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   Future updateCategorie(Insertable<Categorie> categorie) =>
       update(categories).replace(categorie);
+
+  // Future<Categorie> updateCategoriee(Insertable<Categorie> categorie) async {
+  // return await update(categories)..where((uc) => uc.categoryId.equals().);}
 }
