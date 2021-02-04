@@ -44,7 +44,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
             leading: IconButton(
               icon: widget.isImportant == true
                   ? Icon(
-                      Icons.star_border,
+                      Icons.star,
                       size: 20,
                       color: widget.color,
                     )
