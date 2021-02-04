@@ -53,6 +53,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                       size: 25,
                     ),
               onPressed: () {
+                //  catDao.allCategories;
                 if (widget.isImportant) {
                   catDao.updateCategorie(Categorie(
                     isImportant: false,
