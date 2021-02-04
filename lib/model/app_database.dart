@@ -11,8 +11,10 @@ part 'app_database.g.dart';
 // @DataClassName('Category')
 class Categories extends Table {
   IntColumn get categoryId => integer().autoIncrement()();
-  TextColumn get categoryTitle =>
-      text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
+  TextColumn get categoryTitle => text()
+      .withLength(min: 3, max: 15)
+      .nullable()
+      .customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().withDefault(const Constant(0))();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();

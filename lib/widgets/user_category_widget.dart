@@ -42,7 +42,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           alignment: Alignment.center,
           child: ListTile(
             leading: IconButton(
-              icon: widget.isImportant
+              icon: widget.isImportant == true
                   ? Icon(
                       Icons.star_border_outlined,
                       size: 20,

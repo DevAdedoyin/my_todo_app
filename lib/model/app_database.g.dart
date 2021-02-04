@@ -15,7 +15,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   final int color;
   Categorie(
       {@required this.categoryId,
-      @required this.categoryTitle,
+      this.categoryTitle,
       @required this.numberOfList,
       @required this.isImportant,
       this.color});
@@ -158,11 +158,11 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   });
   CategoriesCompanion.insert({
     this.categoryId = const Value.absent(),
-    @required String categoryTitle,
+    this.categoryTitle = const Value.absent(),
     this.numberOfList = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.color = const Value.absent(),
-  }) : categoryTitle = Value(categoryTitle);
+  });
   static Insertable<Categorie> custom({
     Expression<int> categoryId,
     Expression<String> categoryTitle,
@@ -249,7 +249,7 @@ class $CategoriesTable extends Categories
   GeneratedTextColumn get categoryTitle =>
       _categoryTitle ??= _constructCategoryTitle();
   GeneratedTextColumn _constructCategoryTitle() {
-    return GeneratedTextColumn('category_title', $tableName, false,
+    return GeneratedTextColumn('category_title', $tableName, true,
         minTextLength: 3, maxTextLength: 15, $customConstraints: 'UNIQUE');
   }
 
@@ -309,8 +309,6 @@ class $CategoriesTable extends Categories
           _categoryTitleMeta,
           categoryTitle.isAcceptableOrUnknown(
               data['category_title'], _categoryTitleMeta));
-    } else if (isInserting) {
-      context.missing(_categoryTitleMeta);
     }
     if (data.containsKey('number_of_list')) {
       context.handle(
