@@ -14,7 +14,7 @@ class Categories extends Table {
   TextColumn get categoryTitle =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   IntColumn get numberOfList => integer().withDefault(const Constant(0))();
-  IntColumn get isImportant => integer().withDefault(const Constant(0))();
+  BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
   IntColumn get color => integer().nullable().withDefault(const Constant(0))();
 
   // @override
