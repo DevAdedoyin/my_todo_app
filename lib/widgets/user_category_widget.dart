@@ -8,8 +8,9 @@ class UserCategoriesWidget extends StatefulWidget {
   final String title;
   final String numOfList;
   final Color color;
+  final int catId;
 
-  UserCategoriesWidget({this.title, this.numOfList, this.color});
+  UserCategoriesWidget({this.catId, this.title, this.numOfList, this.color});
 
   @override
   _UserCategoriesWidgetState createState() => _UserCategoriesWidgetState();
@@ -18,7 +19,7 @@ class UserCategoriesWidget extends StatefulWidget {
 class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
-    // final userCats = Provider.of<UserCategories>(context);
+    final catDao = Provider.of<CategorieDao>(context);
     return InkWell(
       onTap: () => {
         Navigator.of(context).pushNamed(TodoListScreen.routeName,
