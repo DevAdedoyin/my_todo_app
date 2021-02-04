@@ -9,8 +9,10 @@ class UserCategoriesWidget extends StatefulWidget {
   final String numOfList;
   final Color color;
   final int catId;
+  final bool isImportant;
 
-  UserCategoriesWidget({this.catId, this.title, this.numOfList, this.color});
+  UserCategoriesWidget(
+      {this.catId, this.title, this.numOfList, this.color, this.isImportant});
 
   @override
   _UserCategoriesWidgetState createState() => _UserCategoriesWidgetState();
