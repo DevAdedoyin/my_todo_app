@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moor_flutter/moor_flutter.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/user_categories.dart';
 import 'package:my_todo_app/screens/todo_list_screen.dart';
@@ -51,7 +52,15 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                       Icons.star_border_outlined,
                       size: 25,
                     ),
-              onPressed: () {},
+              onPressed: () {
+                if (widget.isImportant) {
+                  catDao.updateCategorie(
+                      CategoriesCompanion(isImportant: Value(false)));
+                } else {
+                  catDao.updateCategorie(
+                      CategoriesCompanion(isImportant: Value(true)));
+                }
+              },
               splashColor: widget.color,
             ),
             title: Text(
