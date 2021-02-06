@@ -121,6 +121,10 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
         .watch();
   }
 
+  Future<int> countCategories() async {
+    return (await select(categories).get()).length;
+  }
+
   Future insertCategorie(Insertable<Categorie> categorie) =>
       into(categories).insert(categorie);
 

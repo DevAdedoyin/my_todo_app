@@ -8,6 +8,7 @@ import 'package:my_todo_app/widgets/category_screen_widgets/alert_dialog_widget.
 import 'package:my_todo_app/widgets/user_category_widget.dart';
 import 'package:provider/provider.dart';
 import '../model/category.dart';
+// import 'package:shared_preferences/shared_preferences.dart';
 
 class CategoryScreen extends StatefulWidget {
   static const routeName = '/category-screen';
@@ -81,6 +82,7 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
     stream: Provider.of<CategorieDao>(context).watchAllCategories(),
     builder: (context, snapshot) {
       final categories = snapshot.data ?? List();
+
       return categories.isEmpty
           ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               Center(
