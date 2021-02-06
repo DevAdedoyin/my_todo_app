@@ -11,8 +11,6 @@ class AppDrawer extends StatefulWidget {
 }
 
 class _AppDrawerState extends State<AppDrawer> {
-  int _length;
-
   @override
   Widget build(BuildContext context) {
     final catDao = Provider.of<CategorieDao>(context);
@@ -36,7 +34,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       if (snapshot.hasData) {
                         return Text(snapshot.data.toString());
                       } else {
-                        return Text('Null');
+                        return Text('0');
                       }
                     },
                   ),
