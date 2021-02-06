@@ -23,13 +23,28 @@ class _AppDrawerState extends State<AppDrawer> {
             child: ListView(
               children: [
                 ListTile(
-                  leading: Icon(Icons.all_inclusive_rounded),
-                  title: Text('All Categories'),
+                  leading: Icon(
+                    Icons.all_inclusive_rounded,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'All Categories',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17),
+                  ),
                   trailing: FutureBuilder<int>(
                     future: catDao.countCategories(),
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
-                        return Text(snapshot.data.toString());
+                        return Text(
+                          snapshot.data.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        );
                       } else {
                         return Text('0');
                       }
