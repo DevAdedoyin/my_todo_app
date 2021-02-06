@@ -132,18 +132,4 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
           ..where((uc) => uc.categoryId.equals(c.categoryId)))
         .write(CategoriesCompanion.insert(isImportant: Value(c.isImportant)));
   }
-
-  Future<int> getNoOfCategories() async {
-    int length;
-    await watchAllCategories().length.then((value) {
-      length = value;
-      return length;
-    });
-    return length;
-  }
-
-  // Future<List<Categorie>> allCategories(Categories categories) => select(categories).;
-
-  // Future<Categorie> updateCategoriee(Insertable<Categorie> categorie) async {
-  // return await update(categories)..where((uc) => uc.categoryId.equals().);}
 }

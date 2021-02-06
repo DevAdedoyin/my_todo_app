@@ -5,18 +5,23 @@ import 'package:provider/provider.dart';
 import '../providers/default_categories.dart';
 import 'dart:io';
 
-class AppDrawer extends StatelessWidget {
+Future<int> getLength() async {
+  BuildContext context;
+  var catDaoLength = Provider.of<CategorieDao>(context);
+  int length = await catDaoLength.watchAllCategories().length;
+  return length;
+}
+
+class AppDrawer extends StatefulWidget {
+  @override
+  _AppDrawerState createState() => _AppDrawerState();
+}
+
+class _AppDrawerState extends State<AppDrawer> {
   @override
   Widget build(BuildContext context) {
     final catDao = Provider.of<CategorieDao>(context);
-    int length = 0;
-
-    // void catLength() {
-    //  int catLength = catDao.getNoOfCategories.then((catL) {
-    //     return length = catL;
-    //   });
-    // }
-
+    print(catDao.watchAllCategories().length.toString() + 'check');
     return Drawer(
       child: Column(
         children: <Widget>[
@@ -29,14 +34,9 @@ class AppDrawer extends StatelessWidget {
             child: ListView(
               children: [
                 ListTile(
-                  leading: Icon(Icons.all_inclusive_rounded),
-                  title: Text('All Categories'),
-                  trailing: Text(catDao
-                      .getNoOfCategories()
-                      .then((val) => val)
-                      .catchError((error) => print(error))
-                      .toString()),
-                ),
+                    leading: Icon(Icons.all_inclusive_rounded),
+                    title: Text('All Categories'),
+                    trailing: Text('')),
                 Divider(),
                 ListTile(
                   leading: Icon(Icons.star_border_rounded),
