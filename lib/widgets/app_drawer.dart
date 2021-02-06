@@ -1,9 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/app_database.dart';
-import 'package:my_todo_app/model/category.dart';
 import 'package:provider/provider.dart';
-import '../providers/default_categories.dart';
-import 'dart:io';
 
 class AppDrawer extends StatefulWidget {
   @override
