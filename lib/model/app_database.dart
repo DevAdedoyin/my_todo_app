@@ -111,7 +111,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   CategorieDao(this.db) : super(db);
 
-//TODO: Convert the order be int based
+  //returns all Categories Ordered by newest Categories id(Desc)
   Stream<List<Categorie>> watchAllCategories() {
     return (select(categories)
           ..orderBy(([
@@ -121,10 +121,12 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
         .watch();
   }
 
+//returns the amount of categories in the database
   Future<int> countCategories() async {
     return (await select(categories).get()).length;
   }
 
+//returns the amount of important categories in the database
   Future<int> countImportant() async {
     var len = await (select(categories)
           ..where((ci) => ci.isImportant.equals(true)))
@@ -134,12 +136,15 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
     return len;
   }
 
+//adds categories to the database Categorie Table
   Future insertCategorie(Insertable<Categorie> categorie) =>
       into(categories).insert(categorie);
 
+//updates the category table
   Future updateCategorie(Insertable<Categorie> categorie) =>
       update(categories).replace(categorie);
 
+// Update the category importance column of a particular row
   Future updateCategoryImportance(Categorie c) {
     return (update(categories)
           ..where((uc) => uc.categoryId.equals(c.categoryId)))
