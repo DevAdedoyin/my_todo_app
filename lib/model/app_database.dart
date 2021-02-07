@@ -28,13 +28,13 @@ class Tasks extends Table {
   IntColumn get listId => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
-  TextColumn get time => text().withLength(min: 4, max: 5)();
-  TextColumn get date => text().withLength(min: 7, max: 9)();
-  TextColumn get frequency => text().withLength(min: 1, max: 100)();
-  TextColumn get note => text().withLength(min: 0, max: 150)();
-  BoolColumn get isCompleted => boolean()();
-  TextColumn get steps => text().withLength(min: 0, max: 150)();
-  BoolColumn get isImportant => boolean()();
+  TextColumn get time => text().nullable().withLength(min: 4, max: 5)();
+  TextColumn get date => text().nullable().withLength(min: 7, max: 9)();
+  TextColumn get frequency => text().nullable().withLength(min: 1, max: 100)();
+  TextColumn get note => text().nullable().withLength(min: 0, max: 150)();
+  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
+  BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
   IntColumn get categoryId => integer()
       .nullable()
       .customConstraint('NULL REFERENCES categories(categoryId)')();

@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:moor_flutter/moor_flutter.dart' hide Column;
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:provider/provider.dart';
+import 'package:my_todo_app/model/app_database.dart';
 
 class AddListWidget extends StatefulWidget {
   @override
@@ -49,6 +51,7 @@ class _AddListWidgetState extends State<AddListWidget> {
   @override
   Widget build(BuildContext context) {
     final todoDetails = Provider.of<ToDoProvider>(context);
+    final insertTask = Provider.of<TaskDao>(context);
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
@@ -248,7 +251,11 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           Icons.check_circle,
                                           color: Colors.green,
                                         ),
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          insertTask.insertTask(TasksCompanion(
+                                              date: Value(
+                                                  _selectedDate.toString())));
+                                        },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
                                       )
