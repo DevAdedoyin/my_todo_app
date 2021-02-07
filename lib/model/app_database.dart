@@ -130,9 +130,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
           ..where((ci) => ci.isImportant.equals(true)))
         .get()
         .then((val) => val.length);
-    // var len2 = await len.then((val) {
-    //   return val.length;
-    // });
+
     return len;
   }
 
