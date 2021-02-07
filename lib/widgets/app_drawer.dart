@@ -50,7 +50,6 @@ class _AppDrawerState extends State<AppDrawer> {
                       }
                     },
                   ),
-                  // Text(_length.toString())
                 ),
                 Divider(),
                 ListTile(
