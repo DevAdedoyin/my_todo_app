@@ -357,12 +357,12 @@ class Task extends DataClass implements Insertable<Task> {
   Task(
       {@required this.listId,
       @required this.title,
-      @required this.time,
-      @required this.date,
-      @required this.frequency,
-      @required this.note,
+      this.time,
+      this.date,
+      this.frequency,
+      this.note,
       @required this.isCompleted,
-      @required this.steps,
+      this.steps,
       @required this.isImportant,
       this.categoryId});
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
@@ -587,22 +587,15 @@ class TasksCompanion extends UpdateCompanion<Task> {
   TasksCompanion.insert({
     this.listId = const Value.absent(),
     @required String title,
-    @required String time,
-    @required String date,
-    @required String frequency,
-    @required String note,
-    @required bool isCompleted,
-    @required String steps,
-    @required bool isImportant,
+    this.time = const Value.absent(),
+    this.date = const Value.absent(),
+    this.frequency = const Value.absent(),
+    this.note = const Value.absent(),
+    this.isCompleted = const Value.absent(),
+    this.steps = const Value.absent(),
+    this.isImportant = const Value.absent(),
     this.categoryId = const Value.absent(),
-  })  : title = Value(title),
-        time = Value(time),
-        date = Value(date),
-        frequency = Value(frequency),
-        note = Value(note),
-        isCompleted = Value(isCompleted),
-        steps = Value(steps),
-        isImportant = Value(isImportant);
+  }) : title = Value(title);
   static Insertable<Task> custom({
     Expression<int> listId,
     Expression<String> title,
@@ -735,8 +728,11 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get time => _time ??= _constructTime();
   GeneratedTextColumn _constructTime() {
-    return GeneratedTextColumn('time', $tableName, false,
-        minTextLength: 4, maxTextLength: 5);
+    return GeneratedTextColumn(
+      'time',
+      $tableName,
+      true,
+    );
   }
 
   final VerificationMeta _dateMeta = const VerificationMeta('date');
@@ -744,8 +740,11 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get date => _date ??= _constructDate();
   GeneratedTextColumn _constructDate() {
-    return GeneratedTextColumn('date', $tableName, false,
-        minTextLength: 7, maxTextLength: 9);
+    return GeneratedTextColumn(
+      'date',
+      $tableName,
+      true,
+    );
   }
 
   final VerificationMeta _frequencyMeta = const VerificationMeta('frequency');
@@ -753,7 +752,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get frequency => _frequency ??= _constructFrequency();
   GeneratedTextColumn _constructFrequency() {
-    return GeneratedTextColumn('frequency', $tableName, false,
+    return GeneratedTextColumn('frequency', $tableName, true,
         minTextLength: 1, maxTextLength: 100);
   }
 
@@ -762,7 +761,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get note => _note ??= _constructNote();
   GeneratedTextColumn _constructNote() {
-    return GeneratedTextColumn('note', $tableName, false,
+    return GeneratedTextColumn('note', $tableName, true,
         minTextLength: 0, maxTextLength: 150);
   }
 
@@ -773,11 +772,8 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedBoolColumn get isCompleted =>
       _isCompleted ??= _constructIsCompleted();
   GeneratedBoolColumn _constructIsCompleted() {
-    return GeneratedBoolColumn(
-      'is_completed',
-      $tableName,
-      false,
-    );
+    return GeneratedBoolColumn('is_completed', $tableName, false,
+        defaultValue: const Constant(false));
   }
 
   final VerificationMeta _stepsMeta = const VerificationMeta('steps');
@@ -785,7 +781,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get steps => _steps ??= _constructSteps();
   GeneratedTextColumn _constructSteps() {
-    return GeneratedTextColumn('steps', $tableName, false,
+    return GeneratedTextColumn('steps', $tableName, true,
         minTextLength: 0, maxTextLength: 150);
   }
 
@@ -796,11 +792,8 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedBoolColumn get isImportant =>
       _isImportant ??= _constructIsImportant();
   GeneratedBoolColumn _constructIsImportant() {
-    return GeneratedBoolColumn(
-      'is_important',
-      $tableName,
-      false,
-    );
+    return GeneratedBoolColumn('is_important', $tableName, false,
+        defaultValue: const Constant(false));
   }
 
   final VerificationMeta _categoryIdMeta = const VerificationMeta('categoryId');
@@ -849,48 +842,34 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     if (data.containsKey('time')) {
       context.handle(
           _timeMeta, time.isAcceptableOrUnknown(data['time'], _timeMeta));
-    } else if (isInserting) {
-      context.missing(_timeMeta);
     }
     if (data.containsKey('date')) {
       context.handle(
           _dateMeta, date.isAcceptableOrUnknown(data['date'], _dateMeta));
-    } else if (isInserting) {
-      context.missing(_dateMeta);
     }
     if (data.containsKey('frequency')) {
       context.handle(_frequencyMeta,
           frequency.isAcceptableOrUnknown(data['frequency'], _frequencyMeta));
-    } else if (isInserting) {
-      context.missing(_frequencyMeta);
     }
     if (data.containsKey('note')) {
       context.handle(
           _noteMeta, note.isAcceptableOrUnknown(data['note'], _noteMeta));
-    } else if (isInserting) {
-      context.missing(_noteMeta);
     }
     if (data.containsKey('is_completed')) {
       context.handle(
           _isCompletedMeta,
           isCompleted.isAcceptableOrUnknown(
               data['is_completed'], _isCompletedMeta));
-    } else if (isInserting) {
-      context.missing(_isCompletedMeta);
     }
     if (data.containsKey('steps')) {
       context.handle(
           _stepsMeta, steps.isAcceptableOrUnknown(data['steps'], _stepsMeta));
-    } else if (isInserting) {
-      context.missing(_stepsMeta);
     }
     if (data.containsKey('is_important')) {
       context.handle(
           _isImportantMeta,
           isImportant.isAcceptableOrUnknown(
               data['is_important'], _isImportantMeta));
-    } else if (isInserting) {
-      context.missing(_isImportantMeta);
     }
     if (data.containsKey('category_id')) {
       context.handle(

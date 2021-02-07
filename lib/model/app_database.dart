@@ -28,8 +28,8 @@ class Tasks extends Table {
   IntColumn get listId => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
-  TextColumn get time => text().nullable().withLength(min: 4, max: 5)();
-  TextColumn get date => text().nullable().withLength(min: 7, max: 9)();
+  TextColumn get time => text().nullable()();
+  TextColumn get date => text().nullable()();
   TextColumn get frequency => text().nullable().withLength(min: 1, max: 100)();
   TextColumn get note => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();

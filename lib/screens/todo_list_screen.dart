@@ -87,7 +87,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
               elevation: 10,
               isScrollControlled: true,
               builder: (context) => GestureDetector(
-                    child: AddListWidget(),
+                    child: AddListWidget(_args[2]),
                     onTap: () {
                       Navigator.of(context).pop();
                     },

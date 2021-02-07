@@ -6,6 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:my_todo_app/model/app_database.dart';
 
 class AddListWidget extends StatefulWidget {
+  final int catId;
+
+  AddListWidget(this.catId);
+
   @override
   _AddListWidgetState createState() => _AddListWidgetState();
 }
@@ -50,7 +54,6 @@ class _AddListWidgetState extends State<AddListWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final todoDetails = Provider.of<ToDoProvider>(context);
     final insertTask = Provider.of<TaskDao>(context);
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
@@ -82,9 +85,24 @@ class _AddListWidgetState extends State<AddListWidget> {
                     child: IconButton(
                       icon: Icon(Icons.save_rounded),
                       onPressed: () {
-                        todoDetails.insertTodo(_listTitleController.text,
-                            _selectedTime.toString(), _selectedDate.toString());
-                        print(todoDetails.todo);
+                        String time = _selectedTime.hour.toString() +
+                            ':' +
+                            _selectedTime.minute.toString();
+                        String stripDate =
+                            _selectedDate.toString().split(" ").first;
+
+                        insertTask.insertTask(TasksCompanion(
+                            date: Value(stripDate),
+                            time: Value(time),
+                            title: Value(_listTitleController.text),
+                            categoryId: Value(widget.catId)));
+                        print(time +
+                            ' ' +
+                            _selectedDate.toString() +
+                            ' ' +
+                            _listTitleController.text +
+                            'God is Great');
+
                         Navigator.of(context).pop();
 
                         print(_selectedDate.toString() +
@@ -252,22 +270,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           color: Colors.green,
                                         ),
                                         onPressed: () {
-                                          String time = _selectedTime.hour
-                                                  .toString() +
-                                              _selectedTime.minute.toString();
-                                          insertTask.insertTask(TasksCompanion(
-                                              date: Value(
-                                                  _selectedDate.toString()),
-                                              time: Value(time),
-                                              title: Value(
-                                                  _listTitleController.text)));
-                                          print(_selectedTime.toString() +
-                                              ' ' +
-                                              _selectedDate.toString() +
-                                              ' ' +
-                                              _listTitleController.text +
-                                              'God is Great');
-                                          Navigator.of(context).pop();
+                                          // Navigator.of(context).pop();
                                         },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
