@@ -54,13 +54,28 @@ class _AppDrawerState extends State<AppDrawer> {
                 ),
                 Divider(),
                 ListTile(
-                  leading: Icon(Icons.star_border_rounded),
-                  title: Text('Important'),
+                  leading: Icon(
+                    Icons.star_border_rounded,
+                    color: Colors.black,
+                  ),
+                  title: Text(
+                    'Important',
+                    style: TextStyle(
+                        color: Colors.black,
+                        fontWeight: FontWeight.bold,
+                        fontSize: 17),
+                  ),
                   trailing: FutureBuilder(
                     future: catDao.countImportant(),
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
-                        return Text(snapshot.data.toString());
+                        return Text(
+                          snapshot.data.toString(),
+                          style: TextStyle(
+                              color: Colors.black,
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16),
+                        );
                       } else {
                         return Text('0');
                       }
