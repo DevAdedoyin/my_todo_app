@@ -56,7 +56,16 @@ class _AppDrawerState extends State<AppDrawer> {
                 ListTile(
                   leading: Icon(Icons.star_border_rounded),
                   title: Text('Important'),
-                  trailing: Text('0'),
+                  trailing: FutureBuilder(
+                    future: catDao.countImportant(),
+                    builder: (_, snapshot) {
+                      if (snapshot.hasData) {
+                        return Text(snapshot.data.toString());
+                      } else {
+                        return Text('0');
+                      }
+                    },
+                  ),
                 ),
                 Divider(),
                 ListTile(
