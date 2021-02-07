@@ -252,11 +252,13 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           color: Colors.green,
                                         ),
                                         onPressed: () {
+                                          String time = _selectedTime.hour
+                                                  .toString() +
+                                              _selectedTime.minute.toString();
                                           insertTask.insertTask(TasksCompanion(
                                               date: Value(
                                                   _selectedDate.toString()),
-                                              time: Value(
-                                                  _selectedTime.toString()),
+                                              time: Value(time),
                                               title: Value(
                                                   _listTitleController.text)));
                                           print(_selectedTime.toString() +
