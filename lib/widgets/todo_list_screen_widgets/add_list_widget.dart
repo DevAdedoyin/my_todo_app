@@ -254,7 +254,18 @@ class _AddListWidgetState extends State<AddListWidget> {
                                         onPressed: () {
                                           insertTask.insertTask(TasksCompanion(
                                               date: Value(
-                                                  _selectedDate.toString())));
+                                                  _selectedDate.toString()),
+                                              time: Value(
+                                                  _selectedTime.toString()),
+                                              title: Value(
+                                                  _listTitleController.text)));
+                                          print(_selectedTime.toString() +
+                                              ' ' +
+                                              _selectedDate.toString() +
+                                              ' ' +
+                                              _listTitleController.text +
+                                              'God is Great');
+                                          Navigator.of(context).pop();
                                         },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
