@@ -125,6 +125,17 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
     return (await select(categories).get()).length;
   }
 
+  Future<int> countImportant() async {
+    var len = await (select(categories)
+          ..where((ci) => ci.isImportant.equals(true)))
+        .get()
+        .then((val) => val.length);
+    // var len2 = await len.then((val) {
+    //   return val.length;
+    // });
+    return len;
+  }
+
   Future insertCategorie(Insertable<Categorie> categorie) =>
       into(categories).insert(categorie);
 
