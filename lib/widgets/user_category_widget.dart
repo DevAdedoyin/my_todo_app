@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:moor_flutter/moor_flutter.dart';
+
 import 'package:my_todo_app/model/app_database.dart';
-import 'package:my_todo_app/providers/user_categories.dart';
+
 import 'package:my_todo_app/screens/todo_list_screen.dart';
 import 'package:provider/provider.dart';
 
@@ -23,6 +23,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     final catDao = Provider.of<CategorieDao>(context);
+    print(widget.catId);
     return InkWell(
       onTap: () => {
         Navigator.of(context).pushNamed(TodoListScreen.routeName,
