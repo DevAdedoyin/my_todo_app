@@ -10,8 +10,7 @@ part 'app_database.g.dart';
 
 // @DataClassName('Category')
 class Categories extends Table {
-  IntColumn get categoryId =>
-      integer().named('category_id').autoIncrement().nullable()();
+  IntColumn get id => integer().autoIncrement().nullable()();
   TextColumn get categoryTitle => text()
       .withLength(min: 3, max: 15)
       .nullable()
@@ -26,7 +25,7 @@ class Categories extends Table {
 }
 
 class Tasks extends Table {
-  IntColumn get listId => integer().autoIncrement()();
+  IntColumn get id => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   TextColumn get time => text().nullable()();
@@ -37,8 +36,9 @@ class Tasks extends Table {
   TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
   IntColumn get categoryId => integer()
+      .named('category_id')
       .nullable()
-      .customConstraint('NULL REFERENCES categories(categoryId)')();
+      .customConstraint('NULL REFERENCES categories(category_id)')();
 }
 
 class TaskWithCategory {
@@ -89,7 +89,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
         .join(
           [
             leftOuterJoin(
-                categories, categories.categoryId.equalsExp(tasks.categoryId)),
+                categories, categories.id.equalsExp(tasks.categoryId)),
           ],
         )
         .watch()
@@ -116,8 +116,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
   Stream<List<Categorie>> watchAllCategories() {
     return (select(categories)
           ..orderBy(([
-            (c) =>
-                OrderingTerm(expression: c.categoryId, mode: OrderingMode.desc)
+            (c) => OrderingTerm(expression: c.id, mode: OrderingMode.desc)
           ])))
         .watch();
   }
@@ -147,8 +146,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
 // Update the category importance column of a particular row
   Future updateCategoryImportance(Categorie c) {
-    return (update(categories)
-          ..where((uc) => uc.categoryId.equals(c.categoryId)))
+    return (update(categories)..where((uc) => uc.id.equals(c.id)))
         .write(CategoriesCompanion.insert(isImportant: Value(c.isImportant)));
   }
 }

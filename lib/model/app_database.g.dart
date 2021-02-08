@@ -8,13 +8,13 @@ part of 'app_database.dart';
 
 // ignore_for_file: unnecessary_brace_in_string_interps, unnecessary_this
 class Categorie extends DataClass implements Insertable<Categorie> {
-  final int categoryId;
+  final int id;
   final String categoryTitle;
   final int numberOfList;
   final bool isImportant;
   final int color;
   Categorie(
-      {this.categoryId,
+      {this.id,
       this.categoryTitle,
       this.numberOfList,
       @required this.isImportant,
@@ -26,8 +26,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
     final stringType = db.typeSystem.forDartType<String>();
     final boolType = db.typeSystem.forDartType<bool>();
     return Categorie(
-      categoryId: intType
-          .mapFromDatabaseResponse(data['${effectivePrefix}category_id']),
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       categoryTitle: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}category_title']),
       numberOfList: intType
@@ -40,8 +39,8 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || categoryId != null) {
-      map['category_id'] = Variable<int>(categoryId);
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
     }
     if (!nullToAbsent || categoryTitle != null) {
       map['category_title'] = Variable<String>(categoryTitle);
@@ -60,9 +59,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
 
   CategoriesCompanion toCompanion(bool nullToAbsent) {
     return CategoriesCompanion(
-      categoryId: categoryId == null && nullToAbsent
-          ? const Value.absent()
-          : Value(categoryId),
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       categoryTitle: categoryTitle == null && nullToAbsent
           ? const Value.absent()
           : Value(categoryTitle),
@@ -81,7 +78,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Categorie(
-      categoryId: serializer.fromJson<int>(json['categoryId']),
+      id: serializer.fromJson<int>(json['id']),
       categoryTitle: serializer.fromJson<String>(json['categoryTitle']),
       numberOfList: serializer.fromJson<int>(json['numberOfList']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
@@ -92,7 +89,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'categoryId': serializer.toJson<int>(categoryId),
+      'id': serializer.toJson<int>(id),
       'categoryTitle': serializer.toJson<String>(categoryTitle),
       'numberOfList': serializer.toJson<int>(numberOfList),
       'isImportant': serializer.toJson<bool>(isImportant),
@@ -101,13 +98,13 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   }
 
   Categorie copyWith(
-          {int categoryId,
+          {int id,
           String categoryTitle,
           int numberOfList,
           bool isImportant,
           int color}) =>
       Categorie(
-        categoryId: categoryId ?? this.categoryId,
+        id: id ?? this.id,
         categoryTitle: categoryTitle ?? this.categoryTitle,
         numberOfList: numberOfList ?? this.numberOfList,
         isImportant: isImportant ?? this.isImportant,
@@ -116,7 +113,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   @override
   String toString() {
     return (StringBuffer('Categorie(')
-          ..write('categoryId: $categoryId, ')
+          ..write('id: $id, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
           ..write('isImportant: $isImportant, ')
@@ -127,7 +124,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
 
   @override
   int get hashCode => $mrjf($mrjc(
-      categoryId.hashCode,
+      id.hashCode,
       $mrjc(
           categoryTitle.hashCode,
           $mrjc(numberOfList.hashCode,
@@ -136,7 +133,7 @@ class Categorie extends DataClass implements Insertable<Categorie> {
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is Categorie &&
-          other.categoryId == this.categoryId &&
+          other.id == this.id &&
           other.categoryTitle == this.categoryTitle &&
           other.numberOfList == this.numberOfList &&
           other.isImportant == this.isImportant &&
@@ -144,34 +141,34 @@ class Categorie extends DataClass implements Insertable<Categorie> {
 }
 
 class CategoriesCompanion extends UpdateCompanion<Categorie> {
-  final Value<int> categoryId;
+  final Value<int> id;
   final Value<String> categoryTitle;
   final Value<int> numberOfList;
   final Value<bool> isImportant;
   final Value<int> color;
   const CategoriesCompanion({
-    this.categoryId = const Value.absent(),
+    this.id = const Value.absent(),
     this.categoryTitle = const Value.absent(),
     this.numberOfList = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.color = const Value.absent(),
   });
   CategoriesCompanion.insert({
-    this.categoryId = const Value.absent(),
+    this.id = const Value.absent(),
     this.categoryTitle = const Value.absent(),
     this.numberOfList = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.color = const Value.absent(),
   });
   static Insertable<Categorie> custom({
-    Expression<int> categoryId,
+    Expression<int> id,
     Expression<String> categoryTitle,
     Expression<int> numberOfList,
     Expression<bool> isImportant,
     Expression<int> color,
   }) {
     return RawValuesInsertable({
-      if (categoryId != null) 'category_id': categoryId,
+      if (id != null) 'id': id,
       if (categoryTitle != null) 'category_title': categoryTitle,
       if (numberOfList != null) 'number_of_list': numberOfList,
       if (isImportant != null) 'is_important': isImportant,
@@ -180,13 +177,13 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   }
 
   CategoriesCompanion copyWith(
-      {Value<int> categoryId,
+      {Value<int> id,
       Value<String> categoryTitle,
       Value<int> numberOfList,
       Value<bool> isImportant,
       Value<int> color}) {
     return CategoriesCompanion(
-      categoryId: categoryId ?? this.categoryId,
+      id: id ?? this.id,
       categoryTitle: categoryTitle ?? this.categoryTitle,
       numberOfList: numberOfList ?? this.numberOfList,
       isImportant: isImportant ?? this.isImportant,
@@ -197,8 +194,8 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (categoryId.present) {
-      map['category_id'] = Variable<int>(categoryId.value);
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
     }
     if (categoryTitle.present) {
       map['category_title'] = Variable<String>(categoryTitle.value);
@@ -218,7 +215,7 @@ class CategoriesCompanion extends UpdateCompanion<Categorie> {
   @override
   String toString() {
     return (StringBuffer('CategoriesCompanion(')
-          ..write('categoryId: $categoryId, ')
+          ..write('id: $id, ')
           ..write('categoryTitle: $categoryTitle, ')
           ..write('numberOfList: $numberOfList, ')
           ..write('isImportant: $isImportant, ')
@@ -233,12 +230,12 @@ class $CategoriesTable extends Categories
   final GeneratedDatabase _db;
   final String _alias;
   $CategoriesTable(this._db, [this._alias]);
-  final VerificationMeta _categoryIdMeta = const VerificationMeta('categoryId');
-  GeneratedIntColumn _categoryId;
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get categoryId => _categoryId ??= _constructCategoryId();
-  GeneratedIntColumn _constructCategoryId() {
-    return GeneratedIntColumn('category_id', $tableName, true,
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, true,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
@@ -286,7 +283,7 @@ class $CategoriesTable extends Categories
 
   @override
   List<GeneratedColumn> get $columns =>
-      [categoryId, categoryTitle, numberOfList, isImportant, color];
+      [id, categoryTitle, numberOfList, isImportant, color];
   @override
   $CategoriesTable get asDslTable => this;
   @override
@@ -298,11 +295,8 @@ class $CategoriesTable extends Categories
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('category_id')) {
-      context.handle(
-          _categoryIdMeta,
-          categoryId.isAcceptableOrUnknown(
-              data['category_id'], _categoryIdMeta));
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
     }
     if (data.containsKey('category_title')) {
       context.handle(
@@ -330,7 +324,7 @@ class $CategoriesTable extends Categories
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {categoryId};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Categorie map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
@@ -344,7 +338,7 @@ class $CategoriesTable extends Categories
 }
 
 class Task extends DataClass implements Insertable<Task> {
-  final int listId;
+  final int id;
   final String title;
   final String time;
   final String date;
@@ -355,7 +349,7 @@ class Task extends DataClass implements Insertable<Task> {
   final bool isImportant;
   final int categoryId;
   Task(
-      {@required this.listId,
+      {@required this.id,
       @required this.title,
       this.time,
       this.date,
@@ -372,8 +366,7 @@ class Task extends DataClass implements Insertable<Task> {
     final stringType = db.typeSystem.forDartType<String>();
     final boolType = db.typeSystem.forDartType<bool>();
     return Task(
-      listId:
-          intType.mapFromDatabaseResponse(data['${effectivePrefix}list_id']),
+      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
       title:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}title']),
       time: stringType.mapFromDatabaseResponse(data['${effectivePrefix}time']),
@@ -394,8 +387,8 @@ class Task extends DataClass implements Insertable<Task> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (!nullToAbsent || listId != null) {
-      map['list_id'] = Variable<int>(listId);
+    if (!nullToAbsent || id != null) {
+      map['id'] = Variable<int>(id);
     }
     if (!nullToAbsent || title != null) {
       map['title'] = Variable<String>(title);
@@ -429,8 +422,7 @@ class Task extends DataClass implements Insertable<Task> {
 
   TasksCompanion toCompanion(bool nullToAbsent) {
     return TasksCompanion(
-      listId:
-          listId == null && nullToAbsent ? const Value.absent() : Value(listId),
+      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
       title:
           title == null && nullToAbsent ? const Value.absent() : Value(title),
       time: time == null && nullToAbsent ? const Value.absent() : Value(time),
@@ -457,7 +449,7 @@ class Task extends DataClass implements Insertable<Task> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Task(
-      listId: serializer.fromJson<int>(json['listId']),
+      id: serializer.fromJson<int>(json['id']),
       title: serializer.fromJson<String>(json['title']),
       time: serializer.fromJson<String>(json['time']),
       date: serializer.fromJson<String>(json['date']),
@@ -473,7 +465,7 @@ class Task extends DataClass implements Insertable<Task> {
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
-      'listId': serializer.toJson<int>(listId),
+      'id': serializer.toJson<int>(id),
       'title': serializer.toJson<String>(title),
       'time': serializer.toJson<String>(time),
       'date': serializer.toJson<String>(date),
@@ -487,7 +479,7 @@ class Task extends DataClass implements Insertable<Task> {
   }
 
   Task copyWith(
-          {int listId,
+          {int id,
           String title,
           String time,
           String date,
@@ -498,7 +490,7 @@ class Task extends DataClass implements Insertable<Task> {
           bool isImportant,
           int categoryId}) =>
       Task(
-        listId: listId ?? this.listId,
+        id: id ?? this.id,
         title: title ?? this.title,
         time: time ?? this.time,
         date: date ?? this.date,
@@ -512,7 +504,7 @@ class Task extends DataClass implements Insertable<Task> {
   @override
   String toString() {
     return (StringBuffer('Task(')
-          ..write('listId: $listId, ')
+          ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
           ..write('date: $date, ')
@@ -528,7 +520,7 @@ class Task extends DataClass implements Insertable<Task> {
 
   @override
   int get hashCode => $mrjf($mrjc(
-      listId.hashCode,
+      id.hashCode,
       $mrjc(
           title.hashCode,
           $mrjc(
@@ -549,7 +541,7 @@ class Task extends DataClass implements Insertable<Task> {
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is Task &&
-          other.listId == this.listId &&
+          other.id == this.id &&
           other.title == this.title &&
           other.time == this.time &&
           other.date == this.date &&
@@ -562,7 +554,7 @@ class Task extends DataClass implements Insertable<Task> {
 }
 
 class TasksCompanion extends UpdateCompanion<Task> {
-  final Value<int> listId;
+  final Value<int> id;
   final Value<String> title;
   final Value<String> time;
   final Value<String> date;
@@ -573,7 +565,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<bool> isImportant;
   final Value<int> categoryId;
   const TasksCompanion({
-    this.listId = const Value.absent(),
+    this.id = const Value.absent(),
     this.title = const Value.absent(),
     this.time = const Value.absent(),
     this.date = const Value.absent(),
@@ -585,7 +577,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.categoryId = const Value.absent(),
   });
   TasksCompanion.insert({
-    this.listId = const Value.absent(),
+    this.id = const Value.absent(),
     @required String title,
     this.time = const Value.absent(),
     this.date = const Value.absent(),
@@ -597,7 +589,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.categoryId = const Value.absent(),
   }) : title = Value(title);
   static Insertable<Task> custom({
-    Expression<int> listId,
+    Expression<int> id,
     Expression<String> title,
     Expression<String> time,
     Expression<String> date,
@@ -609,7 +601,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<int> categoryId,
   }) {
     return RawValuesInsertable({
-      if (listId != null) 'list_id': listId,
+      if (id != null) 'id': id,
       if (title != null) 'title': title,
       if (time != null) 'time': time,
       if (date != null) 'date': date,
@@ -623,7 +615,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   }
 
   TasksCompanion copyWith(
-      {Value<int> listId,
+      {Value<int> id,
       Value<String> title,
       Value<String> time,
       Value<String> date,
@@ -634,7 +626,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       Value<bool> isImportant,
       Value<int> categoryId}) {
     return TasksCompanion(
-      listId: listId ?? this.listId,
+      id: id ?? this.id,
       title: title ?? this.title,
       time: time ?? this.time,
       date: date ?? this.date,
@@ -650,8 +642,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
-    if (listId.present) {
-      map['list_id'] = Variable<int>(listId.value);
+    if (id.present) {
+      map['id'] = Variable<int>(id.value);
     }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
@@ -686,7 +678,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   @override
   String toString() {
     return (StringBuffer('TasksCompanion(')
-          ..write('listId: $listId, ')
+          ..write('id: $id, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
           ..write('date: $date, ')
@@ -705,12 +697,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   final GeneratedDatabase _db;
   final String _alias;
   $TasksTable(this._db, [this._alias]);
-  final VerificationMeta _listIdMeta = const VerificationMeta('listId');
-  GeneratedIntColumn _listId;
+  final VerificationMeta _idMeta = const VerificationMeta('id');
+  GeneratedIntColumn _id;
   @override
-  GeneratedIntColumn get listId => _listId ??= _constructListId();
-  GeneratedIntColumn _constructListId() {
-    return GeneratedIntColumn('list_id', $tableName, false,
+  GeneratedIntColumn get id => _id ??= _constructId();
+  GeneratedIntColumn _constructId() {
+    return GeneratedIntColumn('id', $tableName, false,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
@@ -802,12 +794,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedIntColumn get categoryId => _categoryId ??= _constructCategoryId();
   GeneratedIntColumn _constructCategoryId() {
     return GeneratedIntColumn('category_id', $tableName, true,
-        $customConstraints: 'NULL REFERENCES categories(categoryId)');
+        $customConstraints: 'NULL REFERENCES categories(category_id)');
   }
 
   @override
   List<GeneratedColumn> get $columns => [
-        listId,
+        id,
         title,
         time,
         date,
@@ -829,9 +821,8 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
-    if (data.containsKey('list_id')) {
-      context.handle(_listIdMeta,
-          listId.isAcceptableOrUnknown(data['list_id'], _listIdMeta));
+    if (data.containsKey('id')) {
+      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
     }
     if (data.containsKey('title')) {
       context.handle(
@@ -881,7 +872,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => {listId};
+  Set<GeneratedColumn> get $primaryKey => {id};
   @override
   Task map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
