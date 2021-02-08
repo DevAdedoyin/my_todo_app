@@ -11,10 +11,8 @@ part 'app_database.g.dart';
 // @DataClassName('Category')
 class Categories extends Table {
   IntColumn get id => integer().autoIncrement()();
-  TextColumn get categoryTitle => text()
-      .withLength(min: 3, max: 15)
-      .nullable()
-      .customConstraint('UNIQUE')();
+  TextColumn get categoryTitle =>
+      text().withLength(min: 3, max: 15).nullable()();
   IntColumn get numberOfList =>
       integer().withDefault(const Constant(0)).nullable()();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
@@ -25,7 +23,7 @@ class Categories extends Table {
 }
 
 class Tasks extends Table {
-  IntColumn get id => integer().autoIncrement()();
+  // IntColumn get id => integer().autoIncrement()();
   TextColumn get title =>
       text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
   TextColumn get time => text().nullable()();
@@ -35,10 +33,8 @@ class Tasks extends Table {
   BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
   TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
-  IntColumn get categoryId => integer()
-      .named('category_id')
-      .nullable()
-      .customConstraint('NULL REFERENCES categories(category_id)')();
+  IntColumn get id =>
+      integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 }
 
 class TaskWithCategory {
@@ -62,7 +58,7 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration =>
       MigrationStrategy(onUpgrade: (migrator, from, to) async {
         if (from == 1) {
-          await migrator.addColumn(tasks, tasks.categoryId);
+          await migrator.addColumn(tasks, tasks.id);
           await migrator.createTable(categories);
         }
       }, beforeOpen: (details) async {
@@ -88,8 +84,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
           ))
         .join(
           [
-            leftOuterJoin(
-                categories, categories.id.equalsExp(tasks.categoryId)),
+            leftOuterJoin(categories, categories.id.equalsExp(tasks.id)),
           ],
         )
         .watch()
