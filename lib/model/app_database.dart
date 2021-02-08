@@ -10,7 +10,7 @@ part 'app_database.g.dart';
 
 // @DataClassName('Category')
 class Categories extends Table {
-  IntColumn get id => integer().autoIncrement().nullable()();
+  IntColumn get id => integer().autoIncrement()();
   TextColumn get categoryTitle => text()
       .withLength(min: 3, max: 15)
       .nullable()
