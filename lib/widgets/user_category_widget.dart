@@ -57,11 +57,11 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
               onPressed: () {
                 //  catDao.allCategories;
                 if (widget.isImportant == true) {
-                  catDao.updateCategoryImportance(Categorie(isImportant: false)
-                      .copyWith(categoryId: widget.catId));
+                  catDao.updateCategoryImportance(
+                      Categorie(isImportant: false).copyWith(id: widget.catId));
                 } else {
-                  catDao.updateCategoryImportance(Categorie(isImportant: true)
-                      .copyWith(categoryId: widget.catId));
+                  catDao.updateCategoryImportance(
+                      Categorie(isImportant: true).copyWith(id: widget.catId));
                 }
               },
               splashColor: widget.color,
