@@ -12,7 +12,7 @@ part 'app_database.g.dart';
 class Categories extends Table {
   IntColumn get id => integer().autoIncrement()();
   TextColumn get categoryTitle =>
-      text().withLength(min: 3, max: 15).nullable()();
+      text().withLength(min: 3, max: 30).nullable()();
   IntColumn get numberOfList =>
       integer().withDefault(const Constant(0)).nullable()();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
@@ -25,7 +25,7 @@ class Categories extends Table {
 class Tasks extends Table {
   // IntColumn get id => integer().autoIncrement()();
   TextColumn get title =>
-      text().withLength(min: 3, max: 15).customConstraint('UNIQUE')();
+      text().withLength(min: 3, max: 30).customConstraint('UNIQUE')();
   TextColumn get time => text().nullable()();
   TextColumn get date => text().nullable()();
   TextColumn get frequency => text().nullable().withLength(min: 1, max: 100)();
