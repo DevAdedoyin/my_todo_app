@@ -247,7 +247,7 @@ class $CategoriesTable extends Categories
       _categoryTitle ??= _constructCategoryTitle();
   GeneratedTextColumn _constructCategoryTitle() {
     return GeneratedTextColumn('category_title', $tableName, true,
-        minTextLength: 3, maxTextLength: 15);
+        minTextLength: 3, maxTextLength: 30);
   }
 
   final VerificationMeta _numberOfListMeta =
@@ -672,7 +672,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedTextColumn get title => _title ??= _constructTitle();
   GeneratedTextColumn _constructTitle() {
     return GeneratedTextColumn('title', $tableName, false,
-        minTextLength: 3, maxTextLength: 15, $customConstraints: 'UNIQUE');
+        minTextLength: 3, maxTextLength: 30, $customConstraints: 'UNIQUE');
   }
 
   final VerificationMeta _timeMeta = const VerificationMeta('time');
