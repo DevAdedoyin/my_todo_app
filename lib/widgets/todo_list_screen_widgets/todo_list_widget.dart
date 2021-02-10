@@ -6,10 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
 class TodoList extends StatefulWidget {
-  final String title;
-  final String date;
+  final TaskWithCategory item;
+  final TaskDao dao;
 
-  TodoList({this.title, this.date});
+  TodoList({this.item, this.dao});
 
   @override
   _TodoListState createState() => _TodoListState();
