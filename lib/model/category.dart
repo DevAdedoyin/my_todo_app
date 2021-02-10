@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 List<Color> bgColors = [
-  Colors.white,
   Colors.teal,
   Colors.red,
   Colors.yellow,
