@@ -338,6 +338,7 @@ class $CategoriesTable extends Categories
 }
 
 class Task extends DataClass implements Insertable<Task> {
+  final int taskid;
   final String title;
   final String time;
   final String date;
@@ -348,7 +349,8 @@ class Task extends DataClass implements Insertable<Task> {
   final bool isImportant;
   final int id;
   Task(
-      {@required this.title,
+      {@required this.taskid,
+      @required this.title,
       this.time,
       this.date,
       this.frequency,
@@ -360,10 +362,11 @@ class Task extends DataClass implements Insertable<Task> {
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
+    final intType = db.typeSystem.forDartType<int>();
     final stringType = db.typeSystem.forDartType<String>();
     final boolType = db.typeSystem.forDartType<bool>();
-    final intType = db.typeSystem.forDartType<int>();
     return Task(
+      taskid: intType.mapFromDatabaseResponse(data['${effectivePrefix}taskid']),
       title:
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}title']),
       time: stringType.mapFromDatabaseResponse(data['${effectivePrefix}time']),
@@ -383,6 +386,9 @@ class Task extends DataClass implements Insertable<Task> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    if (!nullToAbsent || taskid != null) {
+      map['taskid'] = Variable<int>(taskid);
+    }
     if (!nullToAbsent || title != null) {
       map['title'] = Variable<String>(title);
     }
@@ -415,6 +421,8 @@ class Task extends DataClass implements Insertable<Task> {
 
   TasksCompanion toCompanion(bool nullToAbsent) {
     return TasksCompanion(
+      taskid:
+          taskid == null && nullToAbsent ? const Value.absent() : Value(taskid),
       title:
           title == null && nullToAbsent ? const Value.absent() : Value(title),
       time: time == null && nullToAbsent ? const Value.absent() : Value(time),
@@ -439,6 +447,7 @@ class Task extends DataClass implements Insertable<Task> {
       {ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return Task(
+      taskid: serializer.fromJson<int>(json['taskid']),
       title: serializer.fromJson<String>(json['title']),
       time: serializer.fromJson<String>(json['time']),
       date: serializer.fromJson<String>(json['date']),
@@ -454,6 +463,7 @@ class Task extends DataClass implements Insertable<Task> {
   Map<String, dynamic> toJson({ValueSerializer serializer}) {
     serializer ??= moorRuntimeOptions.defaultSerializer;
     return <String, dynamic>{
+      'taskid': serializer.toJson<int>(taskid),
       'title': serializer.toJson<String>(title),
       'time': serializer.toJson<String>(time),
       'date': serializer.toJson<String>(date),
@@ -467,7 +477,8 @@ class Task extends DataClass implements Insertable<Task> {
   }
 
   Task copyWith(
-          {String title,
+          {int taskid,
+          String title,
           String time,
           String date,
           String frequency,
@@ -477,6 +488,7 @@ class Task extends DataClass implements Insertable<Task> {
           bool isImportant,
           int id}) =>
       Task(
+        taskid: taskid ?? this.taskid,
         title: title ?? this.title,
         time: time ?? this.time,
         date: date ?? this.date,
@@ -490,6 +502,7 @@ class Task extends DataClass implements Insertable<Task> {
   @override
   String toString() {
     return (StringBuffer('Task(')
+          ..write('taskid: $taskid, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
           ..write('date: $date, ')
@@ -505,23 +518,28 @@ class Task extends DataClass implements Insertable<Task> {
 
   @override
   int get hashCode => $mrjf($mrjc(
-      title.hashCode,
+      taskid.hashCode,
       $mrjc(
-          time.hashCode,
+          title.hashCode,
           $mrjc(
-              date.hashCode,
+              time.hashCode,
               $mrjc(
-                  frequency.hashCode,
+                  date.hashCode,
                   $mrjc(
-                      note.hashCode,
+                      frequency.hashCode,
                       $mrjc(
-                          isCompleted.hashCode,
-                          $mrjc(steps.hashCode,
-                              $mrjc(isImportant.hashCode, id.hashCode)))))))));
+                          note.hashCode,
+                          $mrjc(
+                              isCompleted.hashCode,
+                              $mrjc(
+                                  steps.hashCode,
+                                  $mrjc(isImportant.hashCode,
+                                      id.hashCode))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
       (other is Task &&
+          other.taskid == this.taskid &&
           other.title == this.title &&
           other.time == this.time &&
           other.date == this.date &&
@@ -534,6 +552,7 @@ class Task extends DataClass implements Insertable<Task> {
 }
 
 class TasksCompanion extends UpdateCompanion<Task> {
+  final Value<int> taskid;
   final Value<String> title;
   final Value<String> time;
   final Value<String> date;
@@ -544,6 +563,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<bool> isImportant;
   final Value<int> id;
   const TasksCompanion({
+    this.taskid = const Value.absent(),
     this.title = const Value.absent(),
     this.time = const Value.absent(),
     this.date = const Value.absent(),
@@ -555,6 +575,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.id = const Value.absent(),
   });
   TasksCompanion.insert({
+    this.taskid = const Value.absent(),
     @required String title,
     this.time = const Value.absent(),
     this.date = const Value.absent(),
@@ -566,6 +587,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.id = const Value.absent(),
   }) : title = Value(title);
   static Insertable<Task> custom({
+    Expression<int> taskid,
     Expression<String> title,
     Expression<String> time,
     Expression<String> date,
@@ -577,6 +599,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<int> id,
   }) {
     return RawValuesInsertable({
+      if (taskid != null) 'taskid': taskid,
       if (title != null) 'title': title,
       if (time != null) 'time': time,
       if (date != null) 'date': date,
@@ -590,7 +613,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
   }
 
   TasksCompanion copyWith(
-      {Value<String> title,
+      {Value<int> taskid,
+      Value<String> title,
       Value<String> time,
       Value<String> date,
       Value<String> frequency,
@@ -600,6 +624,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       Value<bool> isImportant,
       Value<int> id}) {
     return TasksCompanion(
+      taskid: taskid ?? this.taskid,
       title: title ?? this.title,
       time: time ?? this.time,
       date: date ?? this.date,
@@ -615,6 +640,9 @@ class TasksCompanion extends UpdateCompanion<Task> {
   @override
   Map<String, Expression> toColumns(bool nullToAbsent) {
     final map = <String, Expression>{};
+    if (taskid.present) {
+      map['taskid'] = Variable<int>(taskid.value);
+    }
     if (title.present) {
       map['title'] = Variable<String>(title.value);
     }
@@ -648,6 +676,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   @override
   String toString() {
     return (StringBuffer('TasksCompanion(')
+          ..write('taskid: $taskid, ')
           ..write('title: $title, ')
           ..write('time: $time, ')
           ..write('date: $date, ')
@@ -666,6 +695,15 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   final GeneratedDatabase _db;
   final String _alias;
   $TasksTable(this._db, [this._alias]);
+  final VerificationMeta _taskidMeta = const VerificationMeta('taskid');
+  GeneratedIntColumn _taskid;
+  @override
+  GeneratedIntColumn get taskid => _taskid ??= _constructTaskid();
+  GeneratedIntColumn _constructTaskid() {
+    return GeneratedIntColumn('taskid', $tableName, false,
+        hasAutoIncrement: true, declaredAsPrimaryKey: true);
+  }
+
   final VerificationMeta _titleMeta = const VerificationMeta('title');
   GeneratedTextColumn _title;
   @override
@@ -758,8 +796,18 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   }
 
   @override
-  List<GeneratedColumn> get $columns =>
-      [title, time, date, frequency, note, isCompleted, steps, isImportant, id];
+  List<GeneratedColumn> get $columns => [
+        taskid,
+        title,
+        time,
+        date,
+        frequency,
+        note,
+        isCompleted,
+        steps,
+        isImportant,
+        id
+      ];
   @override
   $TasksTable get asDslTable => this;
   @override
@@ -771,6 +819,10 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
       {bool isInserting = false}) {
     final context = VerificationContext();
     final data = instance.toColumns(true);
+    if (data.containsKey('taskid')) {
+      context.handle(_taskidMeta,
+          taskid.isAcceptableOrUnknown(data['taskid'], _taskidMeta));
+    }
     if (data.containsKey('title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['title'], _titleMeta));
@@ -816,7 +868,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   }
 
   @override
-  Set<GeneratedColumn> get $primaryKey => <GeneratedColumn>{};
+  Set<GeneratedColumn> get $primaryKey => {taskid};
   @override
   Task map(Map<String, dynamic> data, {String tablePrefix}) {
     final effectivePrefix = tablePrefix != null ? '$tablePrefix.' : null;
