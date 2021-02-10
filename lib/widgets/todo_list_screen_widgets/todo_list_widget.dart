@@ -6,8 +6,10 @@ import 'package:provider/provider.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
 class TodoList extends StatefulWidget {
-  final int index;
-  TodoList(this.index);
+  final String title;
+  final String date;
+
+  TodoList({this.title, this.date});
 
   @override
   _TodoListState createState() => _TodoListState();
@@ -16,7 +18,7 @@ class TodoList extends StatefulWidget {
 class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
-    final todo = Provider.of<ToDoProvider>(context);
+    // final todo = Provider.of<ToDoProvider>(context);
 
     return GestureDetector(
       onTap: () {
@@ -38,7 +40,7 @@ class _TodoListState extends State<TodoList> {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.black, width: 2)),
           ),
-          title: Text(todo.todo[0].title),
+          title: Text(widget.title),
           subtitle: Row(
             children: <Widget>[
               Icon(
@@ -48,7 +50,7 @@ class _TodoListState extends State<TodoList> {
               SizedBox(
                 width: 5,
               ),
-              Text(todo.todo[0].title),
+              Text(widget.date),
               Icon(
                 Icons.repeat,
                 size: 15,
