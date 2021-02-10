@@ -17,7 +17,7 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     final todo = Provider.of<ToDoProvider>(context);
-    final tasksList = Provider.of<TaskDao>(context);
+
     return GestureDetector(
       onTap: () {
         return Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName);

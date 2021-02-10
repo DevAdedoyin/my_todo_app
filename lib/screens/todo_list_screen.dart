@@ -16,67 +16,89 @@ class TodoListScreen extends StatefulWidget {
 class _TodoListScreenState extends State<TodoListScreen> {
   @override
   Widget build(BuildContext context) {
-    final _todo = Provider.of<ToDoProvider>(context);
     final _args = ModalRoute.of(context).settings.arguments as List;
+    final _tasks = Provider.of<TaskDao>(context);
+    List<String> strings = ['Adedoyin', 'Tunde'];
 
-    // final _color = ModalRoute.of(context).settings.arguments;
     return Scaffold(
-      backgroundColor: _args[1],
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            // automaticallyImplyLeading: true,
-            backgroundColor: Colors.blue,
-            floating: true,
-            pinned: true,
-            expandedHeight: 120,
-            flexibleSpace: Row(
-              children: [
-                Container(
-                  width: 200,
-                  child: FlexibleSpaceBar(
-                    title: Text(_args[0]),
-                    centerTitle: true,
-                    // collapseMode: CollapseMode.pin,
-                  ),
-                ),
-                Spacer(),
-                PopupMenuButton(
-                    itemBuilder: (_) => [
-                          PopupMenuItem(
-                            child: Row(children: <Widget>[
-                              Icon(Icons.color_lens),
-                              Text('Rename list')
-                            ]),
+      backgroundColor: Colors.white,
+      body: SafeArea(
+        child: Container(
+          child: StreamBuilder<List<TaskWithCategory>>(
+            stream: _tasks.watchAllTasks(),
+            builder: (_, snapshot) {
+              if (snapshot.hasData) {
+                return CustomScrollView(
+                  slivers: [
+                    SliverAppBar(
+                      // automaticallyImplyLeading: true,
+                      backgroundColor: _args[1],
+                      floating: true,
+                      pinned: true,
+                      expandedHeight: 120,
+                      flexibleSpace: Row(
+                        children: [
+                          Container(
+                            width: 200,
+                            child: FlexibleSpaceBar(
+                              title: Text(
+                                _args[0],
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              centerTitle: true,
+                              // collapseMode: CollapseMode.pin,
+                            ),
                           ),
-                          PopupMenuItem(
-                            child: Row(children: <Widget>[
-                              Icon(Icons.sort),
-                              Text('Sort by')
-                            ]),
-                          ),
-                          PopupMenuItem(
-                            child: Row(children: <Widget>[
-                              Icon(Icons.color_lens_outlined),
-                              Text('Change Theme')
-                            ]),
-                          ),
-                          PopupMenuItem(
-                            child: Row(children: <Widget>[
-                              Icon(Icons.delete),
-                              Text('Delete list')
-                            ]),
-                          ),
-                        ])
-              ],
-            ),
+                          Spacer(),
+                          PopupMenuButton(
+                              icon: Icon(
+                                Icons.more_vert_outlined,
+                                color: Colors.white,
+                              ),
+                              itemBuilder: (_) => [
+                                    PopupMenuItem(
+                                      child: Row(children: <Widget>[
+                                        Icon(Icons.color_lens),
+                                        Text('Rename list')
+                                      ]),
+                                    ),
+                                    PopupMenuItem(
+                                      child: Row(children: <Widget>[
+                                        Icon(Icons.sort),
+                                        Text('Sort by')
+                                      ]),
+                                    ),
+                                    PopupMenuItem(
+                                      child: Row(children: <Widget>[
+                                        Icon(Icons.color_lens_outlined),
+                                        Text('Change Theme')
+                                      ]),
+                                    ),
+                                    PopupMenuItem(
+                                      child: Row(children: <Widget>[
+                                        Icon(Icons.delete),
+                                        Text('Delete list')
+                                      ]),
+                                    ),
+                                  ])
+                        ],
+                      ),
+                    ),
+                    SliverList(
+                        delegate: SliverChildBuilderDelegate((_, i) {
+                      return Text('Working');
+                      // TodoList(i);
+                    }, childCount: snapshot.data.length))
+                  ],
+                );
+              } else {
+                return Center(
+                  child: Text('You have no task yet'),
+                );
+              }
+            },
           ),
-          SliverList(
-            delegate: SliverChildBuilderDelegate((_, i) {
-              return TodoList(i);
-            }, childCount: _todo.todo.length),
-          )
-        ],
+        ),
       ),
       //  TodoList(),
       floatingActionButton: FloatingActionButton(
