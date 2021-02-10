@@ -85,11 +85,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       ),
                     ),
                     SliverList(
-                        delegate: SliverChildBuilderDelegate((_, i) {
-                      print('Title: ' +
-                          snapshot.data[i].task.copyWith(id: i + 1).title);
-                      return Text('Working');
-                      // TodoList(i);
+                        delegate: SliverChildBuilderDelegate((_, index) {
+                      final item = snapshot.data[index];
+                      return TodoList(item, _tasks);
                     }, childCount: snapshot.data.length))
                   ],
                 );
