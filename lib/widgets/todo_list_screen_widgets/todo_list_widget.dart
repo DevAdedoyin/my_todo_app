@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_todo_app/model/app_database.dart';
-import 'package:my_todo_app/providers/todo_list.dart';
-import 'package:provider/provider.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
 class TodoList extends StatefulWidget {
@@ -40,7 +38,7 @@ class _TodoListState extends State<TodoList> {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.black, width: 2)),
           ),
-          title: Text(widget.title),
+          title: Text(widget.item.task.title),
           subtitle: Row(
             children: <Widget>[
               Icon(
@@ -50,7 +48,7 @@ class _TodoListState extends State<TodoList> {
               SizedBox(
                 width: 5,
               ),
-              Text(widget.date),
+              Text(widget.item.task.date),
               Icon(
                 Icons.repeat,
                 size: 15,
