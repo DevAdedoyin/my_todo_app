@@ -24,8 +24,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
       backgroundColor: Colors.white,
       body: SafeArea(
         child: Container(
-          child: StreamBuilder<List<TaskWithCategory>>(
-            stream: _tasks.watchAllTasks(),
+          child: StreamBuilder<List<Task>>(
+            stream: _tasks.getSpecificTask(_args[2]),
             builder: (_, snapshot) {
               if (snapshot.hasData) {
                 return CustomScrollView(
