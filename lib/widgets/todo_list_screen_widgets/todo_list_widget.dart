@@ -4,7 +4,7 @@ import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
 class TodoList extends StatefulWidget {
-  final TaskWithCategory item;
+  final Task item;
   final TaskDao dao;
 
   TodoList({this.item, this.dao});
@@ -38,7 +38,7 @@ class _TodoListState extends State<TodoList> {
                 borderRadius: BorderRadius.circular(100),
                 border: Border.all(color: Colors.black, width: 2)),
           ),
-          title: Text(widget.item.task.title),
+          title: Text(widget.item.title),
           subtitle: Row(
             children: <Widget>[
               Icon(
@@ -48,7 +48,7 @@ class _TodoListState extends State<TodoList> {
               SizedBox(
                 width: 5,
               ),
-              Text(widget.item.task.date),
+              Text(widget.item.date),
               Icon(
                 Icons.repeat,
                 size: 15,
