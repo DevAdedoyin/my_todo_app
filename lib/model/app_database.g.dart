@@ -347,7 +347,7 @@ class Task extends DataClass implements Insertable<Task> {
   final bool isCompleted;
   final String steps;
   final bool isImportant;
-  final int id;
+  final int catid;
   Task(
       {@required this.taskid,
       @required this.title,
@@ -358,7 +358,7 @@ class Task extends DataClass implements Insertable<Task> {
       @required this.isCompleted,
       this.steps,
       @required this.isImportant,
-      this.id});
+      this.catid});
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
     final effectivePrefix = prefix ?? '';
@@ -380,7 +380,7 @@ class Task extends DataClass implements Insertable<Task> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}steps']),
       isImportant: boolType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
-      id: intType.mapFromDatabaseResponse(data['${effectivePrefix}id']),
+      catid: intType.mapFromDatabaseResponse(data['${effectivePrefix}catid']),
     );
   }
   @override
@@ -413,8 +413,8 @@ class Task extends DataClass implements Insertable<Task> {
     if (!nullToAbsent || isImportant != null) {
       map['is_important'] = Variable<bool>(isImportant);
     }
-    if (!nullToAbsent || id != null) {
-      map['id'] = Variable<int>(id);
+    if (!nullToAbsent || catid != null) {
+      map['catid'] = Variable<int>(catid);
     }
     return map;
   }
@@ -439,7 +439,8 @@ class Task extends DataClass implements Insertable<Task> {
       isImportant: isImportant == null && nullToAbsent
           ? const Value.absent()
           : Value(isImportant),
-      id: id == null && nullToAbsent ? const Value.absent() : Value(id),
+      catid:
+          catid == null && nullToAbsent ? const Value.absent() : Value(catid),
     );
   }
 
@@ -456,7 +457,7 @@ class Task extends DataClass implements Insertable<Task> {
       isCompleted: serializer.fromJson<bool>(json['isCompleted']),
       steps: serializer.fromJson<String>(json['steps']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
-      id: serializer.fromJson<int>(json['id']),
+      catid: serializer.fromJson<int>(json['catid']),
     );
   }
   @override
@@ -472,7 +473,7 @@ class Task extends DataClass implements Insertable<Task> {
       'isCompleted': serializer.toJson<bool>(isCompleted),
       'steps': serializer.toJson<String>(steps),
       'isImportant': serializer.toJson<bool>(isImportant),
-      'id': serializer.toJson<int>(id),
+      'catid': serializer.toJson<int>(catid),
     };
   }
 
@@ -486,7 +487,7 @@ class Task extends DataClass implements Insertable<Task> {
           bool isCompleted,
           String steps,
           bool isImportant,
-          int id}) =>
+          int catid}) =>
       Task(
         taskid: taskid ?? this.taskid,
         title: title ?? this.title,
@@ -497,7 +498,7 @@ class Task extends DataClass implements Insertable<Task> {
         isCompleted: isCompleted ?? this.isCompleted,
         steps: steps ?? this.steps,
         isImportant: isImportant ?? this.isImportant,
-        id: id ?? this.id,
+        catid: catid ?? this.catid,
       );
   @override
   String toString() {
@@ -511,7 +512,7 @@ class Task extends DataClass implements Insertable<Task> {
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
-          ..write('id: $id')
+          ..write('catid: $catid')
           ..write(')'))
         .toString();
   }
@@ -534,7 +535,7 @@ class Task extends DataClass implements Insertable<Task> {
                               $mrjc(
                                   steps.hashCode,
                                   $mrjc(isImportant.hashCode,
-                                      id.hashCode))))))))));
+                                      catid.hashCode))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -548,7 +549,7 @@ class Task extends DataClass implements Insertable<Task> {
           other.isCompleted == this.isCompleted &&
           other.steps == this.steps &&
           other.isImportant == this.isImportant &&
-          other.id == this.id);
+          other.catid == this.catid);
 }
 
 class TasksCompanion extends UpdateCompanion<Task> {
@@ -561,7 +562,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<bool> isCompleted;
   final Value<String> steps;
   final Value<bool> isImportant;
-  final Value<int> id;
+  final Value<int> catid;
   const TasksCompanion({
     this.taskid = const Value.absent(),
     this.title = const Value.absent(),
@@ -572,7 +573,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.isCompleted = const Value.absent(),
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
-    this.id = const Value.absent(),
+    this.catid = const Value.absent(),
   });
   TasksCompanion.insert({
     this.taskid = const Value.absent(),
@@ -584,7 +585,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.isCompleted = const Value.absent(),
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
-    this.id = const Value.absent(),
+    this.catid = const Value.absent(),
   }) : title = Value(title);
   static Insertable<Task> custom({
     Expression<int> taskid,
@@ -596,7 +597,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<bool> isCompleted,
     Expression<String> steps,
     Expression<bool> isImportant,
-    Expression<int> id,
+    Expression<int> catid,
   }) {
     return RawValuesInsertable({
       if (taskid != null) 'taskid': taskid,
@@ -608,7 +609,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       if (isCompleted != null) 'is_completed': isCompleted,
       if (steps != null) 'steps': steps,
       if (isImportant != null) 'is_important': isImportant,
-      if (id != null) 'id': id,
+      if (catid != null) 'catid': catid,
     });
   }
 
@@ -622,7 +623,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       Value<bool> isCompleted,
       Value<String> steps,
       Value<bool> isImportant,
-      Value<int> id}) {
+      Value<int> catid}) {
     return TasksCompanion(
       taskid: taskid ?? this.taskid,
       title: title ?? this.title,
@@ -633,7 +634,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       isCompleted: isCompleted ?? this.isCompleted,
       steps: steps ?? this.steps,
       isImportant: isImportant ?? this.isImportant,
-      id: id ?? this.id,
+      catid: catid ?? this.catid,
     );
   }
 
@@ -667,8 +668,8 @@ class TasksCompanion extends UpdateCompanion<Task> {
     if (isImportant.present) {
       map['is_important'] = Variable<bool>(isImportant.value);
     }
-    if (id.present) {
-      map['id'] = Variable<int>(id.value);
+    if (catid.present) {
+      map['catid'] = Variable<int>(catid.value);
     }
     return map;
   }
@@ -685,7 +686,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
-          ..write('id: $id')
+          ..write('catid: $catid')
           ..write(')'))
         .toString();
   }
@@ -786,12 +787,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         defaultValue: const Constant(false));
   }
 
-  final VerificationMeta _idMeta = const VerificationMeta('id');
-  GeneratedIntColumn _id;
+  final VerificationMeta _catidMeta = const VerificationMeta('catid');
+  GeneratedIntColumn _catid;
   @override
-  GeneratedIntColumn get id => _id ??= _constructId();
-  GeneratedIntColumn _constructId() {
-    return GeneratedIntColumn('id', $tableName, true,
+  GeneratedIntColumn get catid => _catid ??= _constructCatid();
+  GeneratedIntColumn _constructCatid() {
+    return GeneratedIntColumn('catid', $tableName, true,
         $customConstraints: 'NULL REFERENCES categories(id)');
   }
 
@@ -806,7 +807,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         isCompleted,
         steps,
         isImportant,
-        id
+        catid
       ];
   @override
   $TasksTable get asDslTable => this;
@@ -861,8 +862,9 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
           isImportant.isAcceptableOrUnknown(
               data['is_important'], _isImportantMeta));
     }
-    if (data.containsKey('id')) {
-      context.handle(_idMeta, id.isAcceptableOrUnknown(data['id'], _idMeta));
+    if (data.containsKey('catid')) {
+      context.handle(
+          _catidMeta, catid.isAcceptableOrUnknown(data['catid'], _catidMeta));
     }
     return context;
   }

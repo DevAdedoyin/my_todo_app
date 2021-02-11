@@ -95,7 +95,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                             date: Value(stripDate),
                             time: Value(time),
                             title: Value(_listTitleController.text),
-                            id: Value(widget.catId)));
+                            catid: Value(widget.catId)));
                         print(time +
                             ' ' +
                             _selectedDate.toString() +

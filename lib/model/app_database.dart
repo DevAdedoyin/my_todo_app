@@ -33,7 +33,7 @@ class Tasks extends Table {
   BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
   TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
-  IntColumn get id =>
+  IntColumn get catid =>
       integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 }
 
@@ -58,7 +58,7 @@ class AppDatabase extends _$AppDatabase {
   MigrationStrategy get migration =>
       MigrationStrategy(onUpgrade: (migrator, from, to) async {
         if (from == 1) {
-          await migrator.addColumn(tasks, tasks.id);
+          await migrator.addColumn(tasks, tasks._catid);
           await migrator.createTable(categories);
         }
       }, beforeOpen: (details) async {
@@ -84,7 +84,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
           ))
         .join(
           [
-            leftOuterJoin(categories, categories.id.equalsExp(tasks.id)),
+            leftOuterJoin(categories, categories.id.equalsExp(tasks._catid)),
           ],
         )
         .watch()
