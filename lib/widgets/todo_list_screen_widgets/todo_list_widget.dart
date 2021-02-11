@@ -28,36 +28,38 @@ class _TodoListState extends State<TodoList> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         shadowColor: Colors.black,
         child: ListTile(
-          leading: IconButton(
-            icon: Icon(
-              Icons.lens_outlined,
-              size: 30,
+            leading: IconButton(
+              icon: Icon(
+                Icons.lens_outlined,
+                size: 30,
+              ),
+              splashRadius: 22,
+              onPressed: () {},
             ),
-            splashRadius: 22,
-            onPressed: () {},
-          ),
-          title: Text(widget.item.title),
-          subtitle: Row(
-            children: <Widget>[
-              Icon(
-                Icons.calendar_today_outlined,
-                size: 15,
+            title: Text(widget.item.title),
+            subtitle: Row(
+              children: <Widget>[
+                Icon(
+                  Icons.calendar_today_outlined,
+                  size: 15,
+                ),
+                SizedBox(
+                  width: 5,
+                ),
+                Text(widget.item.date),
+                Icon(
+                  Icons.repeat,
+                  size: 15,
+                ),
+              ],
+            ),
+            trailing: IconButton(
+              icon: Icon(
+                Icons.star_border_rounded,
+                size: 25,
               ),
-              SizedBox(
-                width: 5,
-              ),
-              Text(widget.item.date),
-              Icon(
-                Icons.repeat,
-                size: 15,
-              ),
-            ],
-          ),
-          trailing: Icon(
-            Icons.star_border_outlined,
-            size: 20,
-          ),
-        ),
+              onPressed: () {},
+            )),
       ),
     );
   }
