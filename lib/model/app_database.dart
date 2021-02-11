@@ -84,7 +84,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
           ))
         .join(
           [
-            leftOuterJoin(categories, categories.id.equalsExp(tasks._catid)),
+            leftOuterJoin(categories, categories.id.equalsExp(tasks.catid)),
           ],
         )
         .watch()
@@ -93,6 +93,10 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
                   categorie: row.readTable(categories),
                   task: row.readTable(tasks));
             }).toList());
+  }
+
+  Stream<List<Task>> getSpecificTask(int index) {
+    return (select(tasks)..where((val) => val.catid.equals(index))).watch();
   }
 
   Future insertTask(Insertable<Task> task) => into(tasks).insert(task);
