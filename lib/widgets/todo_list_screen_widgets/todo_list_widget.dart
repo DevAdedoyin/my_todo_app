@@ -28,15 +28,13 @@ class _TodoListState extends State<TodoList> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         shadowColor: Colors.black,
         child: ListTile(
-          leading: Container(
-            width: 40,
-            height: 40,
-            child: CircleAvatar(
-              backgroundColor: Colors.white,
+          leading: IconButton(
+            icon: Icon(
+              Icons.lens_outlined,
+              size: 30,
             ),
-            decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(100),
-                border: Border.all(color: Colors.black, width: 2)),
+            splashRadius: 22,
+            onPressed: () {},
           ),
           title: Text(widget.item.title),
           subtitle: Row(
