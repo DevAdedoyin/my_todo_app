@@ -18,7 +18,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
-    List<String> strings = ['Adedoyin', 'Tunde'];
 
     return Scaffold(
       backgroundColor: Colors.white,

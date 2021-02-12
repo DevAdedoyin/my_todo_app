@@ -95,7 +95,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
             }).toList());
   }
 
-  //Gets tasks related to specific tasks
+  //Gets tasks related to specific category
   Stream<List<Task>> getSpecificTask(int index) {
     return (select(tasks)..where((val) => val.catid.equals(index))).watch();
   }
