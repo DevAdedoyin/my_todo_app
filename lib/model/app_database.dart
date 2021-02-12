@@ -102,7 +102,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
 
   //Gets number of task in a specific category
   Future<int> numberOfTaskInACategory(int index) async {
-    int length = await getSpecificTask(index).length;
+    int length = await (getSpecificTask(index)).length;
     return length;
   }
 

@@ -73,13 +73,14 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                 widget.title,
                 style: TextStyle(fontSize: 20),
               ),
-              trailing: FutureBuilder<int>(
-                future: taskDao.numberOfTaskInACategory(widget.catId),
+              trailing: StreamBuilder(
+                stream: taskDao.getSpecificTask(widget.catId),
                 builder: (_, snapshot) {
-                  print('DATA: ' + snapshot.data.toString());
+                  print('DATA: ' + snapshot.data.length.toString());
+
                   if (snapshot.hasData) {
                     return Text(
-                      snapshot.data.toString(),
+                      snapshot.data.length.toString(),
                       style: TextStyle(fontSize: 15),
                     );
                   } else {
