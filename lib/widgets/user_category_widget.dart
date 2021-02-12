@@ -71,18 +71,18 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
               ),
               title: Text(
                 widget.title,
-                style: TextStyle(fontSize: 22),
+                style: TextStyle(fontSize: 20),
               ),
               trailing: FutureBuilder(
                 future: taskDao.numberOfTaskInACategory(widget.catId),
                 builder: (_, snapshot) {
                   if (snapshot.hasData) {
                     return Text(
-                      widget.numOfList,
+                      snapshot.data,
                       style: TextStyle(fontSize: 15),
                     );
                   } else {
-                    return Text('');
+                    return Text('0');
                   }
                 },
               )),
