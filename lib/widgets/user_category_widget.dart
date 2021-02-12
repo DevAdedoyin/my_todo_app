@@ -23,6 +23,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
   @override
   Widget build(BuildContext context) {
     final catDao = Provider.of<CategorieDao>(context);
+    final taskDao = Provider.of<TaskDao>(context);
     print(widget.catId);
     return InkWell(
       onTap: () => {
@@ -42,41 +43,49 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           height: 70,
           alignment: Alignment.center,
           child: ListTile(
-            leading: IconButton(
-              icon: widget.isImportant == true
-                  ? Icon(
-                      Icons.star,
-                      size: 20,
-                      color: widget.color,
-                    )
-                  : Icon(
-                      Icons.star_border,
-                      size: 25,
-                      color: Colors.black,
-                    ),
-              onPressed: () {
-                //  catDao.allCategories;
-                if (widget.isImportant == true) {
-                  catDao.updateCategoryImportance(
-                      Categorie(id: widget.catId, isImportant: false)
-                          .copyWith(id: widget.catId));
-                } else {
-                  catDao.updateCategoryImportance(
-                      Categorie(id: widget.catId, isImportant: true)
-                          .copyWith(id: widget.catId));
-                }
-              },
-              splashColor: widget.color,
-            ),
-            title: Text(
-              widget.title,
-              style: TextStyle(fontSize: 22),
-            ),
-            trailing: Text(
-              widget.numOfList,
-              style: TextStyle(fontSize: 15),
-            ),
-          ),
+              leading: IconButton(
+                icon: widget.isImportant == true
+                    ? Icon(
+                        Icons.star,
+                        size: 20,
+                        color: widget.color,
+                      )
+                    : Icon(
+                        Icons.star_border,
+                        size: 25,
+                        color: Colors.black,
+                      ),
+                onPressed: () {
+                  //  catDao.allCategories;
+                  if (widget.isImportant == true) {
+                    catDao.updateCategoryImportance(
+                        Categorie(id: widget.catId, isImportant: false)
+                            .copyWith(id: widget.catId));
+                  } else {
+                    catDao.updateCategoryImportance(
+                        Categorie(id: widget.catId, isImportant: true)
+                            .copyWith(id: widget.catId));
+                  }
+                },
+                splashColor: widget.color,
+              ),
+              title: Text(
+                widget.title,
+                style: TextStyle(fontSize: 22),
+              ),
+              trailing: FutureBuilder(
+                future: taskDao.numberOfTaskInACategory(widget.catId),
+                builder: (_, snapshot) {
+                  if (snapshot.hasData) {
+                    return Text(
+                      widget.numOfList,
+                      style: TextStyle(fontSize: 15),
+                    );
+                  } else {
+                    return Text('');
+                  }
+                },
+              )),
         ),
       ),
     );
