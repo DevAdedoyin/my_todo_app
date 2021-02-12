@@ -100,6 +100,11 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
     return (select(tasks)..where((val) => val.catid.equals(index))).watch();
   }
 
+  //Gets number of task in a specific category
+  Future<int> numberOfTaskInACategory(int index) async {
+    return getSpecificTask(index).length;
+  }
+
   Future insertTask(Insertable<Task> task) => into(tasks).insert(task);
   Future updateTask(Insertable<Task> task) => update(tasks).replace(task);
   Future deleteTask(Insertable<Task> task) => delete(tasks).delete(task);
