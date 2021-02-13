@@ -6,8 +6,9 @@ import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 class TodoList extends StatefulWidget {
   final Task item;
   final TaskDao dao;
+  final Color color;
 
-  TodoList({this.item, this.dao});
+  TodoList({this.item, this.dao, this.color});
 
   @override
   _TodoListState createState() => _TodoListState();
@@ -75,7 +76,7 @@ class _TodoListState extends State<TodoList> {
                     icon: Icon(
                       Icons.star,
                       size: 25.5,
-                      color: Colors.amber,
+                      color: widget.color,
                     ),
                     onPressed: () {
                       widget.dao.updateTaskImportance(

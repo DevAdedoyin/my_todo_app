@@ -94,6 +94,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       return TodoList(
                         item: item,
                         dao: _tasks,
+                        color: _args[1],
                       );
                     }, childCount: snapshot.data.length))
                   ],
