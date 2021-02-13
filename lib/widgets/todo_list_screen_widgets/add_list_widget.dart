@@ -100,7 +100,8 @@ class _AddListWidgetState extends State<AddListWidget> {
                             date: Value(stripDate),
                             time: Value(time),
                             title: Value(_listTitleController.text),
-                            catid: Value(widget.catId)));
+                            catid: Value(widget.catId),
+                            frequency: Value(days)));
                         print(time +
                             ' ' +
                             _selectedDate.toString() +
@@ -288,11 +289,6 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           size: 27,
                                         ),
                                         onPressed: () {
-                                          // insertTask.insertTask(
-                                          //     TasksCompanion.insert(
-                                          //         frequency: Value(
-                                          //             _selectedDay.join(","))));
-
                                           setState(() {
                                             _selectedDayOfTheWeek =
                                                 _selectedDay.toSet().toList();
