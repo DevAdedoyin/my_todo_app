@@ -114,6 +114,12 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
         .write(TasksCompanion.insert(isCompleted: Value(task.isCompleted)));
   }
 
+  //Updates Task Importance
+  Future updateTaskImportance(Task task) {
+    return (update(tasks)..where((t) => t.taskid.equals(task.taskid)))
+        .write(TasksCompanion.insert(isImportant: Value(task.isImportant)));
+  }
+
   Future insertTask(Insertable<Task> task) => into(tasks).insert(task);
   Future updateTask(Insertable<Task> task) => update(tasks).replace(task);
   Future deleteTask(Insertable<Task> task) => delete(tasks).delete(task);
