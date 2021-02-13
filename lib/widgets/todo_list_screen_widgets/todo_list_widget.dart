@@ -54,7 +54,10 @@ class _TodoListState extends State<TodoList> {
                           widget.item.copyWith(isCompleted: true));
                     },
                   ),
-            title: Text(widget.item.title),
+            title: Text(
+              widget.item.title,
+              style: TextStyle(fontSize: 17),
+            ),
             subtitle: Row(
               children: <Widget>[
                 Icon(
