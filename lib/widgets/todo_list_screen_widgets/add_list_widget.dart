@@ -216,15 +216,18 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                       stateSetter(() {
                                                         _days[i] = isSelected;
                                                         if (_days[i] &
-                                                            !_days[0])
+                                                            !_days[0]) {
                                                           _selectedDay.add(
                                                               _daysOfTheWeek[
                                                                   i]);
-                                                        else if (_days[i] &
+                                                        } else if (_days[i] &
                                                             _days[0]) {
                                                           _days.forEach((x, _) {
                                                             _days[x] = true;
                                                           });
+
+                                                          _selectedDay.addAll(
+                                                              _daysOfTheWeek);
                                                         } else if (!_days[i] &
                                                             _days[0]) {
                                                           _days[0] = false;
@@ -243,6 +246,8 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                         //   });
                                                         print("Selected day" +
                                                             _selectedDay
+                                                                .toSet()
+                                                                .toList()
                                                                 .toString());
                                                       });
                                                     },
@@ -286,7 +291,9 @@ class _AddListWidgetState extends State<AddListWidget> {
 
                                           setState(() {
                                             _selectedDayOfTheWeek =
-                                                _selectedDay;
+                                                _selectedDay.toSet().toList();
+                                            _selectedDayOfTheWeek
+                                                .remove('Daily');
                                             days = _selectedDayOfTheWeek
                                                 .join(', ');
                                           });
