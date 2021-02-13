@@ -350,7 +350,7 @@ class Task extends DataClass implements Insertable<Task> {
   final int catid;
   Task(
       {@required this.taskid,
-      @required this.title,
+      this.title,
       this.time,
       this.date,
       this.frequency,
@@ -577,7 +577,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   });
   TasksCompanion.insert({
     this.taskid = const Value.absent(),
-    @required String title,
+    this.title = const Value.absent(),
     this.time = const Value.absent(),
     this.date = const Value.absent(),
     this.frequency = const Value.absent(),
@@ -586,7 +586,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.catid = const Value.absent(),
-  }) : title = Value(title);
+  });
   static Insertable<Task> custom({
     Expression<int> taskid,
     Expression<String> title,
@@ -710,7 +710,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get title => _title ??= _constructTitle();
   GeneratedTextColumn _constructTitle() {
-    return GeneratedTextColumn('title', $tableName, false,
+    return GeneratedTextColumn('title', $tableName, true,
         minTextLength: 3, maxTextLength: 30, $customConstraints: 'UNIQUE');
   }
 
@@ -827,8 +827,6 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     if (data.containsKey('title')) {
       context.handle(
           _titleMeta, title.isAcceptableOrUnknown(data['title'], _titleMeta));
-    } else if (isInserting) {
-      context.missing(_titleMeta);
     }
     if (data.containsKey('time')) {
       context.handle(

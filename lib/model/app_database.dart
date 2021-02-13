@@ -24,8 +24,10 @@ class Categories extends Table {
 
 class Tasks extends Table {
   IntColumn get taskid => integer().autoIncrement()();
-  TextColumn get title =>
-      text().withLength(min: 3, max: 30).customConstraint('UNIQUE')();
+  TextColumn get title => text()
+      .nullable()
+      .withLength(min: 3, max: 30)
+      .customConstraint('UNIQUE')();
   TextColumn get time => text().nullable()();
   TextColumn get date => text().nullable()();
   TextColumn get frequency => text().nullable().withLength(min: 1, max: 100)();
@@ -104,6 +106,12 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
   Future<int> numberOfTaskInACategory(int index) async {
     int length = await (getSpecificTask(index)).length;
     return length;
+  }
+
+  //Updates Task Completeness
+  Future updateCompleteness(Task task) {
+    return (update(tasks)..where((t) => t.taskid.equals(task.taskid)))
+        .write(TasksCompanion.insert(isCompleted: Value(task.isCompleted)));
   }
 
   Future insertTask(Insertable<Task> task) => into(tasks).insert(task);
