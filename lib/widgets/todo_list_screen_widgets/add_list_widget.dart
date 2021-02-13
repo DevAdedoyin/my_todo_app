@@ -257,6 +257,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                         icon: Icon(
                                           Icons.cancel,
                                           color: Colors.red,
+                                          size: 27,
                                         ),
                                         onPressed: () {
                                           return Navigator.of(context).pop();
@@ -268,6 +269,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                         icon: Icon(
                                           Icons.check_circle,
                                           color: Colors.green,
+                                          size: 27,
                                         ),
                                         onPressed: () {
                                           // Navigator.of(context).pop();
