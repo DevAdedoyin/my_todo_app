@@ -71,10 +71,15 @@ class _TodoListState extends State<TodoList> {
                 SizedBox(
                   width: 8,
                 ),
-                Icon(
-                  Icons.repeat,
-                  size: 15,
-                ),
+                widget.item.frequency == null
+                    ? Icon(
+                        Icons.repeat,
+                        size: 15,
+                      )
+                    : Icon(
+                        Icons.alarm_on,
+                        size: 15,
+                      ),
               ],
             ),
             trailing: widget.item.isImportant
