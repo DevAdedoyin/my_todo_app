@@ -70,13 +70,28 @@ class _TodoListState extends State<TodoList> {
                 ),
               ],
             ),
-            trailing: IconButton(
-              icon: Icon(
-                Icons.star_border_rounded,
-                size: 25,
-              ),
-              onPressed: () {},
-            )),
+            trailing: widget.item.isImportant
+                ? IconButton(
+                    icon: Icon(
+                      Icons.star,
+                      size: 25.5,
+                      color: Colors.amber,
+                    ),
+                    onPressed: () {
+                      widget.dao.updateTaskImportance(
+                          widget.item.copyWith(isImportant: false));
+                    },
+                  )
+                : IconButton(
+                    icon: Icon(
+                      Icons.star_border_rounded,
+                      size: 25.5,
+                    ),
+                    onPressed: () {
+                      widget.dao.updateTaskImportance(
+                          widget.item.copyWith(isImportant: true));
+                    },
+                  )),
       ),
     );
   }
