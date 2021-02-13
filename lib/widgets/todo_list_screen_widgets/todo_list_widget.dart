@@ -62,9 +62,12 @@ class _TodoListState extends State<TodoList> {
                   size: 15,
                 ),
                 SizedBox(
-                  width: 5,
+                  width: 8,
                 ),
                 Text(widget.item.date),
+                SizedBox(
+                  width: 8,
+                ),
                 Icon(
                   Icons.repeat,
                   size: 15,
