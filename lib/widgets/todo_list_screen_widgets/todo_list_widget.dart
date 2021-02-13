@@ -34,7 +34,7 @@ class _TodoListState extends State<TodoList> {
                     icon: Icon(
                       Icons.check_circle_outline_outlined,
                       size: 30,
-                      color: Colors.green,
+                      color: widget.color,
                     ),
                     splashRadius: 22,
                     onPressed: () {
@@ -46,7 +46,6 @@ class _TodoListState extends State<TodoList> {
                     icon: Icon(
                       Icons.lens_outlined,
                       size: 30,
-                      color: Colors.red,
                     ),
                     splashRadius: 22,
                     onPressed: () {
