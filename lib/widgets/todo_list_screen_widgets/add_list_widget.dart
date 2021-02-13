@@ -32,6 +32,8 @@ class _AddListWidgetState extends State<AddListWidget> {
     'Saturday'
   ];
 
+  List<String> _selectedDayOfTheWeek = [];
+
   Map<int, bool> _days = {
     0: false,
     1: false,
@@ -44,6 +46,7 @@ class _AddListWidgetState extends State<AddListWidget> {
   };
 
   List<String> _selectedDay = [];
+  String days = '';
 
   @override
   void initState() {
@@ -181,7 +184,9 @@ class _AddListWidgetState extends State<AddListWidget> {
                         Container(
                             margin: EdgeInsets.only(right: 7),
                             child: Icon(Icons.repeat)),
-                        Text('Repeat'),
+                        _selectedDayOfTheWeek.isEmpty
+                            ? Text('Repeat')
+                            : Text('Repeat on: $days')
                       ],
                     ),
                     onPressed: () {
@@ -236,7 +241,9 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                         //   _days.forEach((x, _) {
                                                         //     _days[x] = false;
                                                         //   });
-                                                        print(_selectedDay);
+                                                        print("Selected day" +
+                                                            _selectedDay
+                                                                .toString());
                                                       });
                                                     },
                                                     value: _days[i],
@@ -272,7 +279,21 @@ class _AddListWidgetState extends State<AddListWidget> {
                                           size: 27,
                                         ),
                                         onPressed: () {
-                                          // Navigator.of(context).pop();
+                                          // insertTask.insertTask(
+                                          //     TasksCompanion.insert(
+                                          //         frequency: Value(
+                                          //             _selectedDay.join(","))));
+
+                                          setState(() {
+                                            _selectedDayOfTheWeek =
+                                                _selectedDay;
+                                            days = _selectedDayOfTheWeek
+                                                .join(', ');
+                                          });
+
+                                          print("Selected::: " +
+                                              _selectedDayOfTheWeek.toString());
+                                          Navigator.of(context).pop();
                                         },
                                         splashColor: Colors.greenAccent,
                                         splashRadius: 20,
