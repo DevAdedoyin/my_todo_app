@@ -28,14 +28,31 @@ class _TodoListState extends State<TodoList> {
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
         shadowColor: Colors.black,
         child: ListTile(
-            leading: IconButton(
-              icon: Icon(
-                Icons.lens_outlined,
-                size: 30,
-              ),
-              splashRadius: 22,
-              onPressed: () {},
-            ),
+            leading: widget.item.isCompleted
+                ? IconButton(
+                    icon: Icon(
+                      Icons.check_circle_outline_outlined,
+                      size: 30,
+                      color: Colors.green,
+                    ),
+                    splashRadius: 22,
+                    onPressed: () {
+                      widget.dao.updateCompleteness(
+                          widget.item.copyWith(isCompleted: false));
+                    },
+                  )
+                : IconButton(
+                    icon: Icon(
+                      Icons.lens_outlined,
+                      size: 30,
+                      color: Colors.red,
+                    ),
+                    splashRadius: 22,
+                    onPressed: () {
+                      widget.dao.updateCompleteness(
+                          widget.item.copyWith(isCompleted: true));
+                    },
+                  ),
             title: Text(widget.item.title),
             subtitle: Row(
               children: <Widget>[
