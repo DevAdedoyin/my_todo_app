@@ -124,7 +124,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     behavior: HitTestBehavior.opaque,
                   ));
         },
-        backgroundColor: Theme.of(context).primaryColor,
+        backgroundColor: _args[1],
         splashColor: Colors.white54,
         elevation: 5,
         child: Icon(
