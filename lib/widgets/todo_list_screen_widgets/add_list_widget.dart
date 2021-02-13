@@ -45,6 +45,8 @@ class _AddListWidgetState extends State<AddListWidget> {
     7: false
   };
 
+  // Map<Map<int, bool> mapDay, List<String>>
+
   List<String> _selectedDay = [];
   String days = '';
 
@@ -215,35 +217,37 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                     onChanged: (isSelected) {
                                                       stateSetter(() {
                                                         _days[i] = isSelected;
+                                                        // If Daily is false and a particular day of the week is true, then the selected day will be added
                                                         if (_days[i] &
                                                             !_days[0]) {
                                                           _selectedDay.add(
                                                               _daysOfTheWeek[
                                                                   i]);
-                                                        } else if (_days[i] &
+                                                        }
+                                                        // As long Daily is true, then all days of the week will be set to true
+                                                        else if (_days[i] &
                                                             _days[0]) {
                                                           _days.forEach((x, _) {
                                                             _days[x] = true;
                                                           });
-
                                                           _selectedDay.addAll(
                                                               _daysOfTheWeek);
-                                                        } else if (!_days[i] &
+                                                        }
+                                                        // if a particular day is set to false, then Daily will also be set to false
+                                                        else if (!_days[i] &
                                                             _days[0]) {
                                                           _days[0] = false;
+                                                          _selectedDay
+                                                              .removeWhere(
+                                                                  (val) {
+                                                            return days
+                                                                .contains(val);
+                                                          });
                                                         } else {
                                                           _selectedDay.remove(
                                                               _daysOfTheWeek[
                                                                   i]);
                                                         }
-                                                        // if (_days[0])
-                                                        //   _days.forEach((x, _) {
-                                                        //     _days[x] = true;
-                                                        //   });
-                                                        // else
-                                                        //   _days.forEach((x, _) {
-                                                        //     _days[x] = false;
-                                                        //   });
                                                         print("Selected day" +
                                                             _selectedDay
                                                                 .toSet()
@@ -261,7 +265,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                             elevation: 10,
                                           );
                                         },
-                                        itemCount: _days.length,
+                                        itemCount: _daysOfTheWeek.length,
                                       ),
                                     ),
                                     actions: [
