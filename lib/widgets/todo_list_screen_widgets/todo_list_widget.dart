@@ -21,7 +21,8 @@ class _TodoListState extends State<TodoList> {
 
     return GestureDetector(
       onTap: () {
-        return Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName);
+        return Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName,
+            arguments: [widget.item, widget.dao, widget.color]);
       },
       child: Card(
         margin: EdgeInsets.all(7),

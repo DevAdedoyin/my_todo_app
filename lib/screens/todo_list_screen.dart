@@ -30,7 +30,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 return CustomScrollView(
                   slivers: [
                     SliverAppBar(
-                      // automaticallyImplyLeading: true,
                       backgroundColor: _args[1],
                       floating: true,
                       pinned: true,
@@ -85,11 +84,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     ),
                     SliverList(
                         delegate: SliverChildBuilderDelegate((_, index) {
-                      // final newitem = snapshot.data.where((id) {
-                      //   return id.categorie.id == _args[2];
-                      // }).toList();
-                      // final item = newitem[index];
-                      // print('Check: ' + );
                       final item = snapshot.data[index];
                       return TodoList(
                         item: item,
@@ -108,7 +102,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
           ),
         ),
       ),
-      //  TodoList(),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
           return showModalBottomSheet(
