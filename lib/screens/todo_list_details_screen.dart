@@ -17,7 +17,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
       appBar: AppBar(
         title: Text('Details'),
       ),
-      body: ToDoDetailsWidget(),
+      body: SafeArea(child: Center(child: Text('Testing'))),
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 40,

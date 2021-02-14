@@ -42,7 +42,7 @@ class MainApp extends StatelessWidget {
           // CategoryScreen(),
           routes: {
             TodoListScreen.routeName: (ctx) => TodoListScreen(),
-            ToDoListDetailsScreen.routeName: (ctx) => ToDoDetailsWidget()
+            ToDoListDetailsScreen.routeName: (ctx) => ToDoListDetailsScreen()
           }),
     );
   }
