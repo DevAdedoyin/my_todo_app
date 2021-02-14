@@ -34,6 +34,39 @@ class _TodoListScreenState extends State<TodoListScreen> {
                       floating: true,
                       pinned: true,
                       expandedHeight: 120,
+                      actions: [
+                        PopupMenuButton(
+                            icon: Icon(
+                              Icons.more_vert_outlined,
+                              color: Colors.white,
+                            ),
+                            itemBuilder: (_) => [
+                                  PopupMenuItem(
+                                    child: Row(children: <Widget>[
+                                      Icon(Icons.color_lens),
+                                      Text('Rename list')
+                                    ]),
+                                  ),
+                                  PopupMenuItem(
+                                    child: Row(children: <Widget>[
+                                      Icon(Icons.sort),
+                                      Text('Sort by')
+                                    ]),
+                                  ),
+                                  PopupMenuItem(
+                                    child: Row(children: <Widget>[
+                                      Icon(Icons.color_lens_outlined),
+                                      Text('Change Theme')
+                                    ]),
+                                  ),
+                                  PopupMenuItem(
+                                    child: Row(children: <Widget>[
+                                      Icon(Icons.delete),
+                                      Text('Delete list')
+                                    ]),
+                                  ),
+                                ])
+                      ],
                       flexibleSpace: Row(
                         children: [
                           Container(
@@ -48,37 +81,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             ),
                           ),
                           Spacer(),
-                          PopupMenuButton(
-                              icon: Icon(
-                                Icons.more_vert_outlined,
-                                color: Colors.white,
-                              ),
-                              itemBuilder: (_) => [
-                                    PopupMenuItem(
-                                      child: Row(children: <Widget>[
-                                        Icon(Icons.color_lens),
-                                        Text('Rename list')
-                                      ]),
-                                    ),
-                                    PopupMenuItem(
-                                      child: Row(children: <Widget>[
-                                        Icon(Icons.sort),
-                                        Text('Sort by')
-                                      ]),
-                                    ),
-                                    PopupMenuItem(
-                                      child: Row(children: <Widget>[
-                                        Icon(Icons.color_lens_outlined),
-                                        Text('Change Theme')
-                                      ]),
-                                    ),
-                                    PopupMenuItem(
-                                      child: Row(children: <Widget>[
-                                        Icon(Icons.delete),
-                                        Text('Delete list')
-                                      ]),
-                                    ),
-                                  ])
                         ],
                       ),
                     ),
