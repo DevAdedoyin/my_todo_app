@@ -26,18 +26,30 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   title: Text('Task Name'),
                   pinned: true,
                   floating: true,
-                  expandedHeight: 100,
+                  expandedHeight: 120,
                   flexibleSpace: FlexibleSpaceBar(
+                    centerTitle: false,
                     title: Row(
                       children: [
                         IconButton(
-                          icon: Icon(Icons.lens_rounded),
+                          icon: Icon(
+                            Icons.lens_outlined,
+                            size: 13,
+                            color: Colors.white,
+                          ),
                           onPressed: () {},
                         ),
-                        Text('Task Title'),
+                        Text(
+                          'Task Title',
+                          style: TextStyle(fontSize: 17),
+                        ),
                         Spacer(),
                         IconButton(
-                          icon: Icon(Icons.star_border_rounded),
+                          icon: Icon(
+                            Icons.star_border_rounded,
+                            size: 14,
+                            color: Colors.white,
+                          ),
                           onPressed: () {},
                         )
                       ],
