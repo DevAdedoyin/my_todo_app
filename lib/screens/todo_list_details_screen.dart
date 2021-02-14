@@ -26,33 +26,37 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   title: Text('Task Name'),
                   pinned: true,
                   floating: true,
-                  expandedHeight: 120,
+                  expandedHeight: 100,
                   flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: false,
-                    title: Row(
-                      children: [
-                        IconButton(
-                          icon: Icon(
-                            Icons.lens_outlined,
-                            size: 13,
-                            color: Colors.white,
+                    centerTitle: true,
+                    title: Container(
+                      height: 20,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: [
+                          IconButton(
+                            icon: Icon(
+                              Icons.lens_outlined,
+                              size: 13,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
                           ),
-                          onPressed: () {},
-                        ),
-                        Text(
-                          'Task Title',
-                          style: TextStyle(fontSize: 17),
-                        ),
-                        Spacer(),
-                        IconButton(
-                          icon: Icon(
-                            Icons.star_border_rounded,
-                            size: 14,
-                            color: Colors.white,
+                          Text(
+                            'Task Title',
+                            style: TextStyle(fontSize: 17),
                           ),
-                          onPressed: () {},
-                        )
-                      ],
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.star_border_rounded,
+                              size: 14,
+                              color: Colors.white,
+                            ),
+                            onPressed: () {},
+                          )
+                        ],
+                      ),
                     ),
                   )),
               // SliverLayoutBuilder(
