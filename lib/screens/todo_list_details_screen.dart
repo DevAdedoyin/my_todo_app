@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_details.dart';
 import 'package:provider/provider.dart';
@@ -13,17 +14,20 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
-    return Scaffold(
-      // appBar: AppBar(
-      //   title: Text('Details'),
+    final _args = ModalRoute.of(context).settings.arguments as List;
 
-      // ),
+    final Task taskItem = _args[0];
+    final TaskDao taskDao = _args[1];
+    int catId = taskItem.catid;
+
+    return Scaffold(
       body: SafeArea(
         child: Container(
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                  title: Text('Task Name'),
+                  backgroundColor: _args[2],
+                  title: Text(taskItem.),
                   pinned: true,
                   floating: true,
                   expandedHeight: 100,
@@ -69,7 +73,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
           ),
         ),
       ),
-
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 40,
