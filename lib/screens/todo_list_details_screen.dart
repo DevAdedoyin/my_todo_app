@@ -23,25 +23,32 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                leading: Text('Category Name'),
-                title: Text('Task Name'),
-                pinned: true,
-                flexibleSpace: Row(
-                  children: [
-                    IconButton(
-                      icon: Icon(Icons.lens_rounded),
-                      onPressed: () {},
+                  title: Text('Task Name'),
+                  pinned: true,
+                  floating: true,
+                  expandedHeight: 100,
+                  flexibleSpace: FlexibleSpaceBar(
+                    title: Row(
+                      children: [
+                        IconButton(
+                          icon: Icon(Icons.lens_rounded),
+                          onPressed: () {},
+                        ),
+                        Text('Task Title'),
+                        Spacer(),
+                        IconButton(
+                          icon: Icon(Icons.star_border_rounded),
+                          onPressed: () {},
+                        )
+                      ],
                     ),
-                    Text('Task Title'),
-                    Spacer(),
-                    IconButton(
-                      icon: Icon(Icons.star_border_rounded),
-                      onPressed: () {},
-                    )
-                  ],
-                ),
-              ),
-              ToDoDetailsWidget(),
+                  )),
+              // SliverLayoutBuilder(
+              //   builder: (context, constraint) {
+              //     constraint.
+              //     return ToDoDetailsWidget();
+              //   },
+              // )
             ],
           ),
         ),
