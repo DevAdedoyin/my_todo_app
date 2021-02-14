@@ -80,7 +80,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                               // collapseMode: CollapseMode.pin,
                             ),
                           ),
-                          Spacer(),
                         ],
                       ),
                     ),

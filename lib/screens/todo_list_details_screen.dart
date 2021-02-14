@@ -14,11 +14,18 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Details'),
-        flexibleSpace: Text("Space Testing"),
-      ),
-      body: ToDoDetailsWidget(),
+
+      // appBar: AppBar(
+      //   title: Text('Details'),
+        
+      // ),
+      body: SafeArea(child: Container(child: CustomScrollView(slivers: [
+        SliverAppBar(leading: Text('Category Name'), title: Text('Task Name'), pinned: true, flexibleSpace: Row(children: [
+          IconButton(icon: Icons.lens_rounded,), Text('Task Title'), Spacer(), IconButton(icon: Icons.star_border_rounded,)
+        ],),)
+      ],),),),  
+      
+      ToDoDetailsWidget(),
       bottomNavigationBar: BottomAppBar(
         child: Container(
           height: 40,
