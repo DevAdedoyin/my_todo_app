@@ -15,6 +15,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
     final _args = ModalRoute.of(context).settings.arguments as List;
+    final catDao = Provider.of<CategorieDao>(context);
 
     final Task taskItem = _args[0];
     final TaskDao taskDao = _args[1];
@@ -27,7 +28,12 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
             slivers: [
               SliverAppBar(
                   backgroundColor: _args[2],
-                  title: Text(taskItem.),
+                  title: FutureBuilder<Categorie>(
+                    future: catDao.getCategory(catId),
+                    builder: (_, snapshot) {
+                      return Text(snapshot.data.categoryTitle);
+                    },
+                  ),
                   pinned: true,
                   floating: true,
                   expandedHeight: 100,
