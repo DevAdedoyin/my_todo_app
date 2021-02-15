@@ -349,7 +349,7 @@ class Task extends DataClass implements Insertable<Task> {
   final bool isImportant;
   final int catid;
   Task(
-      {@required this.taskid,
+      {this.taskid,
       this.title,
       this.time,
       this.date,
@@ -357,7 +357,7 @@ class Task extends DataClass implements Insertable<Task> {
       this.note,
       @required this.isCompleted,
       this.steps,
-      @required this.isImportant,
+      this.isImportant,
       this.catid});
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -701,7 +701,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedIntColumn get taskid => _taskid ??= _constructTaskid();
   GeneratedIntColumn _constructTaskid() {
-    return GeneratedIntColumn('taskid', $tableName, false,
+    return GeneratedIntColumn('taskid', $tableName, true,
         hasAutoIncrement: true, declaredAsPrimaryKey: true);
   }
 
@@ -783,7 +783,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedBoolColumn get isImportant =>
       _isImportant ??= _constructIsImportant();
   GeneratedBoolColumn _constructIsImportant() {
-    return GeneratedBoolColumn('is_important', $tableName, false,
+    return GeneratedBoolColumn('is_important', $tableName, true,
         defaultValue: const Constant(false));
   }
 

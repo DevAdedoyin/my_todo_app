@@ -34,7 +34,8 @@ class Tasks extends Table {
   TextColumn get note => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
   TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
-  BoolColumn get isImportant => boolean().withDefault(const Constant(false))();
+  BoolColumn get isImportant =>
+      boolean().nullable().withDefault(const Constant(false))();
   IntColumn get catid =>
       integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 }
