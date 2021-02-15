@@ -32,7 +32,8 @@ class Tasks extends Table {
   TextColumn get date => text().nullable()();
   TextColumn get frequency => text().nullable().withLength(min: 1, max: 100)();
   TextColumn get note => text().nullable().withLength(min: 0, max: 150)();
-  BoolColumn get isCompleted => boolean().withDefault(const Constant(false))();
+  BoolColumn get isCompleted =>
+      boolean().nullable().withDefault(const Constant(false))();
   TextColumn get steps => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isImportant =>
       boolean().nullable().withDefault(const Constant(false))();

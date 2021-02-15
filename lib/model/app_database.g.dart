@@ -355,7 +355,7 @@ class Task extends DataClass implements Insertable<Task> {
       this.date,
       this.frequency,
       this.note,
-      @required this.isCompleted,
+      this.isCompleted,
       this.steps,
       this.isImportant,
       this.catid});
@@ -763,7 +763,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   GeneratedBoolColumn get isCompleted =>
       _isCompleted ??= _constructIsCompleted();
   GeneratedBoolColumn _constructIsCompleted() {
-    return GeneratedBoolColumn('is_completed', $tableName, false,
+    return GeneratedBoolColumn('is_completed', $tableName, true,
         defaultValue: const Constant(false));
   }
 
