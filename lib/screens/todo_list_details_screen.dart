@@ -44,17 +44,27 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: [
-                          IconButton(
-                            icon: Icon(
-                              Icons.lens_outlined,
-                              size: 13,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {},
-                          ),
+                          taskItem.isCompleted
+                              ? IconButton(
+                                  icon: Icon(
+                                    Icons.check_circle,
+                                    size: 13,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {},
+                                )
+                              : IconButton(
+                                  icon: Icon(
+                                    Icons.lens_outlined,
+                                    size: 13,
+                                    color: Colors.white,
+                                  ),
+                                  onPressed: () {},
+                                ),
                           Text(
                             taskItem.title,
-                            style: TextStyle(fontSize: 15),
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
                           IconButton(

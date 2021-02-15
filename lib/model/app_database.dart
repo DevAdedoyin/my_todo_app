@@ -23,7 +23,7 @@ class Categories extends Table {
 }
 
 class Tasks extends Table {
-  IntColumn get taskid => integer().autoIncrement()();
+  IntColumn get taskid => integer().nullable().autoIncrement()();
   TextColumn get title => text()
       .nullable()
       .withLength(min: 3, max: 30)
