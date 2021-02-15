@@ -53,8 +53,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                             onPressed: () {},
                           ),
                           Text(
-                            'Task Title',
-                            style: TextStyle(fontSize: 17),
+                            taskItem.title,
+                            style: TextStyle(fontSize: 15),
                           ),
                           Spacer(),
                           IconButton(

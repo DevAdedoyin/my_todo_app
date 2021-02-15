@@ -18,6 +18,8 @@ class _TodoListState extends State<TodoList> {
   @override
   Widget build(BuildContext context) {
     // final todo = Provider.of<ToDoProvider>(context);
+    // final String taskTitle = widget.item.title;
+    // final String catTitle = widget.item.catid;
 
     return GestureDetector(
       onTap: () {
