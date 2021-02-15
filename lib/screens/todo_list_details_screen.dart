@@ -53,7 +53,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   ),
                                   onPressed: () {
                                     taskDao.updateCompleteness(
-                                        Task(isCompleted: false));
+                                        Task(taskid: taskItem.taskid)
+                                            .copyWith(isCompleted: false));
                                   },
                                 )
                               : IconButton(
@@ -64,7 +65,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   ),
                                   onPressed: () {
                                     taskDao.updateCompleteness(
-                                        Task(isCompleted: true));
+                                        Task(taskid: taskItem.taskid)
+                                            .copyWith(isCompleted: true));
                                   },
                                 ),
                           Text(
