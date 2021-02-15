@@ -51,7 +51,10 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                     size: 13,
                                     color: Colors.white,
                                   ),
-                                  onPressed: () {},
+                                  onPressed: () {
+                                    taskDao.updateCompleteness(
+                                        Task(isCompleted: false));
+                                  },
                                 )
                               : IconButton(
                                   icon: Icon(
