@@ -141,6 +141,15 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
         .watch();
   }
 
+  Future<Categorie> getCategory(int catId) async {
+    final cat = (select(categories)
+          ..where((cat) {
+            return cat.id.equals(catId);
+          }))
+        .getSingle();
+    return cat;
+  }
+
 //returns the amount of categories in the database
   Future<int> countCategories() async {
     return (await select(categories).get()).length;
