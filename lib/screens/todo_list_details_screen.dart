@@ -42,31 +42,35 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     title: Container(
-                      height: 20,
-                      child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        children: [
-                          CompletenessIcon(
-                            taskId: catId,
-                            color: Colors.white,
-                            task: taskItem,
-                            size: 15,
-                          ),
-                          Text(
-                            taskItem.title,
-                            style: TextStyle(
-                                fontSize: 15, fontWeight: FontWeight.bold),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            icon: Icon(
-                              Icons.star_border_rounded,
-                              size: 14,
+                      alignment: Alignment.bottomCenter,
+                      height: 30,
+                      child: Expanded(
+                        child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            CompletenessIcon(
+                              taskId: catId,
                               color: Colors.white,
+                              task: taskItem,
+                              size: 15,
                             ),
-                            onPressed: () {},
-                          )
-                        ],
+                            Text(
+                              taskItem.title,
+                              style: TextStyle(
+                                  fontSize: 15, fontWeight: FontWeight.bold),
+                            ),
+                            Spacer(),
+                            IconButton(
+                              icon: Icon(
+                                Icons.star_border_rounded,
+                                size: 14,
+                                color: Colors.white,
+                              ),
+                              onPressed: () {},
+                            )
+                          ],
+                        ),
                       ),
                     ),
                   )),
