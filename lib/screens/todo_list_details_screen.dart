@@ -3,6 +3,7 @@ import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_details.dart';
 import 'package:my_todo_app/widgets/todo_list_screen_widgets/completed_icon.dart';
+import 'package:my_todo_app/widgets/todo_list_screen_widgets/important_icon.dart';
 import 'package:provider/provider.dart';
 
 class ToDoListDetailsScreen extends StatefulWidget {
@@ -61,13 +62,11 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   fontSize: 15, fontWeight: FontWeight.bold),
                             ),
                             Spacer(),
-                            IconButton(
-                              icon: Icon(
-                                Icons.star_border_rounded,
-                                size: 14,
-                                color: Colors.white,
-                              ),
-                              onPressed: () {},
+                            ImportanceIcon(
+                              taskId: catId,
+                              color: Colors.white,
+                              task: taskItem,
+                              size: 15,
                             )
                           ],
                         ),
