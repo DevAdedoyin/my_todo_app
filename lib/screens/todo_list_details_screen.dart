@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_details.dart';
+import 'package:my_todo_app/widgets/todo_list_screen_widgets/completed_icon.dart';
 import 'package:provider/provider.dart';
 
 class ToDoListDetailsScreen extends StatefulWidget {
@@ -45,47 +46,9 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: [
-                          StreamBuilder<Task>(
-                            stream: _taskDao.getTask(taskItem.taskid),
-                            builder: (_, snapshot) {
-                              if (snapshot.hasData) {
-                                return snapshot.data.isCompleted
-                                    ? IconButton(
-                                        icon: Icon(
-                                          Icons.check_circle,
-                                          size: 13,
-                                          color: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          print('For True: ' +
-                                              snapshot.data.isCompleted
-                                                  .toString());
-
-                                          _taskDao.updateCompleteness(Task(
-                                                  taskid: snapshot.data.taskid)
-                                              .copyWith(isCompleted: false));
-                                        },
-                                      )
-                                    : IconButton(
-                                        icon: Icon(
-                                          Icons.lens_outlined,
-                                          size: 13,
-                                          color: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          print('For False: ' +
-                                              snapshot.data.isCompleted
-                                                  .toString());
-
-                                          _taskDao.updateCompleteness(
-                                              Task(taskid: snapshot.data.taskid)
-                                                  .copyWith(isCompleted: true));
-                                        },
-                                      );
-                              } else {
-                                return Text('No Data');
-                              }
-                            },
+                          CompletenessIcon(
+                            taskId: catId,
+                            color: Colors.white,
                           ),
                           Text(
                             taskItem.title,
