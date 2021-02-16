@@ -49,6 +49,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                           CompletenessIcon(
                             taskId: catId,
                             color: Colors.white,
+                            task: taskItem,
                           ),
                           Text(
                             taskItem.title,

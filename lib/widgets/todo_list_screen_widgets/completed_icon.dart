@@ -5,8 +5,9 @@ import 'package:provider/provider.dart';
 class CompletenessIcon extends StatefulWidget {
   final int taskId;
   final Color color;
+  final Task task;
 
-  CompletenessIcon({this.taskId, this.color});
+  CompletenessIcon({this.taskId, this.color, this.task});
 
   @override
   _CompletenessIconState createState() => _CompletenessIconState();
@@ -21,26 +22,26 @@ class _CompletenessIconState extends State<CompletenessIcon> {
       stream: task.getTask(widget.taskId),
       builder: (_, snapshot) {
         if (snapshot.hasData) {
-          return snapshot.data.isImportant
+          return snapshot.data.isCompleted
               ? IconButton(
                   icon: Icon(
-                    Icons.star,
+                    Icons.check_circle_rounded,
                     size: 25.5,
                     color: widget.color,
                   ),
                   onPressed: () {
-                    task.updateTaskImportance(
-                        snapshot.data.copyWith(isImportant: false));
+                    task.updateCompleteness(
+                        widget.task.copyWith(isCompleted: false));
                   },
                 )
               : IconButton(
                   icon: Icon(
-                    Icons.star_border_rounded,
+                    Icons.lens_outlined,
                     size: 25.5,
                   ),
                   onPressed: () {
-                    task.updateTaskImportance(
-                        snapshot.data.copyWith(isImportant: true));
+                    task.updateCompleteness(
+                        widget.task.copyWith(isCompleted: true));
                   },
                 );
         } else

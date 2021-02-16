@@ -36,6 +36,7 @@ class _TodoListState extends State<TodoList> {
             leading: CompletenessIcon(
               taskId: widget.item.catid,
               color: widget.color,
+              task: widget.item,
             ),
             title: Text(
               widget.item.title,
