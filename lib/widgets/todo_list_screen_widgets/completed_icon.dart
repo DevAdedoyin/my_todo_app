@@ -1,3 +1,5 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:provider/provider.dart';
@@ -6,8 +8,9 @@ class CompletenessIcon extends StatefulWidget {
   final int taskId;
   final Color color;
   final Task task;
+  final double size;
 
-  CompletenessIcon({this.taskId, this.color, this.task});
+  CompletenessIcon({this.taskId, this.color, this.task, this.size});
 
   @override
   _CompletenessIconState createState() => _CompletenessIconState();
@@ -26,7 +29,7 @@ class _CompletenessIconState extends State<CompletenessIcon> {
               ? IconButton(
                   icon: Icon(
                     Icons.check_circle_rounded,
-                    size: 25.5,
+                    size: widget.size,
                     color: widget.color,
                   ),
                   onPressed: () {
@@ -37,7 +40,7 @@ class _CompletenessIconState extends State<CompletenessIcon> {
               : IconButton(
                   icon: Icon(
                     Icons.lens_outlined,
-                    size: 25.5,
+                    size: widget.size,
                   ),
                   onPressed: () {
                     task.updateCompleteness(
