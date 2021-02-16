@@ -104,6 +104,11 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
     return (select(tasks)..where((val) => val.catid.equals(index))).watch();
   }
 
+  Stream<Task> getTask(int index) {
+    return (select(tasks)..where((val) => val.catid.equals(index)))
+        .watchSingle();
+  }
+
   //Gets number of task in a specific category
   Future<int> numberOfTaskInACategory(int index) async {
     int length = await (getSpecificTask(index)).length;

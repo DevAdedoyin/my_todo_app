@@ -16,9 +16,10 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     //final todoDets = Provider.of<ToDoProvider>(context);
     final _args = ModalRoute.of(context).settings.arguments as List;
     final catDao = Provider.of<CategorieDao>(context);
+    final _taskDao = Provider.of<TaskDao>(context);
 
     final Task taskItem = _args[0];
-    final TaskDao taskDao = _args[1];
+    // final TaskDao taskDao = _args[1];
     int catId = taskItem.catid;
 
     return Scaffold(
@@ -44,31 +45,48 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.baseline,
                         children: [
-                          taskItem.isCompleted
-                              ? IconButton(
-                                  icon: Icon(
-                                    Icons.check_circle,
-                                    size: 13,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    taskDao.updateCompleteness(
-                                        Task(taskid: taskItem.taskid)
-                                            .copyWith(isCompleted: false));
-                                  },
-                                )
-                              : IconButton(
-                                  icon: Icon(
-                                    Icons.lens_outlined,
-                                    size: 13,
-                                    color: Colors.white,
-                                  ),
-                                  onPressed: () {
-                                    taskDao.updateCompleteness(
-                                        Task(taskid: taskItem.taskid)
-                                            .copyWith(isCompleted: true));
-                                  },
-                                ),
+                          StreamBuilder<Task>(
+                            stream: _taskDao.getTask(taskItem.taskid),
+                            builder: (_, snapshot) {
+                              if (snapshot.hasData) {
+                                return snapshot.data.isCompleted
+                                    ? IconButton(
+                                        icon: Icon(
+                                          Icons.check_circle,
+                                          size: 13,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          print('For True: ' +
+                                              snapshot.data.isCompleted
+                                                  .toString());
+
+                                          _taskDao.updateCompleteness(Task(
+                                                  taskid: snapshot.data.taskid)
+                                              .copyWith(isCompleted: false));
+                                        },
+                                      )
+                                    : IconButton(
+                                        icon: Icon(
+                                          Icons.lens_outlined,
+                                          size: 13,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          print('For False: ' +
+                                              snapshot.data.isCompleted
+                                                  .toString());
+
+                                          _taskDao.updateCompleteness(
+                                              Task(taskid: snapshot.data.taskid)
+                                                  .copyWith(isCompleted: true));
+                                        },
+                                      );
+                              } else {
+                                return Text('No Data');
+                              }
+                            },
+                          ),
                           Text(
                             taskItem.title,
                             style: TextStyle(

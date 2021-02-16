@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
+import 'package:my_todo_app/widgets/todo_list_screen_widgets/completed_icon.dart';
 
 class TodoList extends StatefulWidget {
   final Task item;
@@ -22,16 +23,18 @@ class _TodoListState extends State<TodoList> {
     // final String catTitle = widget.item.catid;
 
     return GestureDetector(
-      onTap: () {
-        return Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName,
-            arguments: [widget.item, widget.dao, widget.color]);
-      },
-      child: Card(
-        margin: EdgeInsets.all(7),
-        elevation: 5,
-        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-        shadowColor: Colors.black,
-        child: ListTile(
+        onTap: () {
+          return Navigator.of(context).pushNamed(
+              ToDoListDetailsScreen.routeName,
+              arguments: [widget.item, widget.dao, widget.color]);
+        },
+        child: Card(
+          margin: EdgeInsets.all(7),
+          elevation: 5,
+          shape:
+              RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+          shadowColor: Colors.black,
+          child: ListTile(
             leading: widget.item.isCompleted
                 ? IconButton(
                     icon: Icon(
@@ -41,8 +44,10 @@ class _TodoListState extends State<TodoList> {
                     ),
                     splashRadius: 22,
                     onPressed: () {
-                      widget.dao.updateCompleteness(
-                          widget.item.copyWith(isCompleted: false));
+                      setState(() {
+                        widget.dao.updateCompleteness(
+                            widget.item.copyWith(isCompleted: false));
+                      });
                     },
                   )
                 : IconButton(
@@ -52,8 +57,10 @@ class _TodoListState extends State<TodoList> {
                     ),
                     splashRadius: 22,
                     onPressed: () {
-                      widget.dao.updateCompleteness(
-                          widget.item.copyWith(isCompleted: true));
+                      setState(() {
+                        widget.dao.updateCompleteness(
+                            widget.item.copyWith(isCompleted: true));
+                      });
                     },
                   ),
             title: Text(
@@ -84,29 +91,8 @@ class _TodoListState extends State<TodoList> {
                       ),
               ],
             ),
-            trailing: widget.item.isImportant
-                ? IconButton(
-                    icon: Icon(
-                      Icons.star,
-                      size: 25.5,
-                      color: widget.color,
-                    ),
-                    onPressed: () {
-                      widget.dao.updateTaskImportance(
-                          widget.item.copyWith(isImportant: false));
-                    },
-                  )
-                : IconButton(
-                    icon: Icon(
-                      Icons.star_border_rounded,
-                      size: 25.5,
-                    ),
-                    onPressed: () {
-                      widget.dao.updateTaskImportance(
-                          widget.item.copyWith(isImportant: true));
-                    },
-                  )),
-      ),
-    );
+            trailing: CompletenessIcon(),
+          ),
+        ));
   }
 }
