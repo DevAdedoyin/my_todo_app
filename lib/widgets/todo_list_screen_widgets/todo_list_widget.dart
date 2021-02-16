@@ -37,6 +37,7 @@ class _TodoListState extends State<TodoList> {
               taskId: widget.item.catid,
               color: widget.color,
               task: widget.item,
+              size: 25.5,
             ),
             title: Text(
               widget.item.title,
