@@ -50,11 +50,12 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                             taskId: catId,
                             color: Colors.white,
                             task: taskItem,
+                            size: 15,
                           ),
                           Text(
                             taskItem.title,
                             style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
+                                fontSize: 15, fontWeight: FontWeight.bold),
                           ),
                           Spacer(),
                           IconButton(

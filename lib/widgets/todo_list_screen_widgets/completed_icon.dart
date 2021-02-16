@@ -27,6 +27,7 @@ class _CompletenessIconState extends State<CompletenessIcon> {
         if (snapshot.hasData) {
           return snapshot.data.isCompleted
               ? IconButton(
+                  splashRadius: 10,
                   icon: Icon(
                     Icons.check_circle_rounded,
                     size: widget.size,
@@ -38,6 +39,7 @@ class _CompletenessIconState extends State<CompletenessIcon> {
                   },
                 )
               : IconButton(
+                  splashRadius: 10,
                   icon: Icon(
                     Icons.lens_outlined,
                     size: widget.size,
