@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_details.dart';
-import 'package:my_todo_app/widgets/todo_list_screen_widgets/completed_icon.dart';
-import 'package:my_todo_app/widgets/todo_list_screen_widgets/important_icon.dart';
 import 'package:provider/provider.dart';
 
 class ToDoListDetailsScreen extends StatefulWidget {
@@ -43,33 +41,67 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   flexibleSpace: FlexibleSpaceBar(
                     centerTitle: true,
                     title: Container(
-                      alignment: Alignment.bottomCenter,
-                      height: 30,
-                      child: Expanded(
-                        child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            CompletenessIcon(
-                              taskId: catId,
+                      height: 20,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.baseline,
+                        children: [
+                          StreamBuilder<Task>(
+                            stream: _taskDao.getTask(taskItem.taskid),
+                            builder: (_, snapshot) {
+                              if (snapshot.hasData) {
+                                return snapshot.data.isCompleted
+                                    ? IconButton(
+                                        icon: Icon(
+                                          Icons.check_circle,
+                                          size: 13,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          print('For True: ' +
+                                              snapshot.data.isCompleted
+                                                  .toString());
+
+                                          _taskDao.updateCompleteness(Task(
+                                                  taskid: snapshot.data.taskid)
+                                              .copyWith(isCompleted: false));
+                                        },
+                                      )
+                                    : IconButton(
+                                        icon: Icon(
+                                          Icons.lens_outlined,
+                                          size: 13,
+                                          color: Colors.white,
+                                        ),
+                                        onPressed: () {
+                                          print('For False: ' +
+                                              snapshot.data.isCompleted
+                                                  .toString());
+
+                                          _taskDao.updateCompleteness(
+                                              Task(taskid: snapshot.data.taskid)
+                                                  .copyWith(isCompleted: true));
+                                        },
+                                      );
+                              } else {
+                                return Text('No Data');
+                              }
+                            },
+                          ),
+                          Text(
+                            taskItem.title,
+                            style: TextStyle(
+                                fontSize: 16, fontWeight: FontWeight.bold),
+                          ),
+                          Spacer(),
+                          IconButton(
+                            icon: Icon(
+                              Icons.star_border_rounded,
+                              size: 14,
                               color: Colors.white,
-                              task: taskItem,
-                              size: 15,
                             ),
-                            Text(
-                              taskItem.title,
-                              style: TextStyle(
-                                  fontSize: 15, fontWeight: FontWeight.bold),
-                            ),
-                            Spacer(),
-                            ImportanceIcon(
-                              taskId: catId,
-                              color: Colors.white,
-                              task: taskItem,
-                              size: 15,
-                            )
-                          ],
-                        ),
+                            onPressed: () {},
+                          )
+                        ],
                       ),
                     ),
                   )),
