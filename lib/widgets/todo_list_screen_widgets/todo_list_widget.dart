@@ -35,7 +35,7 @@ class _TodoListState extends State<TodoList> {
         shadowColor: Colors.black,
         child: ListTile(
           leading: CompletenessIcon(
-            taskId: widget.item.catid,
+            taskId: widget.item.taskid,
             color: widget.color,
             task: widget.item,
             size: 25.5,
