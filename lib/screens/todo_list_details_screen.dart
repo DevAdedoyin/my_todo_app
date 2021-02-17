@@ -46,74 +46,25 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                     title: Container(
                       height: 20,
                       child: Row(
-                        crossAxisAlignment: CrossAxisAlignment.baseline,
-                        children: [
-                          StreamBuilder<Task>(
-                            stream: _taskDao.getTask(taskItem.taskid),
-                            builder: (_, snapshot) {
-                              if (snapshot.hasData) {
-                                return snapshot.data.isCompleted
-                                    ? IconButton(
-                                        icon: Icon(
-                                          Icons.check_circle,
-                                          size: 13,
-                                          color: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          print('For True: ' +
-                                              snapshot.data.isCompleted
-                                                  .toString());
-
-                                          _taskDao.updateCompleteness(Task(
-                                                  taskid: snapshot.data.taskid)
-                                              .copyWith(isCompleted: false));
-                                        },
-                                      )
-                                    : IconButton(
-                                        icon: Icon(
-                                          Icons.lens_outlined,
-                                          size: 13,
-                                          color: Colors.white,
-                                        ),
-                                        onPressed: () {
-                                          print('For False: ' +
-                                              snapshot.data.isCompleted
-                                                  .toString());
-
-                                          _taskDao.updateCompleteness(
-                                              Task(taskid: snapshot.data.taskid)
-                                                  .copyWith(isCompleted: true));
-                                        },
-                                      );
-                              } else {
-                                return Text('No Data');
-                              }
-                            },
-                          ),
-                          Text(
-                            taskItem.title,
-                            style: TextStyle(
-                                fontSize: 16, fontWeight: FontWeight.bold),
-                          ),
-                          Spacer(),
-                          IconButton(
-                            icon: Icon(
-                              Icons.star_border_rounded,
-                              size: 14,
-                              color: Colors.white,
-                            ),
-                            onPressed: () {},
-                          )
-                        ],
-                      ),
+                          crossAxisAlignment: CrossAxisAlignment.baseline,
+                          children: [
+                            StreamBuilder<Task>(
+                                stream: _taskDao.getTask(taskItem.taskid),
+                                builder: (_, snapshot) {
+                                  if (snapshot.hasData) {
+                                    return Text(
+                                      taskItem.title,
+                                      style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    );
+                                  } else {
+                                    return Text('No Category');
+                                  }
+                                })
+                          ]),
                     ),
                   )),
-              // SliverLayoutBuilder(
-              //   builder: (context, constraint) {
-              //     constraint.
-              //     return ToDoDetailsWidget();
-              //   },
-              // )
             ],
           ),
         ),
