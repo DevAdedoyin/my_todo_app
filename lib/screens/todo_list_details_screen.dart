@@ -45,24 +45,21 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                     centerTitle: true,
                     title: Container(
                       height: 20,
-                      child: Row(
-                          crossAxisAlignment: CrossAxisAlignment.baseline,
-                          children: [
-                            StreamBuilder<Task>(
-                                stream: _taskDao.getTask(taskItem.taskid),
-                                builder: (_, snapshot) {
-                                  if (snapshot.hasData) {
-                                    return Text(
-                                      taskItem.title,
-                                      style: TextStyle(
-                                          fontSize: 16,
-                                          fontWeight: FontWeight.bold),
-                                    );
-                                  } else {
-                                    return Text('No Category');
-                                  }
-                                })
-                          ]),
+                      alignment: Alignment.bottomLeft,
+                      margin: EdgeInsets.only(left: 10),
+                      child: StreamBuilder<Task>(
+                          stream: _taskDao.getTask(taskItem.taskid),
+                          builder: (_, snapshot) {
+                            if (snapshot.hasData) {
+                              return Text(
+                                taskItem.title,
+                                style: TextStyle(
+                                    fontSize: 16, fontWeight: FontWeight.bold),
+                              );
+                            } else {
+                              return Text('No Category');
+                            }
+                          }),
                     ),
                   )),
             ],
