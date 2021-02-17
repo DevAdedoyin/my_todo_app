@@ -73,9 +73,13 @@ class _TodoListScreenState extends State<TodoListScreen> {
                           Container(
                             width: 200,
                             child: FlexibleSpaceBar(
-                              title: Text(
-                                _args[0],
-                                style: TextStyle(color: Colors.white),
+                              title: Container(
+                                margin: EdgeInsets.only(left: 10),
+                                child: Text(
+                                  _args[0],
+                                  style: TextStyle(
+                                      color: Colors.white, fontSize: 18),
+                                ),
                               ),
                               centerTitle: true,
                               // collapseMode: CollapseMode.pin,
