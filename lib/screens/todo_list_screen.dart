@@ -5,6 +5,7 @@ import 'package:my_todo_app/providers/todo_list.dart';
 import 'package:my_todo_app/widgets/todo_list_screen_widgets/add_list_widget.dart';
 import 'package:my_todo_app/widgets/todo_list_screen_widgets/todo_list_widget.dart';
 import 'package:provider/provider.dart';
+import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
 class TodoListScreen extends StatefulWidget {
   static const routeName = '/todo-list';
@@ -18,7 +19,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
-
+    print('TodoList Rebuilt!!!');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -86,10 +87,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     SliverList(
                         delegate: SliverChildBuilderDelegate((_, index) {
                       final item = snapshot.data[index];
-                      return TodoList(
-                        item: item,
-                        dao: _tasks,
-                        color: _args[1],
+                      return GestureDetector(
+                        onTap: () {
+                          Navigator.of(context).pushNamed(
+                              ToDoListDetailsScreen.routeName,
+                              arguments: [item, _tasks, _args[1]]);
+                        },
+                        child: TodoLists(
+                          item: item,
+                          dao: _tasks,
+                          color: _args[1],
+                        ),
                       );
                     }, childCount: snapshot.data.length))
                   ],

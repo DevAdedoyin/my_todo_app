@@ -14,6 +14,9 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
   @override
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
+
+    print('Details Page Rebuilt');
+
     final _args = ModalRoute.of(context).settings.arguments as List;
     final catDao = Provider.of<CategorieDao>(context);
     final _taskDao = Provider.of<TaskDao>(context);
@@ -30,7 +33,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
               SliverAppBar(
                   backgroundColor: _args[2],
                   title: FutureBuilder<Categorie>(
-                    future: catDao.getCategory(catId),
+                    future: catDao.getCategory(taskItem.catid),
                     builder: (_, snapshot) {
                       return Text(snapshot.data.categoryTitle);
                     },
