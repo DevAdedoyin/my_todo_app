@@ -104,8 +104,12 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
     return (select(tasks)..where((val) => val.catid.equals(index))).watch();
   }
 
+  // Stream<Task> getSteps(){
+  //   (select(tasks)..where((val) => ))
+  // }
+
   Stream<Task> getTask(int index) {
-    return (select(tasks)..where((val) => val.catid.equals(index)))
+    return (select(tasks)..where((val) => val.taskid.equals(index)))
         .watchSingle();
   }
 

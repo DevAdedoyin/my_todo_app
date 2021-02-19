@@ -23,7 +23,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
 
     final Task taskItem = _args[0];
     // final TaskDao taskDao = _args[1];
-    int catId = taskItem.catid;
+    // int catId = taskItem.catid;
 
     return Scaffold(
       body: SafeArea(
@@ -35,7 +35,10 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                 title: FutureBuilder<Categorie>(
                   future: catDao.getCategory(taskItem.catid),
                   builder: (_, snapshot) {
-                    return Text(snapshot.data.categoryTitle);
+                    return Text(
+                      snapshot.data.categoryTitle,
+                      style: TextStyle(fontStyle: FontStyle.italic),
+                    );
                   },
                 ),
                 pinned: true,
@@ -51,10 +54,22 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                         stream: _taskDao.getTask(taskItem.taskid),
                         builder: (_, snapshot) {
                           if (snapshot.hasData) {
-                            return Text(
-                              taskItem.title,
-                              style: TextStyle(
-                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            return Row(
+                              children: [
+                                IconButton(
+                                  icon: Icon(
+                                    Icons.lens_outlined,
+                                    size: 15,
+                                  ),
+                                  onPressed: () {},
+                                ),
+                                Text(
+                                  taskItem.title,
+                                  style: TextStyle(
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
                             );
                           } else {
                             return Text('No Category');
@@ -64,8 +79,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                 ),
               ),
               SliverList(
-                delegate: SliverChildListDelegate(
-                    [Text('Testing 1'), Text('Testing 2'), Text('Testing 3')]),
+                delegate: SliverChildListDelegate([]),
               )
             ],
           ),
