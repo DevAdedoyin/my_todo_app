@@ -31,37 +31,42 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
-                  backgroundColor: _args[2],
-                  title: FutureBuilder<Categorie>(
-                    future: catDao.getCategory(taskItem.catid),
-                    builder: (_, snapshot) {
-                      return Text(snapshot.data.categoryTitle);
-                    },
+                backgroundColor: _args[2],
+                title: FutureBuilder<Categorie>(
+                  future: catDao.getCategory(taskItem.catid),
+                  builder: (_, snapshot) {
+                    return Text(snapshot.data.categoryTitle);
+                  },
+                ),
+                pinned: true,
+                floating: true,
+                expandedHeight: 100,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  title: Container(
+                    height: 20,
+                    alignment: Alignment.bottomLeft,
+                    margin: EdgeInsets.only(left: 10),
+                    child: StreamBuilder<Task>(
+                        stream: _taskDao.getTask(taskItem.taskid),
+                        builder: (_, snapshot) {
+                          if (snapshot.hasData) {
+                            return Text(
+                              taskItem.title,
+                              style: TextStyle(
+                                  fontSize: 16, fontWeight: FontWeight.bold),
+                            );
+                          } else {
+                            return Text('No Category');
+                          }
+                        }),
                   ),
-                  pinned: true,
-                  floating: true,
-                  expandedHeight: 100,
-                  flexibleSpace: FlexibleSpaceBar(
-                    centerTitle: true,
-                    title: Container(
-                      height: 20,
-                      alignment: Alignment.bottomLeft,
-                      margin: EdgeInsets.only(left: 10),
-                      child: StreamBuilder<Task>(
-                          stream: _taskDao.getTask(taskItem.taskid),
-                          builder: (_, snapshot) {
-                            if (snapshot.hasData) {
-                              return Text(
-                                taskItem.title,
-                                style: TextStyle(
-                                    fontSize: 16, fontWeight: FontWeight.bold),
-                              );
-                            } else {
-                              return Text('No Category');
-                            }
-                          }),
-                    ),
-                  )),
+                ),
+              ),
+              SliverList(
+                delegate: SliverChildListDelegate(
+                    [Text('Testing 1'), Text('Testing 2'), Text('Testing 3')]),
+              )
             ],
           ),
         ),
