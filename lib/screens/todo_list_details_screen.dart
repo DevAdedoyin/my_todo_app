@@ -6,11 +6,22 @@ import 'package:provider/provider.dart';
 
 class ToDoListDetailsScreen extends StatefulWidget {
   static const routeName = '/todo-list-details';
+  final bool isComplete;
+  ToDoListDetailsScreen({this.isComplete});
+
   @override
   _ToDoListDetailsScreenState createState() => _ToDoListDetailsScreenState();
 }
 
 class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
+  bool _isComplete;
+
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   _isComplete = _isComplete;
+  // }
+
   @override
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
@@ -22,6 +33,11 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     final _taskDao = Provider.of<TaskDao>(context);
 
     final Task taskItem = _args[0];
+
+    bool _isComplete = _args[3];
+
+    print("VALUE " + _isComplete.toString());
+
     // final TaskDao taskDao = _args[1];
     // int catId = taskItem.catid;
 
@@ -36,7 +52,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   future: catDao.getCategory(taskItem.catid),
                   builder: (_, snapshot) {
                     return Text(
-                      snapshot.data.categoryTitle,
+                      'Checking',
+                      // snapshot.data.categoryTitle,
                       style: TextStyle(fontStyle: FontStyle.italic),
                     );
                   },
@@ -56,12 +73,19 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                           if (snapshot.hasData) {
                             return Row(
                               children: [
-                                IconButton(
-                                  icon: Icon(
-                                    Icons.lens_outlined,
-                                    size: 15,
-                                  ),
-                                  onPressed: () {},
+                                Container(
+                                  margin: EdgeInsets.only(right: 15),
+                                  child: _isComplete
+                                      ? Icon(
+                                          Icons.check_circle_outline_outlined,
+                                          size: 16,
+                                          color: Colors.white,
+                                        )
+                                      : Icon(
+                                          Icons.lens_outlined,
+                                          size: 16,
+                                          color: Colors.white,
+                                        ),
                                 ),
                                 Text(
                                   taskItem.title,

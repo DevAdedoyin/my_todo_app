@@ -91,17 +91,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     SliverList(
                         delegate: SliverChildBuilderDelegate((_, index) {
                       final item = snapshot.data[index];
-                      return GestureDetector(
-                        onTap: () {
-                          Navigator.of(context).pushNamed(
-                              ToDoListDetailsScreen.routeName,
-                              arguments: [item, _tasks, _args[1]]);
-                        },
-                        child: TodoLists(
-                          item: item,
-                          dao: _tasks,
-                          color: _args[1],
-                        ),
+                      return TodoLists(
+                        item: item,
+                        dao: _tasks,
+                        color: _args[1],
                       );
                     }, childCount: snapshot.data.length))
                   ],

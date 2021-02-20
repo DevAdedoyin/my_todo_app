@@ -3,92 +3,128 @@ import 'package:intl/intl.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/screens/todo_list_details_screen.dart';
 
-class TodoLists extends StatelessWidget {
+class TodoLists extends StatefulWidget {
   final Task item;
   final TaskDao dao;
   final Color color;
 
-  TodoLists({this.item, this.dao, this.color});
+  TodoLists({
+    this.item,
+    this.dao,
+    this.color,
+  });
+
+  @override
+  _TodoListsState createState() => _TodoListsState();
+}
+
+class _TodoListsState extends State<TodoLists> {
+  bool isComplete;
+
+  @override
+  void initState() {
+    super.initState();
+    isComplete = widget.item.isCompleted;
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Card(
-      margin: EdgeInsets.all(7),
-      elevation: 5,
-      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
-      shadowColor: Colors.black,
-      child: ListTile(
-          leading: item.isCompleted
-              ? IconButton(
-                  icon: Icon(
-                    Icons.check_circle_outline_outlined,
-                    size: 30,
-                    color: color,
-                  ),
-                  splashRadius: 22,
-                  onPressed: () {
-                    dao.updateCompleteness(item.copyWith(isCompleted: false));
-                  },
-                )
-              : IconButton(
-                  icon: Icon(
-                    Icons.lens_outlined,
-                    size: 30,
-                  ),
-                  splashRadius: 22,
-                  onPressed: () {
-                    dao.updateCompleteness(item.copyWith(isCompleted: true));
-                  },
-                ),
-          title: Text(
-            item.title,
-            style: TextStyle(fontSize: 17),
-          ),
-          subtitle: Row(
-            children: <Widget>[
-              Icon(
-                Icons.calendar_today_outlined,
-                size: 15,
-              ),
-              SizedBox(
-                width: 8,
-              ),
-              Text(item.date),
-              SizedBox(
-                width: 8,
-              ),
-              item.frequency == null
-                  ? Icon(
-                      Icons.repeat,
-                      size: 15,
+    return GestureDetector(
+        onTap: () {
+          Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName,
+              arguments: [widget.item, widget.dao, widget.color, isComplete]);
+        },
+        child: Card(
+            margin: EdgeInsets.all(7),
+            elevation: 5,
+            shape:
+                RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+            shadowColor: Colors.black,
+            child: ListTile(
+              leading: isComplete
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.check_circle_outline_outlined,
+                        size: 30,
+                        color: widget.color,
+                      ),
+                      splashRadius: 22,
+                      onPressed: () {
+                        widget.dao.updateCompleteness(
+                            widget.item.copyWith(isCompleted: false));
+
+                        setState(() {
+                          isComplete = false;
+                        });
+                        print("If true change to " + isComplete.toString());
+                      },
                     )
-                  : Icon(
-                      Icons.alarm_on,
-                      size: 15,
+                  : IconButton(
+                      icon: Icon(
+                        Icons.lens_outlined,
+                        size: 30,
+                      ),
+                      splashRadius: 22,
+                      onPressed: () {
+                        widget.dao.updateCompleteness(
+                            widget.item.copyWith(isCompleted: false));
+                        print("If false change to " + isComplete.toString());
+                        setState(() {
+                          isComplete = true;
+                        });
+                      },
                     ),
-            ],
-          ),
-          trailing: item.isImportant
-              ? IconButton(
-                  icon: Icon(
-                    Icons.star,
-                    size: 25.5,
-                    color: color,
+              title: Text(
+                widget.item.title,
+                style: TextStyle(fontSize: 17),
+              ),
+              subtitle: Row(
+                children: <Widget>[
+                  Icon(
+                    Icons.calendar_today_outlined,
+                    size: 15,
                   ),
-                  onPressed: () {
-                    dao.updateTaskImportance(item.copyWith(isImportant: false));
-                  },
-                )
-              : IconButton(
-                  icon: Icon(
-                    Icons.star_border_rounded,
-                    size: 25.5,
+                  SizedBox(
+                    width: 8,
                   ),
-                  onPressed: () {
-                    dao.updateTaskImportance(item.copyWith(isImportant: true));
-                  },
-                )),
-    );
+                  Text(widget.item.date),
+                  SizedBox(
+                    width: 8,
+                  ),
+                  widget.item.frequency == null
+                      ? Icon(
+                          Icons.repeat,
+                          size: 15,
+                        )
+                      : Icon(
+                          Icons.alarm_on,
+                          size: 15,
+                        ),
+                ],
+              ),
+              trailing: widget.item.isImportant
+                  ? IconButton(
+                      icon: Icon(
+                        Icons.star,
+                        size: 25.5,
+                        color: widget.color,
+                      ),
+                      onPressed: () {
+                        widget.dao.updateTaskImportance(
+                            widget.item.copyWith(isImportant: false));
+                      },
+                    )
+                  : IconButton(
+                      icon: Icon(
+                        Icons.star_border_rounded,
+                        size: 25.5,
+                      ),
+                      onPressed: () {
+                        widget.dao.updateTaskImportance(
+                            widget.item.copyWith(isImportant: true));
+                      },
+                    ),
+            )));
   }
 }
 
