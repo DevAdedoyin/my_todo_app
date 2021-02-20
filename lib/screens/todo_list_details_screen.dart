@@ -35,6 +35,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     final Task taskItem = _args[0];
 
     bool _isComplete = _args[3];
+    bool _isImportant = _args[4];
 
     print("VALUE " + _isComplete.toString());
 
@@ -92,7 +93,22 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   style: TextStyle(
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
-                                )
+                                ),
+                                Spacer(),
+                                Container(
+                                  margin: EdgeInsets.only(right: 15),
+                                  child: _isImportant
+                                      ? Icon(
+                                          Icons.star,
+                                          size: 16,
+                                          color: Colors.white,
+                                        )
+                                      : Icon(
+                                          Icons.star_border_rounded,
+                                          size: 16,
+                                          color: Colors.white,
+                                        ),
+                                ),
                               ],
                             );
                           } else {
