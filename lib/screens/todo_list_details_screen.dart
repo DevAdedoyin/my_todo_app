@@ -88,12 +88,22 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                           color: Colors.white,
                                         ),
                                 ),
-                                Text(
-                                  taskItem.title,
-                                  style: TextStyle(
-                                      fontSize: 16,
-                                      fontWeight: FontWeight.bold),
-                                ),
+                                _isComplete
+                                    ? Text(
+                                        taskItem.title,
+                                        style: TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold,
+                                          decoration:
+                                              TextDecoration.lineThrough,
+                                        ),
+                                      )
+                                    : Text(
+                                        taskItem.title,
+                                        style: TextStyle(
+                                            fontSize: 16,
+                                            fontWeight: FontWeight.bold),
+                                      ),
                                 Spacer(),
                                 Container(
                                   margin: EdgeInsets.only(right: 15),
