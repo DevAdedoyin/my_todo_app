@@ -20,11 +20,13 @@ class TodoLists extends StatefulWidget {
 
 class _TodoListsState extends State<TodoLists> {
   bool isComplete;
+  bool isImportant;
 
   @override
   void initState() {
     super.initState();
     isComplete = widget.item.isCompleted;
+    isImportant = widget.item.isImportant;
   }
 
   @override
@@ -32,7 +34,13 @@ class _TodoListsState extends State<TodoLists> {
     return GestureDetector(
         onTap: () {
           Navigator.of(context).pushNamed(ToDoListDetailsScreen.routeName,
-              arguments: [widget.item, widget.dao, widget.color, isComplete]);
+              arguments: [
+                widget.item,
+                widget.dao,
+                widget.color,
+                isComplete,
+                isImportant
+              ]);
         },
         child: Card(
             margin: EdgeInsets.all(7),
@@ -110,6 +118,10 @@ class _TodoListsState extends State<TodoLists> {
                         color: widget.color,
                       ),
                       onPressed: () {
+                        setState(() {
+                          isImportant = false;
+                        });
+
                         widget.dao.updateTaskImportance(
                             widget.item.copyWith(isImportant: false));
                       },
@@ -120,6 +132,10 @@ class _TodoListsState extends State<TodoLists> {
                         size: 25.5,
                       ),
                       onPressed: () {
+                        setState(() {
+                          isImportant = true;
+                        });
+
                         widget.dao.updateTaskImportance(
                             widget.item.copyWith(isImportant: true));
                       },
