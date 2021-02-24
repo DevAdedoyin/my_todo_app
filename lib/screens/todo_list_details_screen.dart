@@ -129,7 +129,16 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                 ),
               ),
               SliverList(
-                delegate: SliverChildListDelegate([]),
+                delegate: SliverChildListDelegate([
+                  StreamBuilder(builder: (_, snapshot) {
+                    return Container(
+                      child: ListView.builder(
+                        itemBuilder: (_, index) {},
+                        itemCount: snapshot.data,
+                      ),
+                    );
+                  }),
+                ]),
               )
             ],
           ),
