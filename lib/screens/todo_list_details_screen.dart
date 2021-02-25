@@ -14,7 +14,7 @@ class ToDoListDetailsScreen extends StatefulWidget {
 }
 
 class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
-  bool _isComplete;
+  // bool _isComplete;
 
   // @override
   // void initState() {
@@ -27,7 +27,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     //final todoDets = Provider.of<ToDoProvider>(context);
 
     print('Details Page Rebuilt');
-
+    final textController = TextEditingController();
     final _args = ModalRoute.of(context).settings.arguments as List;
     final catDao = Provider.of<CategorieDao>(context);
     final _taskDao = Provider.of<TaskDao>(context);
@@ -39,7 +39,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
 
     print("VALUE " + _isComplete.toString());
 
-    // final TaskDao taskDao = _args[1];
+    final TaskDao taskDao = _args[1];
     // int catId = taskItem.catid;
 
     return Scaffold(
@@ -130,14 +130,49 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
               ),
               SliverList(
                 delegate: SliverChildListDelegate([
-                  StreamBuilder(builder: (_, snapshot) {
-                    return Container(
-                      child: ListView.builder(
-                        itemBuilder: (_, index) {},
-                        itemCount: snapshot.data,
-                      ),
-                    );
-                  }),
+                  StreamBuilder<Task>(
+                    builder: (_, snapshot) {
+                      if (snapshot.hasData) {
+                        List<String> steps = snapshot.data.steps.split(' ');
+                        if (steps == null) {
+                          return Container(
+                            height: 60,
+                            child: ListView.builder(
+                              itemBuilder: (_, index) {
+                                return Expanded(
+                                  child: Row(
+                                    children: [
+                                      CircleAvatar(
+                                        child: Text((index + 1).toString()),
+                                      ),
+                                      EditableText(
+                                        backgroundCursorColor: Colors.white,
+                                        controller: textController,
+                                        cursorColor: _args[2],
+                                        style: TextStyle(
+                                            fontWeight: FontWeight.normal),
+                                        // focusNode: FocusNode(onKey: ()),
+                                      ),
+                                      IconButton(
+                                        icon: Icon(Icons.delete),
+                                        onPressed: () {},
+                                      )
+                                    ],
+                                  ),
+                                );
+                              },
+                              itemCount: steps.length,
+                            ),
+                          );
+                        } else {
+                          return Text("No Steps Yet");
+                        }
+                      } else {
+                        return Text("No Data");
+                      }
+                    },
+                    stream: taskDao.getTask(taskItem.taskid),
+                  ),
                 ]),
               )
             ],
