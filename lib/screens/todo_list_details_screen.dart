@@ -198,7 +198,10 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                           ],
                                         ),
                                       ),
-                                      onPressed: () {},
+                                      onPressed: () {
+                                        _taskDao.updateSteps(taskItem.copyWith(
+                                            steps: textController.text));
+                                      },
                                     ),
                                   )
                                 ],
