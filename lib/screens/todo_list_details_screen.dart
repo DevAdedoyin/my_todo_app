@@ -42,6 +42,12 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     final TaskDao taskDao = _args[1];
     // int catId = taskItem.catid;
 
+    @override
+    void dispose() {
+      textController.dispose();
+      super.dispose();
+    }
+
     return Scaffold(
       body: SafeArea(
         child: Container(
