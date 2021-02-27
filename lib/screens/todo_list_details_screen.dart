@@ -159,6 +159,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       if (snapshot.data.steps != null) {
                                         step = snapshot.data.steps.split(",");
                                         return ListView.builder(
+                                          shrinkWrap: true,
                                           itemCount: step.length,
                                           itemBuilder: (_, index) {
                                             return Row(
