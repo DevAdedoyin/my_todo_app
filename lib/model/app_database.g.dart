@@ -772,8 +772,11 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
   @override
   GeneratedTextColumn get steps => _steps ??= _constructSteps();
   GeneratedTextColumn _constructSteps() {
-    return GeneratedTextColumn('steps', $tableName, true,
-        minTextLength: 0, maxTextLength: 3000);
+    return GeneratedTextColumn(
+      'steps',
+      $tableName,
+      true,
+    );
   }
 
   final VerificationMeta _isImportantMeta =
