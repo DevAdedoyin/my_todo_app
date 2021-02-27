@@ -154,6 +154,9 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       keyboardType: TextInputType.multiline,
                                       minLines: 1,
                                       maxLines: null,
+                                      onChanged: (changedVal) {
+                                        //TODO Update value of step in the database
+                                      },
                                       decoration: InputDecoration(
                                         hintText:
                                             'Please Enter Your Steps/Notes Here!!!',
