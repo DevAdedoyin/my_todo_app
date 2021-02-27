@@ -34,7 +34,7 @@ class Tasks extends Table {
   TextColumn get note => text().nullable().withLength(min: 0, max: 150)();
   BoolColumn get isCompleted =>
       boolean().nullable().withDefault(const Constant(false))();
-  TextColumn get steps => text().nullable().withLength(min: 0, max: 3000)();
+  TextColumn get steps => text().nullable()();
   BoolColumn get isImportant =>
       boolean().nullable().withDefault(const Constant(false))();
   IntColumn get catid =>

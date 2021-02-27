@@ -133,37 +133,37 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   StreamBuilder<Task>(
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
-                        List<String> steps = snapshot.data.steps.split(' ');
+                        String steps = snapshot.data.steps;
                         if (steps == null) {
                           return Container(
-                            height: 60,
-                            child: ListView.builder(
-                              itemBuilder: (_, index) {
-                                return Expanded(
-                                  child: Row(
-                                    children: [
-                                      CircleAvatar(
-                                        child: Text((index + 1).toString()),
-                                      ),
-                                      EditableText(
-                                        backgroundCursorColor: Colors.white,
-                                        controller: textController,
-                                        cursorColor: _args[2],
-                                        style: TextStyle(
-                                            fontWeight: FontWeight.normal),
-                                        // focusNode: FocusNode(onKey: ()),
-                                      ),
-                                      IconButton(
-                                        icon: Icon(Icons.delete),
-                                        onPressed: () {},
-                                      )
-                                    ],
+                              margin: EdgeInsets.all(12),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    'Steps/Notes',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
                                   ),
-                                );
-                              },
-                              itemCount: steps.length,
-                            ),
-                          );
+                                  Container(
+                                    margin: EdgeInsets.only(top: 5),
+                                    child: TextField(
+                                      controller: textController,
+                                      keyboardType: TextInputType.multiline,
+                                      minLines: 1,
+                                      maxLines: null,
+                                      decoration: InputDecoration(
+                                        hintText:
+                                            'Please Enter Your Steps/Notes Here!!!',
+                                        hintStyle: TextStyle(
+                                            fontStyle: FontStyle.italic),
+                                      ),
+                                    ),
+                                  )
+                                ],
+                              ));
                         } else {
                           return Text("No Steps Yet");
                         }
