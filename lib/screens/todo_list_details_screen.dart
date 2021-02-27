@@ -14,20 +14,20 @@ class ToDoListDetailsScreen extends StatefulWidget {
 }
 
 class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
-  // bool _isComplete;
+  final textController = TextEditingController();
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   _isComplete = _isComplete;
-  // }
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     //final todoDets = Provider.of<ToDoProvider>(context);
 
     print('Details Page Rebuilt');
-    final textController = TextEditingController();
+
     final _args = ModalRoute.of(context).settings.arguments as List;
     final catDao = Provider.of<CategorieDao>(context);
     final _taskDao = Provider.of<TaskDao>(context);
@@ -41,12 +41,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
 
     final TaskDao taskDao = _args[1];
     // int catId = taskItem.catid;
-
-    @override
-    void dispose() {
-      textController.dispose();
-      super.dispose();
-    }
 
     return Scaffold(
       body: SafeArea(
