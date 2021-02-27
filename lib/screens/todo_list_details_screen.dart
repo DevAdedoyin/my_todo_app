@@ -164,7 +164,12 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                             fontStyle: FontStyle.italic),
                                       ),
                                     ),
-                                  )
+                                  ),
+                                  Container(
+                                      alignment: Alignment.topRight,
+                                      child: RaisedButton(
+                                        onPressed: () {},
+                                      ))
                                 ],
                               ));
                         } else {
