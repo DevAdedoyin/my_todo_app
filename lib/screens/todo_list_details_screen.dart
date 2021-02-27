@@ -166,40 +166,41 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                     ),
                                   ),
                                   Container(
-                                      alignment: Alignment.topRight,
-                                      margin:
-                                          EdgeInsets.only(bottom: 10, top: 10),
-                                      child: RaisedButton(
-                                        color: _args[2],
-                                        child: SizedBox(
-                                          width: 80,
-                                          child: Row(
-                                            children: [
-                                              Expanded(
-                                                flex: 2,
-                                                child: Text(
-                                                  'Save',
-                                                  style: TextStyle(
-                                                      fontSize: 18,
-                                                      color: Colors.white),
-                                                ),
+                                    alignment: Alignment.topRight,
+                                    margin:
+                                        EdgeInsets.only(bottom: 10, top: 10),
+                                    child: RaisedButton(
+                                      color: _args[2],
+                                      child: SizedBox(
+                                        width: 80,
+                                        child: Row(
+                                          children: [
+                                            Expanded(
+                                              flex: 2,
+                                              child: Text(
+                                                'Save',
+                                                style: TextStyle(
+                                                    fontSize: 18,
+                                                    color: Colors.white),
                                               ),
-                                              Expanded(
-                                                flex: 1,
-                                                child: IconButton(
-                                                  icon: Icon(
-                                                    Icons.save,
-                                                    size: 20,
-                                                  ),
-                                                  onPressed: () {},
-                                                  color: Colors.white,
+                                            ),
+                                            Expanded(
+                                              flex: 1,
+                                              child: IconButton(
+                                                icon: Icon(
+                                                  Icons.save,
+                                                  size: 20,
                                                 ),
+                                                onPressed: () {},
+                                                color: Colors.white,
                                               ),
-                                            ],
-                                          ),
+                                            ),
+                                          ],
                                         ),
-                                        onPressed: () {},
-                                      ))
+                                      ),
+                                      onPressed: () {},
+                                    ),
+                                  )
                                 ],
                               ));
                         } else {

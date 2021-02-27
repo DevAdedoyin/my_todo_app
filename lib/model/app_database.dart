@@ -121,6 +121,11 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
         .write(TasksCompanion.insert(isCompleted: Value(task.isCompleted)));
   }
 
+  Future updateSteps(Task task) {
+    return (update(tasks)..where((t) => t.taskid.equals(task.taskid)))
+        .write(TasksCompanion.insert(steps: Value(task.steps)));
+  }
+
   //Updates Task Importance
   Future updateTaskImportance(Task task) {
     return (update(tasks)..where((t) => t.taskid.equals(task.taskid)))
