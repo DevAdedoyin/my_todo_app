@@ -140,12 +140,15 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(
-                                  'Steps/Notes',
-                                  style: TextStyle(
-                                      color: Colors.black,
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold),
+                                Container(
+                                  margin: EdgeInsets.all(10),
+                                  child: Text(
+                                    'Steps/Notes',
+                                    style: TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                  ),
                                 ),
                                 StreamBuilder<Task>(
                                   stream: _taskDao.getTask(taskItem.taskid),
@@ -161,15 +164,28 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                             return Row(
                                               children: [
                                                 CircleAvatar(
+                                                  radius: 15,
                                                   child: Text(
-                                                      (index + 1).toString()),
+                                                    (index + 1).toString(),
+                                                    style: TextStyle(
+                                                        color: Colors.white,
+                                                        fontWeight:
+                                                            FontWeight.bold),
+                                                  ),
+                                                  backgroundColor: _args[2],
                                                 ),
-                                                Text(step[index]),
+                                                Container(
+                                                  margin:
+                                                      EdgeInsets.only(left: 10),
+                                                  child: Text(
+                                                    step[index],
+                                                  ),
+                                                ),
                                                 Spacer(),
                                                 IconButton(
-                                                  icon: Icon(Icons.delete),
-                                                  onPressed: () {},
-                                                )
+                                                    icon: Icon(Icons.delete),
+                                                    onPressed: () {},
+                                                    color: _args[2])
                                               ],
                                             );
                                           },
@@ -178,9 +194,20 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                         return Row(
                                           children: [
                                             CircleAvatar(
-                                              child: Text('0'),
+                                              radius: 15,
+                                              child: Text(
+                                                '0',
+                                                style: TextStyle(
+                                                    color: Colors.white,
+                                                    fontWeight:
+                                                        FontWeight.bold),
+                                              ),
+                                              backgroundColor: _args[2],
                                             ),
-                                            Text('Steps 0')
+                                            Container(
+                                                margin:
+                                                    EdgeInsets.only(left: 10),
+                                                child: Text('Steps 0'))
                                           ],
                                         );
                                       }
