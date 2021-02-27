@@ -133,84 +133,127 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   StreamBuilder<Task>(
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
-                        String steps = snapshot.data.steps;
-                        if (steps == null) {
-                          return Container(
-                              margin: EdgeInsets.all(12),
-                              child: Column(
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    'Steps/Notes',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontSize: 17,
-                                        fontWeight: FontWeight.bold),
-                                  ),
-                                  Container(
-                                    margin: EdgeInsets.only(top: 5),
-                                    child: TextField(
-                                      controller: textController,
-                                      keyboardType: TextInputType.multiline,
-                                      minLines: 1,
-                                      maxLines: null,
-                                      onChanged: (changedVal) {
-                                        //TODO Update value of step in the database
-                                      },
-                                      decoration: InputDecoration(
-                                        hintText:
-                                            'Please Enter Your Steps/Notes Here!!!',
-                                        hintStyle: TextStyle(
-                                            fontStyle: FontStyle.italic),
-                                      ),
-                                    ),
-                                  ),
-                                  Container(
-                                    alignment: Alignment.topRight,
-                                    margin:
-                                        EdgeInsets.only(bottom: 10, top: 10),
-                                    child: RaisedButton(
-                                      color: _args[2],
-                                      child: SizedBox(
-                                        width: 80,
-                                        child: Row(
-                                          children: [
-                                            Expanded(
-                                              flex: 2,
-                                              child: Text(
-                                                'Save',
-                                                style: TextStyle(
-                                                    fontSize: 18,
-                                                    color: Colors.white),
-                                              ),
-                                            ),
-                                            Expanded(
-                                              flex: 1,
-                                              child: IconButton(
-                                                icon: Icon(
-                                                  Icons.save,
-                                                  size: 20,
+                        // String steps = snapshot.data.steps;
+
+                        return Container(
+                            margin: EdgeInsets.all(12),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  'Steps/Notes',
+                                  style: TextStyle(
+                                      color: Colors.black,
+                                      fontSize: 17,
+                                      fontWeight: FontWeight.bold),
+                                ),
+                                StreamBuilder<Task>(
+                                  stream: _taskDao.getTask(taskItem.taskid),
+                                  builder: (_, snapshot) {
+                                    if (snapshot.hasData) {
+                                      List<String> step;
+
+                                      if (snapshot.data.steps != null) {
+                                        step = snapshot.data.steps.split(",");
+                                        return ListView.builder(
+                                          itemCount: step.length,
+                                          itemBuilder: (_, index) {
+                                            return Row(
+                                              children: [
+                                                CircleAvatar(
+                                                  child: Text(
+                                                      (index + 1).toString()),
                                                 ),
-                                                onPressed: () {},
-                                                color: Colors.white,
-                                              ),
+                                                Text(step[index]),
+                                                Spacer(),
+                                                IconButton(
+                                                  icon: Icon(Icons.delete),
+                                                  onPressed: () {},
+                                                )
+                                              ],
+                                            );
+                                          },
+                                        );
+                                      } else {
+                                        return Row(
+                                          children: [
+                                            CircleAvatar(
+                                              child: Text('0'),
                                             ),
+                                            Text('Steps 0')
                                           ],
-                                        ),
-                                      ),
-                                      onPressed: () {
-                                        if (textController.text.isNotEmpty)
-                                          _taskDao.updateSteps(
-                                              taskItem.copyWith(
-                                                  steps: textController.text));
-                                      },
+                                        );
+                                      }
+                                    } else {
+                                      return Text('No Data Yet');
+                                    }
+                                  },
+                                ),
+                                Container(
+                                  margin: EdgeInsets.only(top: 5),
+                                  child: TextField(
+                                    controller: textController,
+                                    keyboardType: TextInputType.multiline,
+                                    minLines: 1,
+                                    maxLines: null,
+                                    onChanged: (changedVal) {
+                                      //TODO Update value of step in the database
+                                    },
+                                    decoration: InputDecoration(
+                                      hintText:
+                                          'Please Enter Your Steps/Notes Here!!!',
+                                      hintStyle: TextStyle(
+                                          fontStyle: FontStyle.italic),
                                     ),
-                                  )
-                                ],
-                              ));
-                        } else {
-                          return Text("No Steps Yet");
-                        }
+                                  ),
+                                ),
+                                Container(
+                                  alignment: Alignment.topRight,
+                                  margin: EdgeInsets.only(bottom: 10, top: 10),
+                                  child: RaisedButton(
+                                    color: _args[2],
+                                    child: SizedBox(
+                                      width: 80,
+                                      child: Row(
+                                        children: [
+                                          Expanded(
+                                            flex: 2,
+                                            child: Text(
+                                              'Save',
+                                              style: TextStyle(
+                                                  fontSize: 18,
+                                                  color: Colors.white),
+                                            ),
+                                          ),
+                                          Expanded(
+                                            flex: 1,
+                                            child: IconButton(
+                                              icon: Icon(
+                                                Icons.save,
+                                                size: 20,
+                                              ),
+                                              onPressed: () {},
+                                              color: Colors.white,
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    onPressed: () {
+                                      if (textController.text.isNotEmpty) {
+                                        String stepsSeperator =
+                                            textController.text + ',';
+                                        _taskDao.updateSteps(taskItem.copyWith(
+                                            steps: stepsSeperator));
+                                      }
+                                      setState(() {
+                                        textController.text;
+                                      });
+                                    },
+                                  ),
+                                )
+                              ],
+                            ));
                       } else {
                         return Text("No Data");
                       }
