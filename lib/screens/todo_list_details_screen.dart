@@ -167,7 +167,32 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   ),
                                   Container(
                                       alignment: Alignment.topRight,
+                                      margin:
+                                          EdgeInsets.only(bottom: 10, top: 10),
                                       child: RaisedButton(
+                                        child: SizedBox(
+                                          width: 100,
+                                          child: Row(
+                                            children: [
+                                              Expanded(
+                                                child: IconButton(
+                                                  icon: Icon(
+                                                    Icons.save,
+                                                    size: 10,
+                                                  ),
+                                                  onPressed: () {},
+                                                ),
+                                              ),
+                                              Expanded(
+                                                child: Text(
+                                                  'Save',
+                                                  style:
+                                                      TextStyle(fontSize: 15),
+                                                ),
+                                              )
+                                            ],
+                                          ),
+                                        ),
                                         onPressed: () {},
                                       ))
                                 ],
