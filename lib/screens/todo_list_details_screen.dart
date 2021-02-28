@@ -278,9 +278,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                         _taskDao.updateSteps(taskItem.copyWith(
                                             steps: stepsSeperator));
                                       }
-                                      // setState(() {
-                                      //   textController.text;
-                                      // });
                                     },
                                   ),
                                 )
