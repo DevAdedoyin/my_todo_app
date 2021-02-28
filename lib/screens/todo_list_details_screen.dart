@@ -24,8 +24,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    //final todoDets = Provider.of<ToDoProvider>(context);
-
     print('Details Page Rebuilt');
 
     final _args = ModalRoute.of(context).settings.arguments as List;
@@ -40,7 +38,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
     print("VALUE " + _isComplete.toString());
 
     final TaskDao taskDao = _args[1];
-    // int catId = taskItem.catid;
 
     return Scaffold(
       body: SafeArea(
@@ -54,7 +51,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   builder: (_, snapshot) {
                     return Text(
                       'Checking',
-                      // snapshot.data.categoryTitle,
                       style: TextStyle(fontStyle: FontStyle.italic),
                     );
                   },
@@ -133,8 +129,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   StreamBuilder<Task>(
                     builder: (_, snapshot) {
                       if (snapshot.hasData) {
-                        // String steps = snapshot.data.steps;
-
                         return Container(
                             margin: EdgeInsets.all(12),
                             child: Column(
