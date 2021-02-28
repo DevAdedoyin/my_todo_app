@@ -158,6 +158,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
 
                                       if (snapshot.data.steps != null) {
                                         step = snapshot.data.steps.split(",");
+                                        print(step);
                                         return ListView.builder(
                                           shrinkWrap: true,
                                           itemCount: step.length,
@@ -268,9 +269,12 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      if (textController.text.isNotEmpty) {
+                                      if (textController.text.isNotEmpty &&
+                                          taskItem.steps != null) {
                                         String stepsSeperator =
-                                            textController.text + ',';
+                                            taskItem.steps.toString() +
+                                                textController.text +
+                                                ',';
                                         _taskDao.updateSteps(taskItem.copyWith(
                                             steps: stepsSeperator));
                                       }
