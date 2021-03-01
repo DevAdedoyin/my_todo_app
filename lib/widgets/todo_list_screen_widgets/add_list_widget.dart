@@ -95,11 +95,13 @@ class _AddListWidgetState extends State<AddListWidget> {
                         String time = _selectedTime.hour.toString() +
                             ':' +
                             _selectedTime.minute.toString();
-                        String stripDate =
-                            _selectedDate.toString().split(" ").first;
+                        String formattedDate = DateFormat.yMMMd(
+                                Localizations.localeOf(context).languageCode)
+                            .format(_selectedDate);
+                        // _selectedDate.toString().split(" ").first;
 
                         insertTask.insertTask(TasksCompanion(
-                            date: Value(stripDate),
+                            date: Value(formattedDate),
                             time: Value(time),
                             title: Value(_listTitleController.text),
                             catid: Value(widget.catId),
