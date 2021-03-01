@@ -89,7 +89,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                     ? Text(
                                         taskItem.title,
                                         style: TextStyle(
-                                          fontSize: 16,
+                                          fontSize: 14,
                                           fontWeight: FontWeight.bold,
                                           decoration:
                                               TextDecoration.lineThrough,
@@ -98,7 +98,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                     : Text(
                                         taskItem.title,
                                         style: TextStyle(
-                                            fontSize: 16,
+                                            fontSize: 14,
                                             fontWeight: FontWeight.bold),
                                       ),
                                 Spacer(),
