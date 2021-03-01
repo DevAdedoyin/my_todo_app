@@ -292,6 +292,30 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       });
                                     },
                                   ),
+                                ),
+                                Card(
+                                  child: Column(
+                                    children: [
+                                      ListTile(
+                                        leading: Icon(Icons.notifications),
+                                        title: Text('Due Date'),
+                                        subtitle: Text(snapshot.data.date),
+                                        trailing: Icon(Icons.lens_outlined),
+                                      ),
+                                      ListTile(
+                                        leading: Icon(Icons.notifications),
+                                        title: Text('Due Time'),
+                                        subtitle: Text(snapshot.data.time),
+                                        trailing: Icon(Icons.lens_outlined),
+                                      ),
+                                      ListTile(
+                                        leading: Icon(Icons.notifications),
+                                        title: Text('Remind Me On'),
+                                        subtitle: Text(snapshot.data.frequency),
+                                        trailing: Icon(Icons.lens_outlined),
+                                      )
+                                    ],
+                                  ),
                                 )
                               ],
                             ));
