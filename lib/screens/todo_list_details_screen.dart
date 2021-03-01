@@ -185,8 +185,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                                   IconButton(
                                                       icon: Icon(Icons.delete),
                                                       onPressed: () {
-                                                        step.remove(
-                                                            step[index]);
+                                                        step.removeAt(index);
                                                         String stepsSeperator =
                                                             step.join(",");
                                                         _taskDao.updateSteps(
