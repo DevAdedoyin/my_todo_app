@@ -45,6 +45,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
           child: CustomScrollView(
             slivers: [
               SliverAppBar(
+                collapsedHeight: 80,
                 backgroundColor: _args[2],
                 title: FutureBuilder<Categorie>(
                   future: catDao.getCategory(taskItem.catid),
@@ -56,8 +57,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   },
                 ),
                 pinned: true,
-                floating: true,
-                expandedHeight: 100,
+                floating: false,
+                expandedHeight: 110,
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   title: Container(
