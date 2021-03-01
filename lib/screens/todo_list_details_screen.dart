@@ -232,7 +232,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   margin: EdgeInsets.only(top: 5),
                                   child: TextField(
                                     controller: textController,
-                                    keyboardType: TextInputType.multiline,
+                                    keyboardType: TextInputType.text,
                                     minLines: 1,
                                     maxLines: null,
                                     onChanged: (changedVal) {
