@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:my_todo_app/model/app_database.dart';
 import 'package:my_todo_app/providers/todo_list.dart';
@@ -302,12 +304,14 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                         subtitle: Text(snapshot.data.date),
                                         trailing: Icon(Icons.lens_outlined),
                                       ),
+                                      Divider(),
                                       ListTile(
                                         leading: Icon(Icons.notifications),
                                         title: Text('Due Time'),
                                         subtitle: Text(snapshot.data.time),
                                         trailing: Icon(Icons.lens_outlined),
                                       ),
+                                      Divider(),
                                       ListTile(
                                         leading: Icon(Icons.notifications),
                                         title: Text('Remind Me On'),
