@@ -25,14 +25,10 @@ class _AppDrawerState extends State<AppDrawer> {
                 ListTile(
                   leading: Icon(
                     Icons.all_inclusive_rounded,
-                    color: Colors.black,
                   ),
                   title: Text(
                     'All Categories',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                   trailing: FutureBuilder<int>(
                     future: catDao.countCategories(),
@@ -40,10 +36,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       if (snapshot.hasData) {
                         return Text(
                           snapshot.data.toString(),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         );
                       } else {
                         return Text('0');
@@ -55,14 +48,10 @@ class _AppDrawerState extends State<AppDrawer> {
                 ListTile(
                   leading: Icon(
                     Icons.star_border_rounded,
-                    color: Colors.black,
                   ),
                   title: Text(
                     'Important',
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontWeight: FontWeight.bold,
-                        fontSize: 17),
+                    style: TextStyle(fontSize: 17),
                   ),
                   trailing: FutureBuilder(
                     future: catDao.countImportant(),
@@ -70,10 +59,7 @@ class _AppDrawerState extends State<AppDrawer> {
                       if (snapshot.hasData) {
                         return Text(
                           snapshot.data.toString(),
-                          style: TextStyle(
-                              color: Colors.black,
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16),
+                          style: TextStyle(fontSize: 16),
                         );
                       } else {
                         return Text('0');
@@ -84,7 +70,10 @@ class _AppDrawerState extends State<AppDrawer> {
                 Divider(),
                 ListTile(
                   leading: Icon(Icons.check_circle_outline_rounded),
-                  title: Text('Completed'),
+                  title: Text(
+                    'Completed',
+                    style: TextStyle(fontSize: 16),
+                  ),
                   trailing: Text('0'),
                 ),
                 Divider(),
