@@ -103,7 +103,7 @@ class _TodoListsState extends State<TodoLists> {
                       size: 15,
                     )
                   : Icon(
-                      Icons.alarm_on,
+                      Icons.notifications_outlined,
                       size: 15,
                     ),
             ],

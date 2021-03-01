@@ -158,7 +158,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                       children: [
                         Container(
                             margin: EdgeInsets.only(right: 7),
-                            child: Icon(Icons.alarm)),
+                            child: Icon(Icons.notifications_outlined)),
                         _selectedTime == null
                             ? Text('Remind me')
                             : Text(
