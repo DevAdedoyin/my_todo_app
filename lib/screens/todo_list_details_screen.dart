@@ -155,38 +155,50 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       if (snapshot.data.steps != null) {
                                         step = snapshot.data.steps.split(",");
                                         print(step);
-                                        return ListView.builder(
-                                          shrinkWrap: true,
-                                          itemCount: step.length,
-                                          itemBuilder: (_, index) {
-                                            return Row(
-                                              children: [
-                                                CircleAvatar(
-                                                  radius: 15,
-                                                  child: Text(
-                                                    (index + 1).toString(),
-                                                    style: TextStyle(
-                                                        color: Colors.white,
-                                                        fontWeight:
-                                                            FontWeight.bold),
+                                        return SingleChildScrollView(
+                                          padding: EdgeInsets.all(10),
+                                          child: ListView.builder(
+                                            shrinkWrap: true,
+                                            itemCount: step.length,
+                                            itemBuilder: (_, index) {
+                                              return Row(
+                                                children: [
+                                                  CircleAvatar(
+                                                    radius: 15,
+                                                    child: Text(
+                                                      (index + 1).toString(),
+                                                      style: TextStyle(
+                                                          color: Colors.white,
+                                                          fontWeight:
+                                                              FontWeight.bold),
+                                                    ),
+                                                    backgroundColor: _args[2],
                                                   ),
-                                                  backgroundColor: _args[2],
-                                                ),
-                                                Container(
-                                                  margin:
-                                                      EdgeInsets.only(left: 10),
-                                                  child: Text(
-                                                    step[index],
+                                                  Container(
+                                                    margin: EdgeInsets.only(
+                                                        left: 10),
+                                                    child: Text(
+                                                      step[index],
+                                                    ),
                                                   ),
-                                                ),
-                                                Spacer(),
-                                                IconButton(
-                                                    icon: Icon(Icons.delete),
-                                                    onPressed: () {},
-                                                    color: _args[2])
-                                              ],
-                                            );
-                                          },
+                                                  Spacer(),
+                                                  IconButton(
+                                                      icon: Icon(Icons.delete),
+                                                      onPressed: () {
+                                                        step.remove(
+                                                            step[index]);
+                                                        String stepsSeperator =
+                                                            step.join(",");
+                                                        _taskDao.updateSteps(
+                                                            snapshot.data.copyWith(
+                                                                steps:
+                                                                    stepsSeperator));
+                                                      },
+                                                      color: _args[2])
+                                                ],
+                                              );
+                                            },
+                                          ),
                                         );
                                       } else {
                                         return Row(
