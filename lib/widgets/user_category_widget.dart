@@ -43,51 +43,69 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           height: 70,
           alignment: Alignment.center,
           child: ListTile(
-              leading: IconButton(
-                icon: widget.isImportant
-                    ? Icon(
-                        Icons.star,
-                        size: 20,
-                        color: widget.color,
-                      )
-                    : Icon(
-                        Icons.star_border,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                onPressed: () {
-                  //  catDao.allCategories;
-                  if (widget.isImportant == true) {
-                    catDao.updateCategoryImportance(
-                        Categorie(id: widget.catId, isImportant: false)
-                            .copyWith(id: widget.catId));
-                  } else {
-                    catDao.updateCategoryImportance(
-                        Categorie(id: widget.catId, isImportant: true)
-                            .copyWith(id: widget.catId));
-                  }
-                },
-                splashColor: widget.color,
-              ),
-              title: Text(
-                widget.title,
-                style: TextStyle(fontSize: 20),
-              ),
-              trailing: StreamBuilder(
-                stream: taskDao.getSpecificTask(widget.catId),
-                builder: (_, snapshot) {
-                  print('DATA: ' + snapshot.data.length.toString());
+            leading: IconButton(
+              icon: widget.isImportant
+                  ? Icon(
+                      Icons.star,
+                      size: 20,
+                      color: widget.color,
+                    )
+                  : Icon(
+                      Icons.star_border,
+                      size: 25,
+                      color: Colors.black,
+                    ),
+              onPressed: () {
+                //  catDao.allCategories;
+                if (widget.isImportant == true) {
+                  catDao.updateCategoryImportance(
+                      Categorie(id: widget.catId, isImportant: false)
+                          .copyWith(id: widget.catId));
+                } else {
+                  catDao.updateCategoryImportance(
+                      Categorie(id: widget.catId, isImportant: true)
+                          .copyWith(id: widget.catId));
+                }
+              },
+              splashColor: widget.color,
+            ),
+            title: Text(
+              widget.title,
+              style: TextStyle(fontSize: 20),
+            ),
+            trailing: StreamBuilder(
+              stream: taskDao.getSpecificTask(widget.catId),
+              builder: (_, snapshot) {
+                print('DATA: ' + snapshot.data.length.toString());
 
-                  if (snapshot.hasData) {
-                    return Text(
-                      snapshot.data.length.toString(),
-                      style: TextStyle(fontSize: 15),
-                    );
-                  } else {
-                    return Text('0');
-                  }
-                },
-              )),
+                if (snapshot.hasData) {
+                  return Container(
+                    width: 50,
+                    // color: Colors.amberAccent,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () {},
+                          ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            snapshot.data.length.toString(),
+                            style: TextStyle(fontSize: 15),
+                          ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return Text('0');
+                }
+              },
+            ),
+          ),
         ),
       ),
     );

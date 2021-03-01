@@ -19,11 +19,6 @@ class CategoryScreen extends StatefulWidget {
 class _CategoryScreenState extends State<CategoryScreen> {
   @override
   Widget build(BuildContext context) {
-    // final userCats = Provider.of<Categories>(context);
-    // final getCategories = Provider.of<CategorieDao>(context);
-
-    // Color selectedColor = bgColor[0];
-
     return Scaffold(
         appBar: AppBar(
           backgroundColor: Theme.of(context).primaryColor,
