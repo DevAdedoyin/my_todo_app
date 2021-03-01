@@ -296,6 +296,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   ),
                                 ),
                                 Card(
+                                  elevation: 20,
                                   child: Column(
                                     children: [
                                       ListTile(
