@@ -145,7 +145,8 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                   ),
                                 ),
                                 StreamBuilder<Task>(
-                                  stream: _taskDao.getTask(taskItem.taskid),
+                                  stream:
+                                      _taskDao.getTask(snapshot.data.taskid),
                                   builder: (_, snapshot) {
                                     if (snapshot.hasData) {
                                       List<String> step;
@@ -263,15 +264,19 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       ),
                                     ),
                                     onPressed: () {
-                                      if (textController.text.isNotEmpty &&
-                                          taskItem.steps != null) {
-                                        String stepsSeperator =
-                                            taskItem.steps.toString() +
-                                                textController.text +
-                                                ',';
-                                        _taskDao.updateSteps(taskItem.copyWith(
-                                            steps: stepsSeperator));
-                                      }
+                                      setState(() {
+                                        if (textController.text.isNotEmpty &&
+                                            snapshot.data.steps.toString() !=
+                                                null) {
+                                          String stepsSeperator =
+                                              snapshot.data.steps.toString() +
+                                                  textController.text +
+                                                  ',';
+                                          print(stepsSeperator);
+                                          _taskDao.updateSteps(snapshot.data
+                                              .copyWith(steps: stepsSeperator));
+                                        }
+                                      });
                                     },
                                   ),
                                 )
