@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 import 'package:moor_flutter/moor_flutter.dart' hide Column;
-import 'package:my_todo_app/providers/todo_list.dart';
+import 'package:intl/date_symbol_data_local.dart';
 import 'package:provider/provider.dart';
 import 'package:my_todo_app/model/app_database.dart';
 
@@ -60,6 +60,8 @@ class _AddListWidgetState extends State<AddListWidget> {
   @override
   Widget build(BuildContext context) {
     final insertTask = Provider.of<TaskDao>(context);
+    initializeDateFormatting();
+
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
       child: Container(
@@ -134,7 +136,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                         _selectedDate == null
                             ? Text('Set due date')
                             : Text(
-                                'Due Date: ${DateFormat.yMd().format(_selectedDate)}')
+                                'Due Date: ${DateFormat.yMMMd(Localizations.localeOf(context).languageCode).format(_selectedDate)}'),
                       ],
                     ),
                     onPressed: () {
