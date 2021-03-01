@@ -155,8 +155,9 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                       if (snapshot.data.steps != null) {
                                         step = snapshot.data.steps.split(",");
                                         print(step);
-                                        return SingleChildScrollView(
-                                          padding: EdgeInsets.all(10),
+                                        return ConstrainedBox(
+                                          constraints: BoxConstraints(
+                                              minHeight: 40, maxHeight: 400),
                                           child: ListView.builder(
                                             shrinkWrap: true,
                                             itemCount: step.length,
