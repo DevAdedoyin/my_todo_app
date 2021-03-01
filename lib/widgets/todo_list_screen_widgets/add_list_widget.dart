@@ -18,7 +18,7 @@ class _AddListWidgetState extends State<AddListWidget> {
   final _listTitleController = TextEditingController();
   DateTime _selectedDate;
   TimeOfDay _selectedTime;
-  MaterialLocalizations localizations;
+  // MaterialLocalizations localizations;
   bool isCheck;
 
   List<String> _daysOfTheWeek = [
@@ -61,6 +61,7 @@ class _AddListWidgetState extends State<AddListWidget> {
   Widget build(BuildContext context) {
     final insertTask = Provider.of<TaskDao>(context);
     initializeDateFormatting();
+    final localizations = MaterialLocalizations.of(context);
 
     return Padding(
       padding: MediaQuery.of(context).viewInsets,
@@ -92,9 +93,11 @@ class _AddListWidgetState extends State<AddListWidget> {
                     child: IconButton(
                       icon: Icon(Icons.save_rounded),
                       onPressed: () {
-                        String time = _selectedTime.hour.toString() +
-                            ':' +
-                            _selectedTime.minute.toString();
+                        final formattedTimeOfDay =
+                            localizations.formatTimeOfDay(_selectedTime);
+                        // String time = _selectedTime.hourOfPeriod.toString() +
+                        //     ':' +
+                        //     _selectedTime.minute.toString();
                         String formattedDate = DateFormat.yMMMd(
                                 Localizations.localeOf(context).languageCode)
                             .format(_selectedDate);
@@ -102,11 +105,11 @@ class _AddListWidgetState extends State<AddListWidget> {
 
                         insertTask.insertTask(TasksCompanion(
                             date: Value(formattedDate),
-                            time: Value(time),
+                            time: Value(formattedTimeOfDay),
                             title: Value(_listTitleController.text),
                             catid: Value(widget.catId),
                             frequency: Value(days)));
-                        print(time +
+                        print(formattedDate +
                             ' ' +
                             _selectedDate.toString() +
                             ' ' +
@@ -166,7 +169,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                         _selectedTime == null
                             ? Text('Remind me')
                             : Text(
-                                'Due Time: ${_selectedTime.hour}:${_selectedTime.minute}')
+                                'Due Time: ${localizations.formatTimeOfDay(_selectedTime)}')
                       ],
                     ),
                     onPressed: () {
