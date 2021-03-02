@@ -347,6 +347,7 @@ class Task extends DataClass implements Insertable<Task> {
   final bool isCompleted;
   final String steps;
   final bool isImportant;
+  final String dateCreated;
   final int catid;
   Task(
       {this.taskid,
@@ -358,6 +359,7 @@ class Task extends DataClass implements Insertable<Task> {
       this.isCompleted,
       this.steps,
       this.isImportant,
+      this.dateCreated,
       this.catid});
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -380,6 +382,8 @@ class Task extends DataClass implements Insertable<Task> {
           stringType.mapFromDatabaseResponse(data['${effectivePrefix}steps']),
       isImportant: boolType
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
+      dateCreated: stringType
+          .mapFromDatabaseResponse(data['${effectivePrefix}date_created']),
       catid: intType.mapFromDatabaseResponse(data['${effectivePrefix}catid']),
     );
   }
@@ -413,6 +417,9 @@ class Task extends DataClass implements Insertable<Task> {
     if (!nullToAbsent || isImportant != null) {
       map['is_important'] = Variable<bool>(isImportant);
     }
+    if (!nullToAbsent || dateCreated != null) {
+      map['date_created'] = Variable<String>(dateCreated);
+    }
     if (!nullToAbsent || catid != null) {
       map['catid'] = Variable<int>(catid);
     }
@@ -439,6 +446,9 @@ class Task extends DataClass implements Insertable<Task> {
       isImportant: isImportant == null && nullToAbsent
           ? const Value.absent()
           : Value(isImportant),
+      dateCreated: dateCreated == null && nullToAbsent
+          ? const Value.absent()
+          : Value(dateCreated),
       catid:
           catid == null && nullToAbsent ? const Value.absent() : Value(catid),
     );
@@ -457,6 +467,7 @@ class Task extends DataClass implements Insertable<Task> {
       isCompleted: serializer.fromJson<bool>(json['isCompleted']),
       steps: serializer.fromJson<String>(json['steps']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
+      dateCreated: serializer.fromJson<String>(json['dateCreated']),
       catid: serializer.fromJson<int>(json['catid']),
     );
   }
@@ -473,6 +484,7 @@ class Task extends DataClass implements Insertable<Task> {
       'isCompleted': serializer.toJson<bool>(isCompleted),
       'steps': serializer.toJson<String>(steps),
       'isImportant': serializer.toJson<bool>(isImportant),
+      'dateCreated': serializer.toJson<String>(dateCreated),
       'catid': serializer.toJson<int>(catid),
     };
   }
@@ -487,6 +499,7 @@ class Task extends DataClass implements Insertable<Task> {
           bool isCompleted,
           String steps,
           bool isImportant,
+          String dateCreated,
           int catid}) =>
       Task(
         taskid: taskid ?? this.taskid,
@@ -498,6 +511,7 @@ class Task extends DataClass implements Insertable<Task> {
         isCompleted: isCompleted ?? this.isCompleted,
         steps: steps ?? this.steps,
         isImportant: isImportant ?? this.isImportant,
+        dateCreated: dateCreated ?? this.dateCreated,
         catid: catid ?? this.catid,
       );
   @override
@@ -512,6 +526,7 @@ class Task extends DataClass implements Insertable<Task> {
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
+          ..write('dateCreated: $dateCreated, ')
           ..write('catid: $catid')
           ..write(')'))
         .toString();
@@ -534,8 +549,10 @@ class Task extends DataClass implements Insertable<Task> {
                               isCompleted.hashCode,
                               $mrjc(
                                   steps.hashCode,
-                                  $mrjc(isImportant.hashCode,
-                                      catid.hashCode))))))))));
+                                  $mrjc(
+                                      isImportant.hashCode,
+                                      $mrjc(dateCreated.hashCode,
+                                          catid.hashCode)))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -549,6 +566,7 @@ class Task extends DataClass implements Insertable<Task> {
           other.isCompleted == this.isCompleted &&
           other.steps == this.steps &&
           other.isImportant == this.isImportant &&
+          other.dateCreated == this.dateCreated &&
           other.catid == this.catid);
 }
 
@@ -562,6 +580,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<bool> isCompleted;
   final Value<String> steps;
   final Value<bool> isImportant;
+  final Value<String> dateCreated;
   final Value<int> catid;
   const TasksCompanion({
     this.taskid = const Value.absent(),
@@ -573,6 +592,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.isCompleted = const Value.absent(),
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
+    this.dateCreated = const Value.absent(),
     this.catid = const Value.absent(),
   });
   TasksCompanion.insert({
@@ -585,6 +605,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.isCompleted = const Value.absent(),
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
+    this.dateCreated = const Value.absent(),
     this.catid = const Value.absent(),
   });
   static Insertable<Task> custom({
@@ -597,6 +618,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<bool> isCompleted,
     Expression<String> steps,
     Expression<bool> isImportant,
+    Expression<String> dateCreated,
     Expression<int> catid,
   }) {
     return RawValuesInsertable({
@@ -609,6 +631,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       if (isCompleted != null) 'is_completed': isCompleted,
       if (steps != null) 'steps': steps,
       if (isImportant != null) 'is_important': isImportant,
+      if (dateCreated != null) 'date_created': dateCreated,
       if (catid != null) 'catid': catid,
     });
   }
@@ -623,6 +646,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       Value<bool> isCompleted,
       Value<String> steps,
       Value<bool> isImportant,
+      Value<String> dateCreated,
       Value<int> catid}) {
     return TasksCompanion(
       taskid: taskid ?? this.taskid,
@@ -634,6 +658,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
       isCompleted: isCompleted ?? this.isCompleted,
       steps: steps ?? this.steps,
       isImportant: isImportant ?? this.isImportant,
+      dateCreated: dateCreated ?? this.dateCreated,
       catid: catid ?? this.catid,
     );
   }
@@ -668,6 +693,9 @@ class TasksCompanion extends UpdateCompanion<Task> {
     if (isImportant.present) {
       map['is_important'] = Variable<bool>(isImportant.value);
     }
+    if (dateCreated.present) {
+      map['date_created'] = Variable<String>(dateCreated.value);
+    }
     if (catid.present) {
       map['catid'] = Variable<int>(catid.value);
     }
@@ -686,6 +714,7 @@ class TasksCompanion extends UpdateCompanion<Task> {
           ..write('isCompleted: $isCompleted, ')
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
+          ..write('dateCreated: $dateCreated, ')
           ..write('catid: $catid')
           ..write(')'))
         .toString();
@@ -790,6 +819,20 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         defaultValue: const Constant(false));
   }
 
+  final VerificationMeta _dateCreatedMeta =
+      const VerificationMeta('dateCreated');
+  GeneratedTextColumn _dateCreated;
+  @override
+  GeneratedTextColumn get dateCreated =>
+      _dateCreated ??= _constructDateCreated();
+  GeneratedTextColumn _constructDateCreated() {
+    return GeneratedTextColumn(
+      'date_created',
+      $tableName,
+      true,
+    );
+  }
+
   final VerificationMeta _catidMeta = const VerificationMeta('catid');
   GeneratedIntColumn _catid;
   @override
@@ -810,6 +853,7 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         isCompleted,
         steps,
         isImportant,
+        dateCreated,
         catid
       ];
   @override
@@ -862,6 +906,12 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
           _isImportantMeta,
           isImportant.isAcceptableOrUnknown(
               data['is_important'], _isImportantMeta));
+    }
+    if (data.containsKey('date_created')) {
+      context.handle(
+          _dateCreatedMeta,
+          dateCreated.isAcceptableOrUnknown(
+              data['date_created'], _dateCreatedMeta));
     }
     if (data.containsKey('catid')) {
       context.handle(
