@@ -37,9 +37,12 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
               color: Colors.white,
             ),
             Spacer(),
-            Icon(
-              Icons.delete,
-              color: Colors.white,
+            Text(
+              'Delete',
+              style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 15),
             )
           ],
         ),
