@@ -37,7 +37,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(10),
         ),
-        elevation: 7,
+        elevation: 15,
         shadowColor: Colors.black87,
         child: Container(
           height: 70,
@@ -56,7 +56,6 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                       color: Colors.black,
                     ),
               onPressed: () {
-                //  catDao.allCategories;
                 if (widget.isImportant == true) {
                   catDao.updateCategoryImportance(
                       Categorie(id: widget.catId, isImportant: false)

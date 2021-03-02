@@ -191,4 +191,8 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
     return (update(categories)..where((uc) => uc.id.equals(c.id)))
         .write(CategoriesCompanion.insert(isImportant: Value(c.isImportant)));
   }
+
+  Future deleteCategory(int catId) async {
+    return (delete(categories)..where((cat) => cat.id.equals(catId)));
+  }
 }
