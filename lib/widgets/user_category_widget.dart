@@ -26,14 +26,60 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
     final taskDao = Provider.of<TaskDao>(context);
     print(widget.catId);
     return Dismissible(
-      key: Key(widget.catId.toString()),
+      key: UniqueKey(),
+      background: Container(
+        padding: EdgeInsets.only(left: 20, right: 20),
+        color: Colors.red,
+        child: Row(
+          children: [
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            ),
+            Spacer(),
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+            )
+          ],
+        ),
+      ),
       onDismissed: (direction) {
-        setState(() {
-          catDao.deleteCategory(widget.catId);
-        });
-        Scaffold.of(context).showSnackBar(SnackBar(
-          content: Text(widget.title + " deleted"),
-        ));
+        showDialog(
+            context: context,
+            builder: (_) {
+              return AlertDialog(
+                actions: [
+                  IconButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    icon: Icon(
+                      Icons.cancel_rounded,
+                      color: Colors.red,
+                    ),
+                  ),
+                  IconButton(
+                    icon: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      catDao.deleteCategory(widget.catId);
+
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text(widget.title + " deleted"),
+                      ));
+                      Navigator.of(context).pop();
+                    },
+                  )
+                ],
+                elevation: 20,
+                title: Text('Delete ${widget.title}?'),
+                content:
+                    Text('Are you sure you want to delete ${widget.title}?'),
+              );
+            });
       },
       child: InkWell(
         onTap: () => {

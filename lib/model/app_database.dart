@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:moor/moor.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 import 'dart:io';
@@ -192,7 +193,6 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
         .write(CategoriesCompanion.insert(isImportant: Value(c.isImportant)));
   }
 
-  Future deleteCategory(int catId) async {
-    return (delete(categories)..where((cat) => cat.id.equals(catId)));
-  }
+  Future deleteCategories(Insertable<Categorie> cat) =>
+      delete(categories).delete(cat);
 }
