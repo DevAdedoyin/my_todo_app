@@ -59,18 +59,27 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                       color: Colors.red,
                     ),
                   ),
-                  IconButton(
-                    icon: Icon(
-                      Icons.check_circle,
-                      color: Colors.green,
-                    ),
-                    onPressed: () {
-                      catDao.deleteCategory(widget.catId);
+                  FutureBuilder<Categorie>(
+                    future: catDao.getCategory(widget.catId),
+                    builder: (_, snapshot) {
+                      if (snapshot.hasData) {
+                        return IconButton(
+                          icon: Icon(
+                            Icons.check_circle,
+                            color: Colors.green,
+                          ),
+                          onPressed: () {
+                            catDao.deleteCategories(snapshot.data);
 
-                      Scaffold.of(context).showSnackBar(SnackBar(
-                        content: Text(widget.title + " deleted"),
-                      ));
-                      Navigator.of(context).pop();
+                            Scaffold.of(context).showSnackBar(SnackBar(
+                              content: Text(widget.title + " deleted"),
+                            ));
+                            Navigator.of(context).pop();
+                          },
+                        );
+                      } else {
+                        return Text('No Data');
+                      }
                     },
                   )
                 ],

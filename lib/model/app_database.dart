@@ -195,4 +195,9 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
 
   Future deleteCategories(Insertable<Categorie> cat) =>
       delete(categories).delete(cat);
+
+  // Stream<Categorie> getSpecificCategory(int index) {
+  //   return (select(categories)..where((val) => val.id.equals(index)))
+  //       .watchSingle();
+  // }
 }
