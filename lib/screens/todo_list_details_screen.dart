@@ -346,7 +346,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
           padding: EdgeInsets.only(left: 15, right: 7),
           child: Row(
             children: [
-              Text('Created on Wed, Jan 7'),
+              Text('Created on ' + taskItem.dateCreated),
               Spacer(),
               Icon(Icons.delete)
             ],
