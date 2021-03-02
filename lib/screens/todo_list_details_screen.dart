@@ -178,12 +178,16 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                                     backgroundColor: _args[2],
                                                   ),
                                                   Container(
-                                                    margin: EdgeInsets.only(
-                                                        left: 10),
-                                                    child: Text(
-                                                      step[index],
-                                                    ),
-                                                  ),
+                                                      margin: EdgeInsets.only(
+                                                          left: 10),
+                                                      child: step[index]
+                                                              .contains('null')
+                                                          ? Text(step[index]
+                                                              .replaceRange(
+                                                                  0, 4, ''))
+                                                          : Text(
+                                                              step[index],
+                                                            )),
                                                   Spacer(),
                                                   IconButton(
                                                       icon: Icon(Icons.delete),
@@ -251,9 +255,6 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                         }
                                       });
                                       textController.clear();
-                                    },
-                                    onChanged: (changedVal) {
-                                      //TODO Update value of step in the database
                                     },
                                     decoration: InputDecoration(
                                       hintText:
