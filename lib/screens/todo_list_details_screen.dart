@@ -231,10 +231,27 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                 Container(
                                   margin: EdgeInsets.only(top: 5),
                                   child: TextField(
+                                    textInputAction: TextInputAction.done,
                                     controller: textController,
                                     keyboardType: TextInputType.text,
                                     minLines: 1,
                                     maxLines: null,
+                                    onSubmitted: (value) {
+                                      setState(() {
+                                        if (textController.text.isNotEmpty &&
+                                            snapshot.data.steps.toString() !=
+                                                null) {
+                                          String stepsSeperator =
+                                              snapshot.data.steps.toString() +
+                                                  textController.text +
+                                                  ',';
+                                          print(stepsSeperator);
+                                          _taskDao.updateSteps(snapshot.data
+                                              .copyWith(steps: stepsSeperator));
+                                        }
+                                      });
+                                      textController.clear();
+                                    },
                                     onChanged: (changedVal) {
                                       //TODO Update value of step in the database
                                     },
@@ -292,6 +309,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                               .copyWith(steps: stepsSeperator));
                                         }
                                       });
+                                      textController.clear();
                                     },
                                   ),
                                 ),
