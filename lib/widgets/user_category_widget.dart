@@ -44,8 +44,8 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           ],
         ),
       ),
-      onDismissed: (direction) {
-        showDialog(
+      confirmDismiss: (direction) async {
+        return await showDialog(
             context: context,
             builder: (_) {
               return AlertDialog(
@@ -60,28 +60,29 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                     ),
                   ),
                   FutureBuilder<Categorie>(
-                    future: catDao.getCategory(widget.catId),
-                    builder: (_, snapshot) {
-                      if (snapshot.hasData) {
-                        return IconButton(
-                          icon: Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          ),
-                          onPressed: () {
-                            catDao.deleteCategories(snapshot.data);
+                        future: catDao.getCategory(widget.catId),
+                        builder: (_, snapshot) {
+                          if (snapshot.hasData) {
+                            return IconButton(
+                              icon: Icon(
+                                Icons.check_circle,
+                                color: Colors.green,
+                              ),
+                              onPressed: () {
+                                catDao.deleteCategories(snapshot.data);
 
-                            Scaffold.of(context).showSnackBar(SnackBar(
-                              content: Text(widget.title + " deleted"),
-                            ));
-                            Navigator.of(context).pop();
-                          },
-                        );
-                      } else {
-                        return Text('No Data');
-                      }
-                    },
-                  )
+                                Scaffold.of(context).showSnackBar(SnackBar(
+                                  content: Text(widget.title + " deleted"),
+                                ));
+                                Navigator.of(context).pop();
+                              },
+                            );
+                          } else {
+                            return Text('No Data');
+                          }
+                        },
+                      ) ??
+                      false
                 ],
                 elevation: 20,
                 title: Text('Delete ${widget.title}?'),
