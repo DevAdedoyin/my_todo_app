@@ -313,11 +313,15 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                                         trailing: Icon(Icons.lens_outlined),
                                       ),
                                       Divider(),
-                                      ListTile(
-                                        leading: Icon(Icons.notifications),
-                                        title: Text('Remind Me On'),
-                                        subtitle: Text(snapshot.data.frequency),
-                                        trailing: Icon(Icons.lens_outlined),
+                                      Container(
+                                        margin: EdgeInsets.only(bottom: 10),
+                                        child: ListTile(
+                                          leading: Icon(Icons.notifications),
+                                          title: Text('Remind Me On'),
+                                          subtitle:
+                                              Text(snapshot.data.frequency),
+                                          trailing: Icon(Icons.lens_outlined),
+                                        ),
                                       )
                                     ],
                                   ),
