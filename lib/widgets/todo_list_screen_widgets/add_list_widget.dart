@@ -102,13 +102,17 @@ class _AddListWidgetState extends State<AddListWidget> {
                                 Localizations.localeOf(context).languageCode)
                             .format(_selectedDate);
                         // _selectedDate.toString().split(" ").first;
+                        String createdDate = DateFormat.yMMMd(
+                                Localizations.localeOf(context).languageCode)
+                            .format(DateTime.now());
 
                         insertTask.insertTask(TasksCompanion(
                             date: Value(formattedDate),
                             time: Value(formattedTimeOfDay),
                             title: Value(_listTitleController.text),
                             catid: Value(widget.catId),
-                            frequency: Value(days)));
+                            frequency: Value(days),
+                            dateCreated: Value(createdDate)));
                         print(formattedDate +
                             ' ' +
                             _selectedDate.toString() +

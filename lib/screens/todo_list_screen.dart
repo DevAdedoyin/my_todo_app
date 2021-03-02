@@ -82,7 +82,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                 ),
                               ),
                               centerTitle: true,
-                              // collapseMode: CollapseMode.pin,
                             ),
                           ),
                         ],
