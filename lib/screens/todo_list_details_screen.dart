@@ -53,7 +53,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                   future: catDao.getCategory(taskItem.catid),
                   builder: (_, snapshot) {
                     return Text(
-                      'Checking',
+                      snapshot.data.categoryTitle,
                       style: TextStyle(fontStyle: FontStyle.italic),
                     );
                   },
