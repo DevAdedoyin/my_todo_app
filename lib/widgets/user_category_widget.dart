@@ -172,29 +172,39 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                     context: context,
                                     child: AlertDialog(
                                       title: Text('Edit category name'),
-                                      content: TextField(
-                                        maxLength: 30,
-                                        controller: textController,
-                                        maxLines: 1,
-                                        keyboardType: TextInputType.text,
-                                        onSubmitted: (value) {
-                                          if (textController.text.length > 30) {
-                                            SnackBar(
-                                              content: Text(
-                                                  'Category title should not be more than 30 charaters!!!'),
-                                            );
-                                          } else if (textController
-                                              .text.isEmpty) {
-                                            SnackBar(
-                                              content: Text(
-                                                  'Category must have a title!!!'),
+                                      content: FutureBuilder<Categorie>(
+                                        future:
+                                            catDao.getCategory(widget.catId),
+                                        builder: (_, snapshot) {
+                                          if (snapshot.hasData) {
+                                            return TextField(
+                                              maxLength: 30,
+                                              controller: textController,
+                                              maxLines: 1,
+                                              keyboardType: TextInputType.text,
+                                              onSubmitted: (value) {
+                                                if (textController.text.length >
+                                                    30) {
+                                                  SnackBar(
+                                                    content: Text(
+                                                        'Category title should not be more than 30 charaters!!!'),
+                                                  );
+                                                } else if (textController
+                                                    .text.isEmpty) {
+                                                  SnackBar(
+                                                    content: Text(
+                                                        'Category must have a title!!!'),
+                                                  );
+                                                } else {
+                                                  catDao.updateCategorie(
+                                                      snapshot.data);
+                                                  Navigator.of(context).pop();
+                                                }
+                                              },
                                             );
                                           } else {
-                                            catDao.insertCategorie(
-                                                CategoriesCompanion(
-                                                    categoryTitle: Value(
-                                                        textController.text)));
-                                            Navigator.of(context).pop();
+                                            return Text(
+                                                'Nothing to display here');
                                           }
                                         },
                                       ),

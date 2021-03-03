@@ -187,6 +187,12 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
   Future updateCategorie(Insertable<Categorie> categorie) =>
       update(categories).replace(categorie);
 
+//Updates Category Title
+  Future updateCategoryTitle(Categorie c) {
+    return (update(categories)..where((uc) => uc.id.equals(c.id))).write(
+        CategoriesCompanion.insert(categoryTitle: Value(c.categoryTitle)));
+  }
+
 // Update the category importance column of a particular row
   Future updateCategoryImportance(Categorie c) {
     return (update(categories)..where((uc) => uc.id.equals(c.id)))
