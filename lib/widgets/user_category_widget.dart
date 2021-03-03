@@ -176,6 +176,14 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         controller: textController,
                                         maxLines: 1,
                                         keyboardType: TextInputType.text,
+                                        onSubmitted: (value) {
+                                          if (textController.text.length > 30) {
+                                            SnackBar(
+                                              content: Text(
+                                                  'Category title should not be more than 30 charaters!!!'),
+                                            );
+                                          }
+                                        },
                                       ),
                                       actions: [
                                         IconButton(
@@ -189,7 +197,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         ),
                                         IconButton(
                                           icon: Icon(
-                                            Icons.check,
+                                            Icons.check_circle,
                                             color: Colors.green,
                                           ),
                                           onPressed: () {
