@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:my_todo_app/model/app_database.dart';
 
@@ -179,13 +180,21 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         onSubmitted: (value) {
                                           if (textController.text.length > 30) {
                                             SnackBar(
-                                              content: 
-                                              Text(
+                                              content: Text(
                                                   'Category title should not be more than 30 charaters!!!'),
                                             );
-                                          }else if(textController.text.isEmpty){
-                                            SnackBar(content: ,)
-
+                                          } else if (textController
+                                              .text.isEmpty) {
+                                            SnackBar(
+                                              content: Text(
+                                                  'Category must have a title!!!'),
+                                            );
+                                          } else {
+                                            catDao.insertCategorie(
+                                                CategoriesCompanion(
+                                                    categoryTitle: Value(
+                                                        textController.text)));
+                                            Navigator.of(context).pop();
                                           }
                                         },
                                       ),
