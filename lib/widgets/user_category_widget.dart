@@ -156,7 +156,32 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                             flex: 3,
                             child: IconButton(
                               icon: Icon(Icons.edit),
-                              onPressed: () {},
+                              onPressed: () {
+                                showDialog(
+                                    context: context,
+                                    child: AlertDialog(
+                                      actions: [
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.cancel,
+                                            color: Colors.red,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                        IconButton(
+                                          icon: Icon(
+                                            Icons.check,
+                                            color: Colors.green,
+                                          ),
+                                          onPressed: () {
+                                            Navigator.of(context).pop();
+                                          },
+                                        ),
+                                      ],
+                                    ));
+                              },
                             ),
                           ),
                           Expanded(
