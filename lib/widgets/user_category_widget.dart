@@ -20,10 +20,20 @@ class UserCategoriesWidget extends StatefulWidget {
 }
 
 class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
+  final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    // TODO: implement dispose
+    super.dispose();
+    textController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     final catDao = Provider.of<CategorieDao>(context);
     final taskDao = Provider.of<TaskDao>(context);
+
     print(widget.catId);
     return Dismissible(
       key: UniqueKey(),
@@ -160,6 +170,10 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                 showDialog(
                                     context: context,
                                     child: AlertDialog(
+                                      title: Text('Edit category name'),
+                                      content: TextField(
+                                        maxLength: 30,
+                                      ),
                                       actions: [
                                         IconButton(
                                           icon: Icon(
