@@ -179,9 +179,13 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         onSubmitted: (value) {
                                           if (textController.text.length > 30) {
                                             SnackBar(
-                                              content: Text(
+                                              content: 
+                                              Text(
                                                   'Category title should not be more than 30 charaters!!!'),
                                             );
+                                          }else if(textController.text.isEmpty){
+                                            SnackBar(content: ,)
+
                                           }
                                         },
                                       ),
