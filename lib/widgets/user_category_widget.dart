@@ -173,6 +173,9 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                       title: Text('Edit category name'),
                                       content: TextField(
                                         maxLength: 30,
+                                        controller: textController,
+                                        maxLines: 1,
+                                        keyboardType: TextInputType.text,
                                       ),
                                       actions: [
                                         IconButton(
