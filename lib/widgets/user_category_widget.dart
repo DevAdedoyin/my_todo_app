@@ -197,7 +197,10 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                                   );
                                                 } else {
                                                   catDao.updateCategorie(
-                                                      snapshot.data);
+                                                      snapshot.data.copyWith(
+                                                          categoryTitle:
+                                                              textController
+                                                                  .text));
                                                   Navigator.of(context).pop();
                                                 }
                                               },
