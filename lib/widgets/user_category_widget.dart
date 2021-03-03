@@ -183,26 +183,12 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                               maxLines: 1,
                                               keyboardType: TextInputType.text,
                                               onSubmitted: (value) {
-                                                if (textController.text.length >
-                                                    30) {
-                                                  SnackBar(
-                                                    content: Text(
-                                                        'Category title should not be more than 30 charaters!!!'),
-                                                  );
-                                                } else if (textController
-                                                    .text.isEmpty) {
-                                                  SnackBar(
-                                                    content: Text(
-                                                        'Category must have a title!!!'),
-                                                  );
-                                                } else {
-                                                  catDao.updateCategorie(
-                                                      snapshot.data.copyWith(
-                                                          categoryTitle:
-                                                              textController
-                                                                  .text));
-                                                  Navigator.of(context).pop();
-                                                }
+                                                catDao.updateCategorie(
+                                                    snapshot.data.copyWith(
+                                                        categoryTitle:
+                                                            textController
+                                                                .text));
+                                                Navigator.of(context).pop();
                                               },
                                             );
                                           } else {
