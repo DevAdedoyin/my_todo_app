@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:moor_flutter/moor_flutter.dart';
 
 import 'package:my_todo_app/model/app_database.dart';
@@ -178,9 +179,17 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         builder: (_, snapshot) {
                                           if (snapshot.hasData) {
                                             return TextField(
-                                              maxLength: 30,
+                                              maxLength: 7,
                                               controller: textController,
-                                              maxLines: 1,
+                                              decoration: InputDecoration(
+                                                  counterText: ''),
+                                              // maxLines: 1,
+                                              // maxLengthEnforced: 0,
+                                              // inputFormatters: [
+                                              //   LengthLimitingTextInputFormatter(
+                                              //     15,
+                                              //   )
+                                              // ],
                                               keyboardType: TextInputType.text,
                                               onSubmitted: (value) {
                                                 catDao.updateCategorie(
