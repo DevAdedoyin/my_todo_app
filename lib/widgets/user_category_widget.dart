@@ -179,17 +179,24 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         builder: (_, snapshot) {
                                           if (snapshot.hasData) {
                                             return TextField(
-                                              maxLength: 7,
+                                              maxLength: 30,
                                               controller: textController,
-                                              decoration: InputDecoration(
-                                                  counterText: ''),
-                                              // maxLines: 1,
-                                              // maxLengthEnforced: 0,
-                                              // inputFormatters: [
-                                              //   LengthLimitingTextInputFormatter(
-                                              //     15,
-                                              //   )
-                                              // ],
+                                              onChanged: (String value) {
+                                                String result;
+                                                result = value;
+                                                if (result.length > 30) {
+                                                  result =
+                                                      result.substring(0, 30);
+                                                  textController.text = result;
+                                                  textController.selection =
+                                                      TextSelection
+                                                          .fromPosition(
+                                                              TextPosition(
+                                                                  offset: result
+                                                                      .length));
+                                                }
+                                              },
+                                              maxLengthEnforced: true,
                                               keyboardType: TextInputType.text,
                                               onSubmitted: (value) {
                                                 catDao.updateCategorie(
