@@ -35,6 +35,23 @@ class _TodoListsState extends State<TodoLists> {
       key: UniqueKey(),
       background: Container(
         color: widget.color,
+        child: Row(
+          children: [
+            Expanded(
+              child: Icon(
+                Icons.edit,
+                color: Colors.white,
+              ),
+            ),
+            Spacer(),
+            Expanded(
+              child: Icon(
+                Icons.delete,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
       ),
       confirmDismiss: (direction) {
         if (direction == DismissDirection.startToEnd) {
