@@ -55,7 +55,31 @@ class _TodoListsState extends State<TodoLists> {
       ),
       confirmDismiss: (direction) {
         if (direction == DismissDirection.startToEnd) {
-          return;
+          return showDialog(
+            context: context,
+            child: AlertDialog(
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.cancel,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.check_outlined,
+                    color: Colors.green,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            ),
+          );
         } else {
           return;
         }
