@@ -72,6 +72,7 @@ class _TodoListsState extends State<TodoLists> {
                     color: Colors.red,
                   ),
                   onPressed: () {
+                    textController.clear();
                     Navigator.of(context).pop();
                   },
                 ),
