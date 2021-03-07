@@ -92,6 +92,7 @@ class _TodoListsState extends State<TodoLists> {
                     hintStyle: TextStyle(fontStyle: FontStyle.italic)),
                 maxLength: 30,
                 maxLengthEnforced: true,
+                controller: textController,
                 onChanged: (String value) {
                   String result;
                   result = value;
