@@ -21,6 +21,13 @@ class TodoLists extends StatefulWidget {
 class _TodoListsState extends State<TodoLists> {
   bool isComplete;
   bool isImportant;
+  final textController = TextEditingController();
+
+  @override
+  void dispose() {
+    textController.dispose();
+    super.dispose();
+  }
 
   @override
   void initState() {
@@ -78,6 +85,21 @@ class _TodoListsState extends State<TodoLists> {
                   },
                 ),
               ],
+              title: Text('Rename ${widget.item.title}?'),
+              content: TextField(
+                maxLength: 30,
+                maxLengthEnforced: true,
+                onChanged: (String value) {
+                  String result;
+                  result = value;
+                  if (result.length > 25) {
+                    result = result.substring(0, 25);
+                    textController.text = result;
+                    textController.selection = TextSelection.fromPosition(
+                        TextPosition(offset: result.length));
+                  }
+                },
+              ),
             ),
           );
         } else {
