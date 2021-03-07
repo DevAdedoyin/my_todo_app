@@ -41,6 +41,7 @@ class MainApp extends StatelessWidget {
           home: CategoryScreen(),
           // CategoryScreen(),
           routes: {
+            CategoryScreen.routeName: (ctx) => CategoryScreen(),
             TodoListScreen.routeName: (ctx) => TodoListScreen(),
             ToDoListDetailsScreen.routeName: (ctx) => ToDoListDetailsScreen()
           }),
