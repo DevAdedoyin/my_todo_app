@@ -40,7 +40,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
       key: UniqueKey(),
       background: Container(
         padding: EdgeInsets.only(left: 20, right: 20),
-        color: Colors.red,
+        color: widget.color,
         child: Row(
           children: [
             Icon(
