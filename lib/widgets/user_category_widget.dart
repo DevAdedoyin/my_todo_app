@@ -149,7 +149,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
               ),
               title: Text(
                 widget.title,
-                style: TextStyle(fontSize: 20),
+                style: TextStyle(fontSize: 18),
               ),
               trailing: StreamBuilder(
                 stream: taskDao.getSpecificTask(widget.catId),
