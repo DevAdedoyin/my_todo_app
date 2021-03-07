@@ -71,6 +71,17 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                           child: TextField(
                             maxLength: 25,
                             maxLengthEnforced: true,
+                            onChanged: (String value) {
+                              String result;
+                              result = value;
+                              if (result.length > 25) {
+                                result = result.substring(0, 25);
+                                _textFieldController.text = result;
+                                _textFieldController.selection =
+                                    TextSelection.fromPosition(
+                                        TextPosition(offset: result.length));
+                              }
+                            },
                             controller: _textFieldController,
                             decoration: InputDecoration(
                               hintText: 'Enter your category',
