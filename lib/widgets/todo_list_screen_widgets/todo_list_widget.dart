@@ -104,7 +104,12 @@ class _TodoListsState extends State<TodoLists> {
                         TextPosition(offset: result.length));
                   }
                 },
-                onSubmitted: (newTitle) {},
+                onSubmitted: (newTitle) {
+                  widget.dao.updateTask(
+                      widget.item.copyWith(title: textController.text));
+                  textController.clear();
+                  Navigator.of(context).pop();
+                },
               ),
             ),
           );
