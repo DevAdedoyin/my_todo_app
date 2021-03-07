@@ -87,23 +87,27 @@ class _TodoListsState extends State<TodoLists> {
               ],
               title: Text('Rename ${widget.item.title}?'),
               content: TextField(
+                decoration: InputDecoration(
+                    hintText: 'Please enter your title update here!!!',
+                    hintStyle: TextStyle(fontStyle: FontStyle.italic)),
                 maxLength: 30,
                 maxLengthEnforced: true,
                 onChanged: (String value) {
                   String result;
                   result = value;
-                  if (result.length > 25) {
-                    result = result.substring(0, 25);
+                  if (result.length > 30) {
+                    result = result.substring(0, 30);
                     textController.text = result;
                     textController.selection = TextSelection.fromPosition(
                         TextPosition(offset: result.length));
                   }
                 },
+                onSubmitted: (newTitle) {},
               ),
             ),
           );
         } else {
-          return;
+          return null;
         }
       },
       child: GestureDetector(
