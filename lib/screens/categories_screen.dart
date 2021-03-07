@@ -86,13 +86,24 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
                 Center(
                   child: Column(
                     children: [
-                      Icon(
-                        Icons.hourglass_empty_rounded,
-                        size: 20,
+                      Container(
+                        width: 200,
+                        child: SizedBox(
+                          child: Card(
+                            elevation: 50,
+                            child: Image.asset('assets/images/empty.png'),
+                          ),
+                        ),
                       ),
-                      Text(
-                        "You have no category yet.",
-                        style: TextStyle(fontSize: 20),
+                      Card(
+                        elevation: 50,
+                        child: Padding(
+                          padding: const EdgeInsets.all(8.0),
+                          child: Text(
+                            "You have no category yet.",
+                            style: TextStyle(fontSize: 20),
+                          ),
+                        ),
                       ),
                     ],
                   ),
