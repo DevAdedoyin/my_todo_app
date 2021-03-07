@@ -47,7 +47,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
       content: StatefulBuilder(
           builder: (BuildContext context, StateSetter stateSetter) {
         return Container(
-          height: 160,
+          height: MediaQuery.of(context).size.height / 4,
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
@@ -69,6 +69,8 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                       child: Container(
                           margin: EdgeInsets.only(left: 10),
                           child: TextField(
+                            maxLength: 25,
+                            maxLengthEnforced: true,
                             controller: _textFieldController,
                             decoration: InputDecoration(
                               hintText: 'Enter your category',
