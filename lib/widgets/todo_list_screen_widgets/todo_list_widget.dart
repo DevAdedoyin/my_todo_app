@@ -78,10 +78,13 @@ class _TodoListsState extends State<TodoLists> {
                 ),
                 IconButton(
                   icon: Icon(
-                    Icons.check_outlined,
+                    Icons.check_circle,
                     color: Colors.green,
                   ),
                   onPressed: () {
+                    widget.dao.updateTask(
+                        widget.item.copyWith(title: textController.text));
+                    textController.clear();
                     Navigator.of(context).pop();
                   },
                 ),
