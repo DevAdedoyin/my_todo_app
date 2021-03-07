@@ -120,137 +120,130 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
           ),
           elevation: 15,
           shadowColor: Colors.black87,
-          child: Container(
-            height: 70,
-            alignment: Alignment.center,
-            child: ListTile(
-              leading: IconButton(
-                icon: widget.isImportant
-                    ? Icon(
-                        Icons.star,
-                        size: 20,
-                        color: widget.color,
-                      )
-                    : Icon(
-                        Icons.star_border,
-                        size: 25,
-                        color: Colors.black,
-                      ),
-                onPressed: () {
-                  if (widget.isImportant == true) {
-                    catDao.updateCategoryImportance(
-                        Categorie(id: widget.catId, isImportant: false)
-                            .copyWith(id: widget.catId));
-                  } else {
-                    catDao.updateCategoryImportance(
-                        Categorie(id: widget.catId, isImportant: true)
-                            .copyWith(id: widget.catId));
-                  }
-                },
-                splashColor: widget.color,
-              ),
-              title: Text(
-                widget.title,
-                style: TextStyle(fontSize: 20),
-              ),
-              trailing: StreamBuilder(
-                stream: taskDao.getSpecificTask(widget.catId),
-                builder: (_, snapshot) {
-                  print('DATA: ' + snapshot.data.length.toString());
+          child: ListTile(
+            leading: IconButton(
+              icon: widget.isImportant
+                  ? Icon(
+                      Icons.star,
+                      size: 20,
+                      color: widget.color,
+                    )
+                  : Icon(
+                      Icons.star_border,
+                      size: 25,
+                      color: Colors.black,
+                    ),
+              onPressed: () {
+                if (widget.isImportant == true) {
+                  catDao.updateCategoryImportance(
+                      Categorie(id: widget.catId, isImportant: false)
+                          .copyWith(id: widget.catId));
+                } else {
+                  catDao.updateCategoryImportance(
+                      Categorie(id: widget.catId, isImportant: true)
+                          .copyWith(id: widget.catId));
+                }
+              },
+              splashColor: widget.color,
+            ),
+            title: Text(
+              widget.title,
+              style: TextStyle(fontSize: 20),
+            ),
+            trailing: StreamBuilder(
+              stream: taskDao.getSpecificTask(widget.catId),
+              builder: (_, snapshot) {
+                // print('DATA: ' + snapshot.data.length.toString());
 
-                  if (snapshot.hasData) {
-                    return Container(
-                      width: 50,
-                      // color: Colors.amberAccent,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 3,
-                            child: IconButton(
-                              icon: Icon(Icons.edit),
-                              onPressed: () {
-                                showDialog(
-                                    context: context,
-                                    child: AlertDialog(
-                                      title: Text('Edit category name'),
-                                      content: FutureBuilder<Categorie>(
-                                        future:
-                                            catDao.getCategory(widget.catId),
-                                        builder: (_, snapshot) {
-                                          if (snapshot.hasData) {
-                                            return TextField(
-                                              maxLength: 25,
-                                              controller: textController,
-                                              onChanged: (String value) {
-                                                String result;
-                                                result = value;
-                                                if (result.length > 25) {
-                                                  result =
-                                                      result.substring(0, 25);
-                                                  textController.text = result;
-                                                  textController.selection =
-                                                      TextSelection
-                                                          .fromPosition(
-                                                              TextPosition(
-                                                                  offset: result
-                                                                      .length));
-                                                }
-                                              },
-                                              maxLengthEnforced: true,
-                                              keyboardType: TextInputType.text,
-                                              onSubmitted: (value) {
-                                                catDao.updateCategorie(
-                                                    snapshot.data.copyWith(
-                                                        categoryTitle:
-                                                            textController
-                                                                .text));
-                                                Navigator.of(context).pop();
-                                              },
-                                            );
-                                          } else {
-                                            return Text(
-                                                'Nothing to display here');
-                                          }
+                if (snapshot.hasData) {
+                  return Container(
+                    width: 50,
+                    // color: Colors.amberAccent,
+                    child: Row(
+                      children: [
+                        Expanded(
+                          flex: 3,
+                          child: IconButton(
+                            icon: Icon(Icons.edit),
+                            onPressed: () {
+                              showDialog(
+                                  context: context,
+                                  child: AlertDialog(
+                                    title: Text('Edit category name'),
+                                    content: FutureBuilder<Categorie>(
+                                      future: catDao.getCategory(widget.catId),
+                                      builder: (_, snapshot) {
+                                        if (snapshot.hasData) {
+                                          return TextField(
+                                            maxLength: 25,
+                                            controller: textController,
+                                            onChanged: (String value) {
+                                              String result;
+                                              result = value;
+                                              if (result.length > 25) {
+                                                result =
+                                                    result.substring(0, 25);
+                                                textController.text = result;
+                                                textController.selection =
+                                                    TextSelection.fromPosition(
+                                                        TextPosition(
+                                                            offset:
+                                                                result.length));
+                                              }
+                                            },
+                                            maxLengthEnforced: true,
+                                            keyboardType: TextInputType.text,
+                                            onSubmitted: (value) {
+                                              catDao.updateCategorie(
+                                                  snapshot.data.copyWith(
+                                                      categoryTitle:
+                                                          textController.text));
+                                              Navigator.of(context).pop();
+                                            },
+                                          );
+                                        } else {
+                                          return Text(
+                                              'Nothing to display here');
+                                        }
+                                      },
+                                    ),
+                                    actions: [
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.cancel,
+                                          color: Colors.red,
+                                        ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
                                         },
                                       ),
-                                      actions: [
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.cancel,
-                                            color: Colors.red,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
+                                      IconButton(
+                                        icon: Icon(
+                                          Icons.check_circle,
+                                          color: Colors.green,
                                         ),
-                                        IconButton(
-                                          icon: Icon(
-                                            Icons.check_circle,
-                                            color: Colors.green,
-                                          ),
-                                          onPressed: () {
-                                            Navigator.of(context).pop();
-                                          },
-                                        ),
-                                      ],
-                                    ));
-                              },
-                            ),
+                                        onPressed: () {
+                                          Navigator.of(context).pop();
+                                        },
+                                      ),
+                                    ],
+                                  ));
+                            },
                           ),
-                          Expanded(
-                            child: Text(
-                              snapshot.data.length.toString(),
-                              style: TextStyle(fontSize: 15),
-                            ),
+                        ),
+                        Expanded(
+                          child: Text(
+                            snapshot.data.length.toString(),
+                            style: TextStyle(fontSize: 15),
                           ),
-                        ],
-                      ),
-                    );
-                  } else {
-                    return Text('0');
-                  }
-                },
-              ),
+                        ),
+                      ],
+                    ),
+                  );
+                } else {
+                  return Text('0');
+                }
+              },
             ),
           ),
         ),

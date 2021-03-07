@@ -78,32 +78,37 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
     builder: (context, snapshot) {
       final categories = snapshot.data ?? List();
 
-      return categories.isEmpty
-          ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Center(
-                child: Column(
-                  children: [
-                    Icon(
-                      Icons.hourglass_empty_rounded,
-                      size: 20,
-                    ),
-                    Text(
-                      "You have no category yet.",
-                      style: TextStyle(fontSize: 20),
-                    ),
-                  ],
-                ),
-              ),
-            ])
-          : ListView.builder(
-              itemBuilder: (_, i) => UserCategoriesWidget(
-                    catId: categories[i].id,
-                    title: categories[i].categoryTitle ?? "",
-                    color: bgColors[categories[i].color],
-                    numOfList: categories[i].numberOfList.toString(),
-                    isImportant: categories[i].isImportant,
+      if (snapshot.connectionState == ConnectionState.waiting) {
+        return Center(child: CircularProgressIndicator());
+      } else {
+        return categories.isEmpty
+            ? Column(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Center(
+                  child: Column(
+                    children: [
+                      Icon(
+                        Icons.hourglass_empty_rounded,
+                        size: 20,
+                      ),
+                      Text(
+                        "You have no category yet.",
+                        style: TextStyle(fontSize: 20),
+                      ),
+                    ],
                   ),
-              itemCount: categories.length);
+                ),
+              ])
+            : ListView.builder(
+                shrinkWrap: true,
+                itemBuilder: (_, i) => UserCategoriesWidget(
+                      catId: categories[i].id,
+                      title: categories[i].categoryTitle ?? "",
+                      color: bgColors[categories[i].color],
+                      numOfList: categories[i].numberOfList.toString(),
+                      isImportant: categories[i].isImportant,
+                    ),
+                itemCount: categories.length);
+      }
     },
   );
 }
