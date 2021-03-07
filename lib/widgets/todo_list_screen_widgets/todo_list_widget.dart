@@ -33,6 +33,9 @@ class _TodoListsState extends State<TodoLists> {
   Widget build(BuildContext context) {
     return Dismissible(
       key: UniqueKey(),
+      background: Container(
+        color: widget.color,
+      ),
       confirmDismiss: (direction) {
         if (direction == DismissDirection.startToEnd) {
           return;
