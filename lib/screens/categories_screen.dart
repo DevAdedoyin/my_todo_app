@@ -87,7 +87,7 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
                   child: Column(
                     children: [
                       Container(
-                        width: 200,
+                        width: 230,
                         child: SizedBox(
                           child: Card(
                             elevation: 50,
@@ -100,8 +100,9 @@ StreamBuilder<List<Categorie>> _buildCategoryList(BuildContext context) {
                         child: Padding(
                           padding: const EdgeInsets.all(8.0),
                           child: Text(
-                            "You have no category yet.",
-                            style: TextStyle(fontSize: 20),
+                            "You have no category yet",
+                            style: TextStyle(
+                                fontSize: 20, fontStyle: FontStyle.italic),
                           ),
                         ),
                       ),
