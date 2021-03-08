@@ -79,7 +79,20 @@ class _AddListWidgetState extends State<AddListWidget> {
                   child: Container(
                     margin: EdgeInsets.only(left: 10),
                     child: TextField(
+                      maxLength: 30,
+                      maxLengthEnforced: true,
                       controller: _listTitleController,
+                      onChanged: (String value) {
+                        String result;
+                        result = value;
+                        if (result.length > 30) {
+                          result = result.substring(0, 30);
+                          _listTitleController.text = result;
+                          _listTitleController.selection =
+                              TextSelection.fromPosition(
+                                  TextPosition(offset: result.length));
+                        }
+                      },
                       autofocus: true,
                       decoration: InputDecoration(
                         border: InputBorder.none,
