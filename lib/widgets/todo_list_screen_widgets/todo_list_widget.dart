@@ -63,92 +63,96 @@ class _TodoListsState extends State<TodoLists> {
       confirmDismiss: (direction) {
         if (direction == DismissDirection.startToEnd) {
           return showDialog(
-            context: context,
-            child: AlertDialog(
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.cancel,
-                    color: Colors.red,
+            builder: (_) {
+              return AlertDialog(
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.cancel,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      textController.clear();
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  onPressed: () {
-                    textController.clear();
-                    Navigator.of(context).pop();
+                  IconButton(
+                    icon: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      widget.dao.updateTask(
+                          widget.item.copyWith(title: textController.text));
+                      textController.clear();
+                      Navigator.of(context).pop();
+                    },
+                  ),
+                ],
+                title: Text('Rename ${widget.item.title}?'),
+                content: TextField(
+                  decoration: InputDecoration(
+                      hintText: 'Please enter your title update here!!!',
+                      hintStyle: TextStyle(fontStyle: FontStyle.italic)),
+                  maxLength: 30,
+                  maxLengthEnforced: true,
+                  controller: textController,
+                  onChanged: (String value) {
+                    String result;
+                    result = value;
+                    if (result.length > 30) {
+                      result = result.substring(0, 30);
+                      textController.text = result;
+                      textController.selection = TextSelection.fromPosition(
+                          TextPosition(offset: result.length));
+                    }
                   },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                  ),
-                  onPressed: () {
+                  onSubmitted: (newTitle) {
                     widget.dao.updateTask(
                         widget.item.copyWith(title: textController.text));
                     textController.clear();
                     Navigator.of(context).pop();
                   },
                 ),
-              ],
-              title: Text('Rename ${widget.item.title}?'),
-              content: TextField(
-                decoration: InputDecoration(
-                    hintText: 'Please enter your title update here!!!',
-                    hintStyle: TextStyle(fontStyle: FontStyle.italic)),
-                maxLength: 30,
-                maxLengthEnforced: true,
-                controller: textController,
-                onChanged: (String value) {
-                  String result;
-                  result = value;
-                  if (result.length > 30) {
-                    result = result.substring(0, 30);
-                    textController.text = result;
-                    textController.selection = TextSelection.fromPosition(
-                        TextPosition(offset: result.length));
-                  }
-                },
-                onSubmitted: (newTitle) {
-                  widget.dao.updateTask(
-                      widget.item.copyWith(title: textController.text));
-                  textController.clear();
-                  Navigator.of(context).pop();
-                },
-              ),
-            ),
+              );
+            },
+            context: context,
           );
         } else {
           return showDialog(
-            context: context,
-            child: AlertDialog(
-              actions: [
-                IconButton(
-                  icon: Icon(
-                    Icons.cancel,
-                    color: Colors.red,
+            builder: (_) {
+              return AlertDialog(
+                actions: [
+                  IconButton(
+                    icon: Icon(
+                      Icons.cancel,
+                      color: Colors.red,
+                    ),
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
                   ),
-                  onPressed: () {
-                    Navigator.of(context).pop();
-                  },
-                ),
-                IconButton(
-                  icon: Icon(
-                    Icons.check_circle,
-                    color: Colors.green,
-                  ),
-                  onPressed: () {
-                    widget.dao.deleteTask(widget.item);
+                  IconButton(
+                    icon: Icon(
+                      Icons.check_circle,
+                      color: Colors.green,
+                    ),
+                    onPressed: () {
+                      widget.dao.deleteTask(widget.item);
 
-                    Navigator.of(context).pop();
-                    Scaffold.of(context).showSnackBar(SnackBar(
-                      content: Text('${widget.item.title} deleted.'),
-                    ));
-                  },
-                ),
-              ],
-              content:
-                  Text('Are you sure you want to delete ${widget.item.title}?'),
-              title: Text('Delete ${widget.item.title}'),
-            ),
+                      Navigator.of(context).pop();
+                      Scaffold.of(context).showSnackBar(SnackBar(
+                        content: Text('${widget.item.title} deleted.'),
+                      ));
+                    },
+                  ),
+                ],
+                content: Text(
+                    'Are you sure you want to delete ${widget.item.title}?'),
+                title: Text('Delete ${widget.item.title}'),
+              );
+            },
+            context: context,
           );
         }
       },
