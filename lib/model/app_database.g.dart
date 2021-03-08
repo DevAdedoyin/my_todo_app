@@ -348,7 +348,6 @@ class Task extends DataClass implements Insertable<Task> {
   final String steps;
   final bool isImportant;
   final String dateCreated;
-  final bool isOld;
   final int catid;
   Task(
       {this.taskid,
@@ -361,7 +360,6 @@ class Task extends DataClass implements Insertable<Task> {
       this.steps,
       this.isImportant,
       this.dateCreated,
-      this.isOld,
       this.catid});
   factory Task.fromData(Map<String, dynamic> data, GeneratedDatabase db,
       {String prefix}) {
@@ -386,7 +384,6 @@ class Task extends DataClass implements Insertable<Task> {
           .mapFromDatabaseResponse(data['${effectivePrefix}is_important']),
       dateCreated: stringType
           .mapFromDatabaseResponse(data['${effectivePrefix}date_created']),
-      isOld: boolType.mapFromDatabaseResponse(data['${effectivePrefix}is_old']),
       catid: intType.mapFromDatabaseResponse(data['${effectivePrefix}catid']),
     );
   }
@@ -423,9 +420,6 @@ class Task extends DataClass implements Insertable<Task> {
     if (!nullToAbsent || dateCreated != null) {
       map['date_created'] = Variable<String>(dateCreated);
     }
-    if (!nullToAbsent || isOld != null) {
-      map['is_old'] = Variable<bool>(isOld);
-    }
     if (!nullToAbsent || catid != null) {
       map['catid'] = Variable<int>(catid);
     }
@@ -455,8 +449,6 @@ class Task extends DataClass implements Insertable<Task> {
       dateCreated: dateCreated == null && nullToAbsent
           ? const Value.absent()
           : Value(dateCreated),
-      isOld:
-          isOld == null && nullToAbsent ? const Value.absent() : Value(isOld),
       catid:
           catid == null && nullToAbsent ? const Value.absent() : Value(catid),
     );
@@ -476,7 +468,6 @@ class Task extends DataClass implements Insertable<Task> {
       steps: serializer.fromJson<String>(json['steps']),
       isImportant: serializer.fromJson<bool>(json['isImportant']),
       dateCreated: serializer.fromJson<String>(json['dateCreated']),
-      isOld: serializer.fromJson<bool>(json['isOld']),
       catid: serializer.fromJson<int>(json['catid']),
     );
   }
@@ -494,7 +485,6 @@ class Task extends DataClass implements Insertable<Task> {
       'steps': serializer.toJson<String>(steps),
       'isImportant': serializer.toJson<bool>(isImportant),
       'dateCreated': serializer.toJson<String>(dateCreated),
-      'isOld': serializer.toJson<bool>(isOld),
       'catid': serializer.toJson<int>(catid),
     };
   }
@@ -510,7 +500,6 @@ class Task extends DataClass implements Insertable<Task> {
           String steps,
           bool isImportant,
           String dateCreated,
-          bool isOld,
           int catid}) =>
       Task(
         taskid: taskid ?? this.taskid,
@@ -523,7 +512,6 @@ class Task extends DataClass implements Insertable<Task> {
         steps: steps ?? this.steps,
         isImportant: isImportant ?? this.isImportant,
         dateCreated: dateCreated ?? this.dateCreated,
-        isOld: isOld ?? this.isOld,
         catid: catid ?? this.catid,
       );
   @override
@@ -539,7 +527,6 @@ class Task extends DataClass implements Insertable<Task> {
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
           ..write('dateCreated: $dateCreated, ')
-          ..write('isOld: $isOld, ')
           ..write('catid: $catid')
           ..write(')'))
         .toString();
@@ -564,10 +551,8 @@ class Task extends DataClass implements Insertable<Task> {
                                   steps.hashCode,
                                   $mrjc(
                                       isImportant.hashCode,
-                                      $mrjc(
-                                          dateCreated.hashCode,
-                                          $mrjc(isOld.hashCode,
-                                              catid.hashCode))))))))))));
+                                      $mrjc(dateCreated.hashCode,
+                                          catid.hashCode)))))))))));
   @override
   bool operator ==(dynamic other) =>
       identical(this, other) ||
@@ -582,7 +567,6 @@ class Task extends DataClass implements Insertable<Task> {
           other.steps == this.steps &&
           other.isImportant == this.isImportant &&
           other.dateCreated == this.dateCreated &&
-          other.isOld == this.isOld &&
           other.catid == this.catid);
 }
 
@@ -597,7 +581,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
   final Value<String> steps;
   final Value<bool> isImportant;
   final Value<String> dateCreated;
-  final Value<bool> isOld;
   final Value<int> catid;
   const TasksCompanion({
     this.taskid = const Value.absent(),
@@ -610,7 +593,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.dateCreated = const Value.absent(),
-    this.isOld = const Value.absent(),
     this.catid = const Value.absent(),
   });
   TasksCompanion.insert({
@@ -624,7 +606,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
     this.steps = const Value.absent(),
     this.isImportant = const Value.absent(),
     this.dateCreated = const Value.absent(),
-    this.isOld = const Value.absent(),
     this.catid = const Value.absent(),
   });
   static Insertable<Task> custom({
@@ -638,7 +619,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
     Expression<String> steps,
     Expression<bool> isImportant,
     Expression<String> dateCreated,
-    Expression<bool> isOld,
     Expression<int> catid,
   }) {
     return RawValuesInsertable({
@@ -652,7 +632,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
       if (steps != null) 'steps': steps,
       if (isImportant != null) 'is_important': isImportant,
       if (dateCreated != null) 'date_created': dateCreated,
-      if (isOld != null) 'is_old': isOld,
       if (catid != null) 'catid': catid,
     });
   }
@@ -668,7 +647,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
       Value<String> steps,
       Value<bool> isImportant,
       Value<String> dateCreated,
-      Value<bool> isOld,
       Value<int> catid}) {
     return TasksCompanion(
       taskid: taskid ?? this.taskid,
@@ -681,7 +659,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
       steps: steps ?? this.steps,
       isImportant: isImportant ?? this.isImportant,
       dateCreated: dateCreated ?? this.dateCreated,
-      isOld: isOld ?? this.isOld,
       catid: catid ?? this.catid,
     );
   }
@@ -719,9 +696,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
     if (dateCreated.present) {
       map['date_created'] = Variable<String>(dateCreated.value);
     }
-    if (isOld.present) {
-      map['is_old'] = Variable<bool>(isOld.value);
-    }
     if (catid.present) {
       map['catid'] = Variable<int>(catid.value);
     }
@@ -741,7 +715,6 @@ class TasksCompanion extends UpdateCompanion<Task> {
           ..write('steps: $steps, ')
           ..write('isImportant: $isImportant, ')
           ..write('dateCreated: $dateCreated, ')
-          ..write('isOld: $isOld, ')
           ..write('catid: $catid')
           ..write(')'))
         .toString();
@@ -860,15 +833,6 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
     );
   }
 
-  final VerificationMeta _isOldMeta = const VerificationMeta('isOld');
-  GeneratedBoolColumn _isOld;
-  @override
-  GeneratedBoolColumn get isOld => _isOld ??= _constructIsOld();
-  GeneratedBoolColumn _constructIsOld() {
-    return GeneratedBoolColumn('is_old', $tableName, true,
-        defaultValue: const Constant(true));
-  }
-
   final VerificationMeta _catidMeta = const VerificationMeta('catid');
   GeneratedIntColumn _catid;
   @override
@@ -890,7 +854,6 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
         steps,
         isImportant,
         dateCreated,
-        isOld,
         catid
       ];
   @override
@@ -949,10 +912,6 @@ class $TasksTable extends Tasks with TableInfo<$TasksTable, Task> {
           _dateCreatedMeta,
           dateCreated.isAcceptableOrUnknown(
               data['date_created'], _dateCreatedMeta));
-    }
-    if (data.containsKey('is_old')) {
-      context.handle(
-          _isOldMeta, isOld.isAcceptableOrUnknown(data['is_old'], _isOldMeta));
     }
     if (data.containsKey('catid')) {
       context.handle(
