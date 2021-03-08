@@ -16,6 +16,18 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   int _value;
+  bool _isOld;
+
+  @override
+  void initState() {
+    super.initState();
+    _isOld = true;
+  }
+
+  @override
+  void didChangeDependencies() {
+    super.didChangeDependencies();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +39,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
       body: SafeArea(
         child: Container(
           child: StreamBuilder<List<Task>>(
-            stream: _tasks.getSpecificTask(_args[2]),
+            stream: _isOld
+                ? _tasks.getSpecificTask(_args[2])
+                : _tasks.getSpecificTask(_args[2]),
             builder: (_, snapshot) {
               if (snapshot.data.isNotEmpty) {
                 return CustomScrollView(

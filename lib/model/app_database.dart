@@ -39,7 +39,6 @@ class Tasks extends Table {
   BoolColumn get isImportant =>
       boolean().nullable().withDefault(const Constant(false))();
   TextColumn get dateCreated => text().nullable()();
-
   IntColumn get catid =>
       integer().nullable().customConstraint('NULL REFERENCES categories(id)')();
 }
