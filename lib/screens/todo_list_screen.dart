@@ -14,7 +14,23 @@ class TodoListScreen extends StatefulWidget {
   _TodoListScreenState createState() => _TodoListScreenState();
 }
 
-class _TodoListScreenState extends State<TodoListScreen> {
+class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
+  final RestorableInt _counter = RestorableInt(0);
+
+  @override
+  String get restorationId => 'TodoListScreen';
+
+  @override
+  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
+    registerForRestoration(_counter, 'counter');
+  }
+
+  @override
+  void dispose() {
+    _counter.dispose();
+    super.dispose();
+  }
+
   bool _value;
   bool _isOld;
 

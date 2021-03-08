@@ -11,7 +11,8 @@ import 'package:my_todo_app/widgets/todo_list_details.dart';
 import 'package:my_todo_app/widgets/user_category_widget.dart';
 import 'package:provider/provider.dart';
 
-void main() => runApp(MainApp());
+void main() =>
+    runApp(RestorationScope(restorationId: 'root', child: MainApp()));
 
 class MainApp extends StatelessWidget {
   @override
