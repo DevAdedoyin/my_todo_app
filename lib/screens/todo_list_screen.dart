@@ -100,8 +100,14 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 );
               } else {
                 return Center(
-                  child: Text('You have no task yet'),
-                );
+                    child: Container(
+                  height: MediaQuery.of(context).size.height / 4,
+                  child: Card(
+                    child: Column(
+                      children: [],
+                    ),
+                  ),
+                ));
               }
             },
           ),
