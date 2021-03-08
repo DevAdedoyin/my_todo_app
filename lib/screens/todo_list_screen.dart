@@ -83,23 +83,28 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                   children: [
                                                     for (int i = 0; i < 2; i++)
                                                       Expanded(
-                                                        child: ListTile(
-                                                          title: i == 0
-                                                              ? Text(
-                                                                  'New tasks')
-                                                              : Text(
-                                                                  'Old tasks'),
-                                                          leading: Radio(
-                                                            value: i,
-                                                            groupValue: _value,
-                                                            activeColor:
-                                                                _args[1],
-                                                            onChanged:
-                                                                (int value) {
-                                                              stateSetter(() {
-                                                                _value = value;
-                                                              });
-                                                            },
+                                                        child: Card(
+                                                          elevation: 30,
+                                                          child: ListTile(
+                                                            title: i == 0
+                                                                ? Text(
+                                                                    'New tasks')
+                                                                : Text(
+                                                                    'Old tasks'),
+                                                            leading: Radio(
+                                                              value: i,
+                                                              groupValue:
+                                                                  _value,
+                                                              activeColor:
+                                                                  _args[1],
+                                                              onChanged:
+                                                                  (int value) {
+                                                                stateSetter(() {
+                                                                  _value =
+                                                                      value;
+                                                                });
+                                                              },
+                                                            ),
                                                           ),
                                                         ),
                                                       )
