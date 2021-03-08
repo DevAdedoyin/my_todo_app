@@ -27,7 +27,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
           child: StreamBuilder<List<Task>>(
             stream: _tasks.getSpecificTask(_args[2]),
             builder: (_, snapshot) {
-              if (snapshot.hasData) {
+              if (snapshot.data.isNotEmpty) {
                 return CustomScrollView(
                   slivers: [
                     SliverAppBar(
@@ -100,11 +100,38 @@ class _TodoListScreenState extends State<TodoListScreen> {
                 );
               } else {
                 return Center(
-                    child: Container(
-                  height: MediaQuery.of(context).size.height / 4,
-                  child: Card(
-                    child: Column(
-                      children: [],
+                    child: Padding(
+                  padding: const EdgeInsets.all(20.0),
+                  child: Container(
+                    height: MediaQuery.of(context).size.height / 2,
+                    child: Padding(
+                      padding: const EdgeInsets.all(8.0),
+                      child: Card(
+                        elevation: 20,
+                        child: Column(
+                          children: [
+                            Card(
+                              elevation: 15,
+                              child: Image.asset('assets/images/task.jpg'),
+                            ),
+                            Card(
+                              elevation: 15,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text('${_args[0]} have no task yet.'),
+                              ),
+                            ),
+                            Card(
+                              elevation: 15,
+                              child: Padding(
+                                padding: const EdgeInsets.all(12.0),
+                                child: Text(
+                                    'Click on the Floating Button below to add task(s) to ${_args[0]}'),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
                     ),
                   ),
                 ));
