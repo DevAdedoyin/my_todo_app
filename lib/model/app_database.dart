@@ -102,8 +102,23 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
   }
 
   //Gets tasks related to specific category
-  Stream<List<Task>> getSpecificTask(int index) {
-    return (select(tasks)..where((val) => val.catid.equals(index))).watch();
+  Stream<List<Task>> getSpecificTaskASC(int index) {
+    return (select(tasks)
+          ..where((val) => val.catid.equals(index))
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.taskid, mode: OrderingMode.asc)
+          ]))
+        .watch();
+  }
+
+  //Gets tasks related to specific category
+  Stream<List<Task>> getSpecificTaskDSC(int index) {
+    return (select(tasks)
+          ..where((val) => val.catid.equals(index))
+          ..orderBy([
+            (t) => OrderingTerm(expression: t.taskid, mode: OrderingMode.desc)
+          ]))
+        .watch();
   }
 
   Stream<Task> getTask(int index) {
@@ -113,7 +128,7 @@ class TaskDao extends DatabaseAccessor<AppDatabase> with _$TaskDaoMixin {
 
   //Gets number of task in a specific category
   Future<int> numberOfTaskInACategory(int index) async {
-    int length = await (getSpecificTask(index)).length;
+    int length = await (getSpecificTaskASC(index)).length;
     return length;
   }
 

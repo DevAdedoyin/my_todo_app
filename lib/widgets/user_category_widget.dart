@@ -152,7 +152,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                 style: TextStyle(fontSize: 18),
               ),
               trailing: StreamBuilder(
-                stream: taskDao.getSpecificTask(widget.catId),
+                stream: taskDao.getSpecificTaskASC(widget.catId),
                 builder: (_, snapshot) {
                   // print('DATA: ' + snapshot.data.length.toString());
 
