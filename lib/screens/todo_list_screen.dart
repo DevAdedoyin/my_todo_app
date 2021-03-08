@@ -15,30 +15,30 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
-  final RestorableInt _counter = RestorableInt(0);
+  bool _isOld;
+  final RestorableBool _value = RestorableBool(false);
 
   @override
   String get restorationId => 'TodoListScreen';
 
   @override
   void restoreState(RestorationBucket oldBucket, bool initialRestore) {
-    registerForRestoration(_counter, 'counter');
+    registerForRestoration(_value, 'boolValue');
   }
 
   @override
   void dispose() {
-    _counter.dispose();
+    _value.dispose();
     super.dispose();
   }
 
-  bool _value;
-  bool _isOld;
+  // bool _currentValue;
 
   @override
   void initState() {
     super.initState();
     _isOld = true;
-    _value = true;
+    // _currentValue = _value.value;
   }
 
   @override
@@ -74,81 +74,83 @@ class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
                                     child: InkWell(
                                       onTap: () {
                                         showDialog(
-                                          context: context,
-                                          child: AlertDialog(
-                                            title: Text('Sort by'),
-                                            actions: [
-                                              IconButton(
-                                                icon: Icon(
-                                                  Icons.cancel,
-                                                  color: Colors.red,
+                                          builder: (_) {
+                                            return AlertDialog(
+                                              title: Text('Sort by'),
+                                              actions: [
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.cancel,
+                                                    color: Colors.red,
+                                                  ),
+                                                  onPressed: () {
+                                                    Navigator.of(context).pop();
+                                                  },
                                                 ),
-                                                onPressed: () {
-                                                  Navigator.of(context).pop();
-                                                },
-                                              ),
-                                              IconButton(
-                                                icon: Icon(
-                                                  Icons.check_circle,
-                                                  color: Colors.green,
-                                                ),
-                                                onPressed: () {
-                                                  setState(() {
-                                                    _value = _isOld;
-                                                  });
-                                                  Navigator.of(context).pop();
-                                                },
-                                              )
-                                            ],
-                                            content: Container(
-                                              height: MediaQuery.of(context)
-                                                      .size
-                                                      .height /
-                                                  6,
-                                              child: StatefulBuilder(builder:
-                                                  (BuildContext context,
-                                                      StateSetter stateSetter) {
-                                                return Column(
-                                                  children: [
-                                                    for (int i = 0; i < 2; i++)
-                                                      Expanded(
-                                                        child: Card(
-                                                          elevation: 30,
-                                                          child: ListTile(
-                                                            title: i == 0
-                                                                ? Text(
-                                                                    'New tasks')
-                                                                : Text(
-                                                                    'Old tasks'),
-                                                            leading:
-                                                                Radio<bool>(
-                                                              value: i == 0
-                                                                  ? false
-                                                                  : true,
-                                                              groupValue:
-                                                                  _isOld,
-                                                              activeColor:
-                                                                  _args[1],
-                                                              onChanged:
-                                                                  (value) {
-                                                                stateSetter(() {
-                                                                  _isOld =
-                                                                      value;
-                                                                  // setState(() {
-                                                                  //   _isOld =
-                                                                  //       _value;
-                                                                  // });
-                                                                });
-                                                              },
+                                                IconButton(
+                                                  icon: Icon(
+                                                    Icons.check_circle,
+                                                    color: Colors.green,
+                                                  ),
+                                                  onPressed: () {
+                                                    setState(() {
+                                                      _value.value = _isOld;
+                                                    });
+                                                    Navigator.of(context).pop();
+                                                  },
+                                                )
+                                              ],
+                                              content: Container(
+                                                height: MediaQuery.of(context)
+                                                        .size
+                                                        .height /
+                                                    6,
+                                                child: StatefulBuilder(builder:
+                                                    (BuildContext context,
+                                                        StateSetter
+                                                            stateSetter) {
+                                                  return Column(
+                                                    children: [
+                                                      for (int i = 0;
+                                                          i < 2;
+                                                          i++)
+                                                        Expanded(
+                                                          child: Card(
+                                                            elevation: 30,
+                                                            child: ListTile(
+                                                              title: i == 0
+                                                                  ? Text(
+                                                                      'New tasks')
+                                                                  : Text(
+                                                                      'Old tasks'),
+                                                              leading:
+                                                                  Radio<bool>(
+                                                                value: i == 0
+                                                                    ? false
+                                                                    : true,
+                                                                groupValue:
+                                                                    _isOld,
+                                                                activeColor:
+                                                                    _args[1],
+                                                                onChanged:
+                                                                    (value) {
+                                                                  stateSetter(
+                                                                      () {
+                                                                    _isOld =
+                                                                        value;
+                                                                  });
+                                                                },
+                                                              ),
                                                             ),
                                                           ),
-                                                        ),
-                                                      )
-                                                  ],
-                                                );
-                                              }),
-                                            ),
-                                          ),
+                                                        )
+                                                    ],
+                                                  );
+                                                }),
+                                              ),
+                                            );
+                                          },
+                                          context: context,
                                         );
                                       },
                                       child: Row(
