@@ -15,18 +15,14 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
-  int _value;
+  bool _value;
   bool _isOld;
 
   @override
   void initState() {
     super.initState();
     _isOld = true;
-  }
-
-  @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
+    _value = true;
   }
 
   @override
@@ -40,8 +36,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
         child: Container(
           child: StreamBuilder<List<Task>>(
             stream: _isOld
-                ? _tasks.getSpecificTask(_args[2])
-                : _tasks.getSpecificTask(_args[2]),
+                ? _tasks.getSpecificTaskDSC(_args[2])
+                : _tasks.getSpecificTaskASC(_args[2]),
             builder: (_, snapshot) {
               if (snapshot.data.isNotEmpty) {
                 return CustomScrollView(
@@ -81,6 +77,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                   color: Colors.green,
                                                 ),
                                                 onPressed: () {
+                                                  setState(() {
+                                                    _value = _isOld;
+                                                  });
                                                   Navigator.of(context).pop();
                                                 },
                                               )
@@ -105,17 +104,24 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                                     'New tasks')
                                                                 : Text(
                                                                     'Old tasks'),
-                                                            leading: Radio(
-                                                              value: i,
+                                                            leading:
+                                                                Radio<bool>(
+                                                              value: i == 0
+                                                                  ? false
+                                                                  : true,
                                                               groupValue:
-                                                                  _value,
+                                                                  _isOld,
                                                               activeColor:
                                                                   _args[1],
                                                               onChanged:
-                                                                  (int value) {
+                                                                  (value) {
                                                                 stateSetter(() {
-                                                                  _value =
+                                                                  _isOld =
                                                                       value;
+                                                                  // setState(() {
+                                                                  //   _isOld =
+                                                                  //       _value;
+                                                                  // });
                                                                 });
                                                               },
                                                             ),
