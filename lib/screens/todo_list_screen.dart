@@ -15,6 +15,8 @@ class TodoListScreen extends StatefulWidget {
 }
 
 class _TodoListScreenState extends State<TodoListScreen> {
+  int _value;
+
   @override
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
@@ -43,13 +45,81 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             ),
                             itemBuilder: (_) => [
                                   PopupMenuItem(
-                                    child: Row(children: <Widget>[
-                                      Icon(
-                                        Icons.sort,
-                                        color: Colors.black45,
+                                    child: InkWell(
+                                      onTap: () {
+                                        showDialog(
+                                          context: context,
+                                          child: AlertDialog(
+                                            title: Text('Sort by'),
+                                            actions: [
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.cancel,
+                                                  color: Colors.red,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              ),
+                                              IconButton(
+                                                icon: Icon(
+                                                  Icons.check_circle,
+                                                  color: Colors.green,
+                                                ),
+                                                onPressed: () {
+                                                  Navigator.of(context).pop();
+                                                },
+                                              )
+                                            ],
+                                            content: Container(
+                                              height: MediaQuery.of(context)
+                                                      .size
+                                                      .height /
+                                                  6,
+                                              child: StatefulBuilder(builder:
+                                                  (BuildContext context,
+                                                      StateSetter stateSetter) {
+                                                return Column(
+                                                  children: [
+                                                    for (int i = 0; i < 2; i++)
+                                                      Expanded(
+                                                        child: ListTile(
+                                                          title: i == 0
+                                                              ? Text(
+                                                                  'New tasks')
+                                                              : Text(
+                                                                  'Old tasks'),
+                                                          leading: Radio(
+                                                            value: i,
+                                                            groupValue: _value,
+                                                            activeColor:
+                                                                _args[1],
+                                                            onChanged:
+                                                                (int value) {
+                                                              stateSetter(() {
+                                                                _value = value;
+                                                              });
+                                                            },
+                                                          ),
+                                                        ),
+                                                      )
+                                                  ],
+                                                );
+                                              }),
+                                            ),
+                                          ),
+                                        );
+                                      },
+                                      child: Row(
+                                        children: <Widget>[
+                                          Icon(
+                                            Icons.sort,
+                                            color: Colors.black45,
+                                          ),
+                                          Text('Sort by')
+                                        ],
                                       ),
-                                      Text('Sort by')
-                                    ]),
+                                    ),
                                   ),
                                   PopupMenuItem(
                                     child: Row(children: <Widget>[
