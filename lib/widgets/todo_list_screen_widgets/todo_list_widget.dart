@@ -117,7 +117,39 @@ class _TodoListsState extends State<TodoLists> {
             ),
           );
         } else {
-          return null;
+          return showDialog(
+            context: context,
+            child: AlertDialog(
+              actions: [
+                IconButton(
+                  icon: Icon(
+                    Icons.cancel,
+                    color: Colors.red,
+                  ),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+                IconButton(
+                  icon: Icon(
+                    Icons.check_circle,
+                    color: Colors.green,
+                  ),
+                  onPressed: () {
+                    widget.dao.deleteTask(widget.item);
+
+                    Navigator.of(context).pop();
+                    Scaffold.of(context).showSnackBar(SnackBar(
+                      content: Text('${widget.item.title} deleted.'),
+                    ));
+                  },
+                ),
+              ],
+              content:
+                  Text('Are you sure you want to delete ${widget.item.title}?'),
+              title: Text('Delete ${widget.item.title}'),
+            ),
+          );
         }
       },
       child: GestureDetector(
