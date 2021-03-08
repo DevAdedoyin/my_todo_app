@@ -121,12 +121,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                 child: Text('${_args[0]} have no task yet.'),
                               ),
                             ),
-                            Card(
-                              elevation: 15,
-                              child: Padding(
-                                padding: const EdgeInsets.all(12.0),
-                                child: Text(
-                                    'Click on the Floating Button below to add task(s) to ${_args[0]}'),
+                            Container(
+                              margin: EdgeInsets.only(left: 5, right: 5),
+                              child: Card(
+                                elevation: 15,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(12.0),
+                                  child: Text(
+                                      'Click on the Floating Button below to add task(s) to ${_args[0]}'),
+                                ),
                               ),
                             ),
                           ],
