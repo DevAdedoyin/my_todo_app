@@ -168,8 +168,8 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                               icon: Icon(Icons.edit),
                               onPressed: () {
                                 showDialog(
-                                    context: context,
-                                    child: AlertDialog(
+                                  builder: (_) {
+                                    return AlertDialog(
                                       title: Text('Edit category name'),
                                       content: FutureBuilder<Categorie>(
                                         future:
@@ -231,7 +231,10 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                           },
                                         ),
                                       ],
-                                    ));
+                                    );
+                                  },
+                                  context: context,
+                                );
                               },
                             ),
                           ),
