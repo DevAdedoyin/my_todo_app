@@ -44,26 +44,20 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             itemBuilder: (_) => [
                                   PopupMenuItem(
                                     child: Row(children: <Widget>[
-                                      Icon(Icons.color_lens),
-                                      Text('Rename list')
-                                    ]),
-                                  ),
-                                  PopupMenuItem(
-                                    child: Row(children: <Widget>[
-                                      Icon(Icons.sort),
+                                      Icon(
+                                        Icons.sort,
+                                        color: Colors.black45,
+                                      ),
                                       Text('Sort by')
                                     ]),
                                   ),
                                   PopupMenuItem(
                                     child: Row(children: <Widget>[
-                                      Icon(Icons.color_lens_outlined),
+                                      Icon(
+                                        Icons.color_lens_outlined,
+                                        color: Colors.black45,
+                                      ),
                                       Text('Change Theme')
-                                    ]),
-                                  ),
-                                  PopupMenuItem(
-                                    child: Row(children: <Widget>[
-                                      Icon(Icons.delete),
-                                      Text('Delete list')
                                     ]),
                                   ),
                                 ])
