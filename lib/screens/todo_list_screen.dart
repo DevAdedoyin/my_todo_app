@@ -27,7 +27,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
     prefs.setBool('boolValue', value);
   }
 
-  readSortState() async {
+  Future<bool> readSortState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool boolValue = prefs.getBool('boolValue');
     _isOld = boolValue;
@@ -51,7 +51,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
-    readSortState();
+    // readSortState();
     print('build ${_isOld.toString()}');
     return Scaffold(
       backgroundColor: Colors.white,
@@ -64,7 +64,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     ? _tasks.getSpecificTaskASC(_args[2])
                     : _tasks.getSpecificTaskDSC(_args[2]),
                 builder: (_, snapshot) {
-                  if (snapshot.data.isNotEmpty) {
+                  if (snapshot.hasData && snapshot.data.isNotEmpty) {
                     return CustomScrollView(
                       slivers: [
                         SliverAppBar(
@@ -219,7 +219,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                             dao: _tasks,
                             color: _args[1],
                           );
-                        }, childCount: snapshot.data.length))
+                        }, childCount: snapshot.data.length ?? 0))
                       ],
                     );
                   } else {
