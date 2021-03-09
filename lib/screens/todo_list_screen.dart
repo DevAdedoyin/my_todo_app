@@ -30,34 +30,32 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Future<bool> readSortState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool boolValue = prefs.getBool('boolValue');
-    _isOld = boolValue;
-    print('readSort ${_isOld.toString()}');
-    return _isOld;
+    // _isOld = boolValue;
+    // print('readSort ${_isOld.toString()}');
+    return boolValue;
   }
 
-  // @override
-  // void initState() {
-  //   super.initState();
-  //   // readSortState();
-  //   if (readSortState()) {
-  //     _isOld = true;
-  //   } else {
-  //     _isOld = false;
-  //   }
-  //   print('initState ${_isOld.toString()}');
-  // }
+  @override
+  void initState() {
+    super.initState();
+    _isOld = true;
+    print('initState ${_isOld.toString()}');
+  }
 
   @override
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
     // readSortState();
-    print('build ${_isOld.toString()}');
+    // print('build ${_isOld.toString()}');
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
         child: FutureBuilder<bool>(
           builder: (_, snap) {
+            if (snap.connectionState == ConnectionState.waiting) {
+              CircularProgressIndicator();
+            }
             return Container(
               child: StreamBuilder<List<Task>>(
                 stream: snap.data
@@ -215,14 +213,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
                           ),
                         ),
                         SliverList(
-                            delegate: SliverChildBuilderDelegate((_, index) {
-                          final item = snapshot.data[index];
-                          return TodoLists(
-                            item: item,
-                            dao: _tasks,
-                            color: _args[1],
-                          );
-                        }, childCount: snapshot.data.length ?? 0))
+                          delegate: SliverChildBuilderDelegate((_, index) {
+                            final item = snapshot.data[index];
+                            return TodoLists(
+                              item: item,
+                              dao: _tasks,
+                              color: _args[1],
+                            );
+                          }, childCount: snapshot.data.length ?? 0),
+                        )
                       ],
                     );
                   } else {
