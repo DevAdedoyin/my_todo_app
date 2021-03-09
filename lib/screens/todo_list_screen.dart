@@ -255,15 +255,9 @@ class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
           return showModalBottomSheet(
               isDismissible: true,
               context: context,
-              elevation: 10,
+              // elevation: 10,
               isScrollControlled: true,
-              builder: (context) => GestureDetector(
-                    child: AddListWidget(_args[2]),
-                    onTap: () {
-                      Navigator.of(context).pop();
-                    },
-                    behavior: HitTestBehavior.opaque,
-                  ));
+              builder: (context) => AddListWidget(_args[2]));
         },
         backgroundColor: _args[1],
         splashColor: Colors.white54,
