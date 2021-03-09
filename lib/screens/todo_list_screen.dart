@@ -35,17 +35,17 @@ class _TodoListScreenState extends State<TodoListScreen> {
     return _isOld;
   }
 
-  @override
-  void initState() {
-    super.initState();
-    // readSortState();
-    if (readSortState()) {
-      _isOld = true;
-    } else {
-      _isOld = false;
-    }
-    print('initState ${_isOld.toString()}');
-  }
+  // @override
+  // void initState() {
+  //   super.initState();
+  //   // readSortState();
+  //   if (readSortState()) {
+  //     _isOld = true;
+  //   } else {
+  //     _isOld = false;
+  //   }
+  //   print('initState ${_isOld.toString()}');
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -56,11 +56,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
-        child: FutureBuilder(
+        child: FutureBuilder<bool>(
           builder: (_, snap) {
             return Container(
               child: StreamBuilder<List<Task>>(
-                stream: _isOld
+                stream: snap.data
                     ? _tasks.getSpecificTaskASC(_args[2])
                     : _tasks.getSpecificTaskDSC(_args[2]),
                 builder: (_, snapshot) {
