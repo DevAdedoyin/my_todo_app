@@ -64,6 +64,9 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     ? _tasks.getSpecificTaskASC(_args[2])
                     : _tasks.getSpecificTaskDSC(_args[2]),
                 builder: (_, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return CircularProgressIndicator();
+                  }
                   if (snapshot.hasData && snapshot.data.isNotEmpty) {
                     return CustomScrollView(
                       slivers: [
