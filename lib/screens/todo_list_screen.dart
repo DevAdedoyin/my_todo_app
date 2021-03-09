@@ -14,25 +14,10 @@ class TodoListScreen extends StatefulWidget {
   _TodoListScreenState createState() => _TodoListScreenState();
 }
 
-class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
+class _TodoListScreenState extends State<TodoListScreen> {
   bool _isOld;
-  final RestorableBool _value = RestorableBool(false);
 
-  @override
-  String get restorationId => 'TodoListScreen';
-
-  @override
-  void restoreState(RestorationBucket oldBucket, bool initialRestore) {
-    registerForRestoration(_value, 'boolValue');
-  }
-
-  @override
-  void dispose() {
-    _value.dispose();
-    super.dispose();
-  }
-
-  // bool _currentValue;
+  bool _value;
 
   @override
   void initState() {
@@ -94,7 +79,7 @@ class _TodoListScreenState extends State<TodoListScreen> with RestorationMixin {
                                                   ),
                                                   onPressed: () {
                                                     setState(() {
-                                                      _value.value = _isOld;
+                                                      _value = _isOld;
                                                     });
                                                     Navigator.of(context).pop();
                                                   },
