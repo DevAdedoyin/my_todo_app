@@ -53,9 +53,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
       body: SafeArea(
         child: FutureBuilder<bool>(
           builder: (_, snap) {
-            if (snap.connectionState == ConnectionState.waiting) {
-              Center(child: CircularProgressIndicator());
-            }
             return Container(
               child: StreamBuilder<List<Task>>(
                 stream: snap.data
