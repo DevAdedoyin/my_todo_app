@@ -17,6 +17,7 @@ class TodoListScreen extends StatefulWidget {
 
 class _TodoListScreenState extends State<TodoListScreen> {
   bool _isOld;
+  int selectedColor;
 
   // bool _value;
 
@@ -35,11 +36,20 @@ class _TodoListScreenState extends State<TodoListScreen> {
     return boolValue;
   }
 
+  // bgColors;
+
   @override
   void initState() {
     super.initState();
     _isOld = true;
-    print('initState ${_isOld.toString()}');
+    selectedColor = 0;
+    // print('initState ${_isOld.toString()}');
+  }
+
+  void _selectedColor(int val) {
+    setState(() {
+      selectedColor = val;
+    });
   }
 
   @override
@@ -180,13 +190,92 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         ),
                                       ),
                                       PopupMenuItem(
-                                        child: Row(children: <Widget>[
-                                          Icon(
-                                            Icons.color_lens_outlined,
-                                            color: Colors.black45,
-                                          ),
-                                          Text('Change Theme')
-                                        ]),
+                                        child: StatefulBuilder(
+                                          builder: (BuildContext context,
+                                              StateSetter stateSetter) {
+                                            return InkWell(
+                                              onTap: () {
+                                                showDialog(
+                                                    context: context,
+                                                    builder: (_) {
+                                                      return AlertDialog(
+                                                        content: Container(
+                                                          height: MediaQuery.of(
+                                                                      context)
+                                                                  .size
+                                                                  .height /
+                                                              7,
+                                                          child:
+                                                              ListView.builder(
+                                                            itemBuilder:
+                                                                (_, index) {
+                                                              return Container(
+                                                                height: 30,
+                                                                width: 30,
+                                                                margin:
+                                                                    EdgeInsets
+                                                                        .all(5),
+                                                                decoration:
+                                                                    BoxDecoration(
+                                                                  shape: BoxShape
+                                                                      .circle,
+                                                                  color:
+                                                                      bgColors[
+                                                                          index],
+                                                                ),
+                                                                child: Radio(
+                                                                  onChanged:
+                                                                      (val) {
+                                                                    _selectedColor(
+                                                                        val);
+                                                                  },
+                                                                  value: index,
+                                                                  groupValue:
+                                                                      selectedColor,
+                                                                ),
+                                                              );
+                                                            },
+                                                            itemCount:
+                                                                bgColors.length,
+                                                            scrollDirection:
+                                                                Axis.horizontal,
+                                                          ),
+                                                        ),
+                                                        actions: [
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child: Text(
+                                                                'Cancel',
+                                                                style: TextStyle(
+                                                                    color: Colors
+                                                                        .redAccent),
+                                                              )),
+                                                          TextButton(
+                                                              onPressed: () {
+                                                                Navigator.of(
+                                                                        context)
+                                                                    .pop();
+                                                              },
+                                                              child:
+                                                                  Text('Okay')),
+                                                        ],
+                                                      );
+                                                    });
+                                              },
+                                              child: Row(children: <Widget>[
+                                                Icon(
+                                                  Icons.color_lens_outlined,
+                                                  color: Colors.black45,
+                                                ),
+                                                Text('Change Theme')
+                                              ]),
+                                            );
+                                          },
+                                        ),
                                       ),
                                     ])
                           ],
