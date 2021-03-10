@@ -18,6 +18,7 @@ class TodoListScreen extends StatefulWidget {
 class _TodoListScreenState extends State<TodoListScreen> {
   bool _isOld;
   int selectedColor;
+  int index;
 
   // bool _value;
 
@@ -43,6 +44,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
     super.initState();
     _isOld = true;
     selectedColor = 0;
+    index = 0;
     // print('initState ${_isOld.toString()}');
   }
 
@@ -190,95 +192,93 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                         ),
                                       ),
                                       PopupMenuItem(
-                                        child: StatefulBuilder(
-                                          builder: (BuildContext context,
-                                              StateSetter stateSetter) {
-                                            return InkWell(
-                                              onTap: () {
-                                                showDialog(
-                                                    context: context,
-                                                    builder: (_) {
-                                                      return AlertDialog(
-                                                        title: Text(
-                                                            'Change theme'),
-                                                        content: Container(
-                                                          height: MediaQuery.of(
-                                                                      context)
+                                          child: InkWell(
+                                        onTap: () {
+                                          showDialog(
+                                              context: context,
+                                              builder: (_) {
+                                                return StatefulBuilder(builder:
+                                                    (BuildContext context,
+                                                        StateSetter
+                                                            stateSetter) {
+                                                  return AlertDialog(
+                                                    title: Text('Change theme'),
+                                                    content: Container(
+                                                      height:
+                                                          MediaQuery.of(context)
                                                                   .size
                                                                   .height /
-                                                              7,
-                                                          child:
-                                                              ListView.builder(
-                                                            itemBuilder:
-                                                                (_, index) {
-                                                              return Container(
-                                                                height: 30,
-                                                                width: 30,
-                                                                margin:
-                                                                    EdgeInsets
-                                                                        .all(5),
-                                                                decoration:
-                                                                    BoxDecoration(
-                                                                  shape: BoxShape
-                                                                      .circle,
-                                                                  color:
-                                                                      bgColors[
-                                                                          index],
-                                                                ),
-                                                                child: Radio(
-                                                                  onChanged:
-                                                                      (val) {
-                                                                    _selectedColor(
-                                                                        val);
-                                                                  },
-                                                                  value: index,
-                                                                  groupValue:
-                                                                      selectedColor,
-                                                                ),
-                                                              );
-                                                            },
-                                                            itemCount:
-                                                                bgColors.length,
-                                                            scrollDirection:
-                                                                Axis.horizontal,
-                                                          ),
-                                                        ),
-                                                        actions: [
-                                                          TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
+                                                              8,
+                                                      child: ListView.builder(
+                                                        itemBuilder: (_, i) {
+                                                          return Container(
+                                                            height: 30,
+                                                            width: 30,
+                                                            margin:
+                                                                EdgeInsets.all(
+                                                                    5),
+                                                            decoration:
+                                                                BoxDecoration(
+                                                              shape: BoxShape
+                                                                  .circle,
+                                                              color:
+                                                                  bgColors[i],
+                                                            ),
+                                                            child: Radio(
+                                                              onChanged: (val) {
+                                                                stateSetter(() {
+                                                                  _selectedColor(
+                                                                      val);
+                                                                  index = val;
+                                                                });
                                                               },
-                                                              child: Text(
-                                                                'Cancel',
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .redAccent),
-                                                              )),
-                                                          TextButton(
-                                                              onPressed: () {
-                                                                Navigator.of(
-                                                                        context)
-                                                                    .pop();
-                                                              },
-                                                              child:
-                                                                  Text('Okay')),
-                                                        ],
-                                                      );
-                                                    });
-                                              },
-                                              child: Row(children: <Widget>[
-                                                Icon(
-                                                  Icons.color_lens_outlined,
-                                                  color: Colors.black45,
-                                                ),
-                                                Text('Change Theme')
-                                              ]),
-                                            );
-                                          },
-                                        ),
-                                      ),
+                                                              value: i,
+                                                              groupValue:
+                                                                  selectedColor,
+                                                              activeColor:
+                                                                  bgColors[i],
+                                                            ),
+                                                          );
+                                                        },
+                                                        itemCount:
+                                                            bgColors.length,
+                                                        scrollDirection:
+                                                            Axis.horizontal,
+                                                      ),
+                                                    ),
+                                                    actions: [
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: Text(
+                                                            'Cancel',
+                                                            style: TextStyle(
+                                                                color: Colors
+                                                                    .redAccent),
+                                                          )),
+                                                      TextButton(
+                                                          onPressed: () {
+                                                            Navigator.of(
+                                                                    context)
+                                                                .pop();
+                                                          },
+                                                          child: Text('Okay')),
+                                                    ],
+                                                  );
+                                                });
+                                              });
+                                        },
+                                        child: Row(children: <Widget>[
+                                          Icon(
+                                            Icons.color_lens_outlined,
+                                            color: Colors.black45,
+                                          ),
+                                          Text('Change Theme')
+                                        ]),
+                                      )),
                                     ])
                           ],
                           flexibleSpace: Row(
