@@ -199,6 +199,8 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                     context: context,
                                                     builder: (_) {
                                                       return AlertDialog(
+                                                        title: Text(
+                                                            'Change theme'),
                                                         content: Container(
                                                           height: MediaQuery.of(
                                                                       context)
