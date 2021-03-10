@@ -58,6 +58,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Widget build(BuildContext context) {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
+    final _cats = Provider.of<CategorieDao>(context);
     // readSortState();
     // print('build ${_isOld.toString()}');
     return Scaffold(
@@ -259,13 +260,32 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                                 color: Colors
                                                                     .redAccent),
                                                           )),
-                                                      TextButton(
-                                                          onPressed: () {
-                                                            Navigator.of(
-                                                                    context)
-                                                                .pop();
-                                                          },
-                                                          child: Text('Okay')),
+                                                      FutureBuilder<Categorie>(
+                                                          future:
+                                                              _cats.getCategory(
+                                                                  _args[2]),
+                                                          builder:
+                                                              (_, catSnap) {
+                                                            return TextButton(
+                                                                onPressed: () {
+                                                                  _cats.updateCategorie(catSnap
+                                                                      .data
+                                                                      .copyWith(
+                                                                          color:
+                                                                              selectedColor));
+                                                                  setState(() {
+                                                                    _args[1] =
+                                                                        bgColors[
+                                                                            selectedColor];
+                                                                  });
+
+                                                                  Navigator.of(
+                                                                          context)
+                                                                      .pop();
+                                                                },
+                                                                child: Text(
+                                                                    'Okay'));
+                                                          }),
                                                     ],
                                                   );
                                                 });

@@ -214,6 +214,7 @@ class CategorieDao extends DatabaseAccessor<AppDatabase>
         .write(CategoriesCompanion.insert(isImportant: Value(c.isImportant)));
   }
 
+// Delete Category
   Future deleteCategories(Insertable<Categorie> cat) =>
       delete(categories).delete(cat);
 }
