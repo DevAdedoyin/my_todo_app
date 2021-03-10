@@ -54,7 +54,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
         child: FutureBuilder<bool>(
           builder: (_, snap) {
             if (snap.connectionState == ConnectionState.waiting) {
-              CircularProgressIndicator();
+              Center(child: CircularProgressIndicator());
             }
             return Container(
               child: StreamBuilder<List<Task>>(
@@ -63,7 +63,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                     : _tasks.getSpecificTaskDSC(_args[2]),
                 builder: (_, snapshot) {
                   if (snapshot.connectionState == ConnectionState.waiting) {
-                    return CircularProgressIndicator();
+                    return Center(child: CircularProgressIndicator());
                   }
                   if (snapshot.hasData && snapshot.data.isNotEmpty) {
                     return CustomScrollView(
