@@ -50,7 +50,7 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                 collapsedHeight: 80,
                 backgroundColor: _args[2],
                 title: FutureBuilder<Categorie>(
-                  future: catDao.getCategory(taskItem.catid),
+                  future: catDao.getCategory(_args[0].catid),
                   builder: (_, snapshot) {
                     if (snapshot.connectionState == ConnectionState.waiting) {
                       Center(
