@@ -52,6 +52,11 @@ class _ToDoListDetailsScreenState extends State<ToDoListDetailsScreen> {
                 title: FutureBuilder<Categorie>(
                   future: catDao.getCategory(taskItem.catid),
                   builder: (_, snapshot) {
+                    if (snapshot.connectionState == ConnectionState.waiting) {
+                      Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    }
                     return Text(
                       snapshot.data.categoryTitle,
                       style: TextStyle(fontStyle: FontStyle.italic),
