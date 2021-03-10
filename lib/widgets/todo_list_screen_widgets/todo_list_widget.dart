@@ -95,7 +95,6 @@ class _TodoListsState extends State<TodoLists> {
                       hintText: 'Please enter your title update here!!!',
                       hintStyle: TextStyle(fontStyle: FontStyle.italic)),
                   maxLength: 30,
-                  maxLengthEnforced: true,
                   controller: textController,
                   onChanged: (String value) {
                     String result;
