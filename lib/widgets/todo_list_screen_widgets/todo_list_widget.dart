@@ -182,12 +182,12 @@ class _TodoListsState extends State<TodoLists> {
                     ),
                     splashRadius: 22,
                     onPressed: () {
-                      widget.dao.updateCompleteness(
-                          widget.item.copyWith(isCompleted: false));
-
                       setState(() {
                         isComplete = false;
                       });
+
+                      widget.dao.updateCompleteness(
+                          widget.item.copyWith(isCompleted: false));
                     },
                   )
                 : IconButton(
@@ -197,12 +197,12 @@ class _TodoListsState extends State<TodoLists> {
                     ),
                     splashRadius: 22,
                     onPressed: () {
-                      widget.dao.updateCompleteness(
-                          widget.item.copyWith(isCompleted: false));
-
                       setState(() {
                         isComplete = true;
                       });
+
+                      widget.dao.updateCompleteness(
+                          widget.item.copyWith(isCompleted: true));
                     },
                   ),
             title: Text(
@@ -233,7 +233,7 @@ class _TodoListsState extends State<TodoLists> {
                       ),
               ],
             ),
-            trailing: widget.item.isImportant
+            trailing: isImportant
                 ? IconButton(
                     icon: Icon(
                       Icons.star,
@@ -267,27 +267,5 @@ class _TodoListsState extends State<TodoLists> {
         ),
       ),
     );
-  }
-}
-
-class TodoList extends StatefulWidget {
-  final Task item;
-  final TaskDao dao;
-  final Color color;
-
-  TodoList({this.item, this.dao, this.color});
-
-  @override
-  _TodoListState createState() => _TodoListState();
-}
-
-class _TodoListState extends State<TodoList> {
-  @override
-  Widget build(BuildContext context) {
-    // final todo = Provider.of<ToDoProvider>(context);
-    // final String taskTitle = widget.item.title;
-    // final String catTitle = widget.item.catid;
-
-    return Text('');
   }
 }
