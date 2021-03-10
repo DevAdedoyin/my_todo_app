@@ -102,6 +102,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                 Container(
                     margin: EdgeInsets.only(right: 10),
                     child: IconButton(
+                      color: Colors.blue,
                       icon: Icon(Icons.save_rounded),
                       onPressed: () {
                         final formattedTimeOfDay =
