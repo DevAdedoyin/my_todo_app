@@ -220,6 +220,7 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                           ),
                                           onPressed: () {
                                             Navigator.of(context).pop();
+                                            textController.clear();
                                           },
                                         ),
                                         IconButton(
