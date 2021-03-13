@@ -49,6 +49,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
         return Container(
           height: MediaQuery.of(context).size.height / 4,
           child: Column(
+            mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
@@ -103,6 +104,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
               ),
               Container(
                 height: 50,
+                width: double.maxFinite,
                 // margin: EdgeInsets.only(top: 1),
                 child: ListView.builder(
                   scrollDirection: Axis.horizontal,

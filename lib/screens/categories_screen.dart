@@ -46,9 +46,7 @@ class _CategoryScreenState extends State<CategoryScreen> {
                 splashColor: Colors.white,
                 onPressed: () {
                   showDialog(
-                      context: context,
-                      builder: (_) =>
-                          Container(height: 100, child: AlertDialogWidget()));
+                      context: context, builder: (_) => AlertDialogWidget());
                 },
                 child: Row(
                   children: [
