@@ -37,6 +37,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
       init++;
       return true;
     }
+    if (init == 1) init = 1;
     // _isOld = boolValue;
     // print('readSort ${_isOld.toString()}');
     return boolValue;
