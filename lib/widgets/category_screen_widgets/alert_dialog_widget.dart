@@ -70,6 +70,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                       child: Container(
                           margin: EdgeInsets.only(left: 10),
                           child: TextField(
+                            autofocus: true,
                             maxLength: 25,
                             // maxLengthEnforced: true,
                             onChanged: (String value) {
