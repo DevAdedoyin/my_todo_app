@@ -32,6 +32,11 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Future<bool> readSortState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool boolValue = prefs.getBool('boolValue');
+    int init = 0;
+    if (init == 0) {
+      init++;
+      return true;
+    }
     // _isOld = boolValue;
     // print('readSort ${_isOld.toString()}');
     return boolValue;
