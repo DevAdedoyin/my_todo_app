@@ -177,14 +177,15 @@ class _UserCategoriesWidgetState extends State<UserCategoriesWidget> {
                                         builder: (_, snapshot) {
                                           if (snapshot.hasData) {
                                             return TextField(
-                                              maxLength: 25,
+                                              autofocus: true,
+                                              maxLength: 30,
                                               controller: textController,
                                               onChanged: (String value) {
                                                 String result;
                                                 result = value;
-                                                if (result.length > 25) {
+                                                if (result.length > 30) {
                                                   result =
-                                                      result.substring(0, 25);
+                                                      result.substring(0, 30);
                                                   textController.text = result;
                                                   textController.selection =
                                                       TextSelection
