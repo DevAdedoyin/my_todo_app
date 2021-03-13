@@ -227,6 +227,8 @@ class _AddListWidgetState extends State<AddListWidget> {
                                     content: Container(
                                       padding: EdgeInsets.all(10),
                                       height: 180,
+                                      // width: double.maxFinite, USEFUL if ListView is in an AlertDialog
+                                      width: double.maxFinite,
                                       child: ListView.builder(
                                         itemBuilder: (_, i) {
                                           return Card(
@@ -235,6 +237,7 @@ class _AddListWidgetState extends State<AddListWidget> {
                                                   left: 10, right: 10),
                                               height: 30,
                                               child: Row(
+                                                mainAxisSize: MainAxisSize.min,
                                                 children: [
                                                   Text(_daysOfTheWeek[i]),
                                                   Spacer(),
