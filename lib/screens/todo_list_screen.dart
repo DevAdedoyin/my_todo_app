@@ -37,7 +37,10 @@ class _TodoListScreenState extends State<TodoListScreen> {
       init++;
       return true;
     }
-    if (init == 1) init = 1;
+    if (init == 1) {
+      init = 1;
+      return boolValue;
+    }
     // _isOld = boolValue;
     // print('readSort ${_isOld.toString()}');
     return boolValue;
@@ -212,6 +215,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                     title: Text('Change theme'),
                                                     content: Container(
                                                       height: 100,
+                                                      width: double.maxFinite,
                                                       child: ListView.builder(
                                                         itemBuilder: (_, i) {
                                                           return Container(
