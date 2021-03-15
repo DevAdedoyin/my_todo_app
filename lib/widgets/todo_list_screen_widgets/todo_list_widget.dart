@@ -92,8 +92,9 @@ class _TodoListsState extends State<TodoLists> {
                 title: Text('Rename ${widget.item.title}?'),
                 content: TextField(
                   decoration: InputDecoration(
-                      hintText: 'Please enter your title update here!!!',
-                      hintStyle: TextStyle(fontStyle: FontStyle.italic)),
+                    hintText: 'Please enter your title update here!!!',
+                    hintStyle: TextStyle(fontStyle: FontStyle.italic),
+                  ),
                   maxLength: 30,
                   controller: textController,
                   onChanged: (String value) {
