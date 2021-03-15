@@ -211,11 +211,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                   return AlertDialog(
                                                     title: Text('Change theme'),
                                                     content: Container(
-                                                      height:
-                                                          MediaQuery.of(context)
-                                                                  .size
-                                                                  .height /
-                                                              8,
+                                                      height: 100,
                                                       child: ListView.builder(
                                                         itemBuilder: (_, i) {
                                                           return Container(
@@ -297,13 +293,15 @@ class _TodoListScreenState extends State<TodoListScreen> {
                                                 });
                                               });
                                         },
-                                        child: Row(children: <Widget>[
-                                          Icon(
-                                            Icons.color_lens_outlined,
-                                            color: Colors.black45,
-                                          ),
-                                          Text('Change Theme')
-                                        ]),
+                                        child: Container(
+                                          child: Row(children: <Widget>[
+                                            Icon(
+                                              Icons.color_lens_outlined,
+                                              color: Colors.black45,
+                                            ),
+                                            Text('Change Theme')
+                                          ]),
+                                        ),
                                       )),
                                     ])
                           ],

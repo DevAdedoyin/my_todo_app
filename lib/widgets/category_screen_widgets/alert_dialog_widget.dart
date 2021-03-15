@@ -47,12 +47,12 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
       content: StatefulBuilder(
           builder: (BuildContext context, StateSetter stateSetter) {
         return Container(
-          height: MediaQuery.of(context).size.height / 4,
           child: Column(
             mainAxisSize: MainAxisSize.min,
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Container(
+                height: 50,
                 child: Row(
                   mainAxisSize: MainAxisSize.min,
                   mainAxisAlignment: MainAxisAlignment.start,
@@ -104,7 +104,7 @@ class _AlertDialogWidgetState extends State<AlertDialogWidget> {
                 ),
               ),
               Container(
-                height: 50,
+                height: 60,
                 width: double.maxFinite,
                 // margin: EdgeInsets.only(top: 1),
                 child: ListView.builder(
