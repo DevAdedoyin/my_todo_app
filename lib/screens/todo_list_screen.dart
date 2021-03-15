@@ -20,7 +20,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   int selectedColor;
   int index;
 
-  // bool _value;
+  bool _boolStateChecker;
 
   // final prefs = await SharedPreferences.getInstance();
 
@@ -32,17 +32,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
   Future<bool> readSortState() async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     bool boolValue = prefs.getBool('boolValue');
-    int init = 0;
-    if (init == 0) {
-      init++;
-      return true;
-    }
-    if (init == 1) {
-      init = 1;
-      return boolValue;
-    }
-    // _isOld = boolValue;
-    // print('readSort ${_isOld.toString()}');
+
     return boolValue;
   }
 
@@ -54,7 +44,6 @@ class _TodoListScreenState extends State<TodoListScreen> {
     _isOld = true;
     selectedColor = 0;
     index = 0;
-    // print('initState ${_isOld.toString()}');
   }
 
   void _selectedColor(int val) {
@@ -68,8 +57,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
     final _args = ModalRoute.of(context).settings.arguments as List;
     final _tasks = Provider.of<TaskDao>(context);
     final _cats = Provider.of<CategorieDao>(context);
-    // readSortState();
-    // print('build ${_isOld.toString()}');
+
     return Scaffold(
       backgroundColor: Colors.white,
       body: SafeArea(
@@ -397,6 +385,7 @@ class _TodoListScreenState extends State<TodoListScreen> {
             );
           },
           future: readSortState(),
+          // _boolStateChecker == null ? true :
         ),
       ),
       floatingActionButton: FloatingActionButton(
