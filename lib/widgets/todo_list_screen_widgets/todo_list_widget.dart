@@ -21,11 +21,11 @@ class TodoLists extends StatefulWidget {
 class _TodoListsState extends State<TodoLists> {
   bool isComplete;
   bool isImportant;
-  final textController = TextEditingController();
+  final _textController = TextEditingController();
 
   @override
   void dispose() {
-    textController.dispose();
+    _textController.dispose();
     super.dispose();
   }
 
@@ -72,7 +72,7 @@ class _TodoListsState extends State<TodoLists> {
                       color: Colors.red,
                     ),
                     onPressed: () {
-                      textController.clear();
+                      _textController.clear();
                       Navigator.of(context).pop();
                     },
                   ),
@@ -83,8 +83,8 @@ class _TodoListsState extends State<TodoLists> {
                     ),
                     onPressed: () {
                       widget.dao.updateTask(
-                          widget.item.copyWith(title: textController.text));
-                      textController.clear();
+                          widget.item.copyWith(title: _textController.text));
+                      _textController.clear();
                       Navigator.of(context).pop();
                     },
                   ),
@@ -96,21 +96,21 @@ class _TodoListsState extends State<TodoLists> {
                     hintStyle: TextStyle(fontStyle: FontStyle.italic),
                   ),
                   maxLength: 30,
-                  controller: textController,
+                  controller: _textController,
                   onChanged: (String value) {
                     String result;
                     result = value;
                     if (result.length > 30) {
                       result = result.substring(0, 30);
-                      textController.text = result;
-                      textController.selection = TextSelection.fromPosition(
+                      _textController.text = result;
+                      _textController.selection = TextSelection.fromPosition(
                           TextPosition(offset: result.length));
                     }
                   },
                   onSubmitted: (newTitle) {
                     widget.dao.updateTask(
-                        widget.item.copyWith(title: textController.text));
-                    textController.clear();
+                        widget.item.copyWith(title: _textController.text));
+                    _textController.clear();
                     Navigator.of(context).pop();
                   },
                 ),
